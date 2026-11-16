@@ -4,7 +4,7 @@ window.PORTFOLIO_PROJECTS = window.PORTFOLIO_PROJECTS || {};
 window.PORTFOLIO_PROJECTS["adaptive-study-architect"] = {
     id: "adaptive-study-architect",
     badge: "AI-Assisted Web App • Diagnostics & LXD",
-    status: "Sanitized Interactive Simulator",
+    status: "Interactive Architecture",
     title: "Adaptive Competency Diagnostic & Study Sprint Web App",
     subtitle: "A decentralized HTML/JS/JSON web application engineered through strategic AI prompting that transforms static technical syllabi into personalized, date-driven daily study sprints.",
     roles: ["lxd-data", "customer-ed", "solutions"],
@@ -18,7 +18,6 @@ window.PORTFOLIO_PROJECTS["adaptive-study-architect"] = {
     challenge: "Adult learners in technical database courses arrive with vastly different readiness levels—from complete beginners intimidated by SQL to experienced analysts looking to accelerate. Static, one-size-fits-all resource lists cause cognitive overload, poor pacing, and premature exam attempts.",
     persona: "Self-paced adult learner balancing career and coursework. Needs an intelligent diagnostic tool that reads their Pre-Assessment competency breakdown, calculates days remaining until their target exam date, and serves a clear daily checklist.",
 
-    // Cross-Industry Transferability Block
     transferability: [
         {
             role: "SaaS Customer Onboarding & Enablement",
@@ -30,7 +29,7 @@ window.PORTFOLIO_PROJECTS["adaptive-study-architect"] = {
         },
         {
             role: "Customer Success & Retention",
-            application: "The color-coded confidence tracker (Green/Yellow/Red) mirrors a Customer Health Score dashboard—allowing CSMs or coaches to spot where a user is stuck during onboarding."
+            application: "The color-coded confidence tracker (Green/Yellow/Red) mirrors a Customer Health Score dashboard—allowing CSMs or coaches to immediately spot where a user is stuck during onboarding."
         }
     ],
 
@@ -61,21 +60,22 @@ window.PORTFOLIO_PROJECTS["adaptive-study-architect"] = {
         }
     ],
 
+    // Evergreen Evaluation Framework (No future edits required!)
     evaluation: {
-        metric1Title: "Diagnostic-to-Exam Readiness Alignment",
-        metric1Desc: "Enforces 80% chapter quiz mastery gates and beginner SQL guardrails before learners schedule their final assessment.",
-        metric2Title: "Learner Autonomy & Coaching Efficiency",
-        metric2Desc: "Equips learners to self-diagnose weak chapters while giving instructors an instant visual snapshot during 1:1 coaching calls."
+        metric1Title: "Tool Adoption, Engagement & Qualitative Feedback",
+        metric1Desc: "Evaluates learner reaction and behavioral adoption (Kirkpatrick Levels 1 & 2) by monitoring active tool utilization, daily sprint completion rates, confidence-tracker engagement, and ongoing learner feedback surveys.",
+        metric2Title: "Diagnostic Readiness & Self-Regulated Mastery",
+        metric2Desc: "Assesses instructional impact (Kirkpatrick Levels 2 & 3) by evaluating how structured 80% mastery gates and targeted Pre-Assessment remediation plans improve learner preparedness prior to high-stakes assessments."
     },
 
-    // Self-Contained Interactive Simulator HTML
     renderInteractive: function() {
         return `
         <div class="surface-sandstone rounded p-6 md:p-8 mb-16">
             <div class="mb-5 p-3.5 rounded bg-[#0F172A] text-[#FAF8F5] flex flex-wrap items-center justify-between gap-2 text-xs">
-                <span>🔒 <strong>Note:</strong> To protect internal university URLs, SharePoint links, and student privacy, this live interactive simulator runs a sanitized version of the web application.</span>
-                <span class="font-mono-tag text-[10px] px-2.5 py-0.5 rounded bg-white/10">Interactive Simulator</span>
+                <span>🔒 <strong>Note:</strong> To protect internal university URLs, SharePoint links, and student privacy, this interactive preview demonstrates a sanitized version of the web application's routing logic.</span>
+                <span class="font-mono-tag text-[10px] px-2.5 py-0.5 rounded bg-white/10">Sanitized Preview</span>
             </div>
+            <!-- Tip: When you duplicate & sanitize your D426 repo later, you can replace this div with an <iframe> or Launch button! -->
             <div class="bg-white rounded border border-[#E5E7EB] p-6">
                 <div class="grid lg:grid-cols-12 gap-6">
                     <div class="lg:col-span-5 border-b lg:border-b-0 lg:border-r border-[#E5E7EB] pb-6 lg:pb-0 lg:pr-6">
