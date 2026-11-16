@@ -1,6 +1,6 @@
 // data/profile.js
 window.PORTFOLIO_PROFILE = {
-    bio: "I’m <strong class='text-[#111827] font-semibold'>Lythia Amoakon</strong>. I believe the best technology only works when people feel confident using it. Blending graduate expertise in <strong class='text-[#111827] font-medium'>Data Analytics</strong> and <strong class='text-[#111827] font-medium'>Instructional Design</strong>, I translate complex technical concepts into engaging live trainings, consultative SaaS onboarding, and custom-built digital tools that drive measurable user success.",
+    bio: "I’m <strong class='text-[#111827] font-semibold'>Lythia Amoakon</strong>. I believe the best technology only works when people feel confident using it. Blending graduate expertise in <strong class='text-[#111827] font-medium'>Data Analytics</strong> and <strong class='text-[#111827] font-medium'>Instructional Design</strong>—and recognized as a <strong class='text-[#111827] font-medium'>2026 Employee of the Year</strong> for faculty and learner enablement—I translate complex technical concepts into engaging live trainings, consultative SaaS onboarding, and custom-built digital tools that drive measurable user success.",
 
     initiativesIntro: "Alongside my interactive web builds, a core part of my career happens in live training rooms, curriculum audits, and enterprise operations. Select an initiative below to explore how I lead team-wide facilitation, guide SaaS implementations, and scale learning programs.",
 
