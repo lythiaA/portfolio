@@ -9,14 +9,14 @@
 </head>
 <body class="min-h-screen flex flex-col selection:bg-[#0F172A] selection:text-[#FAF8F5]">
 
-    <!-- Injected Shared Header -->
+    <!-- Shared Header -->
     <div id="site-nav"></div>
 
     <main class="flex-grow max-w-6xl mx-auto px-6 py-12 md:py-20 w-full">
         <!-- Back Navigation -->
         <div class="mb-8 flex items-center justify-between">
             <a href="index.html#work" class="font-mono-tag text-xs text-[#111827] hover:opacity-70 flex items-center gap-2">
-                ← Back to Selected Work
+                ← Back to Work
             </a>
             <span id="cs-badge" class="font-mono-tag px-3 py-1 rounded surface-sandstone text-[#111827]"></span>
         </div>
@@ -28,613 +28,39 @@
         <div id="project-pagination" class="mt-20 pt-10 border-t border-[#E5E7EB] flex flex-col sm:flex-row items-center justify-between gap-4"></div>
     </main>
 
-    <!-- Injected Shared Footer & Contact Drawer -->
+    <!-- Shared Footer & Contact Drawer -->
     <div id="site-footer"></div>
 
+    <!-- Load Shared Components + Individual Decentralized Project Files -->
     <script src="assets/components.js"></script>
+    <script src="projects/ai-analytics-curriculum.js"></script>
+    <script src="projects/adaptive-study-architect.js"></script>
+    <script src="projects/first-client-call.js"></script>
+    <script src="projects/leading-with-impact.js"></script>
+    <script src="projects/saas-lms-onboarding.js"></script>
+    <script src="projects/power-automate-ops.js"></script>
+    <script src="projects/mysql-joins-cohort.js"></script>
+    <script src="projects/sql-gamified-labs.js"></script>
+
     <script>
-        // DECENTRALIZED MASTER CASE STUDY DATABASE
-        const caseStudies = {
-            "edtech-saas-onboarding": {
-                badge: "Flagship • Solutions Engineering & Customer Education",
-                title: "EdTech SaaS Integration Playbook & Agentic AI Onboarding Copilot",
-                subtitle: "A post-sales technical onboarding ecosystem designed to guide higher-education administrators and faculty through LMS integrations (Canvas, D2L, Achieve) while reducing Tier-1 LTI/gradebook support tickets.",
-                meta: {
-                    role: "Post-Sales Solutions & Enablement Lead",
-                    audience: "University LMS Admins & Faculty",
-                    stack: "Canvas / D2L LTI 1.3, Salesforce, Agentic AI",
-                    impact: "Faster Time-to-Value & Self-Service Resolution"
-                },
-                challenge: "During software rollouts across higher-education institutions, non-technical faculty and time-strapped admins frequently stall during LTI 1.3 deep-linking and gradebook synchronization. Traditional 40-page PDF manuals cause cognitive overload, driving high onboarding drop-off and repetitive support escalations.",
-                persona: "Dr. Elena Rostova (Course Coordinator) & Marcus Vance (LMS Admin). Needs a clear, consultative 45-minute live onboarding run-of-show paired with a zero-friction self-service SOP and instant troubleshooting when a gradebook sync fails before classes start.",
-                interactiveType: "saas-sandbox",
-                features: [
-                    { title: "Consultative 45-Min Live Run-of-Show", desc: "Structured facilitator agenda transitioning smoothly from technical sandbox verification to faculty workflow adoption." },
-                    { title: "Interactive LMS Integration SOP", desc: "Step-by-step visual checklist for Canvas and D2L course pairing, deep-linking modules, and gradebook column validation." },
-                    { title: "Agentic AI Triage Copilot", desc: "Simulated AI agent that ingests an LTI error code or sync symptom, diagnoses root cause, and drafts a custom fix + CSM follow-up brief." },
-                    { title: "Salesforce Rollout Telemetry", desc: "Maps every customer onboarding milestone to CRM stage gates to proactively spot stalled implementations." },
-                    { title: "Role-Segmented Enablement", desc: "Separates backend LTI key configuration (for IT Admins) from day-to-day assignment deployment (for Instructors)." },
-                    { title: "Ticket Deflection Architecture", desc: "Designed around the top 5 recurring post-sales integration bottlenecks to empower self-service resolution." }
-                ],
-                evaluation: {
-                    metric1Title: "Time-to-First-Sync & Adoption Velocity",
-                    metric1Desc: "Tracked via Salesforce implementation timestamps—measuring days elapsed from kickoff call to first verified LMS gradebook sync.",
-                    metric2Title: "Tier-1 Integration Ticket Deflection",
-                    metric2Desc: "Measured by comparing recurring LTI/deep-link support tickets before and after deploying the interactive SOP and AI triage guide."
-                }
-            },
-
-            "adaptive-study-architect": {
-                badge: "Custom Web Application • Data Science & LXD",
-                title: "Adaptive Competency Diagnostic & Sprint Architect",
-                subtitle: "A decentralized HTML/JS/JSON web application that transforms static technical syllabi into personalized, date-driven daily study sprints based on diagnostic Pre-Assessment telemetry and confidence tracking.",
-                meta: {
-                    role: "Lead Learning Experience & Full-Stack Architect",
-                    audience: "Adult Technical Learners (Database & SQL)",
-                    stack: "HTML5, Vanilla JS, Decentralized JSON, LocalStorage",
-                    impact: "3 Adaptive Tracks + 80% Mastery Gating"
-                },
-                challenge: "Adult learners in technical database courses arrive with wildly different backgrounds—ranging from complete novices intimidated by SQL syntax to working analysts looking to accelerate. Static, one-size-fits-all study guides either overwhelm beginners or bore experienced learners, leading to stalled momentum and failed exam attempts.",
-                persona: "Adult self-paced learner juggling work and school. Needs an intelligent system that diagnoses their exact Pre-Assessment competency gaps, calculates how many days remain until their target exam date, and serves a tailored daily checklist.",
-                interactiveType: "d426-simulator",
-                features: [
-                    { title: "6-Variable Placement Algorithm", desc: "Evaluates prior SQL/DB experience, weekly study hours, learning modality preference, and target exam date to route learners into Foundations, Standard, or Fast-Track pathways." },
-                    { title: "Pre-Assessment Competency Analyzer", desc: "Parses competency scores across core domains (e.g., Database Attributes, SQL Queries, Primary Keys) to flag priority remediation chapters." },
-                    { title: "Dynamic Daily Sprint Generator", desc: "Automatically partitions 5 modular JSON chapters into manageable daily buckets aligned to the learner's target completion date." },
-                    { title: "Color-Coded Confidence Telemetry", desc: "Interactive Green/Yellow/Red confidence ratings on every module with 1-click filtering so learners can isolate 'Red/Needs Review' topics before exam day." },
-                    { title: "80% Chapter Mastery Gates", desc: "Enforces structured progression checkpoints and beginner SQL guardrails so foundational concepts aren't skipped." },
-                    { title: "Decentralized JSON Content Engine", desc: "Stores all chapter topics, video tutorials, labs, and FAQs in modular JSON schemas for rapid, code-free curriculum updates." }
-                ],
-                evaluation: {
-                    metric1Title: "Pre-Assessment to Objective Exam Lift",
-                    metric1Desc: "Evaluated by comparing initial diagnostic competency breakdowns against first-attempt exam pass rates across the 3 adaptive tracks.",
-                    metric2Title: "Self-Regulated Learning & Tool Retention",
-                    metric2Desc: "Measured via sprint completion rates, confidence-filter usage, and reduction in premature exam attempts."
-                }
-            },
-
-            "first-client-call": {
-                badge: "Consultative Onboarding • Canvas LMS",
-                title: "Your First Client Call: Consultative Facilitation Lab",
-                subtitle: "An asynchronous onboarding simulation in Canvas LMS that uses a 'Practice, Review, Perform' model, empathy mapping, and structured peer rubrics to turn anxious new hires into confident client facilitators.",
-                meta: {
-                    role: "Instructional Designer & Onboarding Facilitator",
-                    audience: "New Client-Facing Onboarding Specialists",
-                    stack: "Canvas LMS, Custom HTML/CSS, Video Simulation",
-                    impact: "Measurable Lift in 1:1 Facilitation Self-Efficacy"
-                },
-                challenge: "New specialists in a remote onboarding program understood the technical mechanics of their software platform but lacked the consultative presence and facilitation skills required to lead live 1:1 client sessions. Existing training focused heavily on 'what buttons to click' rather than 'how to guide a client,' resulting in high new-hire anxiety and inconsistent customer experiences.",
-                persona: "'Alex' — a motivated but overwhelmed new Onboarding Specialist. Alex needs psychological safety to practice verbal facilitation without fear of judgment, plus concrete rubric criteria defining what a great client call sounds like.",
-                interactiveType: "video-showcase",
-                videoUrl: "https://www.youtube.com/embed/3v80Ql8X7gY",
-                externalUrl: "https://www.youtube.com/watch?v=3v80Ql8X7gY",
-                secondaryImage: "https://lythiaa.github.io/portfolio/image.png",
-                features: [
-                    { title: "Empathy-Mapped Learner Analysis", desc: "Built directly from a structured empathy map capturing new-hire anxieties, client objections, and facilitation blind spots." },
-                    { title: "'Practice, Review, Perform' Loop", desc: "Grounded in Bandura's Social Cognitive Theory—learners record a low-stakes mock client call, evaluate a peer, and refine their final facilitation." },
-                    { title: "9-Point Analytic Facilitation Rubric", desc: "Quantifies consultative behaviors across rapport building, clear technical translation, and actionable next-step closeouts." },
-                    { title: "Custom Canvas HTML/CSS UI", desc: "Engineered a sleek, accessible interface inside Canvas LMS constraints to eliminate visual clutter and reduce cognitive load." },
-                    { title: "OSCQR Quality Standards Alignment", desc: "Audited against the Open SUNY Course Quality Review rubric to guarantee learner-centered navigation and accessibility." },
-                    { title: "Pre/Post Self-Efficacy Telemetry", desc: "Pairs qualitative peer feedback with quantitative 5-point Likert surveys to prove confidence growth." }
-                ],
-                evaluation: {
-                    metric1Title: "Consultative Self-Efficacy Shift",
-                    metric1Desc: "Measured via pre- and post-module 5-point Likert surveys assessing new specialists' confidence in leading live 1:1 customer sessions.",
-                    metric2Title: "Verbal Facilitation Rubric Gains",
-                    metric2Desc: "Quantified by scoring initial practice recordings against final client call submissions using the 9-point analytic rubric."
-                }
-            },
-
-            "leading-with-impact": {
-                badge: "Storyline 360 Simulation • Leadership Enablement",
-                title: "Leading With Impact: Virtual Meeting Facilitation Lab",
-                subtitle: "An immersive branching video simulation built in Articulate Storyline 360 that trains mid-to-senior leaders to run high-accountability virtual and hybrid client meetings.",
-                meta: {
-                    role: "Lead E-Learning Developer & LXD",
-                    audience: "Mid-to-Senior Corporate Leaders",
-                    stack: "Articulate Storyline 360, AI Video Synthesis, WCAG",
-                    impact: "Scenario-Based Decision Accuracy"
-                },
-                challenge: "In a global hybrid enterprise, leaders were struggling with disengaged virtual rooms, poorly scoped agendas, and weak post-meeting follow-through. Passive slide decks on 'meeting best practices' failed to change actual facilitation behavior under pressure.",
-                persona: "Mid-to-senior managers leading cross-functional internal teams and high-stakes client check-ins. They need realistic, consequence-driven decision practice across the full lifecycle of a meeting.",
-                interactiveType: "video-showcase",
-                videoUrl: "https://www.youtube.com/embed/r4fp_e3Ur00",
-                externalUrl: "https://www.youtube.com/watch?v=r4fp_e3Ur00",
-                features: [
-                    { title: "3-Phase Meeting Lifecycle Model", desc: "Structures decision-making around Pre-Meeting Strategy, Live Facilitation & Tool Selection, and Post-Meeting Accountability." },
-                    { title: "AI-Generated Branching Video Scenarios", desc: "Places learners in realistic virtual room breakdowns where their choices trigger immediate visual consequences and coaching feedback." },
-                    { title: "Interactive Ranking & Tool Labs", desc: "Features custom Storyline drag-and-drop prioritization activities and communication channel matchers." },
-                    { title: "Universal Design for Learning (UDL)", desc: "Delivers multimodal instruction (voiceover, closed captions, visual infographics, interactive transcripts) for diverse executive preferences." },
-                    { title: "POUR Accessibility Compliance", desc: "Engineered for full keyboard operability, high-contrast visual hierarchy, and screen-reader clarity." },
-                    { title: "Risk-Free Executive Sandbox", desc: "Allows leaders to experience the cost of poor facilitation choices safely before stepping into live client calls." }
-                ],
-                evaluation: {
-                    metric1Title: "Summative Branching Decision Accuracy",
-                    metric1Desc: "Analyzes path selection and recovery rates inside the final Storyline branching scenario to verify strategic mastery.",
-                    metric2Title: "Facilitator Confidence & Workplace Transfer",
-                    metric2Desc: "Post-simulation survey measuring perceived relevance and readiness to apply structured agendas in live team meetings."
-                }
-            },
-
-            "power-automate-ops": {
-                badge: "Enablement Operations • Workflow Automation",
-                title: "Automated Learner Triage & Multi-Course Outreach Pipeline",
-                subtitle: "A zero-touch backend operations architecture using Microsoft Power Automate, MS Forms, and custom HTML email templates to automate diagnostic routing, cohort follow-ups, and personalized study briefs.",
-                meta: {
-                    role: "Learning Operations & Automation Architect",
-                    audience: "Instructors, Coaches & Adult Learners",
-                    stack: "Power Automate, MS Forms, HTML/CSS, SharePoint/Excel",
-                    impact: "Eliminates Manual Admin Triage & Speeds Response"
-                },
-                challenge: "Managing high-volume learner cohorts across multiple technical courses (D426, D427, D493) created severe administrative bottlenecks. Manually checking form submissions, identifying which course or exam attempt a learner was on, and copy-pasting the right study resources delayed critical coaching interventions.",
-                persona: "High-volume Instructional & Customer Success teams who need instant, error-free routing so they can spend 100% of their energy on live 1:1 coaching rather than manual email admin.",
-                interactiveType: "power-automate-diagram",
-                features: [
-                    { title: "Multi-Course Conditional Switch Routing", desc: "Automatically inspects incoming form/diagnostic payloads and routes learners dynamically to the exact course logic branch." },
-                    { title: "Dynamic HTML Resource Injection", desc: "Generates responsive, high-contrast HTML emails populated with personalized study links, cohort recordings, and next steps." },
-                    { title: "Attempt & Risk-Level Triage", desc: "Distinguishes between 1st-attempt explorers and multi-attempt retake candidates to escalate high-priority 1:1 coaching." },
-                    { title: "Cohort Attendance & Completion Sync", desc: "Connects live/self-paced cohort verification forms directly to automated follow-up sequences and tracking logs." },
-                    { title: "Error-Proof Variable Formatting", desc: "Uses clean string manipulation and fallback conditions so learner names and custom recommendations render flawlessly." },
-                    { title: "Scalable Enablement Infrastructure", desc: "Built as a reusable operational blueprint that can be cloned across new product lines or academic courses in minutes." }
-                ],
-                evaluation: {
-                    metric1Title: "Response Latency Reduction",
-                    metric1Desc: "Reduced resource delivery time from 24–48 hours of manual instructor triage to under 60 seconds via automated trigger execution.",
-                    metric2Title: "Administrative Hours Reclaimed",
-                    metric2Desc: "Eliminated repetitive copy-paste outreach across hundreds of monthly learner touchpoints, reallocating time to live facilitation."
-                }
-            },
-
-            "mysql-joins-cohort": {
-                badge: "Custom EdTech Web App • Live + Async Cohort",
-                title: "Modular MySQL Joins Cohort App (Model B Access Gate)",
-                subtitle: "A gated, interactive HTML/JS cohort platform combining Panopto video instruction, rotating live instructor unlock codes, strikeout-protected foundational checks, and toggleable SQL syntax roadmaps.",
-                meta: {
-                    role: "Lead EdTech Developer & Cohort Facilitator",
-                    audience: "Data Management Cohort Learners",
-                    stack: "HTML5, Vanilla JS, Tailwind, Panopto & MS Forms",
-                    impact: "70% Mastery Gate + Live/Async Hybrid Control"
-                },
-                challenge: "In technical SQL cohorts, learners frequently jump straight to complex multi-table `JOIN` coding exercises without watching the prerequisite conceptual walkthrough or mastering primary/foreign key definitions—leading to frustration and high drop-off.",
-                persona: "Adult technical learners attending either a live facilitator-led cohort or a self-paced replay session who need structured scaffolding, visual syntax cues, and immediate corrective feedback.",
-                interactiveType: "joins-cohort-preview",
-                features: [
-                    { title: "Model B Dual Access Gate", desc: "Unlocks the interactive lab either via a completion code embedded at the end of a Panopto video OR via 10 rotating live instructor codes." },
-                    { title: "15-Question Gate w/ Strikeout Protection", desc: "Requires a 70% passing score on foundational terminology before unlocking syntax labs, using smart strikeout logic to prevent random guessing." },
-                    { title: "3 Guided MCQ Syntax Walkthroughs", desc: "Step-by-step interactive breakdowns showing how `SELECT`, `FROM`, `JOIN`, and `ON` clauses map to table schemas." },
-                    { title: "7 Practice Labs w/ Roadmap Toggles", desc: "Learners can toggle a visual step-by-step 'SQL Roadmap' on or off as they transition from scaffolded practice to independent coding." },
-                    { title: "5 Mastery Challenges & Persistent Feedback", desc: "Features a scrollable persistent feedback panel and live student first-name personalization across the interface." },
-                    { title: "Seamless Telemetry Handoff", desc: "Concludes with an integrated completion tracker and optional MS Forms handoff for automated instructor credit." }
-                ],
-                evaluation: {
-                    metric1Title: "Prerequisite Concept Readiness",
-                    metric1Desc: "Enforces a mandatory 70% foundational baseline before learners touch multi-table syntax, reducing mid-cohort confusion.",
-                    metric2Title: "Scaffold Fade & Mastery Accuracy",
-                    metric2Desc: "Tracks progression from Guided Walkthroughs → Roadmap-Assisted Practice → Unassisted Mastery Questions."
-                }
-            },
-
-            "sql-gamified-labs": {
-                badge: "AI Rapid Prototyping & Articulate 360 Suite",
-                title: "Technical Skill Gamification Suite: MySQL Identity, SQL Quest & Rise 360",
-                subtitle: "Three live, playable learning environments demonstrating how intimidating technical syntax can be transformed into high-retention experiences using Socratic AI, RPG game mechanics, and Articulate Rise + Storyline.",
-                meta: {
-                    role: "Instructional Designer & AI Prototyping Lead",
-                    audience: "Aspiring Data Analysts & Technical Beginners",
-                    stack: "HTML/JS, Gemini AI Prompting, Articulate Rise & Storyline",
-                    impact: "3 Live Playable Technical Modules"
-                },
-                challenge: "Beginner data learners are often intimidated by raw command-line interfaces and dry textbook definitions of SQL queries, joins, and aggregate functions. They need low-stakes, high-motivation environments that reward experimentation and conceptual thinking.",
-                persona: "Career-pivoters, marketing analysts, and students who freeze up when staring at a blank code editor and thrive on narrative momentum, visual feedback, and scaffolded hints.",
-                interactiveType: "trilogy-launcher",
-                features: [
-                    { title: "MySQL Identity: Socratic AI Mystery Game", desc: "Built via strategic AI prompting; validates query *results* rather than rigid syntax and uses Socratic questioning to nudge stuck learners." },
-                    { title: "SQL Quest Hub: Gagné & ARCS RPG", desc: "Applies Gagné's Nine Events and Keller's ARCS motivation model with XP, lives, streaks, and adaptive difficulty scaling." },
-                    { title: "Articulate Rise + Storyline Course", desc: "A responsive enterprise course combining Rise 360 scaffolding with embedded Storyline 360 coding checks on Joins & Aggregate Functions." },
-                    { title: "Result-Based Query Validation", desc: "Rewards multiple valid SQL approaches to solving a database problem rather than penalizing minor formatting differences." },
-                    { title: "Multi-Tiered Hint Scaffolding", desc: "Provides progressive hints and error-specific micro-quizzes so learners stay in their Zone of Proximal Development." },
-                    { title: "Rapid Concept-to-Production Velocity", desc: "Proves ability to ship both custom-coded web games and industry-standard Articulate 360 packages at high speed." }
-                ],
-                evaluation: {
-                    metric1Title: "Task Completion & Hint Dependency Telemetry",
-                    metric1Desc: "Analyzes attempts per SQL challenge and hint utilization rates to pinpoint exact syntax bottlenecks.",
-                    metric2Title: "Learner Motivation & ARCS Satisfaction",
-                    metric2Desc: "Post-module evaluation comparing learner engagement in narrative/gamified labs against traditional static SQL tutorials."
-                }
-            }
-        };
-
-        const projectOrder = Object.keys(caseStudies);
-
-        function renderInteractiveShowcase(cs) {
-            // 1. EDTECH SAAS + AGENTIC AI SANDBOX
-            if (cs.interactiveType === "saas-sandbox") {
-                return `
-                <div class="surface-sandstone rounded p-6 md:p-8 mb-16">
-                    <div class="flex flex-wrap items-center justify-between gap-4 pb-6 mb-6 border-b border-[#E5E7EB]">
-                        <div>
-                            <span class="font-mono-tag text-xs text-slate-500 block">Interactive Enablement Sandbox</span>
-                            <h3 class="font-display text-2xl font-bold text-[#111827]">Inspect the 3-Part Post-Sales Enablement System</h3>
-                        </div>
-                        <div class="flex flex-wrap gap-2" id="saas-tabs">
-                            <button onclick="switchSaasTab(0)" class="saas-tab filter-pill active px-3.5 py-1.5 rounded text-xs font-semibold">1. Live 45-Min Facilitator Guide</button>
-                            <button onclick="switchSaasTab(1)" class="saas-tab filter-pill px-3.5 py-1.5 rounded text-xs font-semibold">2. Interactive LMS Sync SOP</button>
-                            <button onclick="switchSaasTab(2)" class="saas-tab filter-pill px-3.5 py-1.5 rounded text-xs font-semibold">3. Agentic AI Triage Copilot</button>
-                        </div>
-                    </div>
-                    <div id="saas-sandbox-body" class="bg-white rounded border border-[#E5E7EB] p-6"></div>
-                </div>`;
-            }
-
-            // 2. SANITIZED D426 ADAPTIVE STUDY GUIDE SIMULATOR
-            if (cs.interactiveType === "d426-simulator") {
-                return `
-                <div class="surface-sandstone rounded p-6 md:p-8 mb-16">
-                    <div class="mb-4 p-3 rounded bg-[#0F172A] text-[#FAF8F5] flex flex-wrap items-center justify-between gap-2 text-xs">
-                        <span>🔒 <strong>Enterprise Sanitization Note:</strong> Internal university SharePoint URLs, Panopto folders, and staff emails have been sanitized in this live interactive architecture demo.</span>
-                        <span class="font-mono-tag text-[10px] px-2 py-0.5 rounded bg-white/10">Live Logic Simulator</span>
-                    </div>
-                    <div class="bg-white rounded border border-[#E5E7EB] p-6">
-                        <div class="grid lg:grid-cols-12 gap-6">
-                            <div class="lg:col-span-5 border-b lg:border-b-0 lg:border-r border-[#E5E7EB] pb-6 lg:pb-0 lg:pr-6">
-                                <span class="font-mono-tag text-xs text-slate-500 block mb-2">Step 1: Intake & Pre-Assessment Inputs</span>
-                                <h4 class="font-display font-bold text-lg text-[#111827] mb-4">Configure Learner Profile</h4>
-                                <div class="space-y-4 text-xs">
-                                    <div>
-                                        <label class="font-semibold block mb-1">Prior SQL & Database Experience</label>
-                                        <select id="sim-exp" onchange="updateD426Sim()" class="w-full p-2.5 rounded border border-[#E5E7EB] bg-[#FAF8F5]">
-                                            <option value="novice">Brand New Beginner (No prior SQL)</option>
-                                            <option value="intermediate" selected>Some Exposure (Familiar with basic tables)</option>
-                                            <option value="advanced">Experienced (Comfort with queries & ERD)</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label class="font-semibold block mb-1">Weekly Study Capacity & Target Exam Window</label>
-                                        <select id="sim-hours" onchange="updateD426Sim()" class="w-full p-2.5 rounded border border-[#E5E7EB] bg-[#FAF8F5]">
-                                            <option value="foundations">6–8 hrs/wk (4-Week Foundations Pace)</option>
-                                            <option value="standard" selected>10–14 hrs/wk (2.5-Week Standard Sprint)</option>
-                                            <option value="fast">18+ hrs/wk (10-Day Fast-Track Sprint)</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label class="font-semibold block mb-1">Pre-Assessment Diagnostic Profile</label>
-                                        <select id="sim-pa" onchange="updateD426Sim()" class="w-full p-2.5 rounded border border-[#E5E7EB] bg-[#FAF8F5]">
-                                            <option value="syntax-gap" selected>Competent in DB Attributes • Approaching in SQL Queries & Keys</option>
-                                            <option value="erd-gap">Competent in Basic SQL • Needs Review in Normalization & ERD</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="lg:col-span-7" id="d426-sim-output"></div>
-                        </div>
-                    </div>
-                </div>`;
-            }
-
-            // 3. VIDEO SHOWCASE (LEADING WITH IMPACT & YOUR FIRST CLIENT CALL)
-            if (cs.interactiveType === "video-showcase") {
-                return `
-                <div class="surface-sandstone rounded p-6 md:p-8 mb-16">
-                    <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
-                        <div>
-                            <span class="font-mono-tag text-xs text-slate-500 block">Interactive Module Walkthrough</span>
-                            <h3 class="font-display text-2xl font-bold text-[#111827]">Watch the Learner Journey & UI in Action</h3>
-                        </div>
-                        <a href="${cs.externalUrl}" target="_blank" rel="noopener" class="btn-primary px-4 py-2 rounded text-xs font-semibold">
-                            Open Video in New Tab ↗
-                        </a>
-                    </div>
-                    <div class="aspect-video w-full rounded overflow-hidden border border-[#E5E7EB] bg-black shadow-lg">
-                        <iframe class="w-full h-full" src="${cs.videoUrl}" title="${cs.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                    ${cs.secondaryImage ? `
-                    <div class="mt-8 pt-8 border-t border-[#E5E7EB] grid md:grid-cols-12 gap-6 items-center">
-                        <div class="md:col-span-5">
-                            <span class="font-mono-tag text-xs text-slate-500 block mb-1">Learner Discovery Artifact</span>
-                            <h4 class="font-display font-bold text-xl text-[#111827] mb-2">Empathy Map: "Alex" (New Onboarding Specialist)</h4>
-                            <p class="text-xs text-[#4B5563] leading-relaxed">Before building a single screen in Canvas, I mapped Alex's exact cognitive and emotional friction points—shifting the training focus from passive product knowledge to low-stakes consultative roleplay.</p>
-                        </div>
-                        <div class="md:col-span-7 bg-white p-3 rounded border border-[#E5E7EB]">
-                            <img src="${cs.secondaryImage}" alt="Learner Empathy Map" class="w-full h-auto rounded">
-                        </div>
-                    </div>` : ''}
-                </div>`;
-            }
-
-            // 4. POWER AUTOMATE INTERACTIVE SYSTEM DIAGRAM
-            if (cs.interactiveType === "power-automate-diagram") {
-                return `
-                <div class="surface-sandstone rounded p-6 md:p-8 mb-16">
-                    <div class="mb-6">
-                        <span class="font-mono-tag text-xs text-slate-500 block">Interactive System Blueprint (Click Any Node to Inspect Logic)</span>
-                        <h3 class="font-display text-2xl font-bold text-[#111827]">Flagship Flow: Automated Multi-Course Triage & Dynamic HTML Dispatch</h3>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-6" id="pa-nodes">
-                        <button onclick="selectPaNode(0)" class="pa-node text-left p-4 rounded bg-[#0F172A] text-[#FAF8F5]">
-                            <span class="font-mono-tag text-[10px] opacity-70 block">Node 01 / Trigger</span>
-                            <p class="font-display font-bold text-sm mt-1">MS Forms / Diagnostic Webhook</p>
-                        </button>
-                        <button onclick="selectPaNode(1)" class="pa-node text-left p-4 rounded bg-white border border-[#E5E7EB] text-[#111827]">
-                            <span class="font-mono-tag text-[10px] text-slate-500 block">Node 02 / Switch Router</span>
-                            <p class="font-display font-bold text-sm mt-1">Course & Attempt Condition</p>
-                        </button>
-                        <button onclick="selectPaNode(2)" class="pa-node text-left p-4 rounded bg-white border border-[#E5E7EB] text-[#111827]">
-                            <span class="font-mono-tag text-[10px] text-slate-500 block">Node 03 / Payload Builder</span>
-                            <p class="font-display font-bold text-sm mt-1">Dynamic HTML Email Composer</p>
-                        </button>
-                        <button onclick="selectPaNode(3)" class="pa-node text-left p-4 rounded bg-white border border-[#E5E7EB] text-[#111827]">
-                            <span class="font-mono-tag text-[10px] text-slate-500 block">Node 04 / Telemetry</span>
-                            <p class="font-display font-bold text-sm mt-1">Coaching Log & Alert Dispatch</p>
-                        </button>
-                    </div>
-                    <div id="pa-node-detail" class="bg-white rounded border border-[#E5E7EB] p-6 mb-6"></div>
-                    <div class="pt-6 border-t border-[#E5E7EB]">
-                        <span class="font-mono-tag text-xs text-slate-500 block mb-3">Additional Production Automation Workflows Built</span>
-                        <div class="grid md:grid-cols-3 gap-4 text-xs">
-                            <div class="p-4 rounded bg-white border border-[#E5E7EB]">
-                                <p class="font-bold text-[#111827] mb-1">01 / Cohort Verification & Resource Unlock</p>
-                                <p class="text-[#4B5563]">Triggers when a student submits a live/self-paced cohort completion form, automatically sending practice datasets and logging attendance.</p>
-                            </div>
-                            <div class="p-4 rounded bg-white border border-[#E5E7EB]">
-                                <p class="font-bold text-[#111827] mb-1">02 / High-Priority Retake Escalation</p>
-                                <p class="text-[#4B5563]">Detects 2nd/3rd+ assessment attempts and routes tailored remediation plans plus instructor 1:1 booking prompts.</p>
-                            </div>
-                            <div class="p-4 rounded bg-white border border-[#E5E7EB]">
-                                <p class="font-bold text-[#111827] mb-1">03 / Automated Pacing & Milestone Nudges</p>
-                                <p class="text-[#4B5563]">Uses scheduled recurrence triggers to nudge learners approaching target exam dates with bite-sized syntax review sheets.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>`;
-            }
-
-            // 5. MYSQL JOINS COHORT SMART PLACEHOLDER & ARCHITECTURE PREVIEW
-            if (cs.interactiveType === "joins-cohort-preview") {
-                return `
-                <div class="surface-sandstone rounded p-6 md:p-8 mb-16">
-                    <div class="flex flex-wrap items-center justify-between gap-4 pb-6 mb-6 border-b border-[#E5E7EB]">
-                        <div>
-                            <span class="font-mono-tag text-xs px-2.5 py-1 rounded bg-[#0F172A] text-[#FAF8F5] inline-block mb-2">In Final QA • Live URL Placeholder Ready</span>
-                            <h3 class="font-display text-2xl font-bold text-[#111827]">Interactive Architecture & Access-Gate Preview</h3>
-                        </div>
-                        <a href="#coming-soon" onclick="alert('This cohort application is currently in final QA! Swap this href in project.html as soon as your live link is ready.'); return false;" class="btn-outline px-4 py-2 rounded text-xs font-semibold">
-                            Launch Live Cohort App (Final QA) ↗
-                        </a>
-                    </div>
-                    <div class="grid md:grid-cols-4 gap-4 text-xs">
-                        <div class="p-5 rounded bg-white border border-[#E5E7EB]">
-                            <span class="font-mono-tag text-[10px] text-slate-500 block mb-1">Stage 01 / Access Control</span>
-                            <p class="font-display font-bold text-sm text-[#111827] mb-2">Model B Panopto + Rotating Instructor Codes</p>
-                            <p class="text-[#4B5563]">Validates either the Panopto video completion code (<code>ALIASES</code>) or 10 rotating live facilitator codes (e.g., <code>JOINPRO1</code>, <code>SQLPATH3</code>) while capturing learner first name.</p>
-                        </div>
-                        <div class="p-5 rounded bg-white border border-[#E5E7EB]">
-                            <span class="font-mono-tag text-[10px] text-slate-500 block mb-1">Stage 02 / 70% Gate</span>
-                            <p class="font-display font-bold text-sm text-[#111827] mb-2">15 Foundational Questions + Strikeout</p>
-                            <p class="text-[#4B5563]">Tests PK/FK relationships, `INNER` vs `LEFT/RIGHT/FULL` logic, and alias rules. Eliminates wrong choices on retry while protecting the 70% mastery threshold.</p>
-                        </div>
-                        <div class="p-5 rounded bg-white border border-[#E5E7EB]">
-                            <span class="font-mono-tag text-[10px] text-slate-500 block mb-1">Stage 03 / Guided & Practice</span>
-                            <p class="font-display font-bold text-sm text-[#111827] mb-2">3 Walkthroughs + 7 Roadmap Labs</p>
-                            <p class="text-[#4B5563]">Interactive MCQ syntax builders featuring a toggleable visual 'SQL Roadmap' so learners can fade scaffolding at their own pace.</p>
-                        </div>
-                        <div class="p-5 rounded bg-white border border-[#E5E7EB]">
-                            <span class="font-mono-tag text-[10px] text-slate-500 block mb-1">Stage 04 / Summative</span>
-                            <p class="font-display font-bold text-sm text-[#111827] mb-2">5 Unassisted Mastery Labs</p>
-                            <p class="text-[#4B5563]">Full multi-table query challenges with persistent scrollable feedback and automated completion form handoff.</p>
-                        </div>
-                    </div>
-                </div>`;
-            }
-
-            // 6. SQL GAMIFIED TRILOGY LAUNCHER
-            if (cs.interactiveType === "trilogy-launcher") {
-                return `
-                <div class="surface-sandstone rounded p-6 md:p-8 mb-16">
-                    <div class="mb-6">
-                        <span class="font-mono-tag text-xs text-slate-500 block">3 Live Playable Learning Environments</span>
-                        <h3 class="font-display text-2xl font-bold text-[#111827]">Launch Any Module in the Technical Gamification Suite</h3>
-                    </div>
-                    <div class="grid md:grid-cols-3 gap-6">
-                        <div class="bg-white rounded border border-[#E5E7EB] p-6 flex flex-col justify-between">
-                            <div>
-                                <span class="font-mono-tag text-[10px] px-2 py-0.5 rounded surface-sandstone">01 / Socratic AI Game</span>
-                                <h4 class="font-display font-bold text-xl text-[#111827] mt-3 mb-2">MySQL Identity</h4>
-                                <p class="text-xs text-[#4B5563] leading-relaxed mb-6">An investigative SQL mystery game built by strategically prompting Gemini. Checks query *results* rather than rigid syntax and uses Socratic guiding questions instead of giving away answers.</p>
-                            </div>
-                            <a href="https://lythiaa.github.io/mysqlgames/Mysqlid/" target="_blank" rel="noopener" class="btn-primary text-center py-2.5 px-4 rounded text-xs font-semibold">
-                                Play MySQL Identity ↗
-                            </a>
-                        </div>
-                        <div class="bg-white rounded border border-[#E5E7EB] p-6 flex flex-col justify-between">
-                            <div>
-                                <span class="font-mono-tag text-[10px] px-2 py-0.5 rounded surface-sandstone">02 / ARCS Gamified RPG</span>
-                                <h4 class="font-display font-bold text-xl text-[#111827] mt-3 mb-2">SQL Quest Hub</h4>
-                                <p class="text-xs text-[#4B5563] leading-relaxed mb-6">Transforms abstract SQL JOINs into a leveled adventure grounded in Gagné's Nine Events and Keller's ARCS model—complete with XP, streaks, lives, and adaptive difficulty.</p>
-                            </div>
-                            <a href="https://lythiaa.github.io/mysqlgames/joinsquest/" target="_blank" rel="noopener" class="btn-primary text-center py-2.5 px-4 rounded text-xs font-semibold">
-                                Launch SQL Quest Hub ↗
-                            </a>
-                        </div>
-                        <div class="bg-white rounded border border-[#E5E7EB] p-6 flex flex-col justify-between">
-                            <div>
-                                <span class="font-mono-tag text-[10px] px-2 py-0.5 rounded surface-sandstone">03 / Rise 360 + Storyline</span>
-                                <h4 class="font-display font-bold text-xl text-[#111827] mt-3 mb-2">Joins & Aggregates Course</h4>
-                                <p class="text-xs text-[#4B5563] leading-relaxed mb-6">A comprehensive, responsive e-learning course built in Articulate Rise 360 with embedded Storyline 360 interactive blocks, coding quizzes, and completion certification.</p>
-                            </div>
-                            <a href="https://joinsagg427.s3.us-east-2.amazonaws.com/comprehensive-guide-to-my-sql-joins-and-aggregate-functions-raw-Hlxo9Nax/content/index.html" target="_blank" rel="noopener" class="btn-primary text-center py-2.5 px-4 rounded text-xs font-semibold">
-                                Launch Articulate Course ↗
-                            </a>
-                        </div>
-                    </div>
-                </div>`;
-            }
-            return '';
-        }
-
-        // INTERACTIVE WIDGET HELPERS
-        window.switchSaasTab = function(idx) {
-            document.querySelectorAll('.saas-tab').forEach((b, i) => b.classList.toggle('active', i === idx));
-            const container = document.getElementById('saas-sandbox-body');
-            if (idx === 0) {
-                container.innerHTML = `
-                    <div class="grid md:grid-cols-3 gap-4 text-xs">
-                        <div class="p-4 rounded surface-sandstone">
-                            <span class="font-mono-tag text-[10px] text-slate-500">Min 00–10 • Discovery & Alignment</span>
-                            <p class="font-bold text-sm text-[#111827] mt-1 mb-2">1. Course Architecture Audit</p>
-                            <p class="text-[#4B5563]">Confirm LMS environment (Canvas/D2L), grading policy weightings, and co-instructor permissions before touching settings.</p>
-                        </div>
-                        <div class="p-4 rounded surface-sandstone">
-                            <span class="font-mono-tag text-[10px] text-slate-500">Min 10–30 • Guided Sandbox Execution</span>
-                            <p class="font-bold text-sm text-[#111827] mt-1 mb-2">2. Live Driver-Navigator Pairing</p>
-                            <p class="text-[#4B5563]">Facilitator guides the faculty member as they share their screen to authenticate the LTI 1.3 tool, deep-link 2 sample assessments, and test student view.</p>
-                        </div>
-                        <div class="p-4 rounded surface-sandstone">
-                            <span class="font-mono-tag text-[10px] text-slate-500">Min 30–45 • Verification & Closeout</span>
-                            <p class="font-bold text-sm text-[#111827] mt-1 mb-2">3. Gradebook Sync & Day-1 Readiness</p>
-                            <p class="text-[#4B5563]">Trigger a test score passback, verify column creation in the LMS gradebook, log milestone in Salesforce, and hand off self-service SOP.</p>
-                        </div>
-                    </div>`;
-            } else if (idx === 1) {
-                container.innerHTML = `
-                    <div class="space-y-3 text-xs">
-                        <div class="p-3.5 rounded surface-sandstone flex items-center justify-between">
-                            <div><strong class="text-[#111827]">Step 1: Verify LTI 1.3 Developer Key & Deployment ID</strong> — Ensure External Tool is toggled 'Enabled' in Course Navigation.</div>
-                            <span class="font-mono-tag px-2 py-0.5 rounded bg-white border border-[#E5E7EB]">Admin / IT</span>
-                        </div>
-                        <div class="p-3.5 rounded surface-sandstone flex items-center justify-between">
-                            <div><strong class="text-[#111827]">Step 2: Deep-Link Graded Items via Modules (Do Not Copy-Paste URLs)</strong> — Select 'External Tool' → Choose Assessments → Check 'Sync to Gradebook'.</div>
-                            <span class="font-mono-tag px-2 py-0.5 rounded bg-white border border-[#E5E7EB]">Instructor</span>
-                        </div>
-                        <div class="p-3.5 rounded surface-sandstone flex items-center justify-between">
-                            <div><strong class="text-[#111827]">Step 3: Run Gradebook Diagnostic Sync</strong> — Verify points match between Achieve/SaaS platform and Canvas Assignment Group weights.</div>
-                            <span class="font-mono-tag px-2 py-0.5 rounded bg-white border border-[#E5E7EB]">QA Check</span>
-                        </div>
-                    </div>`;
-            } else {
-                container.innerHTML = `
-                    <div class="grid md:grid-cols-12 gap-6 items-center text-xs">
-                        <div class="md:col-span-5 space-y-2">
-                            <span class="font-mono-tag text-[10px] text-slate-500 block">Select a Simulated Client Issue:</span>
-                            <button onclick="runAiCopilot(0)" class="w-full text-left p-3 rounded surface-sandstone hover:border-[#111827] font-semibold">⚠️ "Students see 'LTI Launch Error 401' when clicking quiz"</button>
-                            <button onclick="runAiCopilot(1)" class="w-full text-left p-3 rounded surface-sandstone hover:border-[#111827] font-semibold">📉 "Scores are showing in SaaS tool but not in Canvas Gradebook"</button>
-                        </div>
-                        <div class="md:col-span-7 p-4 rounded bg-[#0F172A] text-[#FAF8F5]" id="ai-copilot-output">
-                            <span class="font-mono-tag text-[10px] text-[#E5E7EB]/60 block mb-1">Agentic AI Onboarding Copilot • Ready</span>
-                            <p class="text-xs leading-relaxed">Select a client symptom on the left to see how the Agentic workflow diagnoses the LMS integration root cause and drafts the CSM's response.</p>
-                        </div>
-                    </div>`;
-                runAiCopilot(0);
-            }
-        };
-
-        window.runAiCopilot = function(issueIdx) {
-            const box = document.getElementById('ai-copilot-output');
-            if (!box) return;
-            const responses = [
-                {
-                    cause: "Course shells were copied from a prior semester without re-initializing the course-level LTI pairing token, or third-party cookies are blocked in Safari.",
-                    action: "1. Instruct faculty to click the main SaaS tool link in left navigation once to pair the new shell. 2. Auto-drafted 30-second GIF walkthrough + student browser banner for syllabus."
-                },
-                {
-                    cause: "Assignment was added as an External URL rather than an LTI Deep-Link item, OR the assignment remain unpublished in Canvas.",
-                    action: "1. Flagged mismatched assignment IDs via API check. 2. Generated 3-click remediation guide to relink via 'External Tool' picker and trigger manual grade refresh."
-                }
-            ];
-            box.innerHTML = `
-                <span class="font-mono-tag text-[10px] text-emerald-300 block mb-1">✓ Root Cause Diagnosed + Action Plan Generated</span>
-                <p class="text-xs mb-2"><strong>Diagnostic Root Cause:</strong> ${responses[issueIdx].cause}</p>
-                <p class="text-xs text-[#E5E7EB]/90"><strong>Autonomous Resolution & CSM Brief:</strong> ${responses[issueIdx].action}</p>
-            `;
-        };
-
-        window.updateD426Sim = function() {
-            const exp = document.getElementById('sim-exp')?.value || 'intermediate';
-            const hours = document.getElementById('sim-hours')?.value || 'standard';
-            const pa = document.getElementById('sim-pa')?.value || 'syntax-gap';
-            const out = document.getElementById('d426-sim-output');
-            if (!out) return;
-
-            const tracks = {
-                foundations: { name: "Track A: Guided Foundations (28-Day Plan)", pace: "Daily 60-Min Micro-Sprints • Beginner SQL Guardrails Active" },
-                standard: { name: "Track B: Standard Accelerated (18-Day Plan)", pace: "Daily 90-Min Targeted Sprints • Focus on Lab Walkthroughs" },
-                fast: { name: "Track C: Intensive Fast-Track (10-Day Sprint)", pace: "High-Yield Syntax & ERD Mastery Labs • 80% Gate Bypass Eligible" }
-            };
-            const focus = pa === 'syntax-gap'
-                ? "Priority Flag: Ch. 2 (DDL/DML & CRUD Syntax) + Ch. 3 (Primary/Foreign Keys & Joins)"
-                : "Priority Flag: Ch. 4 (Entity-Relationship Modeling & Cardinality) + Ch. 5 (Normalization & Indexes)";
-
-            out.innerHTML = `
-                <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-[#E5E7EB]">
-                    <div>
-                        <span class="font-mono-tag text-[10px] text-slate-500 block">Assigned Adaptive Pathway</span>
-                        <h5 class="font-display font-bold text-base text-[#111827]">${tracks[hours].name}</h5>
-                    </div>
-                    <span class="font-mono-tag text-[10px] px-2.5 py-1 rounded bg-[#0F172A] text-[#FAF8F5]">${exp.toUpperCase()} PROFILE</span>
-                </div>
-                <p class="text-xs text-[#4B5563] mb-3"><strong>Pacing Engine:</strong> ${tracks[hours].pace}</p>
-                <div class="p-3 rounded surface-sandstone text-xs mb-4">
-                    <strong class="text-[#111827] block mb-1">🎯 Pre-Assessment Remediation Prescription:</strong>
-                    <span>${focus}</span>
-                </div>
-                <span class="font-mono-tag text-[10px] text-slate-500 block mb-2">Interactive Module Confidence Filter (Sample Sprint View)</span>
-                <div class="grid sm:grid-cols-3 gap-2 text-xs">
-                    <div class="p-2.5 rounded border border-emerald-300 bg-emerald-50/50">
-                        <span class="font-bold text-emerald-900 block">🟢 Ch 1: DB Architecture</span>
-                        <span class="text-[11px] text-emerald-800">Competent • Quiz Passed (90%)</span>
-                    </div>
-                    <div class="p-2.5 rounded border border-amber-300 bg-amber-50/50">
-                        <span class="font-bold text-amber-900 block">🟡 Ch 2: SQL DDL/DML</span>
-                        <span class="text-[11px] text-amber-800">In Progress • 80% Gate Required</span>
-                    </div>
-                    <div class="p-2.5 rounded border border-rose-300 bg-rose-50/50">
-                        <span class="font-bold text-rose-900 block">🔴 Ch 3: Joins & Keys</span>
-                        <span class="text-[11px] text-rose-800">Flagged for Panopto Lab + Cohort</span>
-                    </div>
-                </div>
-            `;
-        };
-
-        window.selectPaNode = function(idx) {
-            const nodes = [
-                {
-                    title: "Node 01: MS Forms Webhook & Diagnostic Trigger",
-                    detail: "Captures real-time learner submissions (First Name, WGU/Client Email, Course Code D426/D427/D493, Assessment Attempt Number, and Self-Reported Blocker) via `When a new response is submitted` + `Get response details`."
-                },
-                {
-                    title: "Node 02: Multi-Branch Switch & Conditional Routing",
-                    detail: "Evaluates the Course ID and Attempt count using a structured `Switch` control. Routes 1st-time learners to foundational onboarding packets while routing retake candidates to targeted diagnostic remediation branches."
-                },
-                {
-                    title: "Node 03: Dynamic HTML Email & Study Plan Composer",
-                    detail: "Injects learner variables into a clean, mobile-responsive HTML email template—embedding the exact adaptive study guide link, Panopto lab walkthrough folder, and cohort registration URL for their specific course."
-                },
-                {
-                    title: "Node 04: Telemetry Logging & Instructor Notification",
-                    detail: "Logs the automated touchpoint into a centralized tracking table and alerts the assigned coach/facilitator when a learner flags high anxiety or multiple failed attempts."
-                }
-            ];
-            document.querySelectorAll('.pa-node').forEach((btn, i) => {
-                if (i === idx) {
-                    btn.className = "pa-node text-left p-4 rounded bg-[#0F172A] text-[#FAF8F5]";
-                } else {
-                    btn.className = "pa-node text-left p-4 rounded bg-white border border-[#E5E7EB] text-[#111827]";
-                }
-            });
-            const detail = document.getElementById('pa-node-detail');
-            if (detail) {
-                detail.innerHTML = `
-                    <span class="font-mono-tag text-[10px] text-slate-500 block mb-1">Active Architecture Stage</span>
-                    <h4 class="font-display font-bold text-lg text-[#111827] mb-2">${nodes[idx].title}</h4>
-                    <p class="text-sm text-[#4B5563] leading-relaxed">${nodes[idx].detail}</p>
-                `;
-            }
-        };
-
-        // INITIALIZE DYNAMIC PAGE FROM URL ?id=
         document.addEventListener('DOMContentLoaded', () => {
+            const catalog = window.PORTFOLIO_PROJECTS || {};
+            const projectOrder = [
+                "saas-lms-onboarding",
+                "ai-analytics-curriculum",
+                "adaptive-study-architect",
+                "first-client-call",
+                "leading-with-impact",
+                "power-automate-ops",
+                "mysql-joins-cohort",
+                "sql-gamified-labs"
+            ];
+
             const params = new URLSearchParams(window.location.search);
-            const currentId = params.get('id') || 'edtech-saas-onboarding';
-            const cs = caseStudies[currentId] || caseStudies['edtech-saas-onboarding'];
+            const currentId = params.get('id') || projectOrder[0];
+            const cs = catalog[currentId] || catalog[projectOrder[0]];
+
+            if (!cs) return;
 
             document.title = `${cs.title} | Lythia Amoakon`;
             document.getElementById('cs-badge').textContent = cs.badge;
@@ -658,11 +84,11 @@
                         <p class="font-semibold text-sm text-[#111827]">${cs.meta.audience}</p>
                     </div>
                     <div class="p-4 rounded surface-sandstone">
-                        <span class="font-mono-tag text-[10px] text-slate-500 block mb-1">Technical Stack</span>
+                        <span class="font-mono-tag text-[10px] text-slate-500 block mb-1">Tools & Stack</span>
                         <p class="font-semibold text-sm text-[#111827]">${cs.meta.stack}</p>
                     </div>
                     <div class="p-4 rounded surface-sandstone">
-                        <span class="font-mono-tag text-[10px] text-slate-500 block mb-1">Core Outcome</span>
+                        <span class="font-mono-tag text-[10px] text-slate-500 block mb-1">Key Outcome</span>
                         <p class="font-semibold text-sm text-[#111827]">${cs.meta.impact}</p>
                     </div>
                 </div>
@@ -670,23 +96,38 @@
                 <!-- Challenge & Persona Grid -->
                 <div class="grid md:grid-cols-2 gap-8 mb-16">
                     <div class="p-8 rounded surface-white">
-                        <span class="font-mono-tag text-xs text-slate-500 block mb-2">01 / The Operational & Learning Problem</span>
+                        <span class="font-mono-tag text-xs text-slate-500 block mb-2">01 / The Operational & Learning Gap</span>
                         <h2 class="font-display text-2xl font-bold text-[#111827] mb-3">The Challenge</h2>
                         <p class="text-sm md:text-base text-[#4B5563] leading-relaxed">${cs.challenge}</p>
                     </div>
                     <div class="p-8 rounded surface-white">
                         <span class="font-mono-tag text-xs text-slate-500 block mb-2">02 / Human-Centered Discovery</span>
-                        <h2 class="font-display text-2xl font-bold text-[#111827] mb-3">The User / Learner Persona</h2>
+                        <h2 class="font-display text-2xl font-bold text-[#111827] mb-3">The Target Persona</h2>
                         <p class="text-sm md:text-base text-[#4B5563] leading-relaxed">${cs.persona}</p>
                     </div>
                 </div>
 
                 <!-- Dynamic Interactive Sandbox / Video / App Launcher -->
-                ${renderInteractiveShowcase(cs)}
+                ${cs.renderInteractive ? cs.renderInteractive() : ''}
+
+                <!-- Cross-Industry & Target Role Transferability Block -->
+                ${cs.transferability ? `
+                <div class="mb-16 p-8 rounded surface-sandstone">
+                    <span class="font-mono-tag text-xs text-slate-500 block mb-2">03 / Cross-Functional Architecture</span>
+                    <h2 class="font-display text-2xl md:text-3xl font-bold text-[#111827] mb-6">How This Structure Applies Across Target Roles</h2>
+                    <div class="grid md:grid-cols-${cs.transferability.length} gap-6">
+                        ${cs.transferability.map(t => `
+                            <div class="p-5 rounded bg-white border border-[#E5E7EB]">
+                                <span class="font-mono-tag text-[10px] px-2.5 py-1 rounded bg-[#0F172A] text-[#FAF8F5] inline-block mb-3">${t.role}</span>
+                                <p class="text-xs sm:text-sm text-[#4B5563] leading-relaxed">${t.application}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>` : ''}
 
                 <!-- 6 Key Architectural & Enablement Features -->
                 <div class="mb-16">
-                    <span class="font-mono-tag text-xs text-slate-500 block mb-2">03 / System Architecture & Execution</span>
+                    <span class="font-mono-tag text-xs text-slate-500 block mb-2">04 / Execution & Methodology</span>
                     <h2 class="font-display text-3xl font-bold text-[#111827] mb-8">Key Capabilities Demonstrated</h2>
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         ${cs.features.map((f, i) => `
@@ -701,8 +142,8 @@
 
                 <!-- Measuring Success & Telemetry -->
                 <div class="p-8 rounded bg-[#0F172A] text-[#FAF8F5]">
-                    <span class="font-mono-tag text-xs text-[#E5E7EB]/60 block mb-2">04 / Evaluation & Analytics Telemetry</span>
-                    <h2 class="font-display text-2xl md:text-3xl font-bold mb-6">Measuring Success & Adoption Impact</h2>
+                    <span class="font-mono-tag text-xs text-[#E5E7EB]/60 block mb-2">05 / Evaluation & Impact</span>
+                    <h2 class="font-display text-2xl md:text-3xl font-bold mb-6">Measuring Success</h2>
                     <div class="grid md:grid-cols-2 gap-6">
                         <div class="p-5 rounded bg-white/5 border border-white/10">
                             <h3 class="font-display font-bold text-lg text-[#FAF8F5] mb-2">${cs.evaluation.metric1Title}</h3>
@@ -716,25 +157,28 @@
                 </div>
             `;
 
-            // Initialize Interactive Widgets if present
-            if (cs.interactiveType === "saas-sandbox") switchSaasTab(0);
-            if (cs.interactiveType === "d426-simulator") updateD426Sim();
-            if (cs.interactiveType === "power-automate-diagram") selectPaNode(0);
+            // Initialize Project-Specific Interactive Widget
+            if (cs.initInteractive) cs.initInteractive();
 
             // Render Bottom Pagination
             const idx = projectOrder.indexOf(currentId);
             const prevId = projectOrder[(idx - 1 + projectOrder.length) % projectOrder.length];
             const nextId = projectOrder[(idx + 1) % projectOrder.length];
-            document.getElementById('project-pagination').innerHTML = `
-                <a href="project.html?id=${prevId}" class="p-4 rounded surface-white w-full sm:w-auto text-left">
-                    <span class="font-mono-tag text-[10px] text-slate-500 block">← Previous Case Study</span>
-                    <span class="font-display font-bold text-sm text-[#111827]">${caseStudies[prevId].title}</span>
-                </a>
-                <a href="project.html?id=${nextId}" class="p-4 rounded surface-white w-full sm:w-auto text-right">
-                    <span class="font-mono-tag text-[10px] text-slate-500 block">Next Case Study →</span>
-                    <span class="font-display font-bold text-sm text-[#111827]">${caseStudies[nextId].title}</span>
-                </a>
-            `;
+            const prevCs = catalog[prevId];
+            const nextCs = catalog[nextId];
+
+            if (prevCs && nextCs) {
+                document.getElementById('project-pagination').innerHTML = `
+                    <a href="project.html?id=${prevId}" class="p-4 rounded surface-white w-full sm:w-auto text-left">
+                        <span class="font-mono-tag text-[10px] text-slate-500 block">← Previous Project</span>
+                        <span class="font-display font-bold text-sm text-[#111827]">${prevCs.title}</span>
+                    </a>
+                    <a href="project.html?id=${nextId}" class="p-4 rounded surface-white w-full sm:w-auto text-right">
+                        <span class="font-mono-tag text-[10px] text-slate-500 block">Next Project →</span>
+                        <span class="font-display font-bold text-sm text-[#111827]">${nextCs.title}</span>
+                    </a>
+                `;
+            }
         });
     </script>
 </body>
