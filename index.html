@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lythia Amoakon | Technical Enablement, Solutions & Learning Architect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body class="min-h-screen flex flex-col selection:bg-[#0F172A] selection:text-[#FAF8F5]">
+
+    <!-- Injected Shared Header -->
+    <div id="site-nav"></div>
+
+    <main class="flex-grow">
+        <!-- 1. EXECUTIVE HERO SECTION -->
+        <section class="max-w-6xl mx-auto px-6 pt-16 pb-20 md:pt-24 md:pb-28 border-b border-[#E5E7EB]">
+            <div class="flex flex-wrap items-center gap-3 mb-6">
+                <span class="font-mono-tag px-3 py-1 rounded surface-sandstone text-[#111827]">
+                    Bilingual: Native French • Fluent English
+                </span>
+                <span class="font-mono-tag px-3 py-1 rounded bg-[#0F172A] text-[#FAF8F5]">
+                    EdTech SaaS • Live Facilitation • Solutions • LXD
+                </span>
+            </div>
+
+            <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold text-[#111827] leading-[1.08] max-w-4xl mb-6">
+                Bridging complex technology and human adoption through <span class="underline decoration-[#E5E7EB] decoration-4 underline-offset-8">data-driven enablement.</span>
+            </h1>
+
+            <p class="text-lg md:text-xl text-[#4B5563] max-w-3xl leading-relaxed mb-10">
+                I’m <strong class="text-[#111827] font-semibold">Lythia Amoakon</strong>—an Instructional Designer, Technical Facilitator, and Post-Sales Enablement Specialist. With graduate degrees in <strong class="text-[#111827] font-medium">Data Science & Analytics (M.S.)</strong> and <strong class="text-[#111827] font-medium">Educational Technology & LXD (M.Ed.)</strong> plus an Engineering foundation, I design interactive learning apps, lead high-impact live product trainings, and build automated systems that turn overwhelmed users into confident power users.
+            </p>
+
+            <!-- Core Pillar Metrics Bar -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8 border-t border-[#E5E7EB]">
+                <div class="p-4 rounded surface-sandstone">
+                    <span class="font-mono-tag text-slate-500 block mb-1">01 / Facilitation</span>
+                    <p class="font-display font-bold text-lg text-[#111827]">Live Product & Coaching Labs</p>
+                    <p class="text-xs text-[#4B5563] mt-1">1:1 consultative onboarding, faculty enablement & de-escalation training.</p>
+                </div>
+                <div class="p-4 rounded surface-sandstone">
+                    <span class="font-mono-tag text-slate-500 block mb-1">02 / Solutions & SaaS</span>
+                    <p class="font-display font-bold text-lg text-[#111827]">LMS & SaaS Integrations</p>
+                    <p class="text-xs text-[#4B5563] mt-1">End-to-end rollouts across Canvas, D2L, Achieve, Salesforce & Mongoose.</p>
+                </div>
+                <div class="p-4 rounded surface-sandstone">
+                    <span class="font-mono-tag text-slate-500 block mb-1">03 / Engineering & AI</span>
+                    <p class="font-display font-bold text-lg text-[#111827]">Custom Apps & Automation</p>
+                    <p class="text-xs text-[#4B5563] mt-1">Modular HTML/JS apps, Agentic AI workflows & Power Automate pipelines.</p>
+                </div>
+                <div class="p-4 rounded surface-sandstone">
+                    <span class="font-mono-tag text-slate-500 block mb-1">04 / Learning Analytics</span>
+                    <p class="font-display font-bold text-lg text-[#111827]">Diagnostics & A/B Testing</p>
+                    <p class="text-xs text-[#4B5563] mt-1">Power BI, SQL, psychometric item analysis & outreach experimentation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. INTERACTIVE ROLE LENS & FEATURED PROJECTS GRID -->
+        <section id="work" class="max-w-6xl mx-auto px-6 py-20 border-b border-[#E5E7EB]">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+                <div>
+                    <span class="font-mono-tag text-slate-500 block mb-2">Interactive Systems & Case Studies</span>
+                    <h2 class="font-display text-3xl md:text-4xl font-bold text-[#111827]">Selected Architecture & Builds</h2>
+                </div>
+                <!-- Role Lens Filter Bar -->
+                <div>
+                    <span class="font-mono-tag text-[11px] text-slate-500 block mb-2">Filter by Hiring Lens:</span>
+                    <div class="flex flex-wrap gap-2" id="role-filters">
+                        <button data-filter="all" class="filter-pill active px-3.5 py-1.5 rounded text-xs font-semibold">All Work (7)</button>
+                        <button data-filter="facilitation" class="filter-pill px-3.5 py-1.5 rounded text-xs font-semibold">Live Facilitation</button>
+                        <button data-filter="customer-ed" class="filter-pill px-3.5 py-1.5 rounded text-xs font-semibold">Customer Education & CS</button>
+                        <button data-filter="solutions" class="filter-pill px-3.5 py-1.5 rounded text-xs font-semibold">Solutions Engineering</button>
+                        <button data-filter="lxd-data" class="filter-pill px-3.5 py-1.5 rounded text-xs font-semibold">LXD & Analytics</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic Role Context Banner -->
+            <div id="lens-banner" class="mb-10 p-4 rounded surface-sandstone flex items-center justify-between text-sm">
+                <p id="lens-description" class="text-[#111827]">
+                    <strong>Viewing All Systems:</strong> Showing end-to-end projects spanning EdTech SaaS onboarding, custom web applications, live facilitation simulations, and learning automation.
+                </p>
+                <span class="font-mono-tag text-xs text-slate-500 hidden sm:inline">Click any card for full Case Study →</span>
+            </div>
+
+            <!-- Project Grid -->
+            <div id="project-grid" class="grid md:grid-cols-2 gap-8">
+                <!-- Cards injected dynamically below so data stays clean and modular -->
+            </div>
+        </section>
+
+        <!-- 3. STRATEGIC ENABLEMENT, PRODUCT TRAINING & ANALYTICS (NO-LINK INTERNAL WORK SHOWCASE) -->
+        <section id="impact" class="max-w-6xl mx-auto px-6 py-20 border-b border-[#E5E7EB]">
+            <div class="max-w-3xl mb-12">
+                <span class="font-mono-tag text-slate-500 block mb-2">Enterprise Enablement, Product Training & Analytics</span>
+                <h2 class="font-display text-3xl md:text-4xl font-bold text-[#111827] mb-4">Behind-the-Firewall Impact Vignettes</h2>
+                <p class="text-[#4B5563] text-base leading-relaxed">
+                    Much of my highest-leverage work—leading live faculty and customer product trainings, running outreach experiments, and analyzing call/assessment diagnostics—lives inside proprietary enterprise ecosystems. Select an initiative below to inspect the <strong class="text-[#111827]">problem, system architecture, and measurable outcome</strong>.
+                </p>
+            </div>
+
+            <!-- Interactive Tabbed Bento Selector -->
+            <div class="grid lg:grid-cols-12 gap-8 items-start">
+                <!-- Left Column: Vignette Selector Buttons -->
+                <div class="lg:col-span-5 space-y-3" id="vignette-tabs">
+                    <button onclick="selectVignette(0)" class="vignette-tab w-full text-left p-5 rounded surface-white border-[#111827] ring-1 ring-[#111827]">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="font-mono-tag text-[11px] text-slate-500">01 / Data Analysis → Live Facilitation</span>
+                            <span class="text-xs font-semibold text-[#111827]">Active →</span>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-[#111827]">The "Good Call" & De-Escalation Series</h3>
+                        <p class="text-xs text-[#4B5563] mt-1">How call-center analytics sparked a multi-part live training series on consultative structure, support & de-escalation.</p>
+                    </button>
+
+                    <button onclick="selectVignette(1)" class="vignette-tab w-full text-left p-5 rounded surface-white">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="font-mono-tag text-[11px] text-slate-500">02 / SaaS Product Training & Rollout</span>
+                            <span class="text-xs font-semibold text-slate-400">Inspect →</span>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-[#111827]">Mongoose Cadence & LMS Product Enablement</h3>
+                        <p class="text-xs text-[#4B5563] mt-1">Training higher-ed faculty and internal teams to adopt enterprise SMS/CRM outreach tools and Achieve/Canvas/D2L integrations.</p>
+                    </button>
+
+                    <button onclick="selectVignette(2)" class="vignette-tab w-full text-left p-5 rounded surface-white">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="font-mono-tag text-[11px] text-slate-500">03 / Growth & Engagement Analytics</span>
+                            <span class="text-xs font-semibold text-slate-400">Inspect →</span>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-[#111827]">Cohort Marketing & Outreach A/B Experiments</h3>
+                        <p class="text-xs text-[#4B5563] mt-1">Testing messaging cadences, visual formats, and timing to maximize adult learner registration and live session attendance.</p>
+                    </button>
+
+                    <button onclick="selectVignette(3)" class="vignette-tab w-full text-left p-5 rounded surface-white">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="font-mono-tag text-[11px] text-slate-500">04 / Psychometrics & AI Curriculum</span>
+                            <span class="text-xs font-semibold text-slate-400">Inspect →</span>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-[#111827]">Psychometric Assessment & AI Course Design</h3>
+                        <p class="text-xs text-[#4B5563] mt-1">Engineering valid end-of-chapter diagnostic items, distractor rationale, and emerging AI literacy learning pathways.</p>
+                    </button>
+                </div>
+
+                <!-- Right Column: Dynamic Architectural Diagram & Breakdown -->
+                <div class="lg:col-span-7 p-8 rounded surface-sandstone min-h-[440px] flex flex-col justify-between" id="vignette-display">
+                    <!-- Populated via JS below -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. CAPABILITIES & EXPERIENCE SNAPSHOT (REPLACES WORD-FOR-WORD RESUME) -->
+        <section id="capabilities" class="max-w-6xl mx-auto px-6 py-20">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <span class="font-mono-tag text-slate-500 block mb-2">Credentials & Core Stack</span>
+                    <h2 class="font-display text-3xl md:text-4xl font-bold text-[#111827]">Capabilities & Experience Snapshot</h2>
+                </div>
+                <button onclick="toggleContactDrawer(true)" class="btn-outline px-5 py-2.5 rounded text-xs font-semibold self-start md:self-auto">
+                    Request Tailored CV →
+                </button>
+            </div>
+
+            <!-- 3-Column Capabilities Matrix -->
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <div class="p-6 rounded surface-white">
+                    <span class="font-mono-tag text-slate-500 block mb-2">Pillar 01</span>
+                    <h3 class="font-display font-bold text-xl text-[#111827] mb-3">Facilitation, CS & Enablement</h3>
+                    <ul class="space-y-2 text-sm text-[#4B5563]">
+                        <li>• Live Virtual Facilitation & Workshop Delivery</li>
+                        <li>• Post-Sales Technical Onboarding (1:1 & Group)</li>
+                        <li>• Consultative Discovery & De-Escalation Coaching</li>
+                        <li>• SaaS Product Adoption & SOP Documentation</li>
+                        <li>• Bilingual Delivery (Native French / Fluent English)</li>
+                    </ul>
+                </div>
+
+                <div class="p-6 rounded surface-white">
+                    <span class="font-mono-tag text-slate-500 block mb-2">Pillar 02</span>
+                    <h3 class="font-display font-bold text-xl text-[#111827] mb-3">Technical & LXD Architecture</h3>
+                    <ul class="space-y-2 text-sm text-[#4B5563]">
+                        <li>• Custom Interactive Web Apps (HTML5, CSS, JS, JSON)</li>
+                        <li>• Articulate 360 Suite (Storyline 360 & Rise 360)</li>
+                        <li>• LMS Administration & Integration (Canvas, D2L, Achieve)</li>
+                        <li>• Agentic AI Prompting, Prototyping & Socratic Labs</li>
+                        <li>• Workflow Automation (Power Automate, Salesforce, Forms)</li>
+                    </ul>
+                </div>
+
+                <div class="p-6 rounded surface-white">
+                    <span class="font-mono-tag text-slate-500 block mb-2">Pillar 03</span>
+                    <h3 class="font-display font-bold text-xl text-[#111827] mb-3">Data Science & Learning Analytics</h3>
+                    <ul class="space-y-2 text-sm text-[#4B5563]">
+                        <li>• Performance Dashboards (Power BI, Tableau)</li>
+                        <li>• Database Querying & Instruction (MySQL, Python, R)</li>
+                        <li>• Psychometric Quiz Design & Competency Diagnostics</li>
+                        <li>• Outreach A/B Testing & Conversion Analysis</li>
+                        <li>• OSCQR Quality Rubric & Accessible Design (WCAG/UDL)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Career Trajectory & Education Bar -->
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="p-6 rounded surface-sandstone">
+                    <span class="font-mono-tag text-slate-500 block mb-4">Career Trajectory</span>
+                    <div class="space-y-4 text-sm">
+                        <div class="flex justify-between items-baseline border-b border-[#E5E7EB] pb-3">
+                            <div>
+                                <p class="font-bold text-[#111827]">Faculty Engagement & Analytics Coach / Course Instructor</p>
+                                <p class="text-xs text-[#4B5563]">Western Governors University • Data Management, LXD & Faculty Enablement</p>
+                            </div>
+                            <span class="font-mono-tag text-[11px] text-slate-500">Current</span>
+                        </div>
+                        <div class="flex justify-between items-baseline border-b border-[#E5E7EB] pb-3">
+                            <div>
+                                <p class="font-bold text-[#111827]">Customer Integration Associate (LMS & EdTech SaaS)</p>
+                                <p class="text-xs text-[#4B5563]">Macmillan Learning • Post-Sales Technical Onboarding (Canvas / D2L / Achieve)</p>
+                            </div>
+                            <span class="font-mono-tag text-[11px] text-slate-500">Contract</span>
+                        </div>
+                        <div class="flex justify-between items-baseline border-b border-[#E5E7EB] pb-3">
+                            <div>
+                                <p class="font-bold text-[#111827]">Client Success & Onboarding Associate</p>
+                                <p class="text-xs text-[#4B5563]">TZ Insurance • 1:1 SaaS Platform Training for Non-Technical Clients</p>
+                            </div>
+                            <span class="font-mono-tag text-[11px] text-slate-500">Prior</span>
+                        </div>
+                        <div class="flex justify-between items-baseline">
+                            <div>
+                                <p class="font-bold text-[#111827]">Statistics & Data Science Instructor</p>
+                                <p class="text-xs text-[#4B5563]">Kennesaw State University • Python, R, SQL, Tableau & Faculty Workshops</p>
+                            </div>
+                            <span class="font-mono-tag text-[11px] text-slate-500">Prior</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6 rounded surface-sandstone flex flex-col justify-between">
+                    <div>
+                        <span class="font-mono-tag text-slate-500 block mb-4">Academic Foundation</span>
+                        <div class="space-y-4 text-sm">
+                            <div class="border-b border-[#E5E7EB] pb-3">
+                                <p class="font-bold text-[#111827]">M.Ed., Educational Technology & Instructional Design</p>
+                                <p class="text-xs text-[#4B5563]">Western Governors University • Focus: Adult Learning, Authentic Assessment & E-Learning</p>
+                            </div>
+                            <div class="border-b border-[#E5E7EB] pb-3">
+                                <p class="font-bold text-[#111827]">M.S., Data Science & Analytics (Applied Statistics)</p>
+                                <p class="text-xs text-[#4B5563]">Kennesaw State University • Focus: Predictive Modeling, SQL, R, Python & Visual Analytics</p>
+                            </div>
+                            <div>
+                                <p class="font-bold text-[#111827]">B.S., Engineering</p>
+                                <p class="text-xs text-[#4B5563]">Kennesaw State University • Systems Thinking & Quantitative Problem Solving</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-[#E5E7EB] flex items-center justify-between text-xs">
+                        <span class="text-[#4B5563]">Want to learn more about my facilitation philosophy & background?</span>
+                        <a href="about.html" class="font-semibold text-[#111827] underline underline-offset-4">Read About Me →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Injected Shared Footer & Contact Drawer -->
+    <div id="site-footer"></div>
+
+    <script src="assets/components.js"></script>
+    <script>
+        // 1. PROJECT CATALOG FOR HOME GRID
+        const projectsCatalog = [
+            {
+                id: "edtech-saas-onboarding",
+                badge: "Flagship • Solutions & Customer Ed",
+                status: "Interactive Sandbox Included",
+                title: "EdTech SaaS Integration Playbook & Agentic AI Onboarding Copilot",
+                summary: "An end-to-end post-sales enablement system for LMS integrations (Canvas, D2L, Achieve). Combines a live 45-minute administrator training run-of-show, an interactive gradebook-sync SOP, and an Agentic AI troubleshooting assistant that resolves LTI configuration errors.",
+                metrics: ["Post-Sales Enablement", "LMS Integration SOP", "Agentic AI Triage"],
+                roles: ["solutions", "customer-ed", "facilitation"]
+            },
+            {
+                id: "adaptive-study-architect",
+                badge: "Custom Web App • Data & LXD",
+                status: "Sanitized Interactive Simulator",
+                title: "Adaptive Competency Diagnostic & Sprint Architect",
+                summary: "A decentralized HTML/JS/JSON web application that ingests a learner's Pre-Assessment diagnostic breakdown, evaluates 6 intake variables, sorts users into 3 adaptive tracks (Foundations, Standard, Fast-Track), and generates daily study sprints tied to their target exam date.",
+                metrics: ["6-Variable Intake Logic", "3 Adaptive Tracks", "80% Mastery Gates"],
+                roles: ["lxd-data", "customer-ed", "solutions"]
+            },
+            {
+                id: "first-client-call",
+                badge: "Consultative Onboarding • Canvas LMS",
+                status: "Live Video Demo & Case Study",
+                title: "Your First Client Call: Consultative Facilitation Lab",
+                summary: "Designed for newly hired remote onboarding specialists who knew the software mechanics but lacked consultative confidence on live 1:1 customer calls. Uses a 'Practice, Review, Perform' simulation and 9-point analytic rubric to build client-facing authority.",
+                metrics: ["1:1 Client Onboarding", "9-Pt Analytic Rubric", "OSCQR Compliant"],
+                roles: ["facilitation", "customer-ed", "lxd-data"]
+            },
+            {
+                id: "leading-with-impact",
+                badge: "Storyline 360 Simulation • Leadership",
+                status: "Interactive Video Walkthrough",
+                title: "Leading With Impact: Virtual Meeting Facilitation Lab",
+                summary: "An immersive branching simulation built in Articulate Storyline 360 with AI-generated video scenarios. Trains mid-to-senior leaders at a global firm to plan, facilitate, and drive accountability during high-stakes hybrid and client-facing meetings.",
+                metrics: ["Articulate Storyline 360", "Branching Video AI", "WCAG / POUR Accessible"],
+                roles: ["facilitation", "lxd-data"]
+            },
+            {
+                id: "power-automate-ops",
+                badge: "Enablement Ops • Workflow Automation",
+                status: "Interactive System Blueprint",
+                title: "Automated Learner Triage & Multi-Course Outreach Pipeline",
+                summary: "An automated backend engine built with Power Automate, MS Forms, and dynamic HTML templates. Eliminates manual tracking by automatically routing cohort completions, flagging at-risk assessment profiles, and deploying personalized HTML resource briefs.",
+                metrics: ["Power Automate", "Dynamic HTML Templates", "Zero-Touch Routing"],
+                roles: ["solutions", "customer-ed", "lxd-data"]
+            },
+            {
+                id: "mysql-joins-cohort",
+                badge: "Custom EdTech Build • Live + Async Cohort",
+                status: "In Final QA • Architecture Preview",
+                title: "Modular MySQL Joins Cohort App (Model B Access Gate)",
+                summary: "A custom-engineered HTML/JS cohort application featuring Panopto video verification, 10 rotating instructor unlock codes, a 15-question foundational gate with 70% strikeout protection, guided MCQ walkthroughs, and toggleable visual roadmaps.",
+                metrics: ["Rotating Code Gate", "Strikeout Protection", "Live Cohort Ready"],
+                roles: ["facilitation", "lxd-data", "solutions"]
+            },
+            {
+                id: "sql-gamified-labs",
+                badge: "AI Prototyping & Rise 360 Suite",
+                status: "3 Live Playable Demos",
+                title: "Technical Skill Gamification Suite: MySQL Identity, SQL Quest & Rise 360",
+                summary: "A trilogy of technical learning products proving how intimidating database syntax can be taught through Socratic AI mystery games (MySQL Identity), ARCS-driven RPG quests (SQL Quest Hub), and scaffolded Articulate Rise + Storyline courses.",
+                metrics: ["Socratic AI Feedback", "Result-Based Validation", "Rise + Storyline 360"],
+                roles: ["lxd-data", "customer-ed"]
+            }
+        ];
+
+        const lensDescriptions = {
+            "all": "<strong>Viewing All Systems (7):</strong> End-to-end projects spanning EdTech SaaS onboarding, custom web applications, live facilitation simulations, and learning automation.",
+            "facilitation": "<strong>Live Facilitation Lens:</strong> Highlighting projects built for live 1:1 customer calls, virtual workshop leadership, and synchronous cohort instruction.",
+            "customer-ed": "<strong>Customer Education & CS Lens:</strong> Highlighting SaaS product onboarding, self-service SOPs, user adoption diagnostics, and client confidence building.",
+            "solutions": "<strong>Solutions Engineering (Post-Sales) Lens:</strong> Highlighting LMS technical integrations, automated workflows, custom web tool architecture, and AI implementation.",
+            "lxd-data": "<strong>LXD & Learning Analytics Lens:</strong> Highlighting adaptive algorithms, competency diagnostics, Articulate 360 simulations, and gamified technical instruction."
+        };
+
+        function renderProjects(filter = "all") {
+            const grid = document.getElementById('project-grid');
+            const filtered = filter === "all" ? projectsCatalog : projectsCatalog.filter(p => p.roles.includes(filter));
+            
+            grid.innerHTML = filtered.map(p => `
+                <a href="project.html?id=${p.id}" class="surface-white rounded p-7 flex flex-col justify-between group">
+                    <div>
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                            <span class="font-mono-tag text-[11px] text-slate-500">${p.badge}</span>
+                            <span class="font-mono-tag text-[10px] px-2.5 py-0.5 rounded ${p.status.includes('In Final QA') ? 'bg-[#F5F2EB] text-[#111827] border border-[#111827]' : 'surface-sandstone text-slate-600'}">
+                                ${p.status}
+                            </span>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-[#111827] group-hover:underline decoration-2 underline-offset-4 mb-3">
+                            ${p.title}
+                        </h3>
+                        <p class="text-sm text-[#4B5563] leading-relaxed mb-6">
+                            ${p.summary}
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-[#E5E7EB] flex items-center justify-between gap-4">
+                        <div class="flex flex-wrap gap-1.5">
+                            ${p.metrics.map(m => `<span class="text-[11px] font-medium px-2 py-0.5 rounded surface-sandstone text-[#111827]">${m}</span>`).join('')}
+                        </div>
+                        <span class="font-mono-tag text-xs font-semibold text-[#111827] whitespace-nowrap group-hover:translate-x-1 transition-transform">
+                            Inspect →
+                        </span>
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        // Filter Button Listeners
+        document.querySelectorAll('#role-filters button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('#role-filters button').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.dataset.filter;
+                document.getElementById('lens-description').innerHTML = lensDescriptions[filter];
+                renderProjects(filter);
+            });
+        });
+
+        // 2. BEHIND-THE-FIREWALL IMPACT VIGNETTES DATA
+        const vignettes = [
+            {
+                tag: "01 / Data Analysis → Live Instructor Facilitation",
+                title: "The 'Good Call' & De-Escalation Live Training Series",
+                role: "Lead Facilitator & Analytics Strategist",
+                problem: "Performance & call-log data revealed inconsistent structures across 1:1 student/client support calls—instructors were either jumping straight into technical troubleshooting without consultative discovery or struggling to de-escalate frustrated, high-anxiety callers.",
+                architecture: [
+                    { step: "1. Diagnostic Audit", detail: "Analyzed call duration, outreach logs, and post-call progression metrics to isolate what separated high-converting coaching calls from stalled ones." },
+                    { step: "2. The 'Good Call' Framework", detail: "Designed and facilitated a live training series breaking down anatomy of an effective call: Psychological Safety Opener → Diagnostic Probing → Co-Created Action Plan." },
+                    { step: "3. De-Escalation & Support Labs", detail: "Led live roleplay workshops on active listening, reframing resistance, and handling high-frustration technical roadblocks calmly." }
+                ],
+                outcome: "Established a shared consultative standard across the team, equipping peers with repeatable de-escalation scripts and measurable call quality benchmarks."
+            },
+            {
+                tag: "02 / Enterprise SaaS Product Training & Rollout",
+                title: "Mongoose Cadence & LMS Platform Enablement",
+                role: "Product Enablement Facilitator & Integration Specialist",
+                problem: "Higher-education faculty and instructional teams needed to adopt enterprise communication tools (Mongoose Cadence SMS/outreach) and complex LMS integrations (Canvas, D2L, Macmillan Achieve) without getting overwhelmed by configuration steps.",
+                architecture: [
+                    { step: "1. Workflow Translation", detail: "Translated dense software documentation into role-specific quick-start SOPs and live screen-share walkthroughs tailored for non-technical educators." },
+                    { step: "2. Live Sandbox Training", detail: "Facilitated interactive trainings on Mongoose Cadence template automation, opt-out compliance, and two-way conversational engagement." },
+                    { step: "3. End-to-End LMS Sync", detail: "Guided faculty through deep linking, gradebook synchronization, and Salesforce-tracked rollout milestones." }
+                ],
+                outcome: "Accelerated software adoption across faculty cohorts, reduced repetitive setup errors, and increased confidence in multi-channel learner outreach."
+            },
+            {
+                tag: "03 / Growth Experimentation & Engagement Analytics",
+                title: "Cohort Marketing & Outreach A/B Experimentation",
+                role: "Learning Experience & Engagement Analyst",
+                problem: "Standard, text-heavy course announcements were suffering from banner blindness and low click-through rates, resulting in under-attended live cohorts and delayed engagement with self-paced resources.",
+                architecture: [
+                    { step: "1. Hypothesis & Segmentation", detail: "Segmented learners by course stage (new starters vs. retake candidates) and formulated hypotheses around outreach timing, channel (Email vs. SMS), and visual layout." },
+                    { step: "2. Multi-Format Experimentation", detail: "Tested high-contrast modular HTML email templates, value-first subject lines, and targeted Mongoose SMS nudges." },
+                    { step: "3. Conversion Tracking", detail: "Tracked registration-to-attendance conversion rates and resource engagement using Power BI and MS Forms completion telemetry." }
+                ],
+                outcome: "Identified the highest-converting outreach cadences and visual formats, directly lifting live cohort attendance and self-paced tool utilization."
+            },
+            {
+                tag: "04 / Psychometrics, Assessment & AI Curriculum",
+                title: "Psychometric Quiz Architecture & AI Course Development",
+                role: "Assessment Designer & AI Curriculum Contributor",
+                problem: "Many technical practice quizzes tested surface-level memorization rather than applied competency, leaving learners surprised by the rigor of high-stakes assessments.",
+                architecture: [
+                    { step: "1. Psychometric Item Engineering", detail: "Created end-of-chapter assessments mapped strictly to cognitive competency levels, engineering plausible distractors that diagnose exact syntax misconceptions." },
+                    { step: "2. Diagnostic Feedback Loops", detail: "Paired every assessment item with targeted remediation rationale so wrong answers became immediate micro-coaching moments." },
+                    { step: "3. AI Curriculum Co-Design", detail: "Contributed to the development of modern AI literacy and prompt-engineering learning modules, ensuring ethical, practical workplace application." }
+                ],
+                outcome: "Strengthened alignment between formative practice and summative exams while pioneering AI-integrated instructional design standards."
+            }
+        ];
+
+        window.selectVignette = function(index) {
+            const v = vignettes[index];
+            const tabs = document.querySelectorAll('.vignette-tab');
+            tabs.forEach((t, i) => {
+                if (i === index) {
+                    t.classList.add('border-[#111827]', 'ring-1', 'ring-[#111827]');
+                    t.querySelector('span:last-child').textContent = 'Active →';
+                    t.querySelector('span:last-child').classList.remove('text-slate-400');
+                    t.querySelector('span:last-child').classList.add('text-[#111827]');
+                } else {
+                    t.classList.remove('border-[#111827]', 'ring-1', 'ring-[#111827]');
+                    t.querySelector('span:last-child').textContent = 'Inspect →';
+                    t.querySelector('span:last-child').classList.add('text-slate-400');
+                    t.querySelector('span:last-child').classList.remove('text-[#111827]');
+                }
+            });
+
+            document.getElementById('vignette-display').innerHTML = `
+                <div>
+                    <div class="flex flex-wrap items-center justify-between gap-2 pb-4 mb-6 border-b border-[#E5E7EB]">
+                        <span class="font-mono-tag text-xs text-slate-500">${v.tag}</span>
+                        <span class="font-mono-tag text-xs px-2.5 py-1 rounded bg-[#0F172A] text-[#FAF8F5]">${v.role}</span>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold text-[#111827] mb-3">${v.title}</h3>
+                    <div class="p-4 rounded bg-white border border-[#E5E7EB] mb-6">
+                        <span class="font-mono-tag text-[10px] text-slate-500 block mb-1">The Operational / Learning Gap</span>
+                        <p class="text-sm text-[#4B5563] leading-relaxed">${v.problem}</p>
+                    </div>
+                    <span class="font-mono-tag text-[10px] text-slate-500 block mb-3">System & Facilitation Architecture</span>
+                    <div class="grid sm:grid-cols-3 gap-3 mb-6">
+                        ${v.architecture.map(a => `
+                            <div class="p-4 rounded bg-white border border-[#E5E7EB]">
+                                <p class="font-display font-bold text-xs text-[#111827] mb-1.5">${a.step}</p>
+                                <p class="text-xs text-[#4B5563] leading-relaxed">${a.detail}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                <div class="p-4 rounded bg-[#0F172A] text-[#FAF8F5] flex items-center justify-between gap-4">
+                    <div>
+                        <span class="font-mono-tag text-[10px] text-[#E5E7EB]/60 block">Measurable Impact</span>
+                        <p class="text-xs sm:text-sm text-[#FAF8F5] mt-0.5">${v.outcome}</p>
+                    </div>
+                </div>
+            `;
+        };
+
+        // Initialize Page
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProjects('all');
+            selectVignette(0);
+        });
+    </script>
+</body>
+</html>
