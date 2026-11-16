@@ -22,11 +22,11 @@ window.PORTFOLIO_PROJECTS["leading-with-impact"] = {
     transferability: [
         {
             role: "Live Facilitation & Leadership Enablement",
-            application: "Models my own core philosophy as a live facilitator—structuring every virtual session around purposeful pre-planning, active participant engagement, and clear post-session accountability."
+            application: "Models my own core philosophy as a live facilitator; structuring every virtual session around purposeful pre-planning, active participant engagement, and clear post-session accountability."
         },
         {
             role: "Customer Education & Interactive E-Learning",
-            application: "Demonstrates advanced proficiency in Articulate Storyline 360, custom UI/UX states, drag-and-drop interactions, and AI video synthesis to create high-retention digital training."
+            application: "Demonstrates proficiency in Articulate Storyline 360, custom UI/UX states, drag-and-drop interactions, and AI video synthesis to create high-retention digital training."
         }
     ],
 
@@ -49,7 +49,7 @@ window.PORTFOLIO_PROJECTS["leading-with-impact"] = {
         },
         {
             title: "Universal Design for Learning (UDL)",
-            desc: "Delivered content across multiple modalities—voiceover, text, AI video, and interactive graphics—to support diverse adult learning preferences."
+            desc: "Delivered content across multiple modalities such as voiceover, text, AI video, and interactive graphics to support diverse adult learning preferences."
         },
         {
             title: "POUR Accessibility Standards",
