@@ -76,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="text-xs bg-white border border-[#E5E7EB] px-2.5 py-1 rounded font-medium">Customer Success</span>
                             <span class="text-xs bg-white border border-[#E5E7EB] px-2.5 py-1 rounded font-medium">LXD & Learning Analytics</span>
                         </div>
+                        <a href="mailto:lythiaamoakon@gmail.com?subject=Portfolio%20Inquiry%20-%20Lythia%20Amoakon" class="flex items-center justify-between p-4 rounded surface-white">
                     </div>
 
                     <div class="space-y-4">
