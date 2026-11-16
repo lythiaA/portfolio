@@ -14,16 +14,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </a>
                 <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-[#111827]">
-                    <a href="index.html#work" class="hover:opacity-70 transition-opacity">Selected Work</a>
-                    <a href="index.html#impact" class="hover:opacity-70 transition-opacity">Facilitation & Analytics</a>
-                    <a href="index.html#capabilities" class="hover:opacity-70 transition-opacity">Capabilities</a>
+                    <a href="index.html#work" class="hover:opacity-70 transition-opacity">Work</a>
+                    <a href="index.html#initiatives" class="hover:opacity-70 transition-opacity">Initiatives</a>
+                    <a href="index.html#expertise" class="hover:opacity-70 transition-opacity">Expertise</a>
                     <a href="about.html" class="hover:opacity-70 transition-opacity">About</a>
                     <button onclick="toggleContactDrawer(true)" class="btn-primary px-5 py-2.5 rounded text-sm font-medium">
-                        Let's Connect
+                        Contacts
                     </button>
                 </nav>
                 <button onclick="toggleContactDrawer(true)" class="md:hidden btn-primary px-4 py-2 rounded text-xs font-medium">
-                    Connect
+                    Contacts
                 </button>
             </div>
         </header>`;
@@ -36,13 +36,13 @@ document.addEventListener('DOMContentLoaded', () => {
         <footer class="bg-[#0F172A] text-[#FAF8F5] border-t border-[#111827] mt-24">
             <div class="max-w-6xl mx-auto px-6 py-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
                 <div>
-                    <p class="font-mono-tag text-[#E5E7EB]/60 mb-2">Available for Strategic Roles & Consulting</p>
+                    <p class="font-mono-tag text-[#E5E7EB]/60 mb-2">Available for Strategic Roles & Collaborations</p>
                     <h3 class="font-display text-2xl md:text-3xl font-bold mb-2">Ready to elevate product adoption & learning impact?</h3>
-                    <p class="text-sm text-[#E5E7EB]/80 max-w-xl">Specializing in Live Technical Facilitation, Customer Education, Post-Sales Solutions Enablement, and Data-Driven Learning Experience Design.</p>
+                    <p class="text-sm text-[#E5E7EB]/80 max-w-xl">Specializing in Live Technical Facilitation, Customer Education, Post-Sales Onboarding, and Data-Driven Learning Experience Design.</p>
                 </div>
                 <div class="flex flex-wrap gap-4">
                     <button onclick="toggleContactDrawer(true)" class="bg-[#FAF8F5] text-[#0F172A] hover:bg-[#F5F2EB] px-6 py-3 rounded font-semibold text-sm transition-colors">
-                        Open Contact Drawer
+                        Contacts
                     </button>
                     <a href="https://www.linkedin.com/in/lythiaa/" target="_blank" rel="noopener" class="border border-[#E5E7EB]/30 hover:border-[#FAF8F5] px-6 py-3 rounded font-semibold text-sm transition-colors">
                         LinkedIn ↗
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
             <div class="border-t border-white/10 py-6 text-center text-xs text-[#E5E7EB]/50">
-                © ${new Date().getFullYear()} Lythia Amoakon • Fluent English & Native French • Built with Modular Decentralized Architecture
+                © ${new Date().getFullYear()} Lythia Amoakon • Built with Gemini
             </div>
         </footer>
 
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="flex items-center justify-between pb-6 border-b border-[#E5E7EB]">
                         <div>
                             <span class="font-mono-tag text-slate-500">Direct Inquiry</span>
-                            <h3 class="font-display text-2xl font-bold text-[#111827]">Let's Connect</h3>
+                            <h3 class="font-display text-2xl font-bold text-[#111827]">Contacts</h3>
                         </div>
                         <button onclick="toggleContactDrawer(false)" class="w-9 h-9 rounded-full bg-[#F5F2EB] flex items-center justify-center text-[#111827] hover:bg-[#E5E7EB]" aria-label="Close drawer">✕</button>
                     </div>
@@ -70,27 +70,26 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="my-6 p-4 rounded surface-sandstone">
                         <p class="font-mono-tag text-xs text-slate-500 mb-2">Target Focus Areas</p>
                         <div class="flex flex-wrap gap-1.5">
-                            <span class="text-xs bg-white border border-[#E5E7EB] px-2.5 py-1 rounded font-medium">Customer Education & Enablement</span>
                             <span class="text-xs bg-white border border-[#E5E7EB] px-2.5 py-1 rounded font-medium">Live Technical Facilitation</span>
+                            <span class="text-xs bg-white border border-[#E5E7EB] px-2.5 py-1 rounded font-medium">Customer Education & Enablement</span>
                             <span class="text-xs bg-white border border-[#E5E7EB] px-2.5 py-1 rounded font-medium">Solutions Engineering (Post-Sales)</span>
                             <span class="text-xs bg-white border border-[#E5E7EB] px-2.5 py-1 rounded font-medium">Customer Success</span>
                             <span class="text-xs bg-white border border-[#E5E7EB] px-2.5 py-1 rounded font-medium">LXD & Learning Analytics</span>
                         </div>
-                        <a href="mailto:lythiaamoakon@gmail.com?subject=Portfolio%20Inquiry%20-%20Lythia%20Amoakon" class="flex items-center justify-between p-4 rounded surface-white">
                     </div>
 
                     <div class="space-y-4">
                         <a href="https://www.linkedin.com/in/lythiaa/" target="_blank" rel="noopener" class="flex items-center justify-between p-4 rounded surface-white">
                             <div>
-                                <span class="font-semibold block text-sm">Message on LinkedIn</span>
+                                <span class="font-semibold block text-sm">Connect on LinkedIn</span>
                                 <span class="text-xs text-slate-500">Fastest response for role inquiries & networking</span>
                             </div>
                             <span class="font-mono-tag">↗</span>
                         </a>
-                        <a href="mailto:lythia.amoakon@gmail.com?subject=Portfolio%20Inquiry%20-%20Lythia%20Amoakon" class="flex items-center justify-between p-4 rounded surface-white">
+                        <a href="mailto:lythiaamoakon@gmail.com?subject=Portfolio%20Inquiry%20-%20Lythia%20Amoakon" class="flex items-center justify-between p-4 rounded surface-white">
                             <div>
-                                <span class="font-semibold block text-sm">Send Direct Email</span>
-                                <span class="text-xs text-slate-500">Request full tailored CV or discuss a role</span>
+                                <span class="font-semibold block text-sm">Email Direct</span>
+                                <span class="text-xs text-slate-500">lythiaamoakon@gmail.com</span>
                             </div>
                             <span class="font-mono-tag">✉</span>
                         </a>
@@ -98,15 +97,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
 
                 <div class="pt-6 border-t border-[#E5E7EB] text-xs text-slate-500">
-                    <p class="font-medium text-[#111827] mb-1">Bilingual Facilitation & Consulting</p>
-                    <p>Native French • Fluent English • Based in Georgia (EST)</p>
+                    <p class="font-medium text-[#111827] mb-1">Lythia Amoakon</p>
+                    <p>Based in Georgia (EST) • Built with Gemini</p>
                 </div>
             </aside>
         </div>`;
     }
 });
 
-// Global Drawer Toggle Function
 window.toggleContactDrawer = function(open) {
     const wrapper = document.getElementById('contact-drawer-Wrapper');
     const backdrop = document.getElementById('drawer-backdrop');
