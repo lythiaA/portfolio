@@ -15,7 +15,7 @@ window.PORTFOLIO_PROJECTS["ai-analytics-curriculum"] = {
         stack: "GenAI Workflows, BI Tools, HTML5/Chart.js, Python",
         impact: "3 Production-Ready Learning Programs"
     },
-    challenge: "Technical training programs often struggle to balance depth with usability—either overwhelming learners with abstract theory or testing isolated button-clicks that don't transfer to the workplace. Organizations need subject-matter experts who can audit technical accuracy, structure realistic business scenarios, and build interactive tools that make complex concepts intuitive.",
+    challenge: "Technical training programs often struggle to balance depth with usability; either overwhelming learners with abstract theory or testing isolated button-clicks that don't transfer to the workplace. Organizations need subject-matter experts who can audit technical accuracy, structure realistic business scenarios, and build interactive tools that make complex concepts intuitive.",
     persona: "Adult learners and working professionals upskilling in AI and data analytics. They need clear instructional scaffolding, realistic workplace simulations, and objective assessment rubrics that set them up for real-world confidence.",
 
     // Cross-Industry Transferability Block
@@ -92,7 +92,7 @@ window.PORTFOLIO_PROJECTS["ai-analytics-curriculum"] = {
             {
                 tag: "Program 01 • Practical AI Adoption & Workflow Design",
                 title: "Generative AI for Data Analytics",
-                overview: "Designed to teach analysts how to safely integrate AI tools into their daily data workflows—focusing on prompt strategy, output validation, and executive reporting.",
+                overview: "Designed to teach analysts how to safely integrate AI tools into their daily data workflows, focusing on prompt strategy, output validation, and executive reporting.",
                 pillars: [
                     { name: "My Role & Strategy", detail: "Audited the curriculum sequence to ensure learners were taught how to verify AI outputs for accuracy and bias before using them to make business decisions." },
                     { name: "Assessment Design", detail: "Created a unified corporate scenario where learners use AI to clean data, forecast trends, and present an ethical, business-ready dashboard." },
@@ -104,7 +104,7 @@ window.PORTFOLIO_PROJECTS["ai-analytics-curriculum"] = {
                 title: "Advanced Spreadsheets for Data Analytics",
                 overview: "A project-driven program moving learners beyond basic formula memorization into real-world data modeling, optimization, and stakeholder storytelling.",
                 pillars: [
-                    { name: "My Role & Strategy", detail: "Served as Technical SME and Quality Reviewer—auditing course blueprints, third-party labs, and visual diagrams for clarity and accuracy before launch." },
+                    { name: "My Role & Strategy", detail: "Served as Technical SME and Quality Reviewer, auditing course blueprints, third-party labs, and visual diagrams for clarity and accuracy before launch." },
                     { name: "Assessment Design", detail: "Refined a multi-part retail simulation with independent datasets so an early mistake wouldn't penalize a learner across the rest of their project." },
                     { name: "Value Delivered", detail: "Calibrated assessment prompts and rubrics for unambiguous grading and integrated low-stakes AI practice blocks to build learner confidence." }
                 ]
