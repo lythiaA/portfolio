@@ -16,13 +16,13 @@ window.PORTFOLIO_PROJECTS["power-automate-ops"] = {
         impact: "Instant Resource Delivery & Zero Manual Triage"
     },
     challenge: "Supporting high volumes of learners across multiple technical courses created repetitive administrative work. Manually reviewing form submissions, checking which course or attempt a learner was on, and copy-pasting the right study resources slowed down response times and pulled focus away from live 1:1 coaching.",
-    persona: "High-volume coaching and customer enablement teams who need reliable, automated backend workflows so every learner gets the right resources immediately—freeing facilitators to focus on human connection.",
+    persona: "High-volume coaching and customer enablement teams who need reliable, automated backend workflows so every learner gets the right resources promptly, freeing facilitators to focus on human connection.",
 
     // Cross-Industry Transferability Block
     transferability: [
         {
             role: "Customer Success & Enablement Operations",
-            application: "This exact automation pattern applies directly to B2B Customer Onboarding—automatically routing client intake forms, sending tailored welcome kits based on product tier, and alerting CSMs when a client flags a blocker."
+            application: "This automation pattern applies directly to B2B Customer Onboarding, automatically routing client intake forms, sending tailored welcome kits based on product tier, and alerting CSMs when a client flags a blocker."
         },
         {
             role: "Solutions Engineering & Workflow Design",
@@ -68,7 +68,7 @@ window.PORTFOLIO_PROJECTS["power-automate-ops"] = {
         return `
         <div class="surface-sandstone rounded p-6 md:p-8 mb-16">
             <div class="mb-6">
-                <span class="font-mono-tag text-xs text-slate-500 block">Interactive Workflow Architecture (Click Any Step to Inspect)</span>
+                <span class="font-mono-tag text-xs text-slate-500 block"> Workflow Explained  (Click Any Step to Inspect)</span>
                 <h3 class="font-display text-2xl font-bold text-[#111827]">Flagship Flow: Automated Intake, Switch Routing & Dynamic HTML Dispatch</h3>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-6" id="pa-nodes">
