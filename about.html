@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About & FAQ | Lythia Amoakon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/styles.css">
+    <style>
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        details[open] .faq-icon { transform: rotate(45deg); }
+        .faq-icon { transition: transform 0.25s ease; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-[#0F172A] selection:text-[#FAF8F5]">
+
+    <!-- Shared Header -->
+    <div id="site-nav"></div>
+
+    <main class="flex-grow max-w-6xl mx-auto px-6 py-16 md:py-24 w-full">
+        
+        <!-- 1. TOP JOURNEY NARRATIVE & SIGNATURE PORTRAIT (Profile2.jpeg) -->
+        <section class="grid lg:grid-cols-12 gap-12 items-start pb-20 border-b border-[#E5E7EB]">
+            <!-- Left 7 Cols: Authentic Journey -->
+            <div class="lg:col-span-7">
+                <span class="font-mono-tag px-3 py-1 rounded surface-sandstone text-[#111827] inline-block mb-4">
+                    My Journey • Engineering, Data Science & Education
+                </span>
+                <h1 id="about-headline" class="font-display text-4xl sm:text-5xl font-extrabold text-[#111827] leading-tight mb-6"></h1>
+                <div id="about-paragraphs" class="space-y-4 text-base text-[#4B5563] leading-relaxed mb-8"></div>
+
+                <!-- Signature Quotes & Philosophy Strip -->
+                <div class="grid sm:grid-cols-2 gap-4 pt-6 border-t border-[#E5E7EB]">
+                    <div class="p-4 rounded surface-sandstone">
+                        <span class="font-mono-tag text-[10px] text-slate-500 block mb-1">Core Enablement Philosophy</span>
+                        <p class="font-display font-bold text-base text-[#111827]">“Happy faculty, happy learner.”</p>
+                        <p class="text-xs text-[#4B5563] mt-1">Supporting the people who lead the room creates a multiplier effect for every learner and client.</p>
+                    </div>
+                    <div class="p-4 rounded surface-sandstone">
+                        <span class="font-mono-tag text-[10px] text-slate-500 block mb-1">Demystifying Technology</span>
+                        <p class="font-display font-bold text-base text-[#111827]">“Excel was crawling so SQL could run.”</p>
+                        <p class="text-xs text-[#4B5563] mt-1">Connecting intimidating technical syntax to everyday mental models people already trust.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right 5 Cols: Primary Portrait (Profile2.jpeg) -->
+            <div class="lg:col-span-5">
+                <div class="p-4 rounded surface-white shadow-sm">
+                    <div class="aspect-[4/5] w-full rounded overflow-hidden bg-[#F5F2EB] mb-3">
+                        <img id="hero-about-img" src="assets/Profile2.jpeg" alt="Lythia Amoakon" class="w-full h-full object-cover">
+                    </div>
+                    <p id="hero-img-caption" class="font-medium text-xs text-[#111827] px-1"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. CONCEPT C: INTERACTIVE FAQ + DYNAMIC PORTRAIT SWITCHER (Profile6, Profile3, Profile1) -->
+        <section class="py-20 border-b border-[#E5E7EB]">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+                <div>
+                    <span class="font-mono-tag text-slate-500 block mb-2">Interactive Q&A • How I Work, Lead & Collaborate</span>
+                    <h2 class="font-display text-3xl md:text-4xl font-bold text-[#111827]">Questions Hiring Managers Ask</h2>
+                </div>
+                <!-- 3 Concept C Category Tabs -->
+                <div class="flex flex-wrap gap-2" id="about-tabs"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-10 items-start">
+                <!-- Left 8 Cols: Expandable FAQ Accordions -->
+                <div id="faq-container" class="lg:col-span-8 space-y-4"></div>
+
+                <!-- Right 4 Cols: Dynamic Portrait that updates with each tab (Profile6 -> Profile3 -> Profile1) -->
+                <div class="lg:col-span-4">
+                    <div class="p-4 rounded surface-sandstone sticky top-28">
+                        <div class="aspect-[4/5] w-full rounded overflow-hidden bg-white border border-[#E5E7EB] mb-3">
+                            <img id="tab-portrait-img" src="assets/Profile6.jpeg" alt="Lythia Amoakon Portrait" class="w-full h-full object-cover transition-all duration-300">
+                        </div>
+                        <span class="font-mono-tag text-[10px] text-slate-500 block mb-0.5">Active Lens</span>
+                        <p id="tab-portrait-caption" class="text-xs font-medium text-[#111827] leading-relaxed"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. BEYOND THE SCREEN: MIND, SPIRIT & BODY + ITALY TRAVEL SHOWCASE (Profile4 & Profile5) -->
+        <section class="pt-20">
+            <div class="grid lg:grid-cols-12 gap-10 items-center">
+                <!-- Left 5 Cols: Personal Philosophy -->
+                <div class="lg:col-span-5">
+                    <span class="font-mono-tag text-slate-500 block mb-2">Mind, Spirit & Body</span>
+                    <h2 class="font-display text-3xl font-bold text-[#111827] mb-4">Life Outside of Work</h2>
+                    <p class="text-sm md:text-base text-[#4B5563] leading-relaxed mb-4">
+                        Outside of work, everything I do revolves around nurturing my mind, spirit, and body. Every year, I pick up a new hobby just to see if I can do it—whether that means teaching myself to swim as an adult, doing my own nail art for the past four years, or crafting a custom playable card game deck for a friend's birthday.
+                    </p>
+                    <p class="text-sm md:text-base text-[#4B5563] leading-relaxed mb-6">
+                        I love staying active in community workout classes (Burn Boot Camp, Pilates, swimming, and dancing), experimenting in the kitchen, and traveling to experience new histories and cultures—from the coast of Albania to Capri, the Vatican, and Rome.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-3 py-1.5 rounded surface-sandstone font-medium text-[#111827]">🌍 10+ Countries Explored</span>
+                        <span class="text-xs px-3 py-1.5 rounded surface-sandstone font-medium text-[#111827]">🏊🏾‍♀️ Adult-Learned Swimmer</span>
+                        <span class="text-xs px-3 py-1.5 rounded surface-sandstone font-medium text-[#111827]">🏋🏾‍♀️ Burn Boot Camp & Pilates</span>
+                        <span class="text-xs px-3 py-1.5 rounded surface-sandstone font-medium text-[#111827]">🎨 Crafting & Nail Art</span>
+                    </div>
+                </div>
+
+                <!-- Right 7 Cols: Trevi Fountain (Profile4) & Colosseum (Profile5) Side-by-Side -->
+                <div class="lg:col-span-7 grid sm:grid-cols-2 gap-6" id="travel-gallery"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Shared Footer & Contact Drawer -->
+    <div id="site-footer"></div>
+
+    <script src="assets/components.js"></script>
+    <script src="data/about.js"></script>
+    <script>
+        window.selectAboutCategory = function(idx) {
+            const data = window.PORTFOLIO_ABOUT;
+            if (!data) return;
+            const cat = data.categories[idx];
+
+            // Update active tab styling
+            document.querySelectorAll('.about-tab-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i === idx);
+            });
+
+            // Swap the side portrait (Profile6 -> Profile3 -> Profile1)
+            const tabImg = document.getElementById('tab-portrait-img');
+            const tabCap = document.getElementById('tab-portrait-caption');
+            if (tabImg && cat.portrait) {
+                tabImg.src = cat.portrait;
+                tabCap.textContent = cat.portraitCaption;
+            }
+
+            // Render FAQs
+            const faqContainer = document.getElementById('faq-container');
+            faqContainer.innerHTML = cat.faqs.map((item, i) => `
+                <details class="surface-white rounded overflow-hidden" ${i === 0 ? 'open' : ''}>
+                    <summary class="p-6 flex items-center justify-between gap-4 hover:bg-[#FAF8F5] transition-colors">
+                        <h3 class="font-display font-bold text-base md:text-lg text-[#111827]">${item.q}</h3>
+                        <span class="faq-icon w-7 h-7 rounded-full surface-sandstone flex items-center justify-center font-mono-tag text-sm text-[#111827] shrink-0">+</span>
+                    </summary>
+                    <div class="px-6 pb-6 pt-2 border-t border-[#E5E7EB]/60 text-sm md:text-base text-[#4B5563] leading-relaxed">
+                        ${item.a}
+                    </div>
+                </details>
+            `).join('');
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const data = window.PORTFOLIO_ABOUT;
+            if (!data) return;
+
+            // Populate Top Narrative & Hero Portrait (Profile2.jpeg)
+            document.getElementById('about-headline').textContent = data.headline;
+            document.getElementById('about-paragraphs').innerHTML = data.introParagraphs.map(p => `<p>${p}</p>`).join('');
+            document.getElementById('hero-about-img').src = data.heroPhoto.src;
+            document.getElementById('hero-img-caption').textContent = data.heroPhoto.caption;
+
+            // Populate Category Tabs
+            document.getElementById('about-tabs').innerHTML = data.categories.map((c, i) => `
+                <button onclick="selectAboutCategory(${i})" class="about-tab-btn filter-pill ${i === 0 ? 'active' : ''} px-4 py-2 rounded text-xs font-semibold">
+                    ${c.tabLabel}
+                </button>
+            `).join('');
+
+            // Populate Bottom Travel Gallery (Profile4 & Profile5)
+            document.getElementById('travel-gallery').innerHTML = data.travelPhotos.map(p => `
+                <div class="p-3 rounded surface-white shadow-sm">
+                    <div class="aspect-[4/5] w-full rounded overflow-hidden bg-[#F5F2EB] mb-3">
+                        <img src="${p.src}" alt="${p.caption}" class="w-full h-full object-cover">
+                    </div>
+                    <span class="font-mono-tag text-[10px] text-slate-500 block">${p.tag}</span>
+                    <p class="font-medium text-xs text-[#111827] mt-0.5">${p.caption}</p>
+                </div>
+            `).join('');
+
+            // Initialize First FAQ Tab
+            selectAboutCategory(0);
+        });
+    </script>
+</body>
+</html>
