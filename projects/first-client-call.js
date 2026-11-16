@@ -92,7 +92,7 @@ window.PORTFOLIO_PROJECTS["first-client-call"] = {
                     <p class="text-xs text-[#4B5563] leading-relaxed mb-4">
                         Mapping what a new onboarding specialist thinks, feels, sees, and hears during their first week allowed me to design a psychologically safe practice loop that directly targets call anxiety.
                     </p>
-                    <img src="https://lythiaa.github.io/portfolio/image.png" alt="Empathy Map for Learner Persona Alex" class="w-full h-auto rounded border border-[#E5E7EB]">
+                    <img src="assets/AlexPersona.png" alt="Empathy Map for Learner Persona Alex" class="w-full h-auto rounded border border-[#E5E7EB]">
                 </div>
             </div>
         </div>`;
