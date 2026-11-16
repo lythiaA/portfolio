@@ -54,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         </footer>
 
-        <!-- Slide-Out Contact Drawer -->
         <div id="contact-drawer-Wrapper" class="fixed inset-0 z-50 hidden">
             <div id="drawer-backdrop" onclick="toggleContactDrawer(false)" class="drawer-backdrop fixed inset-0 opacity-0"></div>
             <aside id="drawer-panel" class="drawer-panel fixed top-0 right-0 h-full w-full max-w-md z-10 p-8 flex flex-col justify-between translate-x-full shadow-2xl overflow-y-auto">
@@ -86,4 +85,41 @@ document.addEventListener('DOMContentLoaded', () => {
                             </div>
                             <span class="font-mono-tag">↗</span>
                         </a>
-                        <a href="mailto:lythiaamoakon
+                        <a href="mailto:lythiaamoakon@gmail.com?subject=Portfolio%20Inquiry%20-%20Lythia%20Amoakon" class="flex items-center justify-between p-4 rounded surface-white">
+                            <div>
+                                <span class="font-semibold block text-sm">Email Direct</span>
+                                <span class="text-xs text-slate-500">lythiaamoakon@gmail.com</span>
+                            </div>
+                            <span class="font-mono-tag">✉</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pt-6 border-t border-[#E5E7EB] text-xs text-slate-500">
+                    <p class="font-medium text-[#111827] mb-1">Lythia Amoakon • 2026 Employee of the Year</p>
+                    <p>Based in Georgia (EST) • Built with Gemini</p>
+                </div>
+            </aside>
+        </div>`;
+    }
+});
+
+window.toggleContactDrawer = function(open) {
+    const wrapper = document.getElementById('contact-drawer-Wrapper');
+    const backdrop = document.getElementById('drawer-backdrop');
+    const panel = document.getElementById('drawer-panel');
+    if (!wrapper) return;
+
+    if (open) {
+        wrapper.classList.remove('hidden');
+        setTimeout(() => {
+            backdrop.classList.remove('opacity-0');
+            panel.classList.remove('translate-x-full');
+        }, 10);
+    } else {
+        backdrop.classList.add('opacity-0');
+        panel.classList.add('translate-x-full');
+        setTimeout(() => wrapper.classList.add('hidden'), 350);
+    }
+};
+// END OF FILE
