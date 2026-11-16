@@ -1,0 +1,100 @@
+/* assets/styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+    --bg-linen: #FAF8F5;       /* Primary Background */
+    --bg-sandstone: #F5F2EB;   /* Secondary Surface / Cards */
+    --border-mist: #E5E7EB;    /* Crisp Structural Borders */
+    --ink-obsidian: #111827;   /* Primary Headings & High-Contrast UI */
+    --ink-slate: #0F172A;      /* Deep Slate Surface / Buttons */
+    --text-muted: #4B5563;     /* Editorial Body Subtext */
+}
+
+body {
+    background-color: var(--bg-linen);
+    color: var(--ink-obsidian);
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .font-display {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    letter-spacing: -0.025em;
+}
+
+.font-mono-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+/* Architectural Cards & Surfaces */
+.surface-sandstone {
+    background-color: var(--bg-sandstone);
+    border: 1px solid var(--border-mist);
+}
+
+.surface-white {
+    background-color: #FFFFFF;
+    border: 1px solid var(--border-mist);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.surface-white:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px -12px rgba(15, 23, 42, 0.08);
+    border-color: var(--ink-obsidian);
+}
+
+/* Primary & Secondary Buttons */
+.btn-primary {
+    background-color: var(--ink-slate);
+    color: var(--bg-linen);
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #1E293B;
+    transform: translateY(-1px);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--ink-obsidian);
+    border: 1px solid var(--ink-obsidian);
+    transition: all 0.2s ease;
+}
+
+.btn-outline:hover {
+    background-color: var(--ink-obsidian);
+    color: var(--bg-linen);
+}
+
+/* Role Lens Filter Pills */
+.filter-pill {
+    background-color: var(--bg-sandstone);
+    color: var(--ink-obsidian);
+    border: 1px solid var(--border-mist);
+    transition: all 0.2s ease;
+}
+
+.filter-pill:hover, .filter-pill.active {
+    background-color: var(--ink-slate);
+    color: var(--bg-linen);
+    border-color: var(--ink-slate);
+}
+
+/* Slide-Out Contact Drawer */
+.drawer-backdrop {
+    background-color: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(4px);
+    transition: opacity 0.3s ease;
+}
+
+.drawer-panel {
+    background-color: var(--bg-linen);
+    border-left: 1px solid var(--border-mist);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
