@@ -22,7 +22,7 @@ window.PORTFOLIO_PROJECTS["sql-gamified-labs"] = {
     transferability: [
         {
             role: "Customer Education & Product Training",
-            application: "Proves I can build an entire multimodal customer academy—from bite-sized animated product explainers (Animaker/Vyond) and Articulate 360 courses to custom interactive web sandboxes."
+            application: "Proves I can build an entire multimodal customer academy from bite-sized animated product explainers (Animaker/Vyond) and Articulate 360 courses to custom interactive web sandboxes."
         },
         {
             role: "Live & Asynchronous Facilitation",
@@ -37,7 +37,7 @@ window.PORTFOLIO_PROJECTS["sql-gamified-labs"] = {
     features: [
         {
             title: "Animated Concept Explainer (Animaker)",
-            desc: "Produced an engaging visual micro-learning video on Database Normalization—using dynamic hand-drawn animations and on-screen movement to make abstract table structuring click."
+            desc: "Produced an engaging visual micro-learning video on Database Normalization using dynamic hand-drawn animations and on-screen movement to make abstract table structuring click."
         },
         {
             title: "Articulate Rise 360 + Storyline Course",
@@ -45,7 +45,7 @@ window.PORTFOLIO_PROJECTS["sql-gamified-labs"] = {
         },
         {
             title: "MySQL Identity: Socratic AI Mystery Lab",
-            desc: "Rapidly prototyped a narrative SQL game via strategic AI prompting that validates query *results* rather than rigid syntax and guides learners with Socratic questions."
+            desc: "Rapidly prototyped a narrative SQL game via strategic AI prompting that validates query results rather than rigid syntax and guides learners with Socratic questions."
         },
         {
             title: "SQL Quest Hub: Gagné & ARCS Web App",
@@ -127,7 +127,7 @@ window.PORTFOLIO_PROJECTS["sql-gamified-labs"] = {
                             <div>
                                 <span class="font-mono-tag text-[10px] px-2 py-0.5 rounded surface-sandstone">Modality 03 / Socratic AI Lab</span>
                                 <h4 class="font-display font-bold text-xl text-[#111827] mt-3 mb-2">MySQL Identity</h4>
-                                <p class="text-xs text-[#4B5563] leading-relaxed mb-6">An AI-prototyped SQL mystery game that checks query *results* rather than rigid syntax and uses Socratic guiding questions to coach learners.</p>
+                                <p class="text-xs text-[#4B5563] leading-relaxed mb-6">An AI-prototyped SQL mystery game that checks query results rather than rigid syntax and uses Socratic guiding questions to coach learners.</p>
                             </div>
                             <a href="https://lythiaa.github.io/mysqlgames/Mysqlid/" target="_blank" rel="noopener" class="btn-primary text-center py-2.5 px-4 rounded text-xs font-semibold">
                                 Play MySQL Identity ↗
