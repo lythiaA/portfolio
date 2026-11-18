@@ -5,7 +5,7 @@ window.PORTFOLIO_PROJECTS["c999-faculty-simulation"] = {
     id: "c999-faculty-simulation",
     badge: "Train-the-Trainer • Live Breakout Simulation",
     status: "Embedded Dashboards & Workbook",
-    title: "Collaborative Coaching & Diagnostic Simulation (Alex & Jordan)",
+    title: "Collaborative Coaching & Diagnostic Simulation",
     subtitle: "A live, breakout-room Train-the-Trainer simulation combining decentralized HTML/CSS learner dashboards with a multi-tab Excel facilitator workbook to standardize coaching diagnostics and outreach strategy.",
     roles: ["facilitation", "customer-ed", "lxd-data"],
     metrics: ["Live Breakout Facilitation", "Interactive Dashboards", "Facilitator Excel Workbook"],
