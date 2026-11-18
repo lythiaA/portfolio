@@ -53,11 +53,11 @@
             <div id="project-grid" class="grid md:grid-cols-2 gap-8"></div>
         </section>
 
-        <!-- 3. INITIATIVES (5 BEHIND-THE-FIREWALL TABS) -->
+        <!-- 3. INITIATIVE VIGNETTES (5 BEHIND-THE-FIREWALL TABS) -->
         <section id="initiatives" class="max-w-6xl mx-auto px-6 py-20 border-b border-[#E5E7EB]">
             <div class="max-w-3xl mb-12">
                 <span class="font-mono-tag text-slate-500 block mb-2">Facilitation, Curriculum & Enablement Operations</span>
-                <h2 class="font-display text-3xl md:text-4xl font-bold text-[#111827] mb-4">Initiatives</h2>
+                <h2 class="font-display text-3xl md:text-4xl font-bold text-[#111827] mb-4">Initiative Vignettes</h2>
                 <p id="initiatives-intro" class="text-[#4B5563] text-base leading-relaxed"></p>
             </div>
 
@@ -79,12 +79,11 @@
                 </button>
             </div>
 
-            <!-- 3 Expertise Columns (No "Pillar" labels!) -->
+            <!-- 3 Expertise Columns (Uncrowded Pill Tags) -->
             <div id="expertise-grid" class="grid md:grid-cols-3 gap-6 mb-12"></div>
 
             <!-- Experience, Education, Certifications & Languages -->
             <div class="grid lg:grid-cols-12 gap-6">
-                <!-- Experience & Languages (Left 6 Cols) -->
                 <div class="lg:col-span-6 space-y-6">
                     <div class="p-6 rounded surface-sandstone">
                         <span class="font-mono-tag text-slate-500 block mb-4">Professional Experience</span>
@@ -97,7 +96,6 @@
                     </div>
                 </div>
 
-                <!-- Education & Certifications (Right 6 Cols) -->
                 <div class="lg:col-span-6 space-y-6">
                     <div class="p-6 rounded surface-sandstone">
                         <span class="font-mono-tag text-slate-500 block mb-4">Academic Foundation</span>
@@ -225,7 +223,6 @@
             const prof = window.PORTFOLIO_PROFILE;
             const inits = window.PORTFOLIO_INITIATIVES || [];
 
-            // Populate Bio & Highlights
             document.getElementById('bio-text').innerHTML = prof.bio;
             document.getElementById('initiatives-intro').textContent = prof.initiativesIntro;
 
@@ -237,7 +234,6 @@
                 </div>
             `).join('');
 
-            // Populate Initiatives Tabs
             document.getElementById('vignette-tabs').innerHTML = inits.map((v, i) => `
                 <button onclick="selectVignette(${i})" class="vignette-tab w-full text-left p-4 rounded surface-white">
                     <div class="flex items-center justify-between mb-1">
@@ -249,17 +245,19 @@
             `).join('');
             selectVignette(0);
 
-            // Populate Expertise Columns
             document.getElementById('expertise-grid').innerHTML = prof.expertiseColumns.map(col => `
                 <div class="p-6 rounded surface-white">
-                    <h3 class="font-display font-bold text-xl text-[#111827] mb-3 pb-2 border-b border-[#E5E7EB]">${col.title}</h3>
-                    <ul class="space-y-2 text-sm text-[#4B5563]">
-                        ${col.items.map(item => `<li>• ${item}</li>`).join('')}
-                    </ul>
+                    <h3 class="font-display font-bold text-lg text-[#111827] mb-4 pb-2 border-b border-[#E5E7EB]">${col.title}</h3>
+                    <div class="flex flex-wrap gap-2">
+                        ${col.items.map(item => `
+                            <span class="text-xs px-3 py-1.5 rounded surface-sandstone text-[#111827] font-medium">
+                                ${item}
+                            </span>
+                        `).join('')}
+                    </div>
                 </div>
             `).join('');
 
-            // Populate Experience (Years Only)
             document.getElementById('experience-list').innerHTML = prof.experience.map((e, i) => `
                 <div class="flex justify-between items-baseline ${i < prof.experience.length - 1 ? 'border-b border-[#E5E7EB] pb-3' : ''}">
                     <div class="pr-4">
@@ -270,7 +268,6 @@
                 </div>
             `).join('');
 
-            // Populate Language Proficiency Bars (Single Spot!)
             document.getElementById('language-bars').innerHTML = prof.languages.map(l => `
                 <div>
                     <div class="flex justify-between font-medium text-[#111827] mb-1">
@@ -283,7 +280,6 @@
                 </div>
             `).join('');
 
-            // Populate Education
             document.getElementById('education-list').innerHTML = prof.education.map((ed, i) => `
                 <div class="flex justify-between items-baseline ${i < prof.education.length - 1 ? 'border-b border-[#E5E7EB] pb-3' : ''}">
                     <div>
@@ -294,7 +290,6 @@
                 </div>
             `).join('');
 
-            // Populate Certifications
             document.getElementById('cert-list').innerHTML = prof.certifications.map(c => `
                 <div class="p-3 rounded bg-white border border-[#E5E7EB] flex flex-col justify-between">
                     <p class="font-bold text-[#111827] leading-snug mb-1">${c.name}</p>
@@ -305,7 +300,6 @@
                 </div>
             `).join('');
 
-            // Restore Saved Role Filter (or default to 'all')
             const savedFilter = sessionStorage.getItem('portfolioRoleFilter') || 'all';
             renderProjects(savedFilter);
 
