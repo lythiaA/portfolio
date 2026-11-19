@@ -5,8 +5,8 @@ window.PORTFOLIO_PROJECTS["saas-lms-onboarding"] = {
     id: "saas-lms-onboarding",
     badge: "Post-Sales Onboarding • SaaS & LMS Enablement",
     status: "Interactive Enablement Sandbox",
-    title: "SaaS-to-LMS Client Onboarding Playbook & Agentic AI Guide",
-    subtitle: "A post-sales customer education and implementation system designed to guide administrators and instructors through 1:1 LMS connections (Canvas, D2L), supported by clear documentation and an AI troubleshooting assistant.",
+    title: "SaaS to LMS Onboarding Playbook and Agentic AI Guide",
+    subtitle: "A post-sales onboarding and customer education system I built to guide faculty and administrators through 1:1 LMS connections (Canvas, D2L), backed by visual SOP documentation and an agentic AI troubleshooting workflow.",
     roles: ["solutions", "customer-ed", "facilitation"],
     metrics: ["1:1 Client Setup", "SOP Documentation", "Agentic AI Triage"],
     meta: {
@@ -15,65 +15,68 @@ window.PORTFOLIO_PROJECTS["saas-lms-onboarding"] = {
         stack: "Canvas, D2L, SaaS Platforms, Salesforce, Agentic AI",
         impact: "Streamlined Rollouts & Self-Service Adoption"
     },
-    challenge: "When adopting a new digital learning platform, instructors and administrators often feel overwhelmed connecting their third-party SaaS product to their institution's LMS (Canvas or D2L). Without structured 1:1 guidance and visual documentation, minor setup missteps like broken course links or unsynced gradebooks create frustration and delay launch readiness.",
-    persona: "Time-strapped faculty members and course administrators preparing for an upcoming term. They do not want dense technical jargon; they need a calm, consultative 1:1 walkthrough to get their course connected, backed by simple documentation they can reference on their own.",
-
-    transferability: [
-        {
-            role: "Post-Sales Solutions & Implementation",
-            application: "Demonstrates how I manage the end-to-end client setup journey, translating technical configuration steps into smooth, confidence-building 1:1 implementation calls tracked in Salesforce."
-        },
-        {
-            role: "Customer Education & Enablement",
-            application: "Showcases my ability to turn recurring client questions into scannable Standard Operating Procedures (SOPs) and interactive self-service guides that reduce support tickets."
-        },
-        {
-            role: "Customer Success & AI Innovation",
-            application: "Illustrates how I design practical Agentic AI workflows that help customers and CSMs quickly diagnose common setup roadblocks and generate clear follow-up action plans."
-        }
-    ],
+    challenge: "When adopting a new digital learning platform, instructors and administrators frequently feel overwhelmed connecting their third-party SaaS product to their institution's LMS (Canvas or D2L). Without structured 1:1 guidance and clear documentation, minor setup missteps like broken course links or unsynced gradebooks create frustration and delay launch readiness.",
+    persona: "Time-strapped faculty members and course administrators preparing for an upcoming term. They do not want dense technical jargon; they need a calm, consultative 1:1 walkthrough to get their course connected, paired with simple reference guides they can reuse independently each semester.",
 
     features: [
         {
             title: "1:1 Consultative Setup Facilitation",
-            desc: "Lead live screen-share implementation calls where clients connect their SaaS platform to Canvas or D2L step-by-step, building hands-on confidence before day one."
+            desc: "I lead live screen-share implementation calls where clients connect their SaaS platform to Canvas or D2L step-by-step, building hands-on confidence before day one."
         },
         {
             title: "Clear, Visual SOP Documentation",
-            desc: "Author user-friendly setup guides and troubleshooting checklists that break complex LMS linking and gradebook sync rules into plain, actionable language."
+            desc: "I author user-friendly setup guides and troubleshooting checklists that translate technical LMS linking and gradebook sync rules into plain, actionable steps."
         },
         {
-            title: "Agentic AI Troubleshooting Assistant",
-            desc: "Conceptualized an AI triage workflow that takes a client's setup symptom, identifies the likely configuration miss, and drafts a clear resolution note for the specialist."
+            title: "Agentic AI Troubleshooting Workflow",
+            desc: "I designed an agentic AI triage assistant concept that analyzes a client's setup symptom, identifies the likely configuration miss, and drafts a clear follow-up action plan for the specialist."
         },
         {
             title: "End-to-End Rollout Tracking in Salesforce",
-            desc: "Manage implementation pipelines, log session milestones, and monitor adoption readiness in Salesforce to ensure timely, zero-surprise rollouts."
+            desc: "I manage implementation pipelines, log session milestones, and track adoption readiness in Salesforce to ensure predictable, zero-surprise term launches."
         },
         {
             title: "Course Shell & Module Readiness QA",
-            desc: "Verify that deployed course links, assignment weights, and student-view permissions work seamlessly across Canvas and D2L environments."
+            desc: "I verify that deployed course links, assignment weights, and learner-view permissions function properly across Canvas and D2L environments."
         },
         {
             title: "Proactive Friction Reduction",
-            desc: "Identify the most common mistakes users make during course copy and semester rollover to address them proactively during live training."
+            desc: "I document recurring snags during course copy and semester rollover so I can address them proactively during live training before tickets pile up."
         }
     ],
 
     evaluation: {
         metric1Title: "Implementation Velocity & Launch Readiness",
-        metric1Desc: "Tracked via Salesforce project milestones, ensuring instructors complete their LMS connection and gradebook verification ahead of term start dates.",
+        metric1Desc: "I track Salesforce project milestones to verify that instructors complete their LMS connection and gradebook checks ahead of term start dates.",
         metric2Title: "User Confidence & Repeat Ticket Reduction",
-        metric2Desc: "Measured by client self-sufficiency during subsequent term rollovers and reduced reliance on live support for basic course-linking tasks."
+        metric2Desc: "I evaluate whether clients complete subsequent term rollovers independently using the self-serve SOPs, reducing repeat support requests for basic course linking."
     },
+
+    skills: [
+        {
+            skill: "Consultative 1:1 Implementation",
+            desc: "I guide non-technical stakeholders through live software integrations without jargon, balancing technical accuracy with patient, hands-on coaching."
+        },
+        {
+            skill: "Self-Serve SOP & Enablement Authoring",
+            desc: "I turn recurring client questions into scannable checklists and visual guides that help users move from a first guided setup to repeat independent use."
+        },
+        {
+            skill: "Agentic AI Workflow Design",
+            desc: "I map real post-sales troubleshooting logic into structured AI triage prompts that speed up diagnosis while keeping human specialists in control of the final response."
+        }
+    ],
+
+    demoTitle: "Explore the 3-Part Client Implementation Sandbox",
+    demoIntro: "Use the three tabs below to inspect how I structure a live 1:1 onboarding call, review a sample client-facing LMS setup checklist, and test the agentic AI triage assistant on two common post-sales tickets.",
 
     renderInteractive: function() {
         return `
-        <div class="surface-sandstone rounded p-6 md:p-8 mb-16">
+        <div class="surface-sandstone rounded p-6 md:p-8">
             <div class="flex flex-wrap items-center justify-between gap-4 pb-6 mb-6 border-b border-[#E5E7EB]">
                 <div>
-                    <span class="font-mono-tag text-xs text-slate-500 block">Interactive Post-Sales Enablement Sandbox</span>
-                    <h3 class="font-display text-2xl font-bold text-[#111827]">Explore the 3-Part Client Implementation System</h3>
+                    <span class="font-mono-tag text-xs text-slate-500 block">Interactive Sandbox</span>
+                    <h3 class="font-display text-xl font-bold text-[#111827]">Post-Sales Onboarding & AI Triage Preview</h3>
                 </div>
                 <div class="flex flex-wrap gap-2" id="saas-tabs">
                     <button onclick="switchSaasTab(0)" class="saas-tab filter-pill active px-3.5 py-1.5 rounded text-xs font-semibold">1. 1:1 Setup Call Playbook</button>
@@ -101,17 +104,17 @@ window.PORTFOLIO_PROJECTS["saas-lms-onboarding"] = {
                         <div class="p-4 rounded surface-sandstone">
                             <span class="font-mono-tag text-[10px] text-slate-500">Phase 01 • Discovery</span>
                             <p class="font-bold text-sm text-[#111827] mt-1 mb-2">Course & LMS Readiness Check</p>
-                            <p class="text-[#4B5563]">Review the client's LMS environment (Canvas or D2L), confirm their course structure and grading preferences, and set clear goals for the session.</p>
+                            <p class="text-[#4B5563]">I review the client's LMS environment (Canvas or D2L), confirm their course structure and grading preferences, and set clear goals for the session.</p>
                         </div>
                         <div class="p-4 rounded surface-sandstone">
                             <span class="font-mono-tag text-[10px] text-slate-500">Phase 02 • Guided Setup</span>
                             <p class="font-bold text-sm text-[#111827] mt-1 mb-2">Hands-On Platform Pairing</p>
-                            <p class="text-[#4B5563]">Walk the client through enabling the SaaS tool in their LMS navigation, pairing their course shell, and deploying their first linked assignments.</p>
+                            <p class="text-[#4B5563]">I walk the client through enabling the SaaS tool in their LMS navigation, pairing their course shell, and deploying their first linked assignments.</p>
                         </div>
                         <div class="p-4 rounded surface-sandstone">
                             <span class="font-mono-tag text-[10px] text-slate-500">Phase 03 • Verification & Handoff</span>
-                            <p class="font-bold text-sm text-[#111827] mt-1 mb-2">Student View & Documentation</p>
-                            <p class="text-[#4B5563]">Verify that gradebook columns and student links work properly, log completion in Salesforce, and send a tailored follow-up SOP guide.</p>
+                            <p class="font-bold text-sm text-[#111827] mt-1 mb-2">Learner View & Documentation</p>
+                            <p class="text-[#4B5563]">I verify that gradebook columns and learner links work properly, log completion in Salesforce, and send a tailored follow-up SOP guide.</p>
                         </div>
                     </div>`;
             } else if (idx === 1) {
@@ -139,8 +142,8 @@ window.PORTFOLIO_PROJECTS["saas-lms-onboarding"] = {
                     <div class="grid md:grid-cols-12 gap-6 items-center text-xs">
                         <div class="md:col-span-5 space-y-2">
                             <span class="font-mono-tag text-[10px] text-slate-500 block">Select a Common Client Question:</span>
-                            <button onclick="runAiCopilot(0)" class="w-full text-left p-3 rounded surface-sandstone hover:border-[#111827] font-semibold">⚠️ "I copied my Canvas course from last semester and students get an error clicking links."</button>
-                            <button onclick="runAiCopilot(1)" class="w-full text-left p-3 rounded surface-sandstone hover:border-[#111827] font-semibold">📉 "My students completed the activity, but their grades aren't showing in D2L/Canvas."</button>
+                            <button onclick="runAiCopilot(0)" class="w-full text-left p-3 rounded surface-sandstone hover:border-[#111827] font-semibold">⚠️ "I copied my Canvas course from last semester and learners get an error clicking links."</button>
+                            <button onclick="runAiCopilot(1)" class="w-full text-left p-3 rounded surface-sandstone hover:border-[#111827] font-semibold">📉 "My learners completed the activity, but their grades are not showing in D2L/Canvas."</button>
                         </div>
                         <div class="md:col-span-7 p-5 rounded bg-[#0F172A] text-[#FAF8F5]" id="ai-copilot-output"></div>
                     </div>`;
@@ -153,7 +156,7 @@ window.PORTFOLIO_PROJECTS["saas-lms-onboarding"] = {
             if (!box) return;
             const responses = [
                 {
-                    cause: "The new semester's LMS shell was copied over, but the new course hasn't been paired with a fresh section in the SaaS platform yet.",
+                    cause: "The new semester's LMS shell was copied over, but the new course has not been paired with a fresh section in the SaaS platform yet.",
                     action: "1. Guide the instructor to click the main tool link in the course menu to complete the 1-click course pairing. 2. Auto-attach the 'New Semester Rollover SOP' to the follow-up email."
                 },
                 {
@@ -168,6 +171,21 @@ window.PORTFOLIO_PROJECTS["saas-lms-onboarding"] = {
             `;
         };
         window.switchSaasTab(0);
-    }
+    },
+
+    transferability: [
+        {
+            role: "Post-Sales Solutions & Implementation",
+            application: "An implementation team can deploy this three-part structure (live call playbook, visual SOP checklist, and AI triage helper) to standardize how new enterprise accounts integrate any B2B software with their existing CRM or ERP."
+        },
+        {
+            role: "User Education & Customer Enablement",
+            application: "A Customer Education Lead can adapt this self-serve checklist and troubleshooting format to help enterprise users move from their first guided onboarding call to confident, independent product use."
+        },
+        {
+            role: "Customer Success & Technical Support",
+            application: "A Customer Success or Support team can turn this AI triage blueprint into an internal copilot that diagnoses common configuration tickets and drafts consistent follow-up notes for account managers."
+        }
+    ]
 };
 // END OF FILE
