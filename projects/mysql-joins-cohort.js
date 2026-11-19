@@ -5,8 +5,8 @@ window.PORTFOLIO_PROJECTS["mysql-joins-cohort"] = {
     id: "mysql-joins-cohort",
     badge: "Custom EdTech Web App • Live & Async Cohort",
     status: "In Final QA • Architecture Preview",
-    title: "Diagnostic & Formative SQL Joins Cohort Application",
-    subtitle: "A custom-engineered HTML/JS cohort learning application that blends diagnostic readiness quizzes, guided syntax walkthroughs, and formative practice labs for live and self-paced instruction.",
+    title: "Hybrid SQL Joins Cohort and Diagnostic Lab",
+    subtitle: "A custom-engineered HTML/JS cohort learning application I designed that blends diagnostic readiness quizzes, guided syntax walkthroughs, and formative practice labs for both live and self-paced instruction.",
     roles: ["facilitation", "lxd-data", "solutions"],
     metrics: ["Diagnostic Assessment", "Formative Scaffolding", "Live & Async Hybrid"],
     meta: {
@@ -18,63 +18,65 @@ window.PORTFOLIO_PROJECTS["mysql-joins-cohort"] = {
     challenge: "In technical database cohorts, learners frequently jump straight into writing complex multi-table `JOIN` queries before grasping foundational concepts like primary/foreign keys or table aliases. Without a diagnostic check and gradual scaffolding, live cohort sessions get derailed by basic syntax confusion.",
     persona: "Adult learners attending either a live facilitator-led workshop or an on-demand cohort replay. They need a structured environment that checks their foundational readiness first, models how queries are built step-by-step, and gradually fades support as their confidence grows.",
 
-    // Cross-Industry Transferability Block
-    transferability: [
-        {
-            role: "Live Technical Facilitation & Customer Training",
-            application: "Designed specifically to support hybrid delivery—giving facilitators a structured interactive lab for live workshops while ensuring self-paced replay learners get the exact same guided experience."
-        },
-        {
-            role: "Customer Education & Product Certification",
-            application: "Demonstrates how to build a multi-stage certification lab: verifying prerequisite knowledge via a diagnostic quiz before unlocking hands-on software configuration practice."
-        },
-        {
-            role: "LXD & Assessment Engineering",
-            application: "Showcases intentional scaffolding fade—moving learners from a 15-question diagnostic quiz to guided walkthroughs, roadmap-assisted formative labs, and unassisted summative challenges."
-        }
-    ],
-
     features: [
         {
             title: "Hybrid Live & On-Demand Cohort Access",
-            desc: "Supports both synchronous workshop attendees (via live instructor session codes) and asynchronous learners (via pre-work video verification) within one unified web application."
+            desc: "I designed a single unified web application that supports both synchronous workshop attendees (via live instructor session codes) and asynchronous learners (via pre-work video verification)."
         },
         {
             title: "15-Question Diagnostic Readiness Quiz",
-            desc: "Evaluates foundational understanding of primary/foreign keys, join types, and table aliases—requiring a 70% baseline score and eliminating incorrect options on retry so learners master core concepts first."
+            desc: "I built a foundational check covering primary/foreign keys, join types, and table aliases that requires a 70% baseline score and strikes out incorrect options on retry so learners lock down core concepts first."
         },
         {
             title: "3 Guided Formative Walkthroughs",
-            desc: "Breaks down multi-table query construction step-by-step, visually connecting `SELECT`, `FROM`, `JOIN`, and `ON` clauses to relational table schemas."
+            desc: "I created step-by-step query walkthroughs that visually connect `SELECT`, `FROM`, `JOIN`, and `ON` clauses directly to relational table schemas."
         },
         {
             title: "7 Practice Labs with Toggleable Roadmaps",
-            desc: "Provides formative coding practice equipped with an optional visual 'SQL Roadmap' that learners can toggle on for support or hide to test their independence."
+            desc: "I engineered formative coding practice equipped with an optional visual 'SQL Roadmap' that learners can toggle on for step-by-step support or hide to test their independence."
         },
         {
             title: "5 Unassisted Summative Mastery Labs",
-            desc: "Removes the training wheels for the final five challenges, assessing whether learners can independently construct accurate multi-table queries."
+            desc: "I removed the scaffolding for the final five challenges to verify whether learners can independently construct accurate multi-table queries."
         },
         {
             title: "Persistent Coaching Feedback & Completion Sync",
-            desc: "Features a scrollable feedback panel with targeted explanations for every choice and concludes with an integrated form handoff to log cohort completion."
+            desc: "I included a scrollable feedback panel with targeted explanations for every choice and an integrated form handoff to log cohort completion cleanly."
         }
     ],
 
     evaluation: {
         metric1Title: "Foundational Readiness & Error Reduction",
-        metric1Desc: "Ensures every learner achieves at least 70% mastery on core database relationships before attempting complex multi-table syntax.",
+        metric1Desc: "I use the 70% diagnostic gate to verify that every learner understands core database relationships before advancing to multi-table query construction.",
         metric2Title: "Independent Query Construction",
-        metric2Desc: "Tracks learner progression as instructional scaffolding fades from guided walkthroughs to unassisted summative challenges."
+        metric2Desc: "I track learner progression as instructional scaffolding fades from guided walkthroughs and toggleable roadmaps to the five unassisted summative challenges."
     },
+
+    skills: [
+        {
+            skill: "Hybrid Live & Async Cohort Architecture",
+            desc: "I design technical learning tools that work smoothly inside live facilitator-led sessions while giving self-paced replay learners the same structured practice experience."
+        },
+        {
+            skill: "Diagnostic & Formative Scaffolding",
+            desc: "I sequence prerequisite readiness gates, toggleable visual roadmaps, and unassisted challenges so learners build durable skill independence."
+        },
+        {
+            skill: "Interactive Technical Lab Prototyping",
+            desc: "I build browser-based practice environments with persistent coaching feedback panels and clean completion tracking handoffs."
+        }
+    ],
+
+    demoTitle: "Inspect the 4-Stage Cohort & Assessment Architecture",
+    demoIntro: "This cohort application is currently in final QA prior to public launch. Review the four sequential stages below to see how learners move from hybrid verification and diagnostic readiness into scaffolded labs and unassisted mastery.",
 
     renderInteractive: function() {
         return `
-        <div class="surface-sandstone rounded p-6 md:p-8 mb-16">
+        <div class="surface-sandstone rounded p-6 md:p-8">
             <div class="flex flex-wrap items-center justify-between gap-4 pb-6 mb-6 border-b border-[#E5E7EB]">
                 <div>
                     <span class="font-mono-tag text-xs px-2.5 py-1 rounded bg-[#0F172A] text-[#FAF8F5] inline-block mb-2">In Final QA • Smart Link Placeholder Active</span>
-                    <h3 class="font-display text-2xl font-bold text-[#111827]">Inspect the 4-Stage Instructional & Assessment Architecture</h3>
+                    <h3 class="font-display text-xl font-bold text-[#111827]">4-Stage Instructional & Assessment Flow</h3>
                 </div>
                 <a href="#coming-soon" onclick="alert('This cohort web application is currently in final QA! As soon as you publish your final link, just replace #coming-soon in projects/mysql-joins-cohort.js.'); return false;" class="btn-outline px-4 py-2 rounded text-xs font-semibold">
                     Launch Cohort Application (In Final QA) ↗
@@ -105,5 +107,21 @@ window.PORTFOLIO_PROJECTS["mysql-joins-cohort"] = {
         </div>`;
     },
 
-    initInteractive: function() {}
+    initInteractive: function() {},
+
+    transferability: [
+        {
+            role: "Live Technical Facilitation & Customer Training",
+            application: "A Customer Education or Training team can use this hybrid lab structure to run live customer workshops while guaranteeing that async replay attendees get the same diagnostic check and hands-on practice."
+        },
+        {
+            role: "User Education & Enterprise AI Bootcamps",
+            application: "A User Education Lead can adapt this 4-stage scaffolding fade (diagnostic check, guided walkthroughs, toggleable hints, and unassisted tasks) to teach enterprise teams how to build reliable AI workflows independently."
+        },
+        {
+            role: "Product Certification & Enablement",
+            application: "A Certification or Partner Enablement team can repurpose the 70% prerequisite gate to verify foundational product knowledge before unlocking hands-on sandbox configuration labs."
+        }
+    ]
 };
+// END OF FILE

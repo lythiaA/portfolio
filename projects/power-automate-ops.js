@@ -5,8 +5,8 @@ window.PORTFOLIO_PROJECTS["power-automate-ops"] = {
     id: "power-automate-ops",
     badge: "Enablement Operations • Workflow Automation",
     status: "Interactive System Blueprint",
-    title: "Automated Learner Triage & Multi-Course Outreach Pipeline",
-    subtitle: "An automated operations system built with Microsoft Power Automate, MS Forms, and dynamic HTML templates that routes learner submissions, delivers personalized resource packets, and streamlines coaching follow-ups.",
+    title: "Automated Learner Triage and Outreach Workflow",
+    subtitle: "An automated operations system I built with Microsoft Power Automate, MS Forms, and dynamic HTML templates that routes learner submissions, delivers personalized resource packets, and streamlines coaching follow-ups.",
     roles: ["solutions", "customer-ed", "lxd-data"],
     metrics: ["Power Automate", "Dynamic HTML Emails", "Multi-Branch Routing"],
     meta: {
@@ -18,58 +18,64 @@ window.PORTFOLIO_PROJECTS["power-automate-ops"] = {
     challenge: "Supporting high volumes of learners across multiple technical courses created repetitive administrative work. Manually reviewing form submissions, checking which course or attempt a learner was on, and copy-pasting the right study resources slowed down response times and pulled focus away from live 1:1 coaching.",
     persona: "High-volume coaching and customer enablement teams who need reliable, automated backend workflows so every learner gets the right resources promptly, freeing facilitators to focus on human connection.",
 
-    // Cross-Industry Transferability Block
-    transferability: [
-        {
-            role: "Customer Success & Enablement Operations",
-            application: "This automation pattern applies directly to B2B Customer Onboarding, automatically routing client intake forms, sending tailored welcome kits based on product tier, and alerting CSMs when a client flags a blocker."
-        },
-        {
-            role: "Solutions Engineering & Workflow Design",
-            application: "Demonstrates my ability to design conditional logic (`Switch` cases, dynamic variables, HTML payloads) that connects forms, spreadsheets, and communication tools without manual intervention."
-        }
-    ],
-
     features: [
         {
             title: "Multi-Course Conditional Switch Logic",
-            desc: "Automatically evaluates each incoming form submission and routes the workflow down the exact branch for that specific course or learner profile."
+            desc: "I built conditional Switch controls that evaluate each incoming form submission and route the workflow down the right branch for that specific course or learner profile."
         },
         {
             title: "Dynamic HTML Email Personalization",
-            desc: "Builds clean, mobile-friendly HTML emails populated dynamically with the learner's name, tailored study guides, video links, and next steps."
+            desc: "I coded clean, mobile-friendly HTML email templates that populate dynamically with the learner's name, tailored study guides, video links, and clear next steps."
         },
         {
             title: "Attempt & Priority-Level Triage",
-            desc: "Distinguishes between brand-new learners and those preparing for a retake so high-priority coaching needs are surfaced immediately."
+            desc: "I structured the intake logic to distinguish between brand-new learners and those preparing for a retake so high-priority coaching needs surface immediately."
         },
         {
             title: "Cohort Verification & Resource Dispatch",
-            desc: "Connects live and self-paced cohort check-in forms directly to automated follow-up emails containing practice labs and session recordings."
+            desc: "I connected live and self-paced cohort check-in forms directly to automated follow-up emails containing matching practice labs and session recordings."
         },
         {
             title: "Clean Data Logging & Tracking",
-            desc: "Records every submission and automated outreach touchpoint into structured tracking sheets for easy team visibility and reporting."
+            desc: "I configured every submission and automated outreach touchpoint to log into structured tracking sheets for full team visibility and reporting."
         },
         {
             title: "Scalable, Reusable Flow Templates",
-            desc: "Structured modularly so new courses, onboarding tracks, or updated resource links can be swapped in quickly without rebuilding the workflow."
+            desc: "I designed the flows modularly so new courses, onboarding tracks, or updated resource links can be swapped in quickly without rebuilding the core workflow."
         }
     ],
 
     evaluation: {
         metric1Title: "Turnaround Speed for Learner Support",
-        metric1Desc: "Reduced resource delivery time from manual daily batching to under 60 seconds from the moment a learner submits a form.",
+        metric1Desc: "I reduced resource delivery time from manual daily batching to under 60 seconds from the moment a learner submits a form.",
         metric2Title: "Facilitator Time Reclaimed for Live Coaching",
-        metric2Desc: "Eliminated repetitive copy-paste email administration across hundreds of monthly learner touchpoints."
+        metric2Desc: "I eliminated repetitive copy-paste email administration across hundreds of monthly learner touchpoints so instructors could focus on high-impact 1:1 calls."
     },
+
+    skills: [
+        {
+            skill: "Conditional Workflow Automation",
+            desc: "I architect multi-branch Power Automate pipelines using Switch controls, dynamic variables, and form triggers to eliminate manual administrative bottlenecks."
+        },
+        {
+            skill: "Dynamic HTML Email Engineering",
+            desc: "I write clean, responsive HTML payloads that assemble personalized resource tables, cohort links, and action plans automatically on every submission."
+        },
+        {
+            skill: "Enablement Operations & Tracking",
+            desc: "I connect intake forms, automated outreach, and centralized tracking logs so customer-facing teams always have complete context before a live call."
+        }
+    ],
+
+    demoTitle: "Inspect the Automated Intake & Dispatch Blueprint",
+    demoIntro: "Click any of the four workflow steps below to examine how I structured the trigger, conditional routing logic, dynamic HTML assembly, and tracking log, followed by three additional enablement flows I built using this same pattern.",
 
     renderInteractive: function() {
         return `
-        <div class="surface-sandstone rounded p-6 md:p-8 mb-16">
+        <div class="surface-sandstone rounded p-6 md:p-8">
             <div class="mb-6">
-                <span class="font-mono-tag text-xs text-slate-500 block"> Workflow Explained  (Click Any Step to Inspect)</span>
-                <h3 class="font-display text-2xl font-bold text-[#111827]">Flagship Flow: Automated Intake, Switch Routing & Dynamic HTML Dispatch</h3>
+                <span class="font-mono-tag text-xs text-slate-500 block">Workflow Explained (Click Any Step to Inspect)</span>
+                <h3 class="font-display text-xl font-bold text-[#111827]">Flagship Flow: Automated Intake, Switch Routing & Dynamic HTML Dispatch</h3>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-6" id="pa-nodes">
                 <button onclick="selectPaNode(0)" class="pa-node text-left p-4 rounded bg-[#0F172A] text-[#FAF8F5]">
@@ -118,7 +124,7 @@ window.PORTFOLIO_PROJECTS["power-automate-ops"] = {
             },
             {
                 title: "Step 02: Multi-Path Conditional Switch Routing",
-                detail: "A structured Switch control checks which course and learning stage the submission belongs to—routing the learner to the exact set of resources built for their situation without manual sorting."
+                detail: "A structured Switch control checks which course and learning stage the submission belongs to, routing the learner to the tailored set of resources built for their situation without manual sorting."
             },
             {
                 title: "Step 03: Dynamic HTML Email Assembly",
@@ -146,5 +152,21 @@ window.PORTFOLIO_PROJECTS["power-automate-ops"] = {
             }
         };
         window.selectPaNode(0);
-    }
+    },
+
+    transferability: [
+        {
+            role: "Customer Success & Onboarding Operations",
+            application: "A Customer Success team can deploy this form-to-Switch-to-HTML workflow to route B2B client intake submissions, deliver tailored welcome kits by product tier, and alert CSMs whenever an account flags a blocker."
+        },
+        {
+            role: "User Education & Self-Serve Enablement",
+            application: "A User Education Lead can adapt this automated dispatch pattern to send role-specific AI starter guides and follow-up practice exercises immediately after learners attend a live workshop or webinar."
+        },
+        {
+            role: "Solutions Engineering & Workflow Design",
+            application: "A Solutions or Operations team can reuse this modular Switch-case and logging blueprint to connect intake portals, CRM trackers, and automated customer communications without manual handoffs."
+        }
+    ]
 };
+// END OF FILE

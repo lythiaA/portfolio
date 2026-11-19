@@ -5,8 +5,8 @@ window.PORTFOLIO_PROJECTS["sql-gamified-labs"] = {
     id: "sql-gamified-labs",
     badge: "Multimodal Technical Training • Animation, AI & Articulate 360",
     status: "4 Live Demos & Video",
-    title: "Multimodal Database & SQL Instruction Suite",
-    subtitle: "A four-part showcase demonstrating how complex database concepts (Normalization, Joins, and Aggregate Queries) can be taught across four distinct modalities: animated explainer video, Socratic AI labs, interactive web quests, and Articulate Rise/Storyline courses.",
+    title: "Multimodal Database and SQL Training Suite",
+    subtitle: "A four-part showcase I built demonstrating how complex database concepts (Normalization, Joins, and Aggregate Queries) can be taught across four distinct modalities: animated explainer video, Articulate Rise/Storyline courses, Socratic AI labs, and interactive web quests.",
     roles: ["lxd-data", "customer-ed", "facilitation"],
     metrics: ["Animaker Explainer Video", "Articulate Rise & Storyline", "Socratic AI Prototyping"],
     meta: {
@@ -15,66 +15,68 @@ window.PORTFOLIO_PROJECTS["sql-gamified-labs"] = {
         stack: "Articulate 360, Animaker, Gemini AI Prompting, HTML/JS",
         impact: "4 Live Multimodal Learning Assets"
     },
-    challenge: "Every learner and organization absorbs technical training differently. Some users need a crisp 3-minute animated video to visualize how tables normalize; others need a structured Articulate Rise course, an interactive RPG quest, or a Socratic AI coach that nudges them when their code breaks.",
+    challenge: "Every learner and organization absorbs technical training differently. Some users need a crisp 3-minute animated video to visualize how tables normalize; others need a structured Articulate Rise course, an interactive quest, or a Socratic AI coach that nudges them when their code breaks.",
     persona: "Adult learners and non-technical professionals upskilling in relational databases and SQL who feel intimidated by dry documentation and need engaging, multimodal ways to build fluency.",
-
-    // Cross-Industry Transferability Block
-    transferability: [
-        {
-            role: "Customer Education & Product Training",
-            application: "Proves I can build an entire multimodal customer academy from bite-sized animated product explainers (Animaker/Vyond) and Articulate 360 courses to custom interactive web sandboxes."
-        },
-        {
-            role: "Live & Asynchronous Facilitation",
-            application: "Showcases my ability to break down abstract technical architecture (like Database Normalization and SQL Joins) using clear visual metaphors and everyday language."
-        },
-        {
-            role: "AI-Assisted Instructional Design",
-            application: "Highlights how I partner with Generative AI to rapidly prototype functional, result-validating learning games with Socratic feedback loops."
-        }
-    ],
 
     features: [
         {
             title: "Animated Concept Explainer (Animaker)",
-            desc: "Produced an engaging visual micro-learning video on Database Normalization using dynamic hand-drawn animations and on-screen movement to make abstract table structuring click."
+            desc: "I produced an engaging visual micro-learning video on Database Normalization using dynamic hand-drawn animations and on-screen movement to make abstract table structuring click."
         },
         {
             title: "Articulate Rise 360 + Storyline Course",
-            desc: "Developed a responsive e-learning course on MySQL Joins & Aggregate Functions in Rise 360, embedding custom Storyline 360 interactions and coding checks."
+            desc: "I developed a responsive e-learning course on MySQL Joins and Aggregate Functions in Rise 360, embedding custom Storyline 360 interactions and coding checks."
         },
         {
             title: "MySQL Identity: Socratic AI Mystery Lab",
-            desc: "Rapidly prototyped a narrative SQL game via strategic AI prompting that validates query results rather than rigid syntax and guides learners with Socratic questions."
+            desc: "I prototyped a narrative SQL game through strategic AI collaboration that validates query results rather than rigid syntax and guides learners with Socratic questions."
         },
         {
             title: "SQL Quest Hub: Gagné & ARCS Web App",
-            desc: "Built a custom HTML/Tailwind interactive module grounded in Gagné's Nine Events and Keller's ARCS model with leveled challenges and adaptive difficulty."
+            desc: "I built a custom HTML/Tailwind interactive module grounded in Gagné's Nine Events and Keller's ARCS model with leveled challenges and adaptive difficulty."
         },
         {
             title: "Multi-Layered Hint & Error Scaffolding",
-            desc: "Designed progressive hints, targeted micro-quizzes for common syntax errors, and low-stakes retry loops so beginners never hit a dead end."
+            desc: "I designed progressive hints, targeted micro-quizzes for common syntax errors, and low-stakes retry loops so beginners never hit a dead end."
         },
         {
             title: "End-to-End Authoring Versatility",
-            desc: "Demonstrates complete fluency across industry-standard authoring suites (Articulate 360), animation tools (Animaker/Vyond), and custom front-end code."
+            desc: "I demonstrated full fluency across industry-standard authoring suites (Articulate 360), animation tools (Animaker/Vyond), and custom front-end code."
         }
     ],
 
     evaluation: {
         metric1Title: "Concept Retention Across Modalities",
-        metric1Desc: "Matches each database competency to its ideal instructional medium—visual animation for conceptual normalization, Rise 360 for structured reading, and web labs for query practice.",
+        metric1Desc: "I match each database competency to its strongest instructional medium: visual animation for conceptual normalization, Rise 360 for structured reference, and web labs for hands-on query practice.",
         metric2Title: "Applied Query Accuracy",
-        metric2Desc: "Evaluated via in-module coding checks, result-based query validation, and reduction in hint dependency across practice tasks."
+        metric2Desc: "I evaluate applied mastery through in-module coding checks, result-based query validation, and decreasing hint dependency across practice tasks."
     },
+
+    skills: [
+        {
+            skill: "Multimodal Content Production",
+            desc: "I match complex technical topics to the right medium, moving fluidly between animated explainer videos, structured e-learning, and interactive web sandboxes."
+        },
+        {
+            skill: "Articulate 360 Course Authoring",
+            desc: "I combine responsive Rise 360 layouts with embedded Storyline 360 practice checks to build polished, self-paced technical courses."
+        },
+        {
+            skill: "Socratic AI Prototyping",
+            desc: "I design result-validating web labs and Socratic feedback loops that help beginners debug technical errors and build independent judgment."
+        }
+    ],
+
+    demoTitle: "Explore All 4 Multimodal Learning Deliverables",
+    demoIntro: "Watch the animated Database Normalization video in Tab 1, or switch to Tab 2 to launch the Articulate Rise/Storyline course, MySQL Identity, and SQL Quest Hub live.",
 
     renderInteractive: function() {
         return `
-        <div class="surface-sandstone rounded p-6 md:p-8 mb-16">
+        <div class="surface-sandstone rounded p-6 md:p-8">
             <div class="flex flex-wrap items-center justify-between gap-4 pb-6 mb-6 border-b border-[#E5E7EB]">
                 <div>
                     <span class="font-mono-tag text-xs text-slate-500 block">Interactive Multimodal Showcase</span>
-                    <h3 class="font-display text-2xl font-bold text-[#111827]">Explore All 4 Learning Modalities</h3>
+                    <h3 class="font-display text-xl font-bold text-[#111827]">Video Explainer & 3 Live Interactive Labs</h3>
                 </div>
                 <div class="flex flex-wrap gap-2" id="multi-tabs">
                     <button onclick="switchMultiTab(0)" class="multi-tab filter-pill active px-3.5 py-1.5 rounded text-xs font-semibold">1. Animaker Video (Normalization)</button>
@@ -147,5 +149,21 @@ window.PORTFOLIO_PROJECTS["sql-gamified-labs"] = {
             }
         };
         window.switchMultiTab(0);
-    }
+    },
+
+    transferability: [
+        {
+            role: "Customer Education & Product Academy",
+            application: "A Customer Education team can replicate this four-modality model to build a complete customer academy: short animated feature explainers, Articulate 360 onboarding courses, and interactive practice sandboxes."
+        },
+        {
+            role: "User Education & AI Practice Labs",
+            application: "A User Education Lead can adapt the MySQL Identity Socratic feedback model to build hands-on AI prompting labs that evaluate user outputs and coach them with guiding questions."
+        },
+        {
+            role: "Live & Asynchronous Technical Enablement",
+            application: "An Enablement team can pair the animated explainer for quick pre-work, run live practice with the web quests, and assign the Rise 360 course as a self-serve reference library."
+        }
+    ]
 };
+// END OF FILE
