@@ -6,7 +6,7 @@ window.PORTFOLIO_PROJECTS["saas-lms-onboarding"] = {
     badge: "Post-Sales Onboarding • SaaS & LMS Enablement",
     status: "Interactive Enablement Sandbox",
     title: "SaaS to LMS Onboarding Playbook and Agentic AI Guide",
-    subtitle: "A post-sales onboarding and customer education system I built to guide faculty and administrators through 1:1 LMS connections (Canvas, D2L), backed by visual SOP documentation and an agentic AI troubleshooting workflow.",
+    subtitle: "A post-sales onboarding and customer education system I built to guide faculty and administrators through 1:1 LMS connections (Canvas, D2L), backed by structured SOP documentation and an agentic AI troubleshooting workflow.",
     roles: ["solutions", "customer-ed", "facilitation"],
     metrics: ["1:1 Client Setup", "SOP Documentation", "Agentic AI Triage"],
     meta: {
@@ -24,8 +24,8 @@ window.PORTFOLIO_PROJECTS["saas-lms-onboarding"] = {
             desc: "I lead live screen-share implementation calls where clients connect their SaaS platform to Canvas or D2L step-by-step, building hands-on confidence before day one."
         },
         {
-            title: "Clear, Visual SOP Documentation",
-            desc: "I author user-friendly setup guides and troubleshooting checklists that translate technical LMS linking and gradebook sync rules into plain, actionable steps."
+            title: "Structured, Visual SOP Documentation",
+            desc: "I author clear Standard Operating Procedures with prerequisites, numbered configuration steps, and verification checks so clients can repeat setups without guesswork."
         },
         {
             title: "Agentic AI Troubleshooting Workflow",
@@ -59,7 +59,7 @@ window.PORTFOLIO_PROJECTS["saas-lms-onboarding"] = {
         },
         {
             skill: "Self-Serve SOP & Enablement Authoring",
-            desc: "I turn recurring client questions into scannable checklists and visual guides that help users move from a first guided setup to repeat independent use."
+            desc: "I turn recurring client questions into structured Standard Operating Procedures that help users move from a first guided setup to repeat independent use."
         },
         {
             skill: "Agentic AI Workflow Design",
@@ -68,7 +68,7 @@ window.PORTFOLIO_PROJECTS["saas-lms-onboarding"] = {
     ],
 
     demoTitle: "Explore the 3-Part Client Implementation Sandbox",
-    demoIntro: "Use the three tabs below to inspect how I structure a live 1:1 onboarding call, review a sample client-facing LMS setup checklist, and test the agentic AI triage assistant on two common post-sales tickets.",
+    demoIntro: "Use the three tabs below to inspect how I structure a live 1:1 onboarding call, review a sample LMS Integration Standard Operating Procedure (SOP), and test the agentic AI triage assistant on two common post-sales tickets.",
 
     renderInteractive: function() {
         return `
@@ -80,7 +80,7 @@ window.PORTFOLIO_PROJECTS["saas-lms-onboarding"] = {
                 </div>
                 <div class="flex flex-wrap gap-2" id="saas-tabs">
                     <button onclick="switchSaasTab(0)" class="saas-tab filter-pill active px-3.5 py-1.5 rounded text-xs font-semibold">1. 1:1 Setup Call Playbook</button>
-                    <button onclick="switchSaasTab(1)" class="saas-tab filter-pill px-3.5 py-1.5 rounded text-xs font-semibold">2. Client LMS Setup SOP</button>
+                    <button onclick="switchSaasTab(1)" class="saas-tab filter-pill px-3.5 py-1.5 rounded text-xs font-semibold">2. LMS Integration SOP</button>
                     <button onclick="switchSaasTab(2)" class="saas-tab filter-pill px-3.5 py-1.5 rounded text-xs font-semibold">3. Agentic AI Triage Assistant</button>
                 </div>
             </div>
@@ -119,22 +119,39 @@ window.PORTFOLIO_PROJECTS["saas-lms-onboarding"] = {
                     </div>`;
             } else if (idx === 1) {
                 container.innerHTML = `
-                    <div class="mb-4 pb-3 border-b border-[#E5E7EB]">
-                        <span class="font-mono-tag text-[10px] text-slate-500 block">Self-Service Client Documentation Sample</span>
-                        <h4 class="font-display font-bold text-lg text-[#111827]">Quick-Start Checklist: Connecting Your SaaS Course to Canvas / D2L</h4>
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-[#E5E7EB]">
+                        <div>
+                            <span class="font-mono-tag text-[10px] text-slate-500 block">SOP-INT-04 • Standard Operating Procedure (Sample)</span>
+                            <h4 class="font-display font-bold text-lg text-[#111827]">SaaS-to-LMS Course Pairing & Gradebook Sync</h4>
+                        </div>
+                        <span class="font-mono-tag text-[10px] px-2.5 py-1 rounded surface-sandstone text-[#111827]">Audience: Faculty & LMS Admins</span>
                     </div>
-                    <div class="space-y-3 text-xs">
-                        <div class="p-3.5 rounded surface-sandstone flex items-center justify-between gap-4">
-                            <div><strong class="text-[#111827]">Step 1: Pair Your Course Shell.</strong> Open your Canvas/D2L course, select the partner tool from your course menu, and sign in once to link your shells.</div>
-                            <span class="font-mono-tag px-2.5 py-1 rounded bg-white border border-[#E5E7EB] whitespace-nowrap">Course Pairing</span>
+
+                    <div class="grid md:grid-cols-2 gap-4 mb-5 text-xs">
+                        <div class="p-3.5 rounded surface-sandstone">
+                            <strong class="text-[#111827] block mb-1">1. Purpose & Scope</strong>
+                            <p class="text-[#4B5563]">Standardizes how instructors pair a third-party SaaS course with Canvas or D2L and verify automatic gradebook passback prior to term launch.</p>
                         </div>
-                        <div class="p-3.5 rounded surface-sandstone flex items-center justify-between gap-4">
-                            <div><strong class="text-[#111827]">Step 2: Add Assignments via the Tool Picker.</strong> Use the LMS External Tool selector rather than copying browser URLs so grades sync automatically.</div>
-                            <span class="font-mono-tag px-2.5 py-1 rounded bg-white border border-[#E5E7EB] whitespace-nowrap">Assignment Sync</span>
+                        <div class="p-3.5 rounded surface-sandstone">
+                            <strong class="text-[#111827] block mb-1">2. Prerequisites</strong>
+                            <p class="text-[#4B5563]">Active instructor credentials in both the LMS and SaaS platform, a provisioned term course shell, and LTI tool access enabled by institutional IT.</p>
                         </div>
-                        <div class="p-3.5 rounded surface-sandstone flex items-center justify-between gap-4">
-                            <div><strong class="text-[#111827]">Step 3: Term Rollover Check.</strong> When copying a course to a new term, click the main tool link once to initialize the new roster and dates.</div>
-                            <span class="font-mono-tag px-2.5 py-1 rounded bg-white border border-[#E5E7EB] whitespace-nowrap">Term Rollover</span>
+                    </div>
+
+                    <div class="mb-5 text-xs">
+                        <strong class="text-[#111827] block mb-2">3. Step-by-Step Procedure</strong>
+                        <ol class="space-y-2 text-[#4B5563] list-decimal list-inside bg-[#FAF8F5] p-4 rounded border border-[#E5E7EB]">
+                            <li><strong class="text-[#111827]">Enable Navigation Tool:</strong> Open LMS Course Settings, locate the partner LTI app under Navigation, drag it to the active menu, and save.</li>
+                            <li><strong class="text-[#111827]">Authenticate & Pair Shell:</strong> Click the partner tool in the course menu, sign in with faculty credentials, and link the active SaaS section to the LMS shell.</li>
+                            <li><strong class="text-[#111827]">Deploy Deep Links:</strong> Add graded activities strictly through the LMS External Tool picker (never via copy-pasted browser URLs) so gradebook columns generate automatically.</li>
+                            <li><strong class="text-[#111827]">Initialize Term Rollover:</strong> When copying a course from a prior term, click the main partner link once in the new shell to refresh roster and due-date mapping.</li>
+                        </ol>
+                    </div>
+
+                    <div class="p-3.5 rounded bg-[#0F172A] text-[#FAF8F5] text-xs flex flex-wrap items-center justify-between gap-2">
+                        <div>
+                            <strong class="block text-emerald-300 mb-0.5">4. Verification & QA Sign-Off</strong>
+                            <span class="text-[#E5E7EB]/90">Confirm all deployed links open in Learner View, verify matching point values in the LMS Gradebook, and log "Launch Ready" in Salesforce.</span>
                         </div>
                     </div>`;
             } else {
@@ -176,11 +193,11 @@ window.PORTFOLIO_PROJECTS["saas-lms-onboarding"] = {
     transferability: [
         {
             role: "Post-Sales Solutions & Implementation",
-            application: "An implementation team can deploy this three-part structure (live call playbook, visual SOP checklist, and AI triage helper) to standardize how new enterprise accounts integrate any B2B software with their existing CRM or ERP."
+            application: "An implementation team can deploy this three-part structure (live call playbook, structured SOP, and AI triage helper) to standardize how new enterprise accounts integrate any B2B software with their existing CRM or ERP."
         },
         {
             role: "User Education & Customer Enablement",
-            application: "A Customer Education Lead can adapt this self-serve checklist and troubleshooting format to help enterprise users move from their first guided onboarding call to confident, independent product use."
+            application: "A Customer Education Lead can adapt this self-serve SOP and troubleshooting format to help enterprise users move from their first guided onboarding call to confident, independent product use."
         },
         {
             role: "Customer Success & Technical Support",

@@ -6,69 +6,69 @@ window.PORTFOLIO_PROJECTS["millionaire-data-quiz"] = {
     badge: "Interactive Assessment App • CompTIA Data+",
     status: "Live Embedded Application",
     title: "Interactive Certification Prep and Socratic Quiz App",
-    subtitle: "A decentralized, game-show-inspired quiz application I built for CompTIA Data+ certification prep, featuring tiered difficulty ladders, a Socratic virtual coach lifeline, and configurable timed modes.",
+    subtitle: "A low-stakes, decentralized quiz application I built for CompTIA Data+ certification prep by bridging a familiar game-show format with instructional design principles like Socratic questioning and domain-level diagnostic reporting.",
     roles: ["lxd-data", "customer-ed", "solutions"],
-    metrics: ["Decentralized Config", "Socratic Coach Lifeline", "54-Question Marathon"],
+    metrics: ["Game-Show to EdTech Bridge", "Socratic Coach Lifeline", "Domain Mastery Report"],
     meta: {
         role: "Lead Learning Architect & App Builder",
         audience: "Adult Technical Learners (Data Analytics)",
         stack: "HTML5, CSS, Vanilla JS, Modular Config Files, GitHub Pages",
-        impact: "Progressive Confidence & Certification Readiness"
+        impact: "Low-Stakes Practice & Targeted Exam Readiness"
     },
-    challenge: "Preparing for technical certification exams like CompTIA Data+ requires mastering a wide breadth of analytical concepts under time pressure. Static practice tests often overwhelm learners or simply mark answers wrong without helping them reason through why a particular statistical or data-governance choice fits best.",
-    persona: "Adult learners preparing for technical certification who need an engaging, low-friction way to test their readiness across foundational and advanced domains while receiving Socratic guidance whenever they get stuck.",
+    challenge: "Preparing for technical certification exams like CompTIA Data+ requires mastering a wide breadth of analytical concepts under time pressure. Static practice tests often feel intimidating and simply mark answers wrong without helping learners reason through why a choice is correct or showing them which specific exam domains need more review.",
+    persona: "Adult learners preparing for technical certification who need a welcoming, low-stakes environment to practice across foundational and advanced domains, receive Socratic guidance when they get stuck, and walk away with a clear map of what to study next.",
 
     features: [
         {
-            title: "Decentralized Question & Config Architecture",
-            desc: "I separated domain question banks, timer rules, and scoring settings into modular files so content updates or new subject tracks can be deployed without rewriting the core app."
-        },
-        {
-            title: "Dual Pacing Modes (15-Question Classic & 54-Question Marathon)",
-            desc: "I built two distinct pathways so learners can choose a focused 15-question sprint or an endurance 54-question marathon equipped with Safe Havens and a Second Chance Shield."
+            title: "Bridging Familiar Game Mechanics With EdTech",
+            desc: "I took universally recognized mechanics from Who Wants to Be a Millionaire (Phone-a-Friend, 50/50, and Ask the Audience) and re-engineered them into purposeful instructional scaffolding tools."
         },
         {
             title: "Socratic Virtual Coach Lifeline (Phone-a-Friend)",
-            desc: "Instead of handing over the right letter, I designed the virtual coach to provide targeted conceptual nudges and guiding questions that strengthen independent analytical judgment."
+            desc: "Instead of handing over the right letter, I designed the Phone-a-Friend virtual coach to use Socratic questioning, offering conceptual nudges that strengthen independent analytical judgment."
         },
         {
-            title: "50/50 Elimination & Audience Poll Lifelines",
-            desc: "I included strategic scaffolding tools that let learners narrow down distractors and weigh probability cues when encountering unfamiliar technical scenarios."
+            title: "Low-Stakes Dual Pacing Modes (16-Question Classic & 50-Question Marathon)",
+            desc: "I built a low-stakes practice space where learners choose between a 16-question Classic run or a 50-question Marathon equipped with Safe Havens and a Second Chance Shield so mistakes become learning moments."
         },
         {
-            title: "Configurable Timers & Pacing Controls",
-            desc: "I added selectable 30s, 45s, and 60s pacing timers with explanatory tooltips so learners can gradually build comfort with real exam-day time constraints."
+            title: "End-of-Run Diagnostic & Domain Mastery Report",
+            desc: "At the end of every run, the app generates a personalized performance summary showing first-try accuracy, total questions answered, time spent, and a percentage breakdown across every CompTIA Data+ exam domain."
         },
         {
-            title: "Streamlined Completion Reporting",
-            desc: "I integrated an Outlook-based completion handoff so learners can easily document their milestone progress and share run summaries with their instructor."
+            title: "Targeted Pre-Exam Review List",
+            desc: "Alongside the domain breakdown, the summary report isolates the specific questions each learner missed so they know precisely where to direct their remaining study time before exam day."
+        },
+        {
+            title: "Decentralized Question & Config Architecture",
+            desc: "I separated domain question banks, timer options (30s, 45s, 60s), and scoring rules into modular files so new certification topics can be updated without rewriting the core application."
         }
     ],
 
     evaluation: {
-        metric1Title: "Progressive Domain Mastery",
-        metric1Desc: "I evaluate learner progress through Safe Haven checkpoint attainment and completion rates across both Classic and Marathon certification runs.",
-        metric2Title: "Scaffolding Independence Over Time",
-        metric2Desc: "I look at how learners reduce their reliance on lifelines across repeat runs, transitioning from guided Socratic hints to unassisted timed accuracy."
+        metric1Title: "First-Try Accuracy & Domain Mastery",
+        metric1Desc: "I evaluate learner readiness through the end-of-run diagnostic report, which tracks first-try accuracy, time spent, and mastery percentages across each CompTIA Data+ domain.",
+        metric2Title: "Scaffolding Independence Over Repeat Runs",
+        metric2Desc: "I look at how learners reduce their reliance on lifelines across repeat low-stakes runs as they review their missed-question list and build unassisted exam confidence."
     },
 
     skills: [
         {
+            skill: "Instructional Gamification & Socratic Design",
+            desc: "I translated familiar game-show mechanics (50/50, Ask the Audience, Phone-a-Friend) into evidence-based learning scaffolds powered by Socratic questioning."
+        },
+        {
+            skill: "Diagnostic Learning Analytics",
+            desc: "I engineered an automated end-of-run report that turns raw quiz clicks into actionable domain mastery percentages and a prioritized study list."
+        },
+        {
             skill: "Modular Front-End Prototyping",
-            desc: "I partnered with AI through structured technical specifications to architect a clean, decentralized HTML/CSS/JS application hosted directly on GitHub Pages."
-        },
-        {
-            skill: "Socratic Coaching Prompt Design",
-            desc: "I crafted hint logic that teaches learners how to reason through tricky analytical questions instead of giving away direct answers."
-        },
-        {
-            skill: "Gamified Assessment Design",
-            desc: "I balanced cognitive load, pacing timers, Safe Havens, and Second Chance Shields to keep high-stakes certification review motivating rather than stressful."
+            desc: "I partnered with AI through structured technical specifications to build a clean, decentralized HTML/CSS/JS web application hosted directly on GitHub Pages."
         }
     ],
 
     demoTitle: "Play the Interactive Data+ Quiz Application",
-    demoIntro: "Test the live embedded app below by choosing Classic or Marathon mode, selecting a timer setting, and trying the Phone-a-Friend lifeline to see the Socratic coaching feedback in action.",
+    demoIntro: "Test the live embedded app below by choosing Classic or Marathon mode, trying the Socratic Phone-a-Friend lifeline, and reviewing the end-of-run Domain Mastery Report.",
 
     renderInteractive: function() {
         return `
@@ -93,7 +93,7 @@ window.PORTFOLIO_PROJECTS["millionaire-data-quiz"] = {
     transferability: [
         {
             role: "Enterprise Product Certification & Badging",
-            application: "A Customer Education team can plug product-specific question banks into this decentralized quiz engine to run interactive customer or partner certification prep with progressive difficulty tiers."
+            application: "A Customer Education team can plug product-specific question banks into this decentralized quiz engine to run low-stakes customer or partner certification prep with automated domain-level diagnostic reports."
         },
         {
             role: "AI Literacy & Prompt Judgment Training",
