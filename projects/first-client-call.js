@@ -3,100 +3,158 @@ window.PORTFOLIO_PROJECTS = window.PORTFOLIO_PROJECTS || {};
 
 window.PORTFOLIO_PROJECTS["first-client-call"] = {
     id: "first-client-call",
-    badge: "Consultative Onboarding • Canvas LMS",
-    status: "Video Demo & Case Study",
-    title: "Your First Client Call: Consultative Onboarding Lab",
-    subtitle: "An onboarding program built in Canvas LMS that uses empathy mapping, video roleplay, and structured peer coaching to turn anxious new hires into confident 1:1 client facilitators.",
-    roles: ["facilitation", "customer-ed", "lxd-data"],
-    metrics: ["1:1 Client Facilitation", "9-Pt Analytic Rubric", "Canvas LMS Custom UI"],
+    badge: "Branching Scenario • Consultative Onboarding",
+    status: "Empathy Map & Scenario Preview",
+    title: "Your First Client Call: Consultative Onboarding Simulation",
+    subtitle: "A human-centered, branching onboarding simulation I designed to help new client-facing specialists practice active listening, de-escalation, and consultative discovery before their first live customer call.",
+    roles: ["customer-ed", "facilitation", "solutions"],
+    metrics: ["Empathy Mapping", "Branching Decisions", "Consultative Discovery"],
     meta: {
-        role: "Instructional Designer & Onboarding Facilitator",
-        audience: "New Client-Facing Onboarding Specialists",
-        stack: "Canvas LMS, Custom HTML/CSS, Video Simulation",
-        impact: "Measurable Lift in Client-Facing Confidence"
+        role: "Instructional Designer & Onboarding Architect",
+        audience: "New Client Success & Onboarding Specialists",
+        stack: "Human-Centered Design, Empathy Mapping, Branching Storyboard",
+        impact: "Safe Practice Before Live Client Calls"
     },
-    challenge: "New specialists in a remote onboarding program understood the technical aspects of their job but lacked the confidence and consultative skills to lead effective 1:1 client sessions. Existing training focused on 'what buttons to click' rather than 'how to guide a client,' leading to new-hire anxiety and inconsistent customer experiences.",
-    persona: "'Alex': a motivated but overwhelmed new hire. Alex needs psychological safety to practice client conversations without fear of judgment, alongside practical activities that translate product knowledge into confident client-facing action.",
-
-    // Cross-Industry Transferability Block
-    transferability: [
-        {
-            role: "Customer Success & Post-Sales Onboarding",
-            application: "Directly models how to ramp new CSMs, Implementation Specialists, and Solutions Engineers so they can lead consultative kickoff and software setup calls with clients."
-        },
-        {
-            role: "Live Training & Facilitation",
-            application: "Demonstrates how I coach teams on verbal facilitation, objection handling, and consultative questioning—creating safe practice environments before staff step in front of live customers."
-        },
-        {
-            role: "Customer Education & LMS Design",
-            application: "Shows my ability to customize LMS environments (Canvas) with clean HTML/CSS and OSCQR quality standards so learners never feel lost in clunky interfaces."
-        }
-    ],
+    challenge: "New onboarding specialists often know the product features inside and out, yet freeze up on their first live customer call when a client sounds stressed, rushed, or skeptical. Reading static call scripts does not prepare new hires to read emotional cues or pivot a conversation in real time.",
+    persona: "Alex, a newly hired client-facing specialist preparing for their first solo onboarding call. Alex feels anxious about making mistakes in front of a paying customer and needs a safe, realistic space to practice discovery questions and de-escalation without risking a real account.",
 
     features: [
         {
-            title: "Learner-Centered Empathy Mapping",
-            desc: "Grounded the entire training in a detailed learner analysis and empathy map to address the specific anxieties and blind spots of new client-facing staff."
+            title: "Human-Centered Empathy Mapping",
+            desc: "I started the design process by mapping what a new specialist like Alex says, thinks, does, and feels prior to their first live call so the training addresses real emotional friction rather than just product clicks."
         },
         {
-            title: "'Practice, Review, Perform' Framework",
-            desc: "Applied Bandura's Social Cognitive Theory to build self-efficacy—guiding new hires from low-stakes video roleplay to peer evaluation and final facilitation."
+            title: "Realistic Branching Call Decisions",
+            desc: "I authored multi-path dialogue branches where learners choose how to respond to an overwhelmed client, immediately seeing how their tone and question framing shift client trust."
         },
         {
-            title: "Structured Peer Coaching & 9-Pt Rubric",
-            desc: "Designed a clear analytic rubric inside Canvas so peers could evaluate sample client calls and practice giving constructive, actionable feedback."
+            title: "Consultative Discovery Over Script Reading",
+            desc: "I structured every scenario around acknowledging client goals first before jumping into software setup, reinforcing consultative habits over robotic feature walkthroughs."
         },
         {
-            title: "Authentic Client Call Simulation",
-            desc: "Replaced passive multiple-choice quizzes with realistic video simulations where specialists practice facilitating a live software solution for a client."
+            title: "Natural Consequence Feedback Loops",
+            desc: "Instead of generic 'Correct' or 'Incorrect' pop-ups, I wrote realistic client reactions paired with concise coaching notes explaining why a response built or eroded rapport."
         },
         {
-            title: "Custom HTML/CSS Canvas Experience",
-            desc: "Engineered a clean, accessible user interface using custom HTML and inline CSS within Canvas to reduce cognitive load and model great UX."
+            title: "De-Escalation & Expectation Setting",
+            desc: "I embedded high-friction moments (such as a client arriving late or frustrated about a previous handoff) so new hires practice staying calm and resetting the agenda."
         },
         {
-            title: "Data-Driven Evaluation & OSCQR Quality",
-            desc: "Aligned the module with the OSCQR quality rubric and paired pre/post confidence surveys with rubric scores to quantify performance gains."
+            title: "Reusable Onboarding Storyboard",
+            desc: "I structured the scenario logic modularly so managers can swap in new client personas or product objections as offerings evolve."
         }
     ],
 
     evaluation: {
-        metric1Title: "Specialist Confidence & Self-Efficacy",
-        metric1Desc: "Measured via pre- and post-training surveys tracking how prepared new specialists felt to lead live 1:1 customer onboarding calls.",
-        metric2Title: "Consultative Facilitation Performance",
-        metric2Desc: "Quantified by comparing initial practice recordings against final video submissions using the 9-point analytic facilitation rubric."
+        metric1Title: "First-Call Confidence & Readiness",
+        metric1Desc: "I evaluate learner confidence through pre- and post-simulation self-assessments and manager call-shadowing rubrics during a new hire's first two weeks.",
+        metric2Title: "Discovery & De-Escalation Application",
+        metric2Desc: "I measure workplace transfer by reviewing early call recordings for agenda setting, empathy statements, and clear next-step summaries."
     },
+
+    skills: [
+        {
+            skill: "Human-Centered Discovery & Empathy Mapping",
+            desc: "I ground every training build in deep audience research, capturing learner anxieties and workflow realities before writing a single scenario."
+        },
+        {
+            skill: "Branching Scenario Authoring",
+            desc: "I write authentic, high-stakes workplace dialogues with realistic consequences that build practical judgment rather than rote memorization."
+        },
+        {
+            skill: "Consultative Onboarding Coaching",
+            desc: "I distill years of 1:1 client onboarding experience into repeatable communication frameworks that help new hires sound calm and credible."
+        }
+    ],
+
+    demoTitle: "Inspect the Learner Empathy Map & Branching Call Preview",
+    demoIntro: "Switch between the two tabs below to inspect the Empathy Map I created for learner persona Alex and test a live branching decision point from the onboarding call simulation.",
 
     renderInteractive: function() {
         return `
-        <div class="surface-sandstone rounded p-6 md:p-8 mb-16">
+        <div class="surface-sandstone rounded p-6 md:p-8">
             <div class="flex flex-wrap items-center justify-between gap-4 pb-6 mb-6 border-b border-[#E5E7EB]">
                 <div>
-                    <span class="font-mono-tag text-xs text-slate-500 block">Module Walkthrough & Discovery Artifacts</span>
-                    <h3 class="font-display text-2xl font-bold text-[#111827]">Explore the Canvas Experience & Learner Empathy Map</h3>
+                    <span class="font-mono-tag text-xs text-slate-500 block">Interactive Design Artifact</span>
+                    <h3 class="font-display text-xl font-bold text-[#111827]">Empathy Map & Live Decision Point</h3>
                 </div>
-                <a href="https://www.youtube.com/watch?v=3v80Ql8X7gY" target="_blank" rel="noopener" class="btn-primary px-4 py-2 rounded text-xs font-semibold">
-                    Watch Full Demo on YouTube ↗
-                </a>
-            </div>
-            <div class="grid lg:grid-cols-12 gap-8 items-center">
-                <div class="lg:col-span-7">
-                    <div class="aspect-video w-full rounded overflow-hidden border border-[#E5E7EB] bg-black shadow-md">
-                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/3v80Ql8X7gY" title="Your First Client Call Walkthrough" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                </div>
-                <div class="lg:col-span-5 bg-white p-5 rounded border border-[#E5E7EB]">
-                    <span class="font-mono-tag text-[10px] text-slate-500 block mb-1">Human-Centered Discovery</span>
-                    <h4 class="font-display font-bold text-lg text-[#111827] mb-2">Empathy Map: "Alex"</h4>
-                    <p class="text-xs text-[#4B5563] leading-relaxed mb-4">
-                        Mapping what a new onboarding specialist thinks, feels, sees, and hears during their first week allowed me to design a psychologically safe practice loop that directly targets call anxiety.
-                    </p>
-                    <img src="assets/AlexPersona.png" alt="Empathy Map for Learner Persona Alex" class="w-full h-auto rounded border border-[#E5E7EB]">
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="switchCallTab(0)" class="call-tab filter-pill active px-3.5 py-1.5 rounded text-xs font-semibold">1. Persona Empathy Map (Alex)</button>
+                    <button onclick="switchCallTab(1)" class="call-tab filter-pill px-3.5 py-1.5 rounded text-xs font-semibold">2. Try a Branching Call Moment</button>
                 </div>
             </div>
+            <div id="call-sandbox-body" class="bg-white rounded border border-[#E5E7EB] p-6"></div>
         </div>`;
     },
 
-    initInteractive: function() {}
+    initInteractive: function() {
+        window.switchCallTab = function(idx) {
+            document.querySelectorAll('.call-tab').forEach((b, i) => b.classList.toggle('active', i === idx));
+            const body = document.getElementById('call-sandbox-body');
+            if (!body) return;
+
+            if (idx === 0) {
+                body.innerHTML = `
+                    <div class="mb-4 pb-3 border-b border-[#E5E7EB]">
+                        <span class="font-mono-tag text-[10px] text-slate-500 block">Human-Centered Discovery Artifact</span>
+                        <h4 class="font-display font-bold text-lg text-[#111827]">Learner Persona Empathy Map: Alex</h4>
+                    </div>
+                    <img src="assets/AlexPersona.png" alt="Empathy Map for Learner Persona Alex" class="w-full h-auto rounded border border-[#E5E7EB]">
+                `;
+            } else {
+                body.innerHTML = `
+                    <div class="mb-4 pb-3 border-b border-[#E5E7EB]">
+                        <span class="font-mono-tag text-[10px] text-slate-500 block">Scenario Checkpoint • Minute 2 of Onboarding Call</span>
+                        <h4 class="font-display font-bold text-lg text-[#111827]">Client: "Honestly, I only have 15 minutes and I already feel behind on setting this up."</h4>
+                    </div>
+                    <p class="text-xs text-[#4B5563] mb-4">Choose how you respond to see the client reaction and coaching debrief:</p>
+                    <div class="grid md:grid-cols-2 gap-4 text-xs mb-5">
+                        <button onclick="pickCallOption(0)" class="text-left p-4 rounded surface-sandstone hover:border-[#111827] border border-transparent transition-all">
+                            <strong class="block text-[#111827] mb-1">Option A: Jump Straight Into Screen Share</strong>
+                            <span class="text-[#4B5563]">"No problem, let's hurry and share your screen so I can click through all the settings before you have to go."</span>
+                        </button>
+                        <button onclick="pickCallOption(1)" class="text-left p-4 rounded surface-sandstone hover:border-[#111827] border border-transparent transition-all">
+                            <strong class="block text-[#111827] mb-1">Option B: Acknowledge, Prioritize & Narrow Scope</strong>
+                            <span class="text-[#4B5563]">"I completely hear you, and we will respect your 15 minutes. Let's focus strictly on the one setup step you need for tomorrow, and I will send a quick guide for the rest."</span>
+                        </button>
+                    </div>
+                    <div id="call-feedback-box" class="hidden p-4 rounded bg-[#0F172A] text-[#FAF8F5] text-xs"></div>
+                `;
+            }
+        };
+
+        window.pickCallOption = function(opt) {
+            const box = document.getElementById('call-feedback-box');
+            if (!box) return;
+            box.classList.remove('hidden');
+            if (opt === 0) {
+                box.innerHTML = `
+                    <span class="font-mono-tag text-[10px] text-amber-300 block mb-1">Client Reaction: Overwhelmed & Rushed</span>
+                    <p class="leading-relaxed"><strong>Coaching Note:</strong> Rushing through every setting when a client is already stressed increases cognitive overload and leads to repeat support tickets. Pause first to validate their time constraint and narrow the goal to one immediate win.</p>
+                `;
+            } else {
+                box.innerHTML = `
+                    <span class="font-mono-tag text-[10px] text-emerald-300 block mb-1">✓ Client Reaction: Relieved & Engaged</span>
+                    <p class="leading-relaxed"><strong>Coaching Note:</strong> Strong consultative move! Acknowledging their time limit lowers anxiety immediately, focuses the live call on their highest-priority outcome, and positions your follow-up SOP as a helpful safety net.</p>
+                `;
+            }
+        };
+        window.switchCallTab(0);
+    },
+
+    transferability: [
+        {
+            role: "Customer Success & Account Management",
+            application: "A Customer Success team can deploy this branching call simulation during new-hire ramp-up so CSMs practice handling executive pushback, renewal objections, and rushed kickoff calls safely."
+        },
+        {
+            role: "Solutions Engineering & Pre/Post-Sales",
+            application: "A Solutions team can swap in technical discovery scenarios to train engineers on uncovering root business needs before launching into a live product demo."
+        },
+        {
+            role: "User Education & Customer Support",
+            application: "A Support or User Education team can adapt this empathy-map-to-scenario structure to train frontline agents on de-escalating frustrated users who feel intimidated by new software or AI tools."
+        }
+    ]
 };
+// END OF FILE
