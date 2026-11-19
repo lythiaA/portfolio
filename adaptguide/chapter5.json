@@ -16,18 +16,18 @@
     "resources": [
       {
         "type": "pdf",
-        "title": "D426 Study Sheet Summary (Chapter 5 Focus)",
-        "url": "https://westerngovernorsuniversity.sharepoint.com/:b:/r/sites/DataScienceTeam/Shared%20Documents/Undergraduate%20Team/D426/Student%20Facing%20Resources/D426%20Study%20Sheet%20Summary.pdf?d=w3e5779c057bd4daa8eee230d4521fdf7&csf=1&web=1&e=IxV13r"
+        "title": "Course Study Sheet Summary (Chapter 5 Focus)",
+        "url": "#"
       },
       {
         "type": "document",
         "title": "Interactive Study Doc: Indexes & Table Structures Definitions",
-        "url": "https://westerngovernorsuniversity-my.sharepoint.com/:w:/g/personal/lythia_amoakon_wgu_edu/IQDroXxJyRqoSrdBHQe-cEHgAZuh8PQ2Thm6LuHm-UrU-3o?e=4LIThb"
+        "url": "#"
       },
       {
         "type": "video",
         "title": "Watch: Investigating Indexes & Table Structures (Sections 5.1 & 5.2)",
-        "url": "https://westerngovernorsuniversity.sharepoint.com/sites/DataScienceTeam/Shared%20Documents/Undergraduate%20Team/D426/Student%20Facing%20Resources/../../../../_layouts/15/stream.aspx?id=%2Fsites%2FDataScienceTeam%2FShared%20Documents%2FUndergraduate%20Team%2FD426%2FStudent%20Facing%20Resources%2FInvestigating%20Indexes%20Cohort%2Emp4&startedResponseCatch=true&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview%2E46bedbe1%2D6283%2D49f0%2D8839%2Dcb68bbaf5fbc"
+        "url": "#"
       },
       {
         "type": "article",
@@ -59,12 +59,12 @@
     "resources": [
       {
         "type": "video",
-        "title": "Watch: Fundamentals of Table Indexing (WGU Stream)",
-        "url": "https://westerngovernorsuniversity.sharepoint.com/sites/DataScienceTeam/Shared%20Documents/Undergraduate%20Team/D426/Student%20Facing%20Resources/../../../../_layouts/15/stream.aspx?id=%2Fsites%2FDataScienceTeam%2FShared%20Documents%2FUndergraduate%20Team%2FD426%2FStudent%20Facing%20Resources%2FFundamentals%20of%20Table%20Indexing%20%28PB%29%5Fdefault%2Emp4&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview%2Ec89c72d2%2Df5f7%2D415d%2D992c%2D9eeb86b7844d"
+        "title": "Watch: Fundamentals of Table Indexing (Course Video)",
+        "url": "#"
       },
       {
         "type": "video",
-        "title": "Watch: Database Indexes Deep-Dive — Dr. Soper (40 min)",
+        "title": "Watch: Database Indexes Deep-Dive (Dr. Soper, 40 min)",
         "url": "https://www.youtube.com/watch?v=Xk3cgUdoieU&list=PL1LIXLIF50uXWJ9alDSXClzNCMynac38g&index=7"
       },
       {
@@ -75,12 +75,12 @@
       {
         "type": "cohort",
         "title": "Asynchronous Cohort: Investigating Indexes",
-        "url": "https://srm.my.salesforce.com/apex/CohortLiveEvent?cohortId=a2yS6000002Flez"
+        "url": "#"
       },
       {
         "type": "quiz",
         "title": "Practice Quiz: Physical Design & Indexes",
-        "url": "https://forms.cloud.microsoft/r/XTzpP7RBKy"
+        "url": "#"
       }
     ]
   },
@@ -119,57 +119,57 @@
     "topics": [
       "Milestone Check: Test your mastery of Competency 3 (Defines Primary Keys: Design, Normalization & Indexes)",
       "Multiple attempts are allowed on both Competency 3 Checkpoint Quizzes below",
-      "Have a question on a quiz item? Reach out to the instruction team at d426@wgu.edu!"
+      "Have a question on a quiz item? Reach out to your assigned instructor or the course support team!"
     ],
     "resources": [
       {
         "type": "quiz",
         "title": "Competency 3 Milestone Quiz 1 (Multiple Attempts Allowed)",
-        "url": "https://forms.cloud.microsoft/r/vpYirM3uG8"
+        "url": "#"
       },
       {
         "type": "quiz",
         "title": "Competency 3 Milestone Quiz 2 (Multiple Attempts Allowed)",
-        "url": "https://forms.cloud.microsoft/r/1DZgRxhWpC"
+        "url": "#"
       }
     ]
   },
   {
     "module_id": 32,
     "chapter": 5,
-    "competency": "Holistic OA Readiness",
+    "competency": "Holistic Final Exam Readiness",
     "is_milestone": true,
     "zybooks_sections": [
       {
-        "section": "Final Objective Assessment (OA) Readiness Challenges",
+        "section": "Final Exam Readiness Challenges",
         "is_core_concept": true
       }
     ],
     "topics": [
       "Comprehensive Course Review across all 3 Competencies",
-      "Complete the 75, 90, and 100-Question Holistic Practice Challenges to verify OA readiness",
-      "Have questions on any challenge items? Email the instruction team at d426@wgu.edu!"
+      "Complete the 75, 90, and 100-Question Holistic Practice Challenges to verify final exam readiness",
+      "Have questions on any challenge items? Contact your assigned instructor or the course support team!"
     ],
     "resources": [
       {
         "type": "cohort",
-        "title": "D426 Pre-Assessment Review Cohort (Available after taking the PA)",
-        "url": "https://srm.my.salesforce.com/apex/CohortLiveEvent?cohortId=a2yS6000002FmCr"
+        "title": "Pre-Assessment Review Cohort (Available after taking the PA)",
+        "url": "#"
       },
       {
         "type": "quiz",
         "title": "Holistic Challenge 1: 75-Question Practice Challenge",
-        "url": "https://forms.office.com/Pages/ResponsePage.aspx?id=z5Knz2h3QUOIV4F1TCr6H1PxWva3AvtGgiAliaoZRO1UNjgzSVc0TTZDRTFRUTBOTVREMk9PUzgyUy4u"
+        "url": "#"
       },
       {
         "type": "quiz",
         "title": "Holistic Challenge 2: 90-Question Practice Challenge",
-        "url": "https://forms.office.com/Pages/ResponsePage.aspx?id=z5Knz2h3QUOIV4F1TCr6H1PxWva3AvtGgiAliaoZRO1UNVhLTEYxNlk4UDc3UUU3NVRJVTJWNjJIWi4u"
+        "url": "#"
       },
       {
         "type": "quiz",
         "title": "Holistic Challenge 3: 100-Question Practice Challenge",
-        "url": "https://forms.office.com/pages/responsepage.aspx?id=z5Knz2h3QUOIV4F1TCr6H5hQ5tsPo5JIjvbWTEENY_xUNFM1TUxSRzJZV1BaN1JUQzhCTlhNVjdJWC4u&route=shorturl"
+        "url": "#"
       }
     ]
   }

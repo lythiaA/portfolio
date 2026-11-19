@@ -22,12 +22,12 @@
       {
         "type": "pdf",
         "title": "D426 Study Sheet Summary (Chapter 2 Focus)",
-        "url": "https://westerngovernorsuniversity.sharepoint.com/:b:/r/sites/DataScienceTeam/Shared%20Documents/Undergraduate%20Team/D426/Student%20Facing%20Resources/D426%20Study%20Sheet%20Summary.pdf?d=w3e5779c057bd4daa8eee230d4521fdf7&csf=1&web=1&e=IxV13r"
+        "url": "#"
       },
       {
         "type": "video",
         "title": "Watch: SQL Sublanguages & Data Management Big Picture",
-        "url": "https://westerngovernorsuniversity.sharepoint.com/sites/DataScienceTeam/Shared%20Documents/Undergraduate%20Team/D426/Student%20Facing%20Resources/../../../../../../:v:/r/sites/DataScienceTeam/Shared%20Documents/Undergraduate%20Team/D426/Student%20Facing%20Resources/Sublanguages%20_%20See%20Data%20Management%20Big%20Picture%20(PB)_default_4a43e30b.mp4?csf=1&web=1&e=WWg81w"
+        "url": "#"
       },
       {
         "type": "interactive",
@@ -57,12 +57,12 @@
       {
         "type": "quiz",
         "title": "Practice Quiz: DDL vs. DML Commands Only",
-        "url": "https://forms.office.com/r/76PctyKXmX"
+        "url": "#"
       },
       {
         "type": "cohort",
         "title": "Self-Paced Mini Cohort: DDL vs. DML",
-        "url": "https://srm.my.salesforce.com/apex/CohortLiveEvent?id=a2wS6000002P0LR"
+        "url": "h"
       }
     ]
   },
@@ -98,7 +98,7 @@
       {
         "type": "video",
         "title": "Watch: ZyBooks Labs Walkthrough Video Folder (Panopto)",
-        "url": "https://wgu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?pid=d94d8d6b-3bce-4353-85d4-b1c6012373f0"
+        "url": "#"
       },
       {
         "type": "interactive",
@@ -133,7 +133,7 @@
       {
         "type": "cohort",
         "title": "Self-Paced Mini Cohort: Data Types & Table Management",
-        "url": "https://srm.my.salesforce.com/apex/CohortLiveEvent?id=a2wS6000002P0LR"
+        "url": "#"
       }
     ]
   },
@@ -172,7 +172,7 @@
       {
         "type": "video",
         "title": "Watch: ZyBooks Labs Walkthrough Video Folder (Panopto)",
-        "url": "https://wgu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?pid=d94d8d6b-3bce-4353-85d4-b1c6012373f0"
+        "url": "#"
       },
       {
         "type": "video",
@@ -237,7 +237,7 @@
       {
         "type": "cohort",
         "title": "D427 Cohort 1: DDL and DML (Syntax Focused)",
-        "url": "https://srm.lightning.force.com/apex/CourseCohortStudentEnrollment?id=a2yS6000000d4oXIAQ"
+        "url": "#"
       }
     ]
   },
@@ -312,7 +312,7 @@
       {
         "type": "video",
         "title": "Watch: ZyBooks Labs Walkthrough Video Folder (Panopto)",
-        "url": "https://wgu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?pid=d94d8d6b-3bce-4353-85d4-b1c6012373f0"
+        "url": "#"
       },
       {
         "type": "video",
@@ -364,12 +364,12 @@
       {
         "type": "pdf",
         "title": "D426 Study Sheet Summary (Chapter 2 Review)",
-        "url": "https://westerngovernorsuniversity.sharepoint.com/:b:/r/sites/DataScienceTeam/Shared%20Documents/Undergraduate%20Team/D426/Student%20Facing%20Resources/D426%20Study%20Sheet%20Summary.pdf?d=w3e5779c057bd4daa8eee230d4521fdf7&csf=1&web=1&e=IxV13r"
+        "url": "#"
       },
       {
         "type": "cohort",
         "title": "All Self-Paced Mini Cohorts Hub",
-        "url": "https://srm.my.salesforce.com/apex/CohortLiveEvent?id=a2wS6000002P0LR"
+        "url": "#"
       }
     ]
   },
@@ -387,18 +387,18 @@
     "topics": [
       "Milestone Check: Test your mastery of Competency 1 (Explains Database Attributes and SQL Commands)",
       "Multiple attempts are allowed on both Microsoft Forms Checkpoint Quizzes below",
-      "Have a question on a quiz item? Reach out to the instruction team at d426@wgu.edu!"
+      "Have a question on a quiz item? Reach out to the instruction team at [redacted email]!"
     ],
     "resources": [
       {
         "type": "quiz",
         "title": "Competency 1 Milestone Quiz 1 (Multiple Attempts Allowed)",
-        "url": "https://forms.cloud.microsoft/r/suWpQjrVPC"
+        "url": "#"
       },
       {
         "type": "quiz",
         "title": "Competency 1 Milestone Quiz 2 (Multiple Attempts Allowed)",
-        "url": "https://forms.cloud.microsoft/r/3ECuQ1SQtU"
+        "url": "#"
       }
     ]
   }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>D426 Data Management Foundations — Adaptive Study Plan</title>
+  <title>Data Management Foundations: Adaptive Study Plan</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -15,9 +15,9 @@
   <header class="app-header">
     <div class="header-container">
       <div class="header-left">
-        <div class="course-badge">WGU D426 • Data Management Foundations</div>
-        <h1 id="studentGreeting">Hi, Student</h1>
-        <p id="dailyQuote" class="daily-quote">"The secret to getting ahead is getting started." — Mark Twain</p>
+        <div class="course-badge">Data Management Foundations • Adaptive Study Plan</div>
+        <h1 id="studentGreeting">Hi, Learner</h1>
+        <p id="dailyQuote" class="daily-quote">"The secret to getting ahead is getting started." - Mark Twain</p>
       </div>
 
       <div class="header-right">
@@ -26,8 +26,8 @@
             <span class="metric-label">Start Date</span>
             <span id="startDateDisplay" class="metric-value">--</span>
           </div>
-          <div class="metric-card clickable" id="editTargetDateBtn" title="Click to adjust Target OA Date">
-            <span class="metric-label">Target OA Date ✎</span>
+          <div class="metric-card clickable" id="editTargetDateBtn" title="Click to adjust Target Exam Date">
+            <span class="metric-label">Target Exam Date ✎</span>
             <span id="targetDateDisplay" class="metric-value">--</span>
           </div>
           <div class="metric-card countdown-card">
@@ -75,8 +75,8 @@
     </div>
     <div class="drawer-body">
       <button class="menu-item-btn" id="menuFaqBtn">
-        <span class="menu-item-title">Course FAQ & OA Tips</span>
-        <span class="menu-item-desc">Answers to common D426 questions, cohorts, and exam strategy</span>
+        <span class="menu-item-title">Course FAQ & Exam Tips</span>
+        <span class="menu-item-desc">Answers to common course questions, cohorts, and exam strategy</span>
       </button>
       <button class="menu-item-btn" id="menuPaUpdaterBtn">
         <span class="menu-item-title">Pre-Assessment (PA) Analyzer</span>
@@ -88,7 +88,7 @@
       </button>
       <button class="menu-item-btn" id="menuRetakeOnboardingBtn">
         <span class="menu-item-title">Recalibrate Placement & Study Preferences</span>
-        <span class="menu-item-desc">Update your learning style, weekly hours, or target OA date</span>
+        <span class="menu-item-desc">Update your learning style, weekly hours, or target exam date</span>
       </button>
       <hr class="drawer-divider" />
       <div class="drawer-footer-note">
@@ -171,28 +171,28 @@
   <div class="support-fab-wrapper">
     <div id="supportPopupMenu" class="support-popup hidden">
       <div class="support-popup-header">
-        <strong>Need Help with D426?</strong>
+        <strong>Need Help with the Course?</strong>
         <span>Choose a support channel below:</span>
       </div>
-      <a href="mailto:d426@wgu.edu?subject=D426%20Study%20Plan%20Question" class="support-option">
+      <a href="#" onclick="alert('Demo Mode: In a live deployment, this opens a pre-filled email to the centralized course support team.'); return false;" class="support-option">
         <span class="support-icon">✉</span>
         <div>
           <strong>Email Course Team Inbox</strong>
-          <small>d426@wgu.edu — Fast response from any available CI</small>
+          <small>Fast response from any available instructor</small>
         </div>
       </a>
       <div class="support-option support-option-static">
         <span class="support-icon">👩‍🏫</span>
         <div>
-          <strong>Message Your Assigned CI</strong>
-          <small>Check your WGU Course Page to email or book a 1-on-1 appointment with your assigned Course Instructor.</small>
+          <strong>Message Your Assigned Instructor</strong>
+          <small>Visit your course portal to email or book a 1-on-1 appointment with your assigned instructor.</small>
         </div>
       </div>
-      <a href="https://westerngovernorsuniversity.sharepoint.com/sites/AcademicCoachingCenter/SitePages/Peer-to-Peer-Coaching.aspx" target="_blank" rel="noopener noreferrer" class="support-option">
+      <a href="#" onclick="alert('Demo Mode: In a live deployment, this opens the 1-on-1 peer tutoring booking portal.'); return false;" class="support-option">
         <span class="support-icon">🤝</span>
         <div>
           <strong>Book a 1-on-1 Peer Tutor</strong>
-          <small>Schedule a live session via the WGU Academic Coaching Center</small>
+          <small>Schedule a live session via the Academic Coaching Center</small>
         </div>
       </a>
     </div>
@@ -205,7 +205,7 @@
   <div id="onboardingModal" class="modal-overlay hidden" role="dialog" aria-modal="true">
     <div class="modal-card modal-lg">
       <div class="modal-header">
-        <span class="course-badge">Welcome to WGU D426</span>
+        <span class="course-badge">Welcome to Data Management Foundations</span>
         <h2>Build Your Personalized Study Plan</h2>
         <p>Answer 6 quick questions so we can calibrate your weekly pacing, daily buckets, and learning resources.</p>
       </div>
@@ -281,11 +281,11 @@
             </label>
             <label class="radio-card">
               <input type="radio" name="weeklyHours" value="10to15" />
-              <span>10–15 hours</span>
+              <span>10-15 hours</span>
             </label>
             <label class="radio-card">
               <input type="radio" name="weeklyHours" value="15to20" />
-              <span>15–20 hours</span>
+              <span>15-20 hours</span>
             </label>
             <label class="radio-card">
               <input type="radio" name="weeklyHours" value="20plus" />
@@ -295,11 +295,11 @@
         </div>
 
         <div class="form-group">
-          <label for="targetOaDateInput"><strong>5. When is your ideal date to take the Objective Assessment (OA)?</strong></label>
+          <label for="targetOaDateInput"><strong>5. When is your ideal date to take the Final Exam?</strong></label>
           <p class="field-hint">Note: This is not a hard deadline! Having a goal to reach just makes it easier to stay motivated, and you can always adjust this date later based on your progress.</p>
           <input type="date" id="targetOaDateInput" required class="form-input" />
           <div id="shortTimelineWarning" class="inline-warning hidden">
-            <strong>Heads up:</strong> Starting from scratch with a short timeline is ambitious! Consider giving yourself at least 21–30 days so you can master Chapters 4 and 5 comfortably.
+            <strong>Heads up:</strong> Starting from scratch with a short timeline is ambitious! Consider giving yourself at least 21-30 days so you can master Chapters 4 and 5 comfortably.
           </div>
         </div>
 
@@ -322,7 +322,7 @@
         </div>
 
         <div class="form-group">
-          <label><strong>Have you already taken the official D426 Pre-Assessment (PA)?</strong></label>
+          <label><strong>Have you already taken the official Pre-Assessment (PA)?</strong></label>
           <div class="radio-grid">
             <label class="radio-card">
               <input type="radio" name="hasTakenPa" value="no" checked />
@@ -330,7 +330,7 @@
             </label>
             <label class="radio-card">
               <input type="radio" name="hasTakenPa" value="yes" />
-              <span>Yes — I want to input my Coaching Report</span>
+              <span>Yes, I want to input my Coaching Report</span>
             </label>
           </div>
         </div>
@@ -348,7 +348,7 @@
       <div class="modal-header">
         <span class="course-badge">Adaptive Routing</span>
         <h2>Pre-Assessment Coaching Report Analyzer</h2>
-        <p>Enter your scores and check off any topics flagged for <strong>"Suggested Study"</strong> on your WGU Coaching Report.</p>
+        <p>Enter your scores and check off any topics flagged for <strong>"Suggested Study"</strong> on your Coaching Report.</p>
       </div>
       <form id="paAnalyzerForm" class="modal-body">
         <div class="form-group">
@@ -456,8 +456,8 @@
     <div class="modal-card modal-lg">
       <div class="modal-header modal-header-flex">
         <div>
-          <span class="course-badge">D426 Knowledge Base</span>
-          <h2>Frequently Asked Questions & OA Strategy</h2>
+          <span class="course-badge">Course Knowledge Base</span>
+          <h2>Frequently Asked Questions & Exam Strategy</h2>
         </div>
         <button id="closeFaqModalBtn" class="icon-btn" aria-label="Close FAQ">&times;</button>
       </div>
@@ -472,12 +472,12 @@
   <div id="dateModal" class="modal-overlay hidden" role="dialog" aria-modal="true">
     <div class="modal-card">
       <div class="modal-header">
-        <h2>Adjust Target OA Date</h2>
-        <p>Updating your Target OA Date will automatically recalculate your weekly sprints while preserving all completed modules.</p>
+        <h2>Adjust Target Exam Date</h2>
+        <p>Updating your Target Exam Date will automatically recalculate your weekly sprints while preserving all completed modules.</p>
       </div>
       <form id="dateModalForm" class="modal-body">
         <div class="form-group">
-          <label for="newTargetDateInput"><strong>New Target OA Date:</strong></label>
+          <label for="newTargetDateInput"><strong>New Target Exam Date:</strong></label>
           <input type="date" id="newTargetDateInput" required class="form-input" />
         </div>
         <div class="modal-footer">
@@ -491,3 +491,4 @@
   <script src="app.js"></script>
 </body>
 </html>
+<!-- END OF FILE -->

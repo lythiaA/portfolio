@@ -23,12 +23,12 @@
       {
         "type": "pdf",
         "title": "D426 Study Sheet Summary (Chapter 3 Focus)",
-        "url": "https://westerngovernorsuniversity.sharepoint.com/:b:/r/sites/DataScienceTeam/Shared%20Documents/Undergraduate%20Team/D426/Student%20Facing%20Resources/D426%20Study%20Sheet%20Summary.pdf?d=w3e5779c057bd4daa8eee230d4521fdf7&csf=1&web=1&e=IxV13r"
+        "url": "#"
       },
       {
         "type": "document",
         "title": "Interactive Study Doc: Glossary for SQL Queries",
-        "url": "https://westerngovernorsuniversity-my.sharepoint.com/:w:/g/personal/lythia_amoakon_wgu_edu/EQkeOti3HpxEjAwgqqrZPe8BjaPwor5-Asa4t4A8hAssJw?e=u1rajM"
+        "url": "#"
       },
       {
         "type": "interactive",
@@ -83,7 +83,7 @@
       {
         "type": "cohort",
         "title": "D427 Cohort 2: Queries, Views & Indexes (SELECT Focus)",
-        "url": "https://srm.lightning.force.com/apex/CourseCohortStudentEnrollment?id=a2yS6000000d4yDIAQ"
+        "url": "#"
       }
     ]
   },
@@ -109,7 +109,7 @@
       {
         "type": "video",
         "title": "Watch: ZyBooks Labs Walkthrough Video Folder (Panopto)",
-        "url": "https://wgu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?pid=d94d8d6b-3bce-4353-85d4-b1c6012373f0"
+        "url": "#"
       },
       {
         "type": "video",
@@ -226,7 +226,7 @@
       {
         "type": "cohort",
         "title": "D427 Cohort 3: Joins & Aggregate Functions",
-        "url": "https://srm.lightning.force.com/apex/CourseCohortStudentEnrollment?id=a2yS6000000x27RIAQ"
+        "url": "#"
       }
     ]
   },
@@ -261,7 +261,7 @@
       {
         "type": "video",
         "title": "Watch: ZyBooks Labs Walkthrough Video Folder (Panopto)",
-        "url": "https://wgu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?pid=d94d8d6b-3bce-4353-85d4-b1c6012373f0"
+        "url": "#"
       },
       {
         "type": "video",
@@ -271,7 +271,7 @@
       {
         "type": "video",
         "title": "Watch: Joins & Aggregate Functions Cohort Recording (2.5 hr | Password: hJPBmx*6)",
-        "url": "https://wgu.webex.com/recordingservice/sites/wgu/recording/d62077c636b945a891116bccb4da7967/playback"
+        "url": "#"
       },
       {
         "type": "interactive",
@@ -296,12 +296,12 @@
       {
         "type": "cohort",
         "title": "Self-Paced Mini Cohort: Joins Video & Interactive Join Activity",
-        "url": "https://srm.my.salesforce.com/apex/CohortLiveEvent?id=a2wS6000002P0LR"
+        "url": "#"
       },
       {
         "type": "quiz",
         "title": "Practice Quiz: SQL Joins Only",
-        "url": "https://forms.cloud.microsoft/r/rsJ4rixntv"
+        "url": "#"
       }
     ]
   },
@@ -349,7 +349,7 @@
       {
         "type": "quiz",
         "title": "Practice Quiz: Joins & Aggregate Functions",
-        "url": "https://forms.cloud.microsoft/r/z2hG7uqYAm"
+        "url": "#"
       }
     ]
   },
@@ -382,7 +382,7 @@
       {
         "type": "cohort",
         "title": "D427 Cohort 2: Queries, Views & Indexes",
-        "url": "https://srm.lightning.force.com/apex/CourseCohortStudentEnrollment?id=a2yS6000000d4yDIAQ"
+        "url": "#"
       }
     ]
   },
@@ -403,7 +403,7 @@
       {
         "type": "quiz",
         "title": "Quiz 2: SQL Queries (With Joins)",
-        "url": "https://forms.office.com/r/jficxUuihV"
+        "url": "#"
       }
     ]
   },
@@ -421,18 +421,18 @@
     "topics": [
       "Milestone Check: Test your mastery of Competency 2 (Determines SQL Queries)",
       "Multiple attempts are allowed on both Competency 2 Checkpoint Quizzes below",
-      "Have a question on a quiz item? Reach out to the instruction team at d426@wgu.edu!"
+      "Have a question on a quiz item? Reach out to the instruction team at d[redacted email]!"
     ],
     "resources": [
       {
         "type": "quiz",
         "title": "Competency 2 Milestone Quiz 1 (Multiple Attempts Allowed)",
-        "url": "https://forms.cloud.microsoft/r/x5BFWfHDLu"
+        "url": "#"
       },
       {
         "type": "quiz",
         "title": "Competency 2 Milestone Quiz 2 (Multiple Attempts Allowed)",
-        "url": "https://forms.cloud.microsoft/r/mMibgWr7LS"
+        "url": "#"
       }
     ]
   }

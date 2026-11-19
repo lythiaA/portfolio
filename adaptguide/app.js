@@ -1,9 +1,9 @@
 /**
- * WGU D426 Data Management Foundations — Adaptive Study Plan
+ * Data Management Foundations: Adaptive Study Plan
  * Serverless client-side application backed by independent JSON files and Local Storage.
  */
 
-const STORAGE_KEY = 'wgu_d426_study_plan_v1';
+const STORAGE_KEY = 'adaptive_study_plan_v1';
 
 // Chapter difficulty & length weights for distributing weekly sprints
 const CHAPTER_WEIGHTS = {
@@ -17,8 +17,8 @@ const CHAPTER_WEIGHTS = {
 // Weekly hours capacity mapping
 const WEEKLY_HOURS_MAP = {
   under10: { hours: 8, capacityFactor: 0.75, label: 'Under 10 hrs/wk' },
-  '10to15': { hours: 12.5, capacityFactor: 1.0, label: '10–15 hrs/wk' },
-  '15to20': { hours: 17.5, capacityFactor: 1.35, label: '15–20 hrs/wk' },
+  '10to15': { hours: 12.5, capacityFactor: 1.0, label: '10-15 hrs/wk' },
+  '15to20': { hours: 17.5, capacityFactor: 1.35, label: '15-20 hrs/wk' },
   '20plus': { hours: 22, capacityFactor: 1.75, label: '20+ hrs/wk' }
 };
 
@@ -26,7 +26,7 @@ let allModules = [];
 let faqItems = [];
 let quotesList = [];
 
-// Default Student State stored in localStorage
+// Default Learner State stored in localStorage
 let appState = {
   onboarded: false,
   studentName: '',
@@ -42,7 +42,7 @@ let appState = {
   paReport: null,         // Stores Coaching Report scores & flags
   quickPlanActive: false, // Activated on subsequent PA retakes with flags
   completedModules: {},   // { [module_id]: { completedAt, confidence, quizScore } }
-  expandedCards: {},      // { [module_id]: boolean } — preserves open/closed state seamlessly
+  expandedCards: {},      // { [module_id]: boolean } preserves open/closed state seamlessly
   expandedResources: {},  // { [module_id]: boolean }
   showAllResources: {},   // { [module_id]: boolean }
   currentWeekIndex: 0,
@@ -304,7 +304,7 @@ function buildWeeklySprints() {
     }
   }
 
-  // Adjust target weekly capacity based on student's weeklyHours selection
+  // Adjust target weekly capacity based on learner's weeklyHours selection
   const hoursConfig = WEEKLY_HOURS_MAP[appState.weeklyHours] || WEEKLY_HOURS_MAP['10to15'];
   const totalWeight = queue.reduce((acc, m) => acc + m.weight, 0);
 
@@ -313,7 +313,6 @@ function buildWeeklySprints() {
   const minWeeksForGoal = Math.max(1, Math.ceil(totalWeight / capacityWeightPerWeek));
 
   // Use the tighter of their target date weeks or their weekly hours capacity weeks
-  // so someone dedicating 20+ hours gets larger weekly/daily buckets than someone doing <10 hours
   const numWeeks = Math.max(1, Math.min(calendarWeeks, minWeeksForGoal));
   const weightPerWeek = totalWeight / numWeeks;
 
@@ -355,7 +354,7 @@ function buildWeeklySprints() {
 
     return {
       weekNumber: idx + 1,
-      dateRangeLabel: `${formatDateShort(weekStart)} – ${formatDateShort(weekEnd)}`,
+      dateRangeLabel: `${formatDateShort(weekStart)} to ${formatDateShort(weekEnd)}`,
       modules: bucket,
       dailyBuckets
     };
@@ -384,7 +383,6 @@ function distributeModulesIntoDailyBuckets(weekModules, weekStartDate) {
     let focusNote = 'Daily Study Session';
 
     if (style === 'weekend') {
-      // Weekend Warrior: Heavy on Sat/Sun, medium mid-week boost on Wednesday, light/rest other days
       if (dayOfWeek === 6 || dayOfWeek === 0) {
         dayShare = 3.2;
         focusNote = 'Weekend Deep-Dive Block';
@@ -395,10 +393,9 @@ function distributeModulesIntoDailyBuckets(weekModules, weekStartDate) {
         dayShare = 0.6;
         focusNote = 'Light Weekday Check-In';
       } else {
-        dayShare = 0; // Rest / buffer day
+        dayShare = 0;
       }
     } else if (style === 'accelerating') {
-      // Accelerating: Heavy daily studying Mon-Fri, lighter weekend review
       if (dayOfWeek >= 1 && dayOfWeek <= 5) {
         dayShare = 2.0;
         focusNote = 'Accelerated Daily Block';
@@ -409,7 +406,6 @@ function distributeModulesIntoDailyBuckets(weekModules, weekStartDate) {
         dayShare = 0;
       }
     } else {
-      // Slow and steady: Balanced across Mon-Sat
       if (dayOfWeek >= 1 && dayOfWeek <= 6) {
         dayShare = 1.0;
         focusNote = 'Steady Daily Pace';
@@ -454,7 +450,6 @@ function distributeModulesIntoDailyBuckets(weekModules, weekStartDate) {
     targetDay.currentWeight += modWeight;
   });
 
-  // Return only days that have assigned modules, along with estimated study hours
   return activeDays
     .filter(d => d.modules.length > 0)
     .map(d => {
@@ -543,11 +538,11 @@ function renderDailyQuote() {
     (new Date() - new Date(new Date().getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24)
   );
   const item = quotesList[dayOfYear % quotesList.length];
-  quoteEl.textContent = `"${item.quote}" — ${item.author}`;
+  quoteEl.textContent = `"${item.quote}" - ${item.author}`;
 }
 
 function renderHeaderMetrics() {
-  document.getElementById('studentGreeting').textContent = `Hi, ${appState.studentName || 'Student'}`;
+  document.getElementById('studentGreeting').textContent = `Hi, ${appState.studentName || 'Learner'}`;
   document.getElementById('startDateDisplay').textContent = appState.startDate
     ? formatDateShort(new Date(appState.startDate + 'T00:00:00'))
     : '--';
@@ -601,11 +596,11 @@ function renderDynamicAlerts() {
     banner.className = 'alert-banner alert-success';
     banner.innerHTML = `
       <div class="alert-content">
-        <h3>Curriculum Complete — Ready for Final Next Steps!</h3>
-        <p>You have completed your personalized study plan across all three competencies. Connect with your assigned Course Instructor or email <strong>d426@wgu.edu</strong> to review your final readiness steps.</p>
+        <h3>Curriculum Complete: Ready for Final Next Steps!</h3>
+        <p>You have completed your personalized study plan across all three competencies. Connect with your assigned instructor or course support team to review your final readiness steps.</p>
       </div>
       <div class="alert-actions">
-        <a href="mailto:d426@wgu.edu?subject=D426%20Study%20Plan%20Complete%20-%20Next%20Steps" class="btn btn-primary btn-sm">Email Course Team</a>
+        <a href="#" onclick="alert('Demo Mode: In a live environment, this opens a pre-filled email to the course support team.'); return false;" class="btn btn-primary btn-sm">Email Course Team</a>
       </div>
     `;
     container.appendChild(banner);
@@ -617,7 +612,7 @@ function renderDynamicAlerts() {
     ftBanner.innerHTML = `
       <div class="alert-content">
         <h3>Day 1 Recommended Task: Take the Pre-Assessment (PA)</h3>
-        <p>Since you bring prior database or SQL experience, start by taking the official D426 Pre-Assessment. Then enter your Coaching Report here to skip mastered sections and focus strictly on your gaps.</p>
+        <p>Since you bring prior database or SQL experience, start by taking the official Pre-Assessment. Then enter your Coaching Report here to skip mastered sections and focus strictly on your gaps.</p>
       </div>
       <div class="alert-actions">
         <button class="btn btn-primary btn-sm" id="ftInputPaBtn">Input PA Coaching Report</button>
@@ -640,7 +635,7 @@ function renderDynamicAlerts() {
     paCheckpoint.innerHTML = `
       <div class="alert-content">
         <h3>Milestone Reached: Ready to Try the Pre-Assessment (PA)?</h3>
-        <p>You have completed Chapters 1–3! Whenever you feel ready, take the D426 Pre-Assessment (or wait until after Chapter 4/5) and input your Coaching Report to calibrate your final review.</p>
+        <p>You have completed Chapters 1-3! Whenever you feel ready, take the Pre-Assessment (or wait until after Chapter 4/5) and input your Coaching Report to calibrate your final review.</p>
       </div>
       <div class="alert-actions">
         <button class="btn btn-primary btn-sm" id="delayedPaBtn">Enter PA Scores</button>
@@ -675,10 +670,10 @@ function renderDynamicAlerts() {
         paceBanner.innerHTML = `
           <div class="alert-content">
             <h3>Pacing Check-In: Want to Recalibrate Your Schedule?</h3>
-            <p>Life happens! Your timeline is running a bit ahead of your completed modules. Would you like to push your Target OA Date back or redistribute your remaining modules across your remaining days?</p>
+            <p>Life happens! Your timeline is running a bit ahead of your completed modules. Would you like to push your Target Exam Date back or redistribute your remaining modules across your remaining days?</p>
           </div>
           <div class="alert-actions">
-            <button class="btn btn-primary btn-sm" id="recalcAdjustDateBtn">Push Target OA Date</button>
+            <button class="btn btn-primary btn-sm" id="recalcAdjustDateBtn">Push Target Exam Date</button>
             <button class="btn btn-outline btn-sm" id="recalcRebalanceBtn">Recalculate Remaining Workload</button>
           </div>
         `;
@@ -686,10 +681,10 @@ function renderDynamicAlerts() {
         paceBanner.innerHTML = `
           <div class="alert-content">
             <h3>You're Ahead of Schedule! 🚀</h3>
-            <p>You've completed ${Math.round(progressPct * 100)}% of your study plan ahead of pace. Want to pull your Target OA Date closer?</p>
+            <p>You've completed ${Math.round(progressPct * 100)}% of your study plan ahead of pace. Want to pull your Target Exam Date closer?</p>
           </div>
           <div class="alert-actions">
-            <button class="btn btn-primary btn-sm" id="recalcAdjustDateBtn">Pull Target OA Date Closer</button>
+            <button class="btn btn-primary btn-sm" id="recalcAdjustDateBtn">Pull Target Exam Date Closer</button>
             <button class="btn btn-outline btn-sm" id="recalcRebalanceBtn">Keep Current Date</button>
           </div>
         `;
@@ -788,7 +783,7 @@ function renderSprintQueue() {
 
     daySection.innerHTML = `
       <div class="daily-bucket-header">
-        <span class="daily-bucket-day">📅 ${escapeHtml(dayBucket.dayLabel)} — ${escapeHtml(dayBucket.focusNote)}</span>
+        <span class="daily-bucket-day">📅 ${escapeHtml(dayBucket.dayLabel)} | ${escapeHtml(dayBucket.focusNote)}</span>
         <span class="daily-bucket-meta">Suggested Load: ${escapeHtml(dayBucket.estHoursLabel)}</span>
       </div>
       <div class="daily-bucket-cards"></div>
@@ -856,7 +851,6 @@ function createModuleCardElement(mod, nextActiveId) {
   const isNextActive = mod.module_id === nextActiveId;
   const adaptiveStatus = mod.adaptiveStatus || getModuleAdaptiveState(mod).status;
 
-  // Determine whether card is expanded: explicit user state takes priority; otherwise expand active module
   const isExpanded =
     appState.expandedCards[mod.module_id] !== undefined
       ? Boolean(appState.expandedCards[mod.module_id])
@@ -870,7 +864,6 @@ function createModuleCardElement(mod, nextActiveId) {
   if (isExpanded) card.classList.add('expanded');
   if (adaptiveStatus === 'optional') card.classList.add('optional-module');
 
-  // Apply confidence-matched color class when completed
   if (isCompleted) {
     const conf = compData.confidence || 'easy';
     card.classList.add(`completed-${conf}`);
@@ -878,7 +871,6 @@ function createModuleCardElement(mod, nextActiveId) {
 
   const sectionTitle = mod.zybooks_sections.map(s => s.section).join(' & ');
 
-  // Status Badges (Matched to Confidence Color)
   let badgesHtml = '';
   if (mod.is_milestone) {
     badgesHtml += `<span class="badge badge-milestone">Competency Milestone</span>`;
@@ -904,7 +896,7 @@ function createModuleCardElement(mod, nextActiveId) {
   const ch4BannerHtml = mod.has_competency_banner
     ? `
     <div class="competency-explainer-banner">
-      <h4>💡 WGU Competency Name Decoder (How Chapters 4 & 5 Map to Your Exam)</h4>
+      <h4>💡 Competency Name Decoder (How Chapters 4 & 5 Map to Your Exam)</h4>
       <div class="competency-explainer-grid">
         <div class="comp-phase-box">
           <strong>Database Design</strong><br/>
@@ -985,8 +977,8 @@ function createModuleCardElement(mod, nextActiveId) {
       <strong>Tricky module? You don't have to get stuck alone:</strong>
       <p>The next module is unlocked so you can keep moving, or use the links below to reinforce this topic:</p>
       <div class="extra-support-links">
-        <a href="https://westerngovernorsuniversity.sharepoint.com/sites/AcademicCoachingCenter/SitePages/Peer-to-Peer-Coaching.aspx" target="_blank" rel="noopener noreferrer">🤝 Book a 1-on-1 Peer Tutor</a>
-        <a href="mailto:d426@wgu.edu?subject=Help%20with%20D426%20Module%20${mod.module_id}%20(${encodeURIComponent(sectionTitle)})">✉ Email Course Team (d426@wgu.edu)</a>
+        <a href="#" onclick="alert('Demo Mode: In a live environment, this opens the 1-on-1 peer tutoring booking portal.'); return false;">🤝 Book a 1-on-1 Peer Tutor</a>
+        <a href="#" onclick="alert('Demo Mode: In a live environment, this opens a pre-filled support email for Module ${mod.module_id}.'); return false;">✉ Email Course Support Team</a>
       </div>
     </div>
   `
@@ -1005,7 +997,7 @@ function createModuleCardElement(mod, nextActiveId) {
       </button>
       <div class="resources-drawer ${shouldAutoOpenResources ? '' : 'hidden'}" id="resDrawer_${mod.module_id}">
         <div class="resources-drawer-header">
-          <h4>Supplemental Study Resources (Read Zybooks First!)</h4>
+          <h4>Supplemental Study Resources (Read Course Material First!)</h4>
           ${showMoreBtnHtml}
         </div>
         <div class="resources-grid">
@@ -1017,12 +1009,11 @@ function createModuleCardElement(mod, nextActiveId) {
   `
       : extraSupportHtml;
 
-  // 80% Mastery Gate with Positive Encouragement Banner when >= 80%
   const passedMasteryGate = isCompleted && compData.quizScore >= 80;
   const masteryGateHtml = mod.is_mastery_gate
     ? `
     <div class="mastery-gate-box">
-      <strong>80% Mastery Checkpoint:</strong> Enter your Zybooks Practice Quiz score (%) to verify readiness before moving forward:
+      <strong>80% Mastery Checkpoint:</strong> Enter your Practice Quiz score (%) to verify readiness before moving forward:
       <div class="mastery-gate-row">
         <input type="number" min="0" max="100" placeholder="e.g., 85" class="score-input" id="quizScoreInput_${mod.module_id}" value="${compData.quizScore !== undefined ? compData.quizScore : ''}" />
         <button type="button" class="btn btn-primary btn-sm verify-score-btn" data-mod-id="${mod.module_id}">
@@ -1035,7 +1026,7 @@ function createModuleCardElement(mod, nextActiveId) {
         }
       </div>
       <div id="masteryWarning_${mod.module_id}" class="mastery-warning hidden">
-        <strong>Score Below 80%:</strong> You're getting closer! Review the supplemental resources below or email <strong>d426@wgu.edu</strong> / your assigned Course Instructor so we can help you lock down these concepts before the next chapter.
+        <strong>Score Below 80%:</strong> You're getting closer! Review the supplemental resources below or contact your assigned instructor or course support team so we can help you lock down these concepts before the next chapter.
       </div>
       <div id="masterySuccess_${mod.module_id}" class="mastery-success ${passedMasteryGate ? '' : 'hidden'}">
         <strong>🎉 Awesome job scoring ${compData.quizScore || 80}%!</strong> You are doing great and have mastered this chapter's core concepts. Keep that momentum going into the next module below!
@@ -1048,7 +1039,7 @@ function createModuleCardElement(mod, nextActiveId) {
     ? `
     <div class="completion-bar">
       <span class="confidence-prompt">
-        ${isCompleted ? 'Module Completed! You can update your confidence rating anytime:' : 'Finished the Zybooks reading/labs? Rate your confidence to complete:'}
+        ${isCompleted ? 'Module Completed! You can update your confidence rating anytime:' : 'Finished the reading and labs? Rate your confidence to complete:'}
       </span>
       <div class="confidence-buttons">
         <button type="button" class="btn-conf btn-conf-easy ${compData.confidence === 'easy' ? 'selected' : ''}" data-mod-id="${mod.module_id}" data-conf="easy">
@@ -1070,7 +1061,6 @@ function createModuleCardElement(mod, nextActiveId) {
   `
     : '';
 
-  // Seamless Next-Module Transition Bar inside completed module
   const nextModInCourse = allModules.find(m => m.module_id === mod.module_id + 1);
   const transitionBannerHtml =
     isCompleted && nextModInCourse
@@ -1107,7 +1097,7 @@ function createModuleCardElement(mod, nextActiveId) {
 
       <div class="module-section-grid">
         <div class="content-box">
-          <h4>1. Zybooks Reading & Labs (Complete First)</h4>
+          <h4>1. Core Reading & Labs (Complete First)</h4>
           <ul class="zybooks-list">${zybooksHtml}</ul>
         </div>
         <div class="content-box">
@@ -1141,7 +1131,6 @@ function updateSingleModuleCardInPlace(modId) {
   const newCard = createModuleCardElement(mod, nextActiveId);
   existingCard.replaceWith(newCard);
 
-  // Also refresh active border highlight on all visible cards
   document.querySelectorAll('.module-card').forEach(el => {
     const id = Number(el.id.replace('moduleCard_', ''));
     if (id === nextActiveId) {
@@ -1155,7 +1144,6 @@ function updateSingleModuleCardInPlace(modId) {
 }
 
 function attachModuleCardListeners() {
-  // Expand / Collapse Card Header (Persisted in appState.expandedCards)
   document.querySelectorAll('[data-toggle-card]').forEach(header => {
     header.onclick = () => {
       const modId = Number(header.dataset.toggleCard);
@@ -1167,7 +1155,7 @@ function attachModuleCardListeners() {
     };
   });
 
-  // Confidence Rating Buttons (Easy, Shaky, Hard) — Seamless In-Place Update!
+  // Confidence Rating Buttons (Easy, Shaky, Hard): Seamless In-Place Update
   document.querySelectorAll('.btn-conf').forEach(btn => {
     btn.onclick = e => {
       e.stopPropagation();
@@ -1179,14 +1167,12 @@ function attachModuleCardListeners() {
         confidence: conf
       };
 
-      // Keep the current card open so it never snaps shut unexpectedly!
       appState.expandedCards[modId] = true;
 
       if (conf === 'shaky' || conf === 'hard') {
         appState.expandedResources[modId] = true;
       }
 
-      // Also auto-expand the next active module so it is ready when they scroll down
       const nextActiveId = getNextActiveModuleId();
       if (nextActiveId) {
         appState.expandedCards[nextActiveId] = true;
@@ -1202,7 +1188,6 @@ function attachModuleCardListeners() {
     };
   });
 
-  // Smooth "Continue to Next Module" button inside completed card
   document.querySelectorAll('.jump-next-mod-btn').forEach(btn => {
     btn.onclick = e => {
       e.stopPropagation();
@@ -1212,7 +1197,6 @@ function attachModuleCardListeners() {
 
       let nextCardEl = document.getElementById(`moduleCard_${nextId}`);
       if (!nextCardEl && appState.viewMode === 'sprint') {
-        // Next module is in the following week's sprint
         appState.currentWeekIndex++;
         saveStateToStorage();
         renderSprintQueue();
@@ -1225,7 +1209,6 @@ function attachModuleCardListeners() {
     };
   });
 
-  // Undo Completion Button
   document.querySelectorAll('.uncomplete-btn').forEach(btn => {
     btn.onclick = e => {
       e.stopPropagation();
@@ -1239,7 +1222,6 @@ function attachModuleCardListeners() {
     };
   });
 
-  // 80% Mastery Gate Verification Button (With Encouragement Banner)
   document.querySelectorAll('.verify-score-btn').forEach(btn => {
     btn.onclick = e => {
       e.stopPropagation();
@@ -1254,7 +1236,6 @@ function attachModuleCardListeners() {
         return;
       }
 
-      // Always keep card open so student sees feedback banner!
       appState.expandedCards[modId] = true;
 
       if (score < 80) {
@@ -1288,7 +1269,6 @@ function attachModuleCardListeners() {
     };
   });
 
-  // Toggle Supplemental Resources Drawer (In-Place without closing card)
   document.querySelectorAll('.toggle-res-drawer-btn').forEach(btn => {
     btn.onclick = e => {
       e.stopPropagation();
@@ -1302,7 +1282,6 @@ function attachModuleCardListeners() {
     };
   });
 
-  // Show All Supplemental Resources Toggle (In-Place without closing card)
   document.querySelectorAll('.show-all-res-btn').forEach(btn => {
     btn.onclick = e => {
       e.stopPropagation();
@@ -1653,3 +1632,4 @@ function linkifyText(escapedText) {
     url => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="resource-link">${url}</a>`
   );
 }
+// END OF FILE

@@ -1,0 +1,72 @@
+[
+  {
+    "category": "Getting Started & Study Strategy",
+    "question": "Should I start my course by taking the Pre-Assessment (PA)?",
+    "answer": "Unless you already have significant prior experience with databases and SQL, we do not recommend taking the PA right away. The PA is best used as a checkpoint for final exam readiness, not as a study guide.\n\nIf you want to self-assess early on, the end-of-chapter quizzes are a much better place to start.\n\nTaking the PA too early can subconsciously narrow your focus as you work through the material. Instead of learning broadly, you may find yourself evaluating every concept through the lens of, 'Was this on the PA?' Because the PA is only a sampler of the course content, it does not cover everything you need to know for the final assessment."
+  },
+  {
+    "category": "Getting Started & Study Strategy",
+    "question": "Which competency should I focus on?",
+    "answer": "All three competencies are important, and success in the course requires working through each of them:\n\n• For SQL (Chapters 2 & 3): The key is hands-on practice. Work through the labs until you can write SQL queries without relying on notes. Repeated practice is essential for passing this course and makes advanced database courses significantly easier.\n• For Database Design, Normalization & Indexes (Chapters 4 & 5): Many learners struggle most with the third competency because it is more theoretical and accounts for 43% of the assessment. Spend as much time as you need here to build a solid conceptual understanding."
+  },
+  {
+    "category": "Getting Started & Study Strategy",
+    "question": "Are there any supplemental resources for this course?",
+    "answer": "Yes! Curated supplemental resources (videos, syntax guides, interactive playgrounds, and practice quizzes) are linked directly inside each module of this study plan.\n\nIf you contact your assigned instructor for additional resources, let them know what you have already tried and what did not click so they can match materials to your learning style."
+  },
+  {
+    "category": "Getting Started & Study Strategy",
+    "question": "I heard there are flashcards I can use. Are they recommended?",
+    "answer": "Flashcards are helpful early in the course for learning new terminology, but they should not be your primary study method. In Data Management Foundations, it is far more important to understand how each concept is applied than to memorize definitions in isolation. Use flashcards as a supplement alongside your reading and hands-on labs."
+  },
+  {
+    "category": "Cohorts & Instructor Support",
+    "question": "Where can I see the cohort offerings?",
+    "answer": "On your course portal, click the 'Explore Cohort Offerings' button to view weekly and monthly live cohort schedules, or reach out to your advisor or assigned instructor."
+  },
+  {
+    "category": "Cohorts & Instructor Support",
+    "question": "I do not have time for live cohorts. What are my options?",
+    "answer": "Live cohorts are offered every day at varying hours, so double-check the schedule to see if one fits. While most live cohorts are not recorded, we also offer Self-Paced Mini Cohorts that you can complete on your own schedule. Links to these are included directly in your study modules and on the course portal."
+  },
+  {
+    "category": "Cohorts & Instructor Support",
+    "question": "What should I do if my assigned instructor is Out of Office?",
+    "answer": "Please reach out to the centralized course support inbox through your course portal and any available instructor on the team will be happy to assist you."
+  },
+  {
+    "category": "Final Exam & Retake Policies",
+    "question": "Do you have any tips for taking the Final Exam?",
+    "answer": "1. Trust your preparation: Make this experience your own because you have put in the work!\n2. Predict before peeking: Read each question carefully and formulate the answer in your head before looking at the multiple-choice options.\n3. Don't talk yourself out of the right answer: Think about why the answer you picked is correct rather than second-guessing yourself.\n4. Pace yourself: Take your time! If a question does not click right away, bookmark it, move on, and come back later.\n5. Reread before submitting: Later questions on the exam often jog your memory or give context clues for earlier ones.\n6. Protect your headspace: If your proctoring check-in starts off poorly and you feel flustered before the exam begins, do not force it. As long as you have not started the exam, you can reschedule."
+  },
+  {
+    "category": "Final Exam & Retake Policies",
+    "question": "I did not pass the final exam. What should I do next?",
+    "answer": "First, don't panic! Not passing is not a failure; it is simply a checkpoint showing where we need to focus before your next attempt.\n\n1. Do NOT request retake approval immediately after seeing your score.\n2. Contact your assigned instructor or book an appointment to review your Coaching Report and co-create a custom retake plan. Retake approval is granted after completing your instructor-designed retake plan.\n3. If you have not finished all core readings and labs yet, start completing the remaining sections.\n4. Review your program's Multiple-Attempts Assessment Policy in your learner handbook."
+  },
+  {
+    "category": "Final Exam & Retake Policies",
+    "question": "I only missed a few questions or one competency. Why am I asked to review the whole book?",
+    "answer": "We take a holistic approach to retake plans so your Coaching Report does not 'flip' on your next attempt (where a previously strong section drops while you focus only on one gap). Continuing to practice areas where you scored Competent keeps all skills sharp while we close the gap."
+  },
+  {
+    "category": "Final Exam & Retake Policies",
+    "question": "Wait, 4 attempts? What happens if I do not pass in 4 tries?",
+    "answer": "In competency-based programs, final assessments are typically limited to 4 total attempts. Because Data Management Foundations is a core requirement for technology programs, not passing within 4 attempts can impact program progression. While an appeal process exists, approvals are rare, which is why we treat every attempt seriously and partner closely with you on preparation."
+  },
+  {
+    "category": "Technical & App Troubleshooting",
+    "question": "I had a technical or proctoring issue during the exam. Who do I contact?",
+    "answer": "Please contact Assessment Services immediately through your course portal's live support desk or emergency proctoring hotline."
+  },
+  {
+    "category": "Technical & App Troubleshooting",
+    "question": "I cannot access some links on this app.",
+    "answer": "In a live deployment, learners sign into their institutional account in the same browser to access internal videos, cohorts, and practice quizzes. In this public portfolio demo, proprietary internal links have been replaced with public references or demo placeholders."
+  },
+  {
+    "category": "Technical & App Troubleshooting",
+    "question": "Will my study plan progress carry over if I switch devices or clear my browser cache?",
+    "answer": "Your study plan progress is saved automatically in your current browser's Local Storage so you never have to log in. If you switch computers or clear your browser data, simply re-enter your target date and check off your completed chapters."
+  }
+]
