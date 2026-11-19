@@ -95,7 +95,7 @@
                     </div>
                 </div>
 
-                <!-- Challenge & Persona Grid -->
+                <!-- 01 & 02: Challenge & Persona Grid -->
                 <div class="grid md:grid-cols-2 gap-8 mb-16">
                     <div class="p-8 rounded surface-white">
                         <span class="font-mono-tag text-xs text-slate-500 block mb-2">01 / The Operational & Learning Gap</span>
@@ -109,29 +109,11 @@
                     </div>
                 </div>
 
-                <!-- Dynamic Interactive Sandbox / Video / App Launcher -->
-                ${cs.renderInteractive ? cs.renderInteractive() : ''}
-
-                <!-- Cross-Industry & Target Role Transferability Block -->
-                ${cs.transferability ? `
-                <div class="mb-16 p-8 rounded surface-sandstone">
-                    <span class="font-mono-tag text-xs text-slate-500 block mb-2">03 / Cross-Functional Architecture</span>
-                    <h2 class="font-display text-2xl md:text-3xl font-bold text-[#111827] mb-6">How This Structure Applies Across Target Roles</h2>
-                    <div class="grid md:grid-cols-${cs.transferability.length} gap-6">
-                        ${cs.transferability.map(t => `
-                            <div class="p-5 rounded bg-white border border-[#E5E7EB]">
-                                <span class="font-mono-tag text-[10px] px-2.5 py-1 rounded bg-[#0F172A] text-[#FAF8F5] inline-block mb-3">${t.role}</span>
-                                <p class="text-xs sm:text-sm text-[#4B5563] leading-relaxed">${t.application}</p>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>` : ''}
-
-                <!-- 6 Key Architectural & Enablement Features -->
+                <!-- 03: Execution, Methodology & Measuring Success -->
                 <div class="mb-16">
-                    <span class="font-mono-tag text-xs text-slate-500 block mb-2">04 / System Design & Delivery</span>
+                    <span class="font-mono-tag text-xs text-slate-500 block mb-2">03 / System Design, Delivery & Evaluation</span>
                     <h2 class="font-display text-3xl font-bold text-[#111827] mb-8">Execution & Methodology</h2>
-                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                         ${cs.features.map((f, i) => `
                             <div class="p-6 rounded surface-white">
                                 <span class="font-mono-tag text-[10px] text-slate-400 block mb-2">0${i + 1}</span>
@@ -140,23 +122,64 @@
                             </div>
                         `).join('')}
                     </div>
-                </div>
 
-                <!-- Measuring Success & Telemetry -->
-                <div class="p-8 rounded bg-[#0F172A] text-[#FAF8F5]">
-                    <span class="font-mono-tag text-xs text-[#E5E7EB]/60 block mb-2">05 / Evaluation & Impact</span>
-                    <h2 class="font-display text-2xl md:text-3xl font-bold mb-6">Measuring Success</h2>
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div class="p-5 rounded bg-white/5 border border-white/10">
-                            <h3 class="font-display font-bold text-lg text-[#FAF8F5] mb-2">${cs.evaluation.metric1Title}</h3>
-                            <p class="text-xs sm:text-sm text-[#E5E7EB]/80 leading-relaxed">${cs.evaluation.metric1Desc}</p>
-                        </div>
-                        <div class="p-5 rounded bg-white/5 border border-white/10">
-                            <h3 class="font-display font-bold text-lg text-[#FAF8F5] mb-2">${cs.evaluation.metric2Title}</h3>
-                            <p class="text-xs sm:text-sm text-[#E5E7EB]/80 leading-relaxed">${cs.evaluation.metric2Desc}</p>
+                    <!-- Measuring Success & Impact (Paired directly under Execution & Methodology) -->
+                    <div class="p-8 rounded bg-[#0F172A] text-[#FAF8F5]">
+                        <span class="font-mono-tag text-xs text-[#E5E7EB]/60 block mb-2">Evaluation & Impact</span>
+                        <h3 class="font-display text-2xl font-bold mb-6">Measuring Success</h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="p-5 rounded bg-white/5 border border-white/10">
+                                <h4 class="font-display font-bold text-lg text-[#FAF8F5] mb-2">${cs.evaluation.metric1Title}</h4>
+                                <p class="text-xs sm:text-sm text-[#E5E7EB]/80 leading-relaxed">${cs.evaluation.metric1Desc}</p>
+                            </div>
+                            <div class="p-5 rounded bg-white/5 border border-white/10">
+                                <h4 class="font-display font-bold text-lg text-[#FAF8F5] mb-2">${cs.evaluation.metric2Title}</h4>
+                                <p class="text-xs sm:text-sm text-[#E5E7EB]/80 leading-relaxed">${cs.evaluation.metric2Desc}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- 04: Top 3 Skills Displayed -->
+                ${cs.skills ? `
+                <div class="mb-16 p-8 rounded surface-sandstone">
+                    <span class="font-mono-tag text-xs text-slate-500 block mb-2">04 / Core Competencies in Action</span>
+                    <h2 class="font-display text-2xl md:text-3xl font-bold text-[#111827] mb-6">Top Skills Displayed</h2>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        ${cs.skills.map(s => `
+                            <div class="p-5 rounded bg-white border border-[#E5E7EB]">
+                                <span class="font-mono-tag text-[10px] px-2.5 py-1 rounded bg-[#0F172A] text-[#FAF8F5] inline-block mb-3">${s.skill}</span>
+                                <p class="text-xs sm:text-sm text-[#4B5563] leading-relaxed">${s.desc}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>` : ''}
+
+                <!-- 05: Interactive Experience & Live Demo -->
+                ${cs.renderInteractive ? `
+                <div class="mb-16">
+                    <div class="mb-6">
+                        <span class="font-mono-tag text-xs text-slate-500 block mb-2">05 / Interactive Experience & Live Demo</span>
+                        <h2 class="font-display text-3xl font-bold text-[#111827] mb-2">${cs.demoTitle || 'Explore the Live Deliverable'}</h2>
+                        ${cs.demoIntro ? `<p class="text-sm md:text-base text-[#4B5563] max-w-3xl leading-relaxed">${cs.demoIntro}</p>` : ''}
+                    </div>
+                    ${cs.renderInteractive()}
+                </div>` : ''}
+
+                <!-- 06: Cross-Industry & Target Role Transferability Block -->
+                ${cs.transferability ? `
+                <div class="p-8 rounded surface-sandstone">
+                    <span class="font-mono-tag text-xs text-slate-500 block mb-2">06 / Cross-Functional Architecture</span>
+                    <h2 class="font-display text-2xl md:text-3xl font-bold text-[#111827] mb-6">How This Structure Applies Across Target Roles</h2>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        ${cs.transferability.map(t => `
+                            <div class="p-5 rounded bg-white border border-[#E5E7EB]">
+                                <span class="font-mono-tag text-[10px] px-2.5 py-1 rounded bg-[#0F172A] text-[#FAF8F5] inline-block mb-3">${t.role}</span>
+                                <p class="text-xs sm:text-sm text-[#4B5563] leading-relaxed">${t.application}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>` : ''}
             `;
 
             // Initialize Project-Specific Interactive Widget
