@@ -5,8 +5,8 @@ window.PORTFOLIO_PROJECTS["adaptive-study-architect"] = {
     id: "adaptive-study-architect",
     badge: "AI-Assisted Web App • Diagnostics & LXD",
     status: "Live Embedded Application",
-    title: "Adaptive Learning Paths",
-    subtitle: "A decentralized HTML/JS/JSON web application I built through strategic AI collaboration that converts static technical syllabi into personalized, date-driven daily study sprints.",
+    title: "Adaptive Learning Path and Pacing App ",
+    subtitle: "A HTML/JS/JSON web application I built through strategic AI collaboration that converts static technical syllabi into personalized, date-driven daily study sprints.",
     roles: ["lxd-data", "customer-ed", "solutions"],
     metrics: ["6-Variable Intake Engine", "Decentralized JSON", "80% Mastery Gates"],
     meta: {
