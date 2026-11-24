@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escape the Fog: Interactive Gradient Descent Puzzle</title>
+  <style>
+    :root {
+      --bg: #FAF8F5;
+      --surface: #FFFFFF;
+      --sandstone: #F3EFE8;
+      --ink: #0F172A;
+      --muted: #4B5563;
+      --border: #E5E7EB;
+      --accent: #2563EB;
+      --success: #059669;
+      --warn: #D97706;
+      --danger: #DC2626;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.5;
+      padding: 16px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .app-shell {
+      width: 100%;
+      max-width: 780px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+    }
+
+    /* Top Header & Level Tabs */
+    .top-bar {
+      background: var(--sandstone);
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand-tag {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      display: block;
+    }
+
+    .top-bar h1 {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .level-tabs {
+      display: flex;
+      gap: 6px;
+    }
+
+    .level-btn {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .level-btn.active {
+      background: var(--ink);
+      color: #FAF8F5;
+      border-color: var(--ink);
+    }
+
+    .level-btn.solved::after {
+      content: " ✓";
+      color: #34D399;
+    }
+
+    /* Main Content */
+    .content {
+      padding: 20px;
+    }
+
+    .prompt-box {
+      margin-bottom: 16px;
+    }
+
+    .prompt-box h2 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .prompt-box p {
+      font-size: 13.5px;
+      color: var(--muted);
+    }
+
+    /* Telemetry Strip */
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .stat-card {
+      background: var(--sandstone);
+      padding: 10px 12px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .stat-label {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .stat-val {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    /* Canvas Container */
+    .canvas-wrap {
+      position: relative;
+      width: 100%;
+      background: #0F172A;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 290px;
+    }
+
+    .fog-toggle {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255, 255, 255, 0.14);
+      color: #FAF8F5;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+    }
+
+    .fog-toggle:hover {
+      background: rgba(255, 255, 255, 0.24);
+    }
+
+    /* Controls */
+    .controls-panel {
+      background: var(--sandstone);
+      padding: 16px;
+      border-radius: 10px;
+      margin-bottom: 14px;
+    }
+
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .lr-badge {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      background: var(--ink);
+      color: #FAF8F5;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--ink);
+      cursor: pointer;
+      margin-bottom: 14px;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn-primary {
+      flex: 1;
+      min-width: 140px;
+      background: var(--ink);
+      color: #FAF8F5;
+      border: none;
+      padding: 11px 16px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.15s ease;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      opacity: 0.9;
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .btn-outline {
+      background: var(--surface);
+      color: var(--ink);
+      border: 1px solid var(--border);
+      padding: 11px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--ink);
+    }
+
+    /* Feedback Banner */
+    .feedback-box {
+      padding: 14px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      border: 1px solid var(--border);
+      background: #F8FAFC;
+      color: var(--ink);
+    }
+
+    .feedback-box.success {
+      background: #ECFDF5;
+      border-color: #A7F3D0;
+      color: #065F46;
+    }
+
+    .feedback-box.warn {
+      background: #FFFBEB;
+      border-color: #FDE68A;
+      color: #92400E;
+    }
+
+    .feedback-box.danger {
+      background: #FEF2F2;
+      border-color: #FECACA;
+      color: #991B1B;
+    }
+
+    .aha-card {
+      margin-top: 12px;
+      padding: 14px 16px;
+      border-radius: 8px;
+      background: var(--ink);
+      color: #FAF8F5;
+      font-size: 13px;
+      display: none;
+    }
+
+    .aha-card.visible {
+      display: block;
+    }
+
+    .aha-label {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      color: #34D399;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .next-level-btn {
+      margin-top: 10px;
+      background: #FAF8F5;
+      color: var(--ink);
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    @media (max-width: 520px) {
+      .stats-strip {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+      canvas {
+        height: 240px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="top-bar">
+      <div>
+        <span class="brand-tag">Math of AI • Interactive Puzzle</span>
+        <h1>Escape the Fog: Gradient Descent</h1>
+      </div>
+      <div class="level-tabs" id="levelTabs">
+        <button class="level-btn active" onclick="loadLevel(0)">1. Foggy Valley</button>
+        <button class="level-btn" onclick="loadLevel(1)">2. Steep Canyon</button>
+        <button class="level-btn" onclick="loadLevel(2)">3. False Bottom</button>
+      </div>
+    </header>
+
+    <main class="content">
+      <div class="prompt-box">
+        <h2 id="levelTitle">Level 1: Find the Bottom in the Fog</h2>
+        <p id="levelDesc">
+          You are on a hidden hillside. You can only feel the slope right under your feet. Adjust your <strong>Step Size</strong> and click <strong>Take Step</strong> to reach the lowest point in 8 steps or fewer.
+        </p>
+      </div>
+
+      <div class="stats-strip">
+        <div class="stat-card">
+          <span class="stat-label">Steps Used</span>
+          <span class="stat-val" id="stepsDisplay">0 / 8</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Current Elevation (Loss)</span>
+          <span class="stat-val" id="lossDisplay">--</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Local Slope (Gradient)</span>
+          <span class="stat-val" id="gradDisplay">--</span>
+        </div>
+      </div>
+
+      <div class="canvas-wrap">
+        <canvas id="valleyCanvas"></canvas>
+        <button class="fog-toggle" id="fogToggleBtn" onclick="toggleFog()">Peek Through Fog</button>
+      </div>
+
+      <div class="controls-panel">
+        <div class="slider-header">
+          <label for="lrSlider">Step Size (Learning Rate)</label>
+          <span class="lr-badge" id="lrValue">0.30</span>
+        </div>
+        <input type="range" id="lrSlider" min="0.05" max="1.60" step="0.05" value="0.30" />
+        <div class="btn-row">
+          <button class="btn-primary" id="stepBtn" onclick="takeStep()">Take Step Downhill</button>
+          <button class="btn-outline" onclick="resetLevel()">Reset Level</button>
+        </div>
+      </div>
+
+      <div class="feedback-box" id="feedbackBox">
+        Tip: The arrow under the ball points downhill. Pick a step size and take your first step.
+      </div>
+
+      <div class="aha-card" id="ahaCard">
+        <span class="aha-label">The Math of AI Behind What You Just Did</span>
+        <p id="ahaText"></p>
+        <button class="next-level-btn" id="nextLevelBtn" onclick="goNextLevel()">Continue to Next Level →</button>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const LEVELS = [
+      {
+        title: "Level 1: Find the Bottom in the Fog",
+        desc: "You are on a hidden hillside and can only feel the slope right under your feet. Adjust your Step Size and reach the lowest point (green zone) in 8 steps or fewer.",
+        startX: -4.2,
+        maxSteps: 8,
+        goalX: 0,
+        goalTolerance: 0.38,
+        defaultLr: 0.30,
+        fn: x => 0.22 * x * x + 0.8,
+        df: x => 0.44 * x,
+        aha: "You just ran Gradient Descent! In AI training, elevation is called 'Loss' (model error), the local slope is the 'Gradient', and your Step Size is the 'Learning Rate'. Too small stalls out; too large overshoots the target."
+      },
+      {
+        title: "Level 2: The Steep Canyon",
+        desc: "This valley is much steeper. Notice what happens if you keep the same large step size from Level 1. Can you tune your Step Size to land in the green zone in 8 steps or fewer?",
+        startX: -3.2,
+        maxSteps: 8,
+        goalX: 0,
+        goalTolerance: 0.35,
+        defaultLr: 0.90,
+        fn: x => 0.65 * x * x + 0.6,
+        df: x => 1.30 * x,
+        aha: "Because the slope (gradient) is much steeper here, multiplying it by a big learning rate launches the ball across the canyon. AI engineers lower the learning rate on steep loss landscapes so the model does not diverge."
+      },
+      {
+        title: "Level 3: The False Bottom (Local vs. Global Minimum)",
+        desc: "Real AI landscapes are rarely smooth bowls. There is a shallow dip nearby and a much deeper valley to the right. Try to escape the shallow dip and reach the true lowest point in 10 steps or fewer!",
+        startX: -3.6,
+        maxSteps: 10,
+        goalX: 2.35,
+        goalTolerance: 0.55,
+        defaultLr: 0.35,
+        fn: x => 0.08 * Math.pow(x, 4) - 0.14 * Math.pow(x, 3) - 0.85 * Math.pow(x, 2) + 0.6 * x + 3.6,
+        df: x => 0.32 * Math.pow(x, 3) - 0.42 * Math.pow(x, 2) - 1.70 * x + 0.6,
+        aha: "You just saw the classic Local Minimum trap! If a step size is too timid, gradient descent settles into the first shallow dip it finds. Choosing the right learning rate (or adding momentum) helps models escape false bottoms."
+      }
+    ];
+
+    let currentLevel = 0;
+    let solvedLevels = [false, false, false];
+    let x = 0;
+    let steps = 0;
+    let history = [];
+    let fogRevealed = false;
+    let levelComplete = false;
+
+    const canvas = document.getElementById("valleyCanvas");
+    const ctx = canvas.getContext("2d");
+    const lrSlider = document.getElementById("lrSlider");
+    const lrValue = document.getElementById("lrValue");
+
+    lrSlider.addEventListener("input", () => {
+      lrValue.textContent = Number(lrSlider.value).toFixed(2);
+    });
+
+    function loadLevel(idx) {
+      currentLevel = idx;
+      const lvl = LEVELS[idx];
+      x = lvl.startX;
+      steps = 0;
+      history = [{ x: x, y: lvl.fn(x) }];
+      fogRevealed = false;
+      levelComplete = false;
+
+      document.getElementById("levelTitle").textContent = lvl.title;
+      document.getElementById("levelDesc").textContent = lvl.desc;
+      lrSlider.value = lvl.defaultLr;
+      lrValue.textContent = lvl.defaultLr.toFixed(2);
+      document.getElementById("stepBtn").disabled = false;
+      document.getElementById("fogToggleBtn").textContent = "Peek Through Fog";
+      document.getElementById("ahaCard").classList.remove("visible");
+
+      setFeedback("Tip: The arrow under the ball points downhill. Pick a step size and click Take Step Downhill.", "");
+      updateTabs();
+      updateStats();
+      drawScene();
+    }
+
+    function resetLevel() {
+      loadLevel(currentLevel);
+    }
+
+    function goNextLevel() {
+      const next = (currentLevel + 1) % LEVELS.length;
+      loadLevel(next);
+    }
+
+    function toggleFog() {
+      fogRevealed = !fogRevealed;
+      document.getElementById("fogToggleBtn").textContent = fogRevealed ? "Hide Fog" : "Peek Through Fog";
+      drawScene();
+    }
+
+    function updateTabs() {
+      document.querySelectorAll(".level-btn").forEach((btn, i) => {
+        btn.classList.toggle("active", i === currentLevel);
+        btn.classList.toggle("solved", solvedLevels[i]);
+      });
+    }
+
+    function updateStats() {
+      const lvl = LEVELS[currentLevel];
+      const loss = lvl.fn(x);
+      const grad = lvl.df(x);
+      document.getElementById("stepsDisplay").textContent = `${steps} / ${lvl.maxSteps}`;
+      document.getElementById("lossDisplay").textContent = loss.toFixed(2);
+      document.getElementById("gradDisplay").textContent = grad.toFixed(2);
+    }
+
+    function setFeedback(msg, tone) {
+      const box = document.getElementById("feedbackBox");
+      box.className = "feedback-box" + (tone ? " " + tone : "");
+      box.textContent = msg;
+    }
+
+    function takeStep() {
+      if (levelComplete) return;
+      const lvl = LEVELS[currentLevel];
+      const lr = Number(lrSlider.value);
+      const prevX = x;
+      const prevY = lvl.fn(prevX);
+      const grad = lvl.df(prevX);
+
+      // Gradient descent update: x_new = x - lr * f'(x)
+      let nextX = prevX - lr * grad;
+      steps++;
+
+      // Clamp extreme divergence so it stays visible on screen
+      let diverged = false;
+      if (Math.abs(nextX) > 5.2) {
+        nextX = nextX > 0 ? 5.2 : -5.2;
+        diverged = true;
+      }
+
+      x = nextX;
+      const newY = lvl.fn(x);
+      history.push({ x: x, y: newY });
+
+      updateStats();
+
+      // Check win condition
+      if (Math.abs(x - lvl.goalX) <= lvl.goalTolerance) {
+        levelComplete = true;
+        fogRevealed = true;
+        solvedLevels[currentLevel] = true;
+        document.getElementById("stepBtn").disabled = true;
+        document.getElementById("fogToggleBtn").textContent = "Hide Fog";
+        setFeedback(`Nice work! You reached the lowest point in ${steps} step${steps === 1 ? "" : "s"}. The fog has lifted so you can see your full path.`, "success");
+
+        document.getElementById("ahaText").textContent = lvl.aha;
+        document.getElementById("nextLevelBtn").textContent =
+          currentLevel < LEVELS.length - 1 ? "Continue to Next Level →" : "Replay From Level 1 ↺";
+        document.getElementById("ahaCard").classList.add("visible");
+        updateTabs();
+        drawScene();
+        return;
+      }
+
+      // Check out of steps
+      if (steps >= lvl.maxSteps) {
+        levelComplete = true;
+        fogRevealed = true;
+        document.getElementById("stepBtn").disabled = true;
+        document.getElementById("fogToggleBtn").textContent = "Hide Fog";
+        if (currentLevel === 2 && x < 0) {
+          setFeedback("Out of steps! Notice how you got stuck in the shallow 'False Bottom' on the left. Click Reset Level and try a bolder Step Size to jump over the middle hill.", "warn");
+        } else {
+          setFeedback("Out of steps! The fog lifted so you can see what happened. Click Reset Level and adjust your Step Size.", "danger");
+        }
+        drawScene();
+        return;
+      }
+
+      // Mid-run coaching feedback
+      if (diverged || newY > prevY + 0.15) {
+        setFeedback("Whoa, you overshot! Your Step Size was too large and bounced you higher up the opposite wall. Try lowering the slider.", "danger");
+      } else if (Math.abs(x - prevX) < 0.18) {
+        if (currentLevel === 2 && x < 0 && Math.abs(grad) < 0.5) {
+          setFeedback("You are barely moving inside a shallow dip! Try increasing your Step Size to see if there is a deeper valley past this hill.", "warn");
+        } else {
+          setFeedback("Very tiny step! At this pace you might run out of steps. Try increasing your Step Size.", "warn");
+        }
+      } else {
+        setFeedback("Good progress! You moved downhill and reduced your elevation (Loss). Keep going!", "");
+      }
+
+      drawScene();
+    }
+
+    function drawScene() {
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+
+      const W = rect.width;
+      const H = rect.height;
+      const lvl = LEVELS[currentLevel];
+
+      // Coordinate mapping: x in [-5.2, 5.2], y in [0, 7.5]
+      const mapX = val => ((val + 5.2) / 10.4) * (W - 48) + 24;
+      const mapY = val => H - 28 - (val / 7.5) * (H - 56);
+
+      // Dark slate background
+      ctx.fillStyle = "#0F172A";
+      ctx.fillRect(0, 0, W, H);
+
+      // Subtle grid lines
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.06)";
+      ctx.lineWidth = 1;
+      for (let gx = -4; gx <= 4; gx += 2) {
+        const px = mapX(gx);
+        ctx.beginPath();
+        ctx.moveTo(px, 16);
+        ctx.lineTo(px, H - 16);
+        ctx.stroke();
+      }
+
+      // Draw full curve (will be masked by fog if not revealed)
+      ctx.beginPath();
+      for (let i = 0; i <= 200; i++) {
+        const vx = -5.2 + (i / 200) * 10.4;
+        const vy = lvl.fn(vx);
+        const px = mapX(vx);
+        const py = mapY(vy);
+        if (i === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      }
+      ctx.strokeStyle = "#38BDF8";
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      // Highlight Goal Zone on curve
+      const gx1 = mapX(lvl.goalX - lvl.goalTolerance);
+      const gx2 = mapX(lvl.goalX + lvl.goalTolerance);
+      const gy = mapY(lvl.fn(lvl.goalX));
+      ctx.fillStyle = "rgba(52, 211, 153, 0.22)";
+      ctx.fillRect(gx1, gy - 16, gx2 - gx1, 32);
+      ctx.strokeStyle = "#34D399";
+      ctx.lineWidth = 1.5;
+      ctx.strokeRect(gx1, gy - 16, gx2 - gx1, 32);
+
+      // Draw step history trail
+      if (history.length > 1) {
+        ctx.beginPath();
+        history.forEach((pt, idx) => {
+          const px = mapX(pt.x);
+          const py = mapY(pt.y);
+          if (idx === 0) ctx.moveTo(px, py);
+          else ctx.lineTo(px, py);
+        });
+        ctx.strokeStyle = "rgba(251, 191, 36, 0.7)";
+        ctx.lineWidth = 2;
+        ctx.setLineDash([4, 4]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Previous dots
+        history.slice(0, -1).forEach(pt => {
+          ctx.beginPath();
+          ctx.arc(mapX(pt.x), mapY(pt.y), 4, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(251, 191, 36, 0.75)";
+          ctx.fill();
+        });
+      }
+
+      // Fog Overlay (Radial spotlight around current ball)
+      const ballX = mapX(x);
+      const ballY = mapY(lvl.fn(x));
+
+      if (!fogRevealed) {
+        const gradOverlay = ctx.createRadialGradient(ballX, ballY, 28, ballX, ballY, 95);
+        gradOverlay.addColorStop(0, "rgba(15, 23, 42, 0)");
+        gradOverlay.addColorStop(0.65, "rgba(15, 23, 42, 0.88)");
+        gradOverlay.addColorStop(1, "rgba(15, 23, 42, 0.98)");
+        ctx.fillStyle = gradOverlay;
+        ctx.fillRect(0, 0, W, H);
+      }
+
+      // Draw downhill direction arrow under the ball
+      const slope = lvl.df(x);
+      if (Math.abs(slope) > 0.05 && !levelComplete) {
+        const dir = slope > 0 ? -1 : 1; // downhill is opposite of slope sign
+        const arrowLen = 28;
+        ctx.beginPath();
+        ctx.moveTo(ballX, ballY + 18);
+        ctx.lineTo(ballX + dir * arrowLen, ballY + 18);
+        ctx.strokeStyle = "#FBBF24";
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
+
+        // Arrowhead
+        ctx.beginPath();
+        ctx.moveTo(ballX + dir * arrowLen, ballY + 18);
+        ctx.lineTo(ballX + dir * (arrowLen - 7), ballY + 13);
+        ctx.lineTo(ballX + dir * (arrowLen - 7), ballY + 23);
+        ctx.closePath();
+        ctx.fillStyle = "#FBBF24";
+        ctx.fill();
+      }
+
+      // Draw current ball
+      ctx.beginPath();
+      ctx.arc(ballX, ballY, 8.5, 0, Math.PI * 2);
+      ctx.fillStyle = levelComplete && solvedLevels[currentLevel] ? "#34D399" : "#FBBF24";
+      ctx.fill();
+      ctx.strokeStyle = "#FFFFFF";
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+
+      // Label when fog is lifted
+      if (fogRevealed) {
+        ctx.fillStyle = "#34D399";
+        ctx.font = "600 11px ui-monospace, SFMono-Regular, Menlo, monospace";
+        ctx.textAlign = "center";
+        ctx.fillText("GOAL (MIN LOSS)", mapX(lvl.goalX), gy + 28);
+      }
+    }
+
+    window.addEventListener("resize", drawScene);
+    loadLevel(0);
+  </script>
+</body>
+</html>
+<!-- END OF FILE -->
