@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Beam Alignment | Interactive Linear Regression Lab</title>
+  <title>Grid Warp | Interactive Matrix Transformations Lab</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
@@ -15,17 +15,16 @@
     <header class="hud-header">
       <div class="hud-brand">
         <span class="mission-pill" id="brandPill">INTERACTIVE MISSION</span>
-        <h1>Beam Alignment</h1>
+        <h1>Grid Warp</h1>
       </div>
 
       <nav class="level-selector" id="levelTabs" aria-label="Mission Levels">
-        <button class="lvl-pill active" data-lvl="0" type="button">01. Clean Relay</button>
-        <button class="lvl-pill" data-lvl="1" type="button">02. Outlier Pull</button>
-        <button class="lvl-pill" data-lvl="2" type="button">03. Noisy Sector</button>
+        <button class="lvl-pill active" data-lvl="0" type="button">01. Stretch Grid</button>
+        <button class="lvl-pill" data-lvl="1" type="button">02. Slant Space</button>
+        <button class="lvl-pill" data-lvl="2" type="button">03. Mirror & Collapse</button>
       </nav>
 
       <div class="hud-actions">
-        <button class="icon-pill" id="olsToggleBtn" type="button" disabled>Exact OLS: LOCKED</button>
         <button class="icon-pill" id="resetBtn" type="button">Reset</button>
         <button class="icon-pill notes-btn" id="drawerToggleBtn" type="button">Field Notes</button>
       </div>
@@ -37,16 +36,16 @@
       <div class="briefing-bar">
         <div class="telemetry-grid">
           <div class="tele-box">
-            <span class="tele-label" id="sseLabel">POWER DRAIN</span>
-            <span class="tele-value" id="sseDisplay">--</span>
+            <span class="tele-label">ALIGNMENT</span>
+            <span class="tele-value" id="alignDisplay">0%</span>
           </div>
           <div class="tele-box">
-            <span class="tele-label">TARGET MAX</span>
-            <span class="tele-value target-val" id="targetDisplay">--</span>
+            <span class="tele-label" id="detLabel">GRID AREA</span>
+            <span class="tele-value" id="detDisplay">1.00x</span>
           </div>
           <div class="tele-box">
-            <span class="tele-label" id="bestLabel">STATUS</span>
-            <span class="tele-value" id="statusDisplay">TUNING</span>
+            <span class="tele-label">STATUS</span>
+            <span class="tele-value" id="statusDisplay">WARPING</span>
           </div>
         </div>
 
@@ -56,42 +55,60 @@
         </div>
       </div>
 
-      <!-- Interactive Canvas World -->
+      <!-- Interactive Warping Coordinate Canvas -->
       <div class="canvas-stage">
         <canvas id="gameCanvas"></canvas>
       </div>
 
       <!-- Bottom Command Console -->
       <section class="command-console">
-        <div class="sliders-wrapper">
-          <!-- Live Formula Bar -->
-          <div class="formula-bar">
-            <span class="formula-tag" id="formulaTag">BEAM EQUATION</span>
-            <span class="formula-eq" id="formulaEq">y = 0.00x + 5.00</span>
+        <!-- Compact Live 2x2 Matrix / Control Grid -->
+        <div class="matrix-panel">
+          <span class="matrix-label" id="matrixLabel">CONTROL GRID</span>
+          <div class="matrix-bracket">
+            <div class="matrix-grid">
+              <span class="m-cell" id="cellA">1.0</span>
+              <span class="m-cell" id="cellB">0.0</span>
+              <span class="m-cell" id="cellC">0.0</span>
+              <span class="m-cell" id="cellD">1.0</span>
+            </div>
           </div>
+        </div>
 
+        <!-- Two Active Sliders -->
+        <div class="sliders-wrapper">
           <div class="dual-sliders">
             <div class="slider-group">
               <div class="slider-meta">
-                <label for="slopeSlider" id="slopeLabel">BEAM TILT</label>
-                <span class="val-readout" id="slopeValue">0.00</span>
+                <label for="slider1" id="slider1Label">WIDTH DIAL</label>
+                <span class="val-readout" id="slider1Value">1.0</span>
               </div>
-              <input type="range" id="slopeSlider" min="-1.50" max="1.50" step="0.05" value="0.00" />
+              <input type="range" id="slider1" min="0.5" max="2.5" step="0.1" value="1.0" />
+              <div class="slider-scale">
+                <span id="s1Min">0.5</span>
+                <span id="s1Mid">1.5</span>
+                <span id="s1Max">2.5</span>
+              </div>
             </div>
 
             <div class="slider-group">
               <div class="slider-meta">
-                <label for="interceptSlider" id="interceptLabel">BEAM HEIGHT</label>
-                <span class="val-readout" id="interceptValue">5.0</span>
+                <label for="slider2" id="slider2Label">HEIGHT DIAL</label>
+                <span class="val-readout" id="slider2Value">1.0</span>
               </div>
-              <input type="range" id="interceptSlider" min="0.0" max="10.0" step="0.1" value="5.0" />
+              <input type="range" id="slider2" min="0.5" max="2.5" step="0.1" value="1.0" />
+              <div class="slider-scale">
+                <span id="s2Min">0.5</span>
+                <span id="s2Mid">1.5</span>
+                <span id="s2Max">2.5</span>
+              </div>
             </div>
           </div>
         </div>
 
         <div class="action-zone">
           <button class="btn-launch" id="lockBtn" type="button">
-            LOCK ALIGNMENT
+            LOCK WARP
           </button>
         </div>
       </section>
@@ -99,7 +116,7 @@
       <!-- Live Telemetry Log -->
       <div class="live-log" id="feedbackLog">
         <span class="log-dot"></span>
-        <span id="feedbackText">Drag the two dials to shrink the glowing squares below the Target Max, then click Lock Alignment.</span>
+        <span id="feedbackText">Drag the two dials to warp the grid until your ship matches the pulsing green silhouette.</span>
       </div>
     </main>
 
@@ -116,7 +133,7 @@
       <!-- Tab 1: Current Intro / Debrief -->
       <div class="drawer-body" id="drawerBriefView">
         <span class="drawer-tag" id="drawerTag">INTERACTIVE MISSION</span>
-        <h3 class="drawer-title" id="drawerTitle">Welcome to Beam Alignment</h3>
+        <h3 class="drawer-title" id="drawerTitle">Welcome to Grid Warp</h3>
         <div class="drawer-text" id="drawerText"></div>
 
         <div class="drawer-math-box hidden" id="drawerMathBox">
@@ -129,9 +146,9 @@
 
       <!-- Tab 2: Persistent Study Notes Across All 3 Missions -->
       <div class="drawer-body hidden" id="drawerLogView">
-        <span class="drawer-tag">LINEAR REGRESSION STUDY NOTES</span>
+        <span class="drawer-tag">LINEAR ALGEBRA STUDY NOTES</span>
         <h3 class="drawer-title">What You Learned Across All 3 Missions</h3>
-        <p class="log-intro">Every concept you uncover across the missions is saved here as your Linear Regression (OLS) summary.</p>
+        <p class="log-intro">Every matrix concept you uncover (from wins, near-misses, and collapses) is saved here as your Linear Algebra summary.</p>
         <div class="mission-log-list" id="missionLogList"></div>
       </div>
     </aside>
