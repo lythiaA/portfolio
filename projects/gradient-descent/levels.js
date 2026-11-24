@@ -12,18 +12,20 @@ window.DESCENT_LEVELS = [
     goalTolerance: 0.35,
     defaultLr: 0.50,
     maxSafeX: 4.6,
-    // f(x) = 0.5x^2 + 0.5 -> f'(x) = 1.0x
     fn: x => 0.5 * x * x + 0.5,
     df: x => 1.0 * x,
-    conceptSummary: "Gradient Descent: stepping downhill proportional to the slope until Loss reaches its minimum.",
     winTitle: "You Just Ran Gradient Descent!",
-    winMath: "You just practiced how AI models learn! Think of Altitude as Loss (model error), Slope as the Gradient, and Thruster Power as the Learning Rate. Gradient Descent repeats one rule: step downhill based on the slope until error hits its lowest point.",
+    winMath: "Gradient Descent repeats one simple rule: step downhill proportional to the slope until error (Loss) hits its lowest point. As the hill flattens near the bottom, your steps shrink automatically.",
+    winNoteLabel: "Core Mechanism (Gradient Descent)",
+    winNoteBody: "Altitude is Loss (error), Slope is the Gradient, and Thruster Power is the Learning Rate. Steps shrink naturally as the Gradient approaches zero.",
     failBatteryTitle: "Out of Battery in 4 Steps",
     failBatteryReason: "Your Thruster Power was too low (or bounced back and forth too much) to reach the landing zone in 4 steps.",
     failBatteryMath: "In AI, your dial is called the Learning Rate. When a Learning Rate is too small, a model learns painfully slowly and runs out of time before finding the best answer.",
+    failBatteryNoteLabel: "Too-Small Learning Rate",
     failDivergeTitle: "You Overshot the Valley!",
     failDivergeReason: "Your Thruster Power multiplied by the slope was too strong and launched the rover right out of the valley.",
-    failDivergeMath: "In AI, your dial is called the Learning Rate. When it is too high, every step makes the error (Loss) worse instead of better. Engineers call this Divergence."
+    failDivergeMath: "In AI, your dial is called the Learning Rate. When it is too high, every step makes the error (Loss) worse instead of better. Engineers call this Divergence.",
+    failDivergeNoteLabel: "Divergence (Too-High Learning Rate)"
   },
   {
     id: 1,
@@ -34,25 +36,27 @@ window.DESCENT_LEVELS = [
     demoTitle: "Mission 02: Test a Steeper Canyon",
     demoDesc: "This canyon is 2.5 times steeper than Mission 01. First, click Fire Thrusters at 0.90 to see what happens when you use a high Learning Rate on a steep Gradient.",
     title: "Mission 02: Calibrate for Steep Terrain",
-    desc: "Your battery is reset to 0 / 4. Now lower your Learning Rate to match this steeper Gradient and land in the Global Minimum in 4 steps or fewer.",
+    desc: "Your battery is reset to 0 / 4. Lower your Learning Rate to match this steeper Gradient and land in the Global Minimum in 4 steps or fewer.",
     startX: -2.4,
     maxSteps: 4,
     goalX: 0,
     goalTolerance: 0.30,
     defaultLr: 0.90,
     maxSafeX: 3.4,
-    // f(x) = 1.25x^2 + 0.5 -> f'(x) = 2.5x
     fn: x => 1.25 * x * x + 0.5,
     df: x => 2.5 * x,
-    conceptSummary: "Overshooting & Steep Gradients: steeper loss curves require smaller Learning Rates to stay stable.",
     winTitle: "Steep Terrain Mastered!",
     winMath: "There is no single magic Learning Rate. Steeper Loss landscapes create larger Gradients, so AI engineers lower the Learning Rate to prevent overshooting and keep training stable.",
+    winNoteLabel: "Steep Gradients & Calibration",
+    winNoteBody: "Steeper Loss curves multiply into larger jumps, so AI engineers scale down the Learning Rate to stay stable.",
     failBatteryTitle: "Out of Battery on Steep Terrain",
     failBatteryReason: "You ran out of your 4 steps before reaching the Global Minimum.",
     failBatteryMath: "If you overcorrect by setting the Learning Rate too tiny (or keep bouncing back and forth across the valley), the model stalls out before reaching minimum Loss.",
+    failBatteryNoteLabel: "Overcorrection / Oscillation",
     failDivergeTitle: "Diverged Off the Canyon!",
     failDivergeReason: "Your Learning Rate was still too high for this steep canyon and launched the rover off the terrain.",
-    failDivergeMath: "On steep curves, even a moderate Learning Rate multiplies into a huge step that causes Divergence. Lower the dial until your steps move steadily downhill without crossing over the bottom."
+    failDivergeMath: "On steep curves, even a moderate Learning Rate multiplies into a huge step that causes Divergence. Lower the dial until your steps move steadily downhill.",
+    failDivergeNoteLabel: "Steep-Curve Divergence"
   },
   {
     id: 2,
@@ -66,18 +70,20 @@ window.DESCENT_LEVELS = [
     goalTolerance: 0.45,
     defaultLr: 0.25,
     maxSafeX: 4.5,
-    // Local min at -1.8, ridge at -0.3, global min at +2.0
     fn: x => 0.0625 * Math.pow(x, 4) + 0.00833 * Math.pow(x, 3) - 0.4575 * Math.pow(x, 2) - 0.27 * x + 3.5,
     df: x => 0.25 * Math.pow(x, 3) + 0.025 * Math.pow(x, 2) - 0.915 * x - 0.27,
-    conceptSummary: "Local vs. Global Minimum: cautious Learning Rates can trap models in shallow dips instead of the true best solution.",
     winTitle: "You Found the Global Minimum!",
     winMath: "A Local Minimum is a shallow dip that looks like the bottom nearby, while the Global Minimum is the true lowest error overall. Real AI optimizers use techniques like momentum to carry past false bottoms.",
+    winNoteLabel: "Global vs. Local Minimum",
+    winNoteBody: "Escaping a shallow Local Minimum requires enough step momentum to clear the ridge and reach the true Global Minimum.",
     failBatteryTitle: "Trapped in a Local Minimum!",
     failBatteryReason: "Your cautious Learning Rate settled into the shallow dip on the left, where the Gradient flattened to zero.",
     failBatteryMath: "A Local Minimum traps an AI model in a 'good enough' answer even though a much better solution exists nearby. Reset and try a bolder Learning Rate to clear the ridge, while still watching out for overshooting.",
+    failBatteryNoteLabel: "Local Minimum Trap",
     failDivergeTitle: "Overshot the Global Minimum!",
     failDivergeReason: "Your Learning Rate was strong enough to clear the ridge, but too high to stay inside the canyon.",
-    failDivergeMath: "Finding the Global Minimum is a balancing act: too cautious traps you in a Local Minimum, while too aggressive causes Divergence. Dial it back slightly and try again."
+    failDivergeMath: "Finding the Global Minimum is a balancing act: too cautious traps you in a Local Minimum, while too aggressive causes Divergence. Dial it back slightly and try again.",
+    failDivergeNoteLabel: "Balancing Exploration vs. Divergence"
   }
 ];
 // END OF FILE

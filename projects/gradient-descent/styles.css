@@ -147,8 +147,8 @@ html, body {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  justify-content: flex-start;
+  gap: 16px;
   padding: 10px 14px;
   background: var(--bg-panel);
   border: 1px solid var(--border);
@@ -156,26 +156,10 @@ html, body {
   flex-shrink: 0;
 }
 
-.briefing-text {
-  flex: 1;
-  min-width: 240px;
-}
-
-.briefing-text h2 {
-  font-size: 15px;
-  font-weight: 700;
-  margin-bottom: 2px;
-}
-
-.briefing-text p {
-  font-size: 12.5px;
-  color: var(--text-muted);
-  line-height: 1.4;
-}
-
 .telemetry-grid {
   display: flex;
   gap: 8px;
+  flex-shrink: 0;
 }
 
 .tele-box {
@@ -206,6 +190,23 @@ html, body {
   display: block;
 }
 
+.briefing-text {
+  flex: 1;
+  min-width: 240px;
+}
+
+.briefing-text h2 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.briefing-text p {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
 /* Hover ? Tooltips */
 .help-tip {
   position: relative;
@@ -227,7 +228,7 @@ html, body {
 .help-tip::after {
   content: attr(data-tip);
   position: absolute;
-  bottom: calc(100% + 8px);
+  top: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%);
   width: 220px;
@@ -248,6 +249,11 @@ html, body {
   transition: opacity 0.15s ease;
   z-index: 40;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+.slider-meta .help-tip::after {
+  top: auto;
+  bottom: calc(100% + 8px);
 }
 
 .help-tip:hover::after {
@@ -422,7 +428,7 @@ input[type="range"]:disabled {
   top: 10px;
   right: 16px;
   bottom: 10px;
-  width: 375px;
+  width: 380px;
   max-width: calc(100% - 32px);
   background: rgba(15, 23, 42, 0.97);
   border: 1px solid var(--cyan);
@@ -530,12 +536,29 @@ input[type="range"]:disabled {
 }
 
 .drawer-text {
-  font-size: 13.5px;
+  font-size: 13px;
   color: var(--text-muted);
   line-height: 1.55;
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.vocab-list {
+  list-style: none;
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--text-main);
+}
+
+.vocab-list strong {
+  color: var(--cyan);
 }
 
 .drawer-math-box {
@@ -651,25 +674,33 @@ input[type="range"]:disabled {
   color: var(--emerald);
 }
 
-.log-status.failed {
-  background: rgba(251, 113, 133, 0.18);
-  color: var(--rose);
+.log-status.in-progress {
+  background: rgba(251, 191, 36, 0.18);
+  color: var(--amber);
 }
 
 .log-card-meta {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 10.5px;
   color: var(--cyan);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
-.log-card-note {
+.log-notes-ul {
+  list-style: disc;
+  padding-left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   font-size: 12px;
   color: var(--text-muted);
   line-height: 1.45;
 }
 
-/* Mobile fallback allows natural scrolling */
+.log-notes-ul li strong {
+  color: var(--text-main);
+}
+
 @media (max-width: 768px) {
   .game-viewport {
     height: auto;

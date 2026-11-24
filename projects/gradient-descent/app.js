@@ -24,17 +24,15 @@
   let fogRevealed = false;
   let gameOver = false;
   let isAnimating = false;
-  let overshotCount = 0;
   let inDemoPhase = false;
 
-  // Persistent mission records for the All Missions Log tab
+  // Persistent study notes across all 3 missions (keeps ALL unlocked takeaways)
   const missionHistory = LEVELS.map(l => ({
     id: l.id,
     shortName: l.shortName,
     status: "Not Started",
-    stepsUsed: null,
-    lastLr: null,
-    note: "Complete this mission to unlock its Math of AI takeaway."
+    bestSteps: null,
+    notes: [] // Array of { label, body }
   }));
 
   const stars = Array.from({ length: 45 }, () => ({
@@ -44,7 +42,6 @@
     alpha: Math.random() * 0.5 + 0.2
   }));
 
-  // Track rover render position for continuous blinking beacon animation
   let renderX = 0;
   let renderY = 0;
 
@@ -96,13 +93,13 @@
     if (!isBrief) renderMissionLog();
   }
 
-  function openDrawer({ tone = "", tag, title, paragraphs, mathText = "", buttons = [] }) {
+  function openDrawer({ tone = "", tag, title, htmlBlocks, mathText = "", buttons = [] }) {
     sideDrawer.className = "side-drawer open" + (tone ? " tone-" + tone : "");
     switchDrawerTab("brief");
 
     document.getElementById("drawerTag").textContent = tag;
     document.getElementById("drawerTitle").textContent = title;
-    document.getElementById("drawerText").innerHTML = paragraphs.map(p => `<p>${p}</p>`).join("");
+    document.getElementById("drawerText").innerHTML = htmlBlocks.join("");
 
     const mathBox = document.getElementById("drawerMathBox");
     if (mathText) {
@@ -128,9 +125,9 @@
     openDrawer({
       tag: "INTERACTIVE MISSION",
       title: "Welcome to Rover Descent",
-      paragraphs: [
-        "Your lunar rover is stranded high up in a dark mountain valley with limited battery. Your mission is to reach the blinking green landing zone at the lowest point in 4 steps or fewer.",
-        "You control one dial: Thruster Power. Each time you fire the thrusters, the rover multiplies your dial by the steepness of the hill (the slope) to decide how far to step."
+      htmlBlocks: [
+        "<p>Your lunar rover is stranded high up in a dark mountain valley with limited battery. Your mission is to reach the blinking green landing zone at the lowest point in 4 steps or fewer.</p>",
+        "<p>You control one dial: <strong>Thruster Power</strong>. Each time you fire the thrusters, the rover multiplies your dial by the steepness of the hill (the slope) to decide how far to step.</p>"
       ],
       buttons: [
         {
@@ -149,7 +146,6 @@
     renderX = x;
     renderY = lvl.fn(x);
     steps = 0;
-    overshotCount = 0;
     trail = [{ x: x, y: lvl.fn(x) }];
     fogRevealed = false;
     gameOver = false;
@@ -286,15 +282,22 @@
     fogRevealed = true;
     updateTelemetry();
     updateFormulaBar();
-    setLog("Overshot! Notice how the Gradient flipped from negative to positive on the opposite wall.", "warn");
+
+    addMissionNote(
+      currentLevel,
+      "Overshooting & Sign Flip",
+      "A high Learning Rate on a steep Gradient launches you past the minimum onto the opposite wall, flipping the Gradient's sign and causing back-and-forth bouncing."
+    );
+
+    setLog("Overshot! Look at the Gradient on the left: it flipped from negative to positive on the opposite wall.", "warn");
 
     openDrawer({
       tone: "warn",
       tag: "LEARNING MOMENT • OVERSHOOTING",
       title: "Whoa! That Is Overshooting.",
-      paragraphs: [
-        `Even though 0.90 felt manageable in Mission 01, multiplying it by this steeper Gradient (${prevGrad.toFixed(2)}) launched you straight across the canyon onto the opposite wall.`,
-        `Notice how your Gradient flipped from ${prevGrad.toFixed(2)} to +${newGrad.toFixed(2)}? That sign flip is why a high Learning Rate makes a rover (or an AI model) bounce back and forth across the bottom, or fly off the canyon completely.`
+      htmlBlocks: [
+        `<p>Even though 0.90 felt manageable in Mission 01, multiplying it by this steeper Gradient (${prevGrad.toFixed(2)}) launched you straight across the canyon onto the opposite wall.</p>`,
+        `<p>Look at your Gradient readout on the left: it flipped from <strong>${prevGrad.toFixed(2)}</strong> to <strong>+${newGrad.toFixed(2)}</strong>. That sign flip is why a high Learning Rate makes an AI model bounce back and forth across the bottom, or fly off the canyon completely.</p>`
       ],
       mathText: "Your battery will now reset to 0 / 4. Lower your Learning Rate so you can step smoothly into the Global Minimum.",
       buttons: [
@@ -314,7 +317,6 @@
     renderX = x;
     renderY = lvl.fn(x);
     steps = 0;
-    overshotCount = 0;
     trail = [{ x: x, y: lvl.fn(x) }];
     fogRevealed = false;
     gameOver = false;
@@ -335,10 +337,7 @@
 
   function evaluateStep(prevX, prevY, prevGrad, newY, diverged) {
     const lvl = LEVELS[currentLevel];
-    const lr = Number(lrSlider.value);
     const newGrad = lvl.df(Math.max(-lvl.maxSafeX, Math.min(lvl.maxSafeX, x)));
-    const crossedValley = (prevGrad < 0 && newGrad > 0) || (prevGrad > 0 && newGrad < 0);
-    if (crossedValley) overshotCount++;
 
     updateTelemetry();
     updateFormulaBar();
@@ -347,15 +346,17 @@
     if (diverged) {
       gameOver = true;
       fogRevealed = true;
-      recordHistory("Failed (Diverged)", steps, lr, lvl.failDivergeMath);
+      addMissionNote(currentLevel, lvl.failDivergeNoteLabel, lvl.failDivergeMath);
+      markAttemptStatus(currentLevel, "In Progress");
       setLog("SIGNAL LOST: Your dial was too high and launched the rover off the terrain.", "danger");
       openDrawer({
         tone: "fail",
         tag: "SIGNAL LOST • DIVERGED",
         title: lvl.failDivergeTitle,
-        paragraphs: [lvl.failDivergeReason],
+        htmlBlocks: [`<p>${lvl.failDivergeReason}</p>`],
         mathText: lvl.failDivergeMath,
         buttons: [
+          { label: "View All Notes", primary: false, onClick: () => switchDrawerTab("log") },
           { label: "Try Again", primary: true, onClick: () => loadLevel(currentLevel, false) }
         ]
       });
@@ -366,17 +367,31 @@
     if (Math.abs(x - lvl.goalX) <= lvl.goalTolerance) {
       gameOver = true;
       fogRevealed = true;
-      recordHistory("Completed", steps, lr, lvl.conceptSummary);
+      addMissionNote(currentLevel, lvl.winNoteLabel, lvl.winNoteBody);
+      markCompleted(currentLevel, steps);
       updateTabs();
       setLog(`LANDING CONFIRMED: Reached the lowest point in ${steps} step${steps === 1 ? "" : "s"}!`, "success");
 
-      let winReason = `You landed in ${steps} step${steps === 1 ? "" : "s"}.`;
+      const htmlBlocks = [];
       if (currentLevel === 0) {
-        winReason += " Notice how your steps got smaller as you neared the bottom, even if you never moved the dial? That happens because the hill gets less steep near the bottom, so the slope number gets closer to zero.";
+        htmlBlocks.push(
+          `<p>You landed in ${steps} step${steps === 1 ? "" : "s"}. Notice how your steps got smaller as you neared the bottom, even if you never moved the dial? That happens because the hill flattens out near the bottom, so the slope gets closer to zero.</p>`,
+          `<p><strong>HUD Upgrade for Mission 02:</strong> Now that you know how the rover moves, we are switching your dashboard to the real AI terms (hover over any <strong>?</strong> icon anytime for a reminder):</p>`,
+          `<ul class="vocab-list">
+            <li><strong>Thruster Power</strong> → Learning Rate</li>
+            <li><strong>Altitude</strong> → Loss (model error)</li>
+            <li><strong>Slope</strong> → Gradient</li>
+            <li><strong>Landing Zone</strong> → Global Minimum</li>
+          </ul>`
+        );
       } else if (currentLevel === 1) {
-        winReason += " You adapted cleanly to the steeper Gradient without overshooting off the canyon.";
+        htmlBlocks.push(
+          `<p>You adapted cleanly to the steeper Gradient and landed in ${steps} step${steps === 1 ? "" : "s"} without overshooting off the canyon.</p>`
+        );
       } else {
-        winReason += " You cleared the middle ridge and reached the deepest valley. A cautious Learning Rate from Mission 02 would have trapped you in that shallow dip on the left.";
+        htmlBlocks.push(
+          `<p>You cleared the middle ridge and reached the deepest valley in ${steps} step${steps === 1 ? "" : "s"}. A cautious Learning Rate from Mission 02 would have trapped you in that shallow dip on the left.</p>`
+        );
       }
 
       const nextIdx = (currentLevel + 1) % LEVELS.length;
@@ -384,7 +399,7 @@
         tone: "win",
         tag: currentLevel === LEVELS.length - 1 ? "ALL MISSIONS COMPLETE" : `MISSION 0${currentLevel + 1} COMPLETE`,
         title: lvl.winTitle,
-        paragraphs: [winReason],
+        htmlBlocks: htmlBlocks,
         mathText: lvl.winMath,
         buttons: [
           { label: "View All Notes", primary: false, onClick: () => switchDrawerTab("log") },
@@ -402,8 +417,9 @@
     if (steps >= lvl.maxSteps) {
       gameOver = true;
       fogRevealed = true;
-      const isLocalTrap = currentLevel === 2 && x < 0;
-      recordHistory(isLocalTrap ? "Trapped (Local Min)" : "Out of Battery", steps, lr, lvl.failBatteryMath);
+      const isLocalTrap = currentLevel === 2 && x < -0.3;
+      addMissionNote(currentLevel, lvl.failBatteryNoteLabel, lvl.failBatteryMath);
+      markAttemptStatus(currentLevel, "In Progress");
       setLog(
         isLocalTrap
           ? "BATTERY DEPLETED: Trapped in the shallow Local Minimum on the left."
@@ -414,40 +430,61 @@
         tone: "fail",
         tag: isLocalTrap ? "TRAPPED • LOCAL MINIMUM" : "OUT OF BATTERY",
         title: lvl.failBatteryTitle,
-        paragraphs: [lvl.failBatteryReason],
+        htmlBlocks: [`<p>${lvl.failBatteryReason}</p>`],
         mathText: lvl.failBatteryMath,
         buttons: [
+          { label: "View All Notes", primary: false, onClick: () => switchDrawerTab("log") },
           { label: "Try Again", primary: true, onClick: () => loadLevel(currentLevel, false) }
         ]
       });
       return;
     }
 
-    // 4. Mid-run Live Coaching
+    // 4. Mid-run Live Coaching (Mission 03 Local Minimum check comes FIRST!)
     stepBtn.disabled = false;
+
+    if (currentLevel === 2 && x < -0.3) {
+      setLog("You are inside the shallow dip (Local Minimum) on the left! Lowering your Learning Rate will keep you stuck here. Reset and try a bolder Learning Rate to clear the middle ridge.", "warn");
+      return;
+    }
+
+    // Did we actually cross the true Global Minimum?
+    const crossedGlobalMin = (prevX < lvl.goalX && x > lvl.goalX) || (prevX > lvl.goalX && x < lvl.goalX);
+
     if (newY > prevY + 0.1) {
       setLog("Diverging! You stepped higher up the opposite wall. Lower your dial immediately.", "danger");
-    } else if (crossedValley) {
+    } else if (crossedGlobalMin) {
       setLog("Overshot the bottom! You crossed onto the opposite wall, so the slope reversed direction. Lower your dial to settle in.", "warn");
     } else if (Math.abs(x - prevX) < 0.25) {
-      if (currentLevel === 2 && x < 0) {
-        setLog("Your Gradient is nearly zero inside this shallow dip, so you barely move. You hit a Local Minimum. Reset and try a bolder Learning Rate to clear the ridge.", "warn");
-      } else {
-        setLog("Small step. At this pace you risk running out of battery in 4 steps.", "warn");
-      }
+      setLog("Small step. At this pace you risk running out of battery in 4 steps.", "warn");
     } else {
       setLog(lvl.aiMode ? "Smooth descent. Loss dropped and the Gradient flattened out." : "Good descent. Altitude dropped and the slope flattened out.", "");
     }
   }
 
-  function recordHistory(status, stepsUsed, lastLr, note) {
-    const rec = missionHistory[currentLevel];
-    // Never overwrite a Completed status with a later failed replay
-    if (rec.status === "Completed" && status !== "Completed") return;
-    rec.status = status;
-    rec.stepsUsed = stepsUsed;
-    rec.lastLr = lastLr;
-    rec.note = note;
+  function addMissionNote(lvlIdx, label, body) {
+    const rec = missionHistory[lvlIdx];
+    const exists = rec.notes.some(n => n.label === label);
+    if (!exists) {
+      rec.notes.push({ label, body });
+    }
+    renderMissionLog();
+  }
+
+  function markAttemptStatus(lvlIdx, status) {
+    const rec = missionHistory[lvlIdx];
+    if (rec.status !== "Completed") {
+      rec.status = status;
+    }
+    renderMissionLog();
+  }
+
+  function markCompleted(lvlIdx, stepsUsed) {
+    const rec = missionHistory[lvlIdx];
+    rec.status = "Completed";
+    if (rec.bestSteps === null || stepsUsed < rec.bestSteps) {
+      rec.bestSteps = stepsUsed;
+    }
     renderMissionLog();
   }
 
@@ -455,11 +492,16 @@
     const list = document.getElementById("missionLogList");
     list.innerHTML = missionHistory.map(m => {
       const isDone = m.status === "Completed";
-      const isFail = m.status !== "Not Started" && !isDone;
-      const badgeClass = isDone ? "done" : (isFail ? "failed" : "");
-      const metaLine = m.stepsUsed !== null
-        ? `Steps: ${m.stepsUsed} / 4 • Last Dial: ${m.lastLr.toFixed(2)}`
-        : "Not attempted yet";
+      const isProg = m.status === "In Progress";
+      const badgeClass = isDone ? "done" : (isProg ? "in-progress" : "");
+      const metaLine = m.bestSteps !== null
+        ? `Best Run: ${m.bestSteps} / 4 steps`
+        : (m.notes.length > 0 ? "Attempted • Takeaways unlocked below" : "Not attempted yet");
+
+      const notesHtml = m.notes.length > 0
+        ? `<ul class="log-notes-ul">${m.notes.map(n => `<li><strong>${n.label}:</strong> ${n.body}</li>`).join("")}</ul>`
+        : `<p class="log-intro">Play this mission to unlock its Gradient Descent takeaways.</p>`;
+
       return `
         <div class="log-card ${isDone ? "solved" : ""}">
           <div class="log-card-head">
@@ -467,7 +509,7 @@
             <span class="log-status ${badgeClass}">${m.status}</span>
           </div>
           <div class="log-card-meta">${metaLine}</div>
-          <p class="log-card-note">${m.note}</p>
+          ${notesHtml}
         </div>
       `;
     }).join("");
@@ -554,7 +596,7 @@
       });
     }
 
-    // 4. Dark Fog of War Mask (Spotlight around Rover)
+    // 4. Dark Fog of War Mask
     const rx = mapX(roverX);
     const ry = mapY(roverY);
 
@@ -567,7 +609,7 @@
       ctx.fillRect(0, 0, W, H);
     }
 
-    // 5. Blinking Green Landing Zone (Drawn ABOVE fog so it pulses through the dark!)
+    // 5. Blinking Green Landing Zone (Always pulses through the fog)
     const pulse = 0.55 + 0.45 * Math.sin((timestamp || 0) / 380);
     const gx = mapX(lvl.goalX);
     const gy = mapY(lvl.fn(lvl.goalX));
@@ -584,7 +626,6 @@
     ctx.lineTo(gRight, gy + 8);
     ctx.stroke();
 
-    // Pulsing Beacon Dot
     ctx.beginPath();
     ctx.arc(gx, gy - 6, 4.5 + pulse * 2.5, 0, Math.PI * 2);
     ctx.fillStyle = `rgba(52, 211, 153, ${0.45 + pulse * 0.55})`;
