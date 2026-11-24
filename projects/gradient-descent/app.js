@@ -6,7 +6,6 @@
 
   const lrSlider = document.getElementById("lrSlider");
   const lrValue = document.getElementById("lrValue");
-  const zoneChip = document.getElementById("zoneChip");
   const stepBtn = document.getElementById("stepBtn");
   const fogToggleBtn = document.getElementById("fogToggleBtn");
   const resetBtn = document.getElementById("resetBtn");
@@ -21,8 +20,8 @@
   let fogRevealed = false;
   let gameOver = false;
   let isAnimating = false;
+  let overshotCount = 0;
 
-  // Starfield generated once for atmosphere
   const stars = Array.from({ length: 45 }, () => ({
     rx: Math.random(),
     ry: Math.random() * 0.55,
@@ -33,7 +32,6 @@
   function init() {
     lrSlider.addEventListener("input", () => {
       lrValue.textContent = Number(lrSlider.value).toFixed(2);
-      updateZoneChip();
     });
 
     stepBtn.addEventListener("click", handleStep);
@@ -69,6 +67,7 @@
     const lvl = LEVELS[idx];
     x = lvl.startX;
     steps = 0;
+    overshotCount = 0;
     trail = [{ x: x, y: lvl.fn(x) }];
     fogRevealed = false;
     gameOver = false;
@@ -83,9 +82,8 @@
     outcomeOverlay.classList.add("hidden");
 
     updateTabs();
-    updateZoneChip();
     updateTelemetry();
-    setLog("Rover deployed. Use the headlamp and downhill arrow to tune your Step Size.", "");
+    setLog("Rover deployed. Use the headlamp and slope readout to tune your Learning Rate.", "");
     drawScene(x, lvl.fn(x));
   }
 
@@ -94,23 +92,6 @@
       btn.classList.toggle("active", i === currentLevel);
       btn.classList.toggle("solved", solved[i]);
     });
-  }
-
-  function updateZoneChip() {
-    const val = Number(lrSlider.value);
-    if (val <= 0.25) {
-      zoneChip.textContent = "CAUTIOUS";
-      zoneChip.style.color = "#94A3B8";
-    } else if (val <= 1.0) {
-      zoneChip.textContent = "BALANCED";
-      zoneChip.style.color = "#38BDF8";
-    } else if (val <= 1.75) {
-      zoneChip.textContent = "BOLD";
-      zoneChip.style.color = "#FBBF24";
-    } else {
-      zoneChip.textContent = "HIGH RISK";
-      zoneChip.style.color = "#FB7185";
-    }
   }
 
   function updateTelemetry() {
@@ -133,9 +114,9 @@
     const lr = Number(lrSlider.value);
     const startX = x;
     const startY = lvl.fn(startX);
-    const grad = lvl.df(startX);
+    const prevGrad = lvl.df(startX);
 
-    const rawNextX = startX - lr * grad;
+    const rawNextX = startX - lr * prevGrad;
     const diverged = Math.abs(rawNextX) > lvl.maxSafeX;
     const targetX = diverged ? (rawNextX > 0 ? lvl.maxSafeX + 0.35 : -(lvl.maxSafeX + 0.35)) : rawNextX;
     const targetY = lvl.fn(Math.max(-lvl.maxSafeX, Math.min(lvl.maxSafeX, targetX)));
@@ -144,7 +125,6 @@
     isAnimating = true;
     stepBtn.disabled = true;
 
-    // Smooth hop animation
     const duration = 340;
     const t0 = performance.now();
 
@@ -162,15 +142,19 @@
         isAnimating = false;
         x = targetX;
         trail.push({ x: x, y: targetY });
-        evaluateStep(startX, startY, targetY, diverged);
+        evaluateStep(startX, startY, prevGrad, targetY, diverged);
       }
     }
 
     requestAnimationFrame(animateHop);
   }
 
-  function evaluateStep(prevX, prevY, newY, diverged) {
+  function evaluateStep(prevX, prevY, prevGrad, newY, diverged) {
     const lvl = LEVELS[currentLevel];
+    const newGrad = lvl.df(Math.max(-lvl.maxSafeX, Math.min(lvl.maxSafeX, x)));
+    const crossedValley = (prevGrad < 0 && newGrad > 0) || (prevGrad > 0 && newGrad < 0);
+    if (crossedValley) overshotCount++;
+
     updateTelemetry();
 
     // 1. Check Divergence Crash
@@ -178,12 +162,12 @@
       gameOver = true;
       fogRevealed = true;
       drawScene(x, newY);
-      setLog("SIGNAL LOST: Your step size was too large and launched the rover off the canyon!", "danger");
+      setLog("SIGNAL LOST: Your learning rate was too large and launched the rover off the canyon!", "danger");
       showOutcome(
         false,
         "MISSION FAILED • DIVERGED",
         "Overshot the Canyon!",
-        `Your Step Size of ${Number(lrSlider.value).toFixed(2)} multiplied by the slope (${lvl.df(prevX).toFixed(2)}) and threw the rover completely off the terrain.`,
+        `Your Learning Rate of ${Number(lrSlider.value).toFixed(2)} multiplied by the slope (${prevGrad.toFixed(2)}) threw the rover completely off the terrain.`,
         lvl.failDivergeMath
       );
       return;
@@ -196,12 +180,17 @@
       solved[currentLevel] = true;
       updateTabs();
       drawScene(x, newY);
+
+      const oscillationNote = overshotCount > 0
+        ? "Notice how you overshot the bottom at first, then the reversed slope pulled you back in (called damped oscillation)."
+        : "You tuned the learning rate cleanly and guided the rover smoothly into the lowest valley without overshooting.";
+
       setLog(`LANDING CONFIRMED: Reached minimum loss in ${steps} step${steps === 1 ? "" : "s"}!`, "success");
       showOutcome(
         true,
         "MISSION COMPLETE",
         `Beacon Reached in ${steps} Step${steps === 1 ? "" : "s"}!`,
-        "You tuned the learning rate effectively and guided the rover smoothly into the lowest valley.",
+        oscillationNote,
         lvl.winMath
       );
       return;
@@ -225,7 +214,7 @@
         isLocalTrap ? "Trapped in the False Bottom!" : "Out of Battery!",
         isLocalTrap
           ? "The rover settled into the shallow dip on the left and never crossed the ridge to the deeper Global Minimum."
-          : "You ran out of steps before reaching the green landing zone. Adjust your Step Size and try again.",
+          : "You ran out of steps before reaching the green landing zone. Adjust your Learning Rate and try again.",
         lvl.failBatteryMath
       );
       return;
@@ -236,15 +225,17 @@
     drawScene(x, newY);
 
     if (newY > prevY + 0.1) {
-      setLog("Overshooting! You jumped higher up the opposite wall. Lower your Step Size.", "danger");
+      setLog("Diverging! You jumped higher up the opposite wall. Lower your Learning Rate immediately.", "danger");
+    } else if (crossedValley) {
+      setLog("Overshot the bottom! You jumped past the valley onto the opposite wall, so the slope reversed direction. Lower your Learning Rate to settle in.", "warn");
     } else if (Math.abs(x - prevX) < 0.22) {
       if (currentLevel === 2 && x < 0) {
-        setLog("Barely moving inside a shallow dip! Try a bolder Step Size to clear the hill ahead.", "warn");
+        setLog("Barely moving inside a shallow dip! Try a larger Learning Rate to clear the ridge ahead.", "warn");
       } else {
-        setLog("Tiny step! You risk running out of battery. Try increasing your Step Size.", "warn");
+        setLog("Tiny step! You risk running out of battery. Try increasing your Learning Rate.", "warn");
       }
     } else {
-      setLog("Good descent! Altitude (Loss) dropped. Keep calibrating your Step Size.", "");
+      setLog("Smooth descent! Altitude (Loss) dropped without overshooting.", "");
     }
   }
 
@@ -290,7 +281,6 @@
     ctx.fillStyle = skyGrad;
     ctx.fillRect(0, 0, W, H);
 
-    // Stars
     stars.forEach(s => {
       ctx.fillStyle = `rgba(248, 250, 252, ${s.alpha})`;
       ctx.beginPath();
@@ -315,7 +305,6 @@
     ctx.fillStyle = terrainGrad;
     ctx.fill();
 
-    // Glowing Terrain Ridge Line
     ctx.beginPath();
     for (let i = 0; i <= 220; i++) {
       const vx = -xRange + (i / 220) * (xRange * 2);
@@ -365,7 +354,7 @@
       });
     }
 
-    // 5. Fog of War Mask (Spotlight around Rover)
+    // 5. Fog of War Mask
     const rx = mapX(roverX);
     const ry = mapY(roverY);
 
@@ -380,9 +369,8 @@
 
     // 6. Rover Avatar + Headlamp Cone
     const slope = lvl.df(Math.max(-lvl.maxSafeX, Math.min(lvl.maxSafeX, roverX)));
-    const dir = slope > 0 ? -1 : 1; // Faces downhill
+    const dir = slope > 0 ? -1 : 1;
 
-    // Headlamp Beam
     if (!gameOver) {
       ctx.save();
       ctx.beginPath();
@@ -398,30 +386,25 @@
       ctx.restore();
     }
 
-    // Draw Cute Glowing Rover Body
     ctx.save();
     ctx.translate(rx, ry - 9);
 
-    // Wheels
     ctx.fillStyle = "#94A3B8";
     ctx.beginPath();
     ctx.arc(-7, 7, 3.8, 0, Math.PI * 2);
     ctx.arc(7, 7, 3.8, 0, Math.PI * 2);
     ctx.fill();
 
-    // Chassis
     ctx.fillStyle = gameOver && !solved[currentLevel] ? "#FB7185" : "#FBBF24";
     ctx.beginPath();
     ctx.roundRect(-11, -4, 22, 10, 4);
     ctx.fill();
 
-    // Dome / Visor
     ctx.fillStyle = "#38BDF8";
     ctx.beginPath();
     ctx.arc(dir * 3, -5, 5.5, Math.PI, 0);
     ctx.fill();
 
-    // Antenna
     ctx.strokeStyle = "#F8FAFC";
     ctx.lineWidth = 1.5;
     ctx.beginPath();
@@ -436,7 +419,6 @@
 
     ctx.restore();
 
-    // Goal Label when revealed
     if (fogRevealed) {
       ctx.fillStyle = "#34D399";
       ctx.font = "700 11px 'JetBrains Mono', monospace";

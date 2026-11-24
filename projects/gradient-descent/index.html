@@ -80,17 +80,14 @@
       <section class="command-console">
         <div class="slider-zone">
           <div class="slider-meta">
-            <label for="lrSlider">THRUSTER STEP SIZE (LEARNING RATE)</label>
-            <div class="lr-readout-group">
-              <span class="zone-chip" id="zoneChip">READY</span>
-              <span class="lr-value" id="lrValue">0.35</span>
-            </div>
+            <label for="lrSlider">LEARNING RATE (STEP SIZE)</label>
+            <span class="lr-value" id="lrValue">0.35</span>
           </div>
           <input type="range" id="lrSlider" min="0.05" max="2.50" step="0.05" value="0.35" />
           <div class="slider-scale">
-            <span>0.05 (Cautious)</span>
-            <span>1.25 (Bold)</span>
-            <span>2.50 (Extreme)</span>
+            <span>0.05</span>
+            <span>1.25</span>
+            <span>2.50</span>
           </div>
         </div>
 
@@ -104,7 +101,7 @@
       <!-- Live Telemetry Log -->
       <div class="live-log" id="feedbackLog">
         <span class="log-dot"></span>
-        <span id="feedbackText">Adjust the Step Size slider and fire thrusters to guide the rover to the lowest point.</span>
+        <span id="feedbackText">Adjust the Learning Rate slider and fire thrusters to guide the rover to the lowest point.</span>
       </div>
     </main>
   </div>
