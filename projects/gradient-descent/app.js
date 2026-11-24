@@ -9,19 +9,33 @@
   const stepBtn = document.getElementById("stepBtn");
   const fogToggleBtn = document.getElementById("fogToggleBtn");
   const resetBtn = document.getElementById("resetBtn");
-  const outcomeOverlay = document.getElementById("outcomeOverlay");
-  const outcomeCard = document.getElementById("outcomeCard");
+  const drawerToggleBtn = document.getElementById("drawerToggleBtn");
+  const sideDrawer = document.getElementById("sideDrawer");
+  const drawerCloseBtn = document.getElementById("drawerCloseBtn");
+  const tabBriefBtn = document.getElementById("tabBriefBtn");
+  const tabLogBtn = document.getElementById("tabLogBtn");
+  const drawerBriefView = document.getElementById("drawerBriefView");
+  const drawerLogView = document.getElementById("drawerLogView");
 
   let currentLevel = 0;
-  let solved = LEVELS.map(() => false);
   let x = 0;
   let steps = 0;
   let trail = [];
   let fogRevealed = false;
   let gameOver = false;
   let isAnimating = false;
-  let animFrameId = null;
   let overshotCount = 0;
+  let inDemoPhase = false;
+
+  // Persistent mission records for the All Missions Log tab
+  const missionHistory = LEVELS.map(l => ({
+    id: l.id,
+    shortName: l.shortName,
+    status: "Not Started",
+    stepsUsed: null,
+    lastLr: null,
+    note: "Complete this mission to unlock its Math of AI takeaway."
+  }));
 
   const stars = Array.from({ length: 45 }, () => ({
     rx: Math.random(),
@@ -30,77 +44,166 @@
     alpha: Math.random() * 0.5 + 0.2
   }));
 
+  // Track rover render position for continuous blinking beacon animation
+  let renderX = 0;
+  let renderY = 0;
+
   function init() {
     lrSlider.addEventListener("input", () => {
       lrValue.textContent = Number(lrSlider.value).toFixed(2);
+      updateFormulaBar();
     });
 
     stepBtn.addEventListener("click", handleStep);
-    resetBtn.addEventListener("click", () => loadLevel(currentLevel));
+    resetBtn.addEventListener("click", () => loadLevel(currentLevel, false));
+
     fogToggleBtn.addEventListener("click", () => {
       fogRevealed = !fogRevealed;
-      fogToggleBtn.textContent = fogRevealed ? "Clear Mist: ON" : "Clear Mist: OFF";
-      drawScene(x, LEVELS[currentLevel].fn(x));
+      fogToggleBtn.textContent = fogRevealed ? "Clear Fog: ON" : "Clear Fog: OFF";
     });
+
+    drawerToggleBtn.addEventListener("click", () => {
+      sideDrawer.classList.toggle("open");
+      if (sideDrawer.classList.contains("open")) renderMissionLog();
+    });
+
+    drawerCloseBtn.addEventListener("click", () => {
+      sideDrawer.classList.remove("open");
+    });
+
+    tabBriefBtn.addEventListener("click", () => switchDrawerTab("brief"));
+    tabLogBtn.addEventListener("click", () => switchDrawerTab("log"));
 
     document.querySelectorAll(".lvl-pill").forEach(btn => {
-      btn.addEventListener("click", () => {
-        loadLevel(Number(btn.dataset.lvl));
-      });
+      btn.addEventListener("click", () => loadLevel(Number(btn.dataset.lvl), false));
     });
 
-    document.getElementById("overlayRetryBtn").addEventListener("click", () => {
-      loadLevel(currentLevel);
-    });
-
-    document.getElementById("overlayNextBtn").addEventListener("click", () => {
-      const next = (currentLevel + 1) % LEVELS.length;
-      loadLevel(next);
-    });
-
-    window.addEventListener("resize", () => {
-      if (!isAnimating) drawScene(x, LEVELS[currentLevel].fn(x));
-    });
-
-    loadLevel(0);
-    // Ensure a clean redraw once browser layout finishes
-    requestAnimationFrame(() => drawScene(x, LEVELS[currentLevel].fn(x)));
+    loadLevel(0, true);
+    requestAnimationFrame(renderLoop);
   }
 
-  function loadLevel(idx) {
-    if (animFrameId) {
-      cancelAnimationFrame(animFrameId);
-      animFrameId = null;
+  function renderLoop(timestamp) {
+    drawScene(renderX, renderY, timestamp);
+    requestAnimationFrame(renderLoop);
+  }
+
+  function switchDrawerTab(tab) {
+    const isBrief = tab === "brief";
+    tabBriefBtn.classList.toggle("active", isBrief);
+    tabLogBtn.classList.toggle("active", !isBrief);
+    drawerBriefView.classList.toggle("hidden", !isBrief);
+    drawerLogView.classList.toggle("hidden", isBrief);
+    if (!isBrief) renderMissionLog();
+  }
+
+  function openDrawer({ tone = "", tag, title, paragraphs, mathText = "", buttons = [] }) {
+    sideDrawer.className = "side-drawer open" + (tone ? " tone-" + tone : "");
+    switchDrawerTab("brief");
+
+    document.getElementById("drawerTag").textContent = tag;
+    document.getElementById("drawerTitle").textContent = title;
+    document.getElementById("drawerText").innerHTML = paragraphs.map(p => `<p>${p}</p>`).join("");
+
+    const mathBox = document.getElementById("drawerMathBox");
+    if (mathText) {
+      mathBox.classList.remove("hidden");
+      document.getElementById("drawerMathText").textContent = mathText;
+    } else {
+      mathBox.classList.add("hidden");
     }
 
+    const actionsEl = document.getElementById("drawerActions");
+    actionsEl.innerHTML = "";
+    buttons.forEach(b => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = b.primary ? "btn-drawer-primary" : "btn-drawer-outline";
+      btn.textContent = b.label;
+      btn.addEventListener("click", b.onClick);
+      actionsEl.appendChild(btn);
+    });
+  }
+
+  function showIntroDrawer() {
+    openDrawer({
+      tag: "INTERACTIVE MISSION",
+      title: "Welcome to Rover Descent",
+      paragraphs: [
+        "Your lunar rover is stranded high up in a dark mountain valley with limited battery. Your mission is to reach the blinking green landing zone at the lowest point in 4 steps or fewer.",
+        "You control one dial: Thruster Power. Each time you fire the thrusters, the rover multiplies your dial by the steepness of the hill (the slope) to decide how far to step."
+      ],
+      buttons: [
+        {
+          label: "Start Mission 01 →",
+          primary: true,
+          onClick: () => sideDrawer.classList.remove("open")
+        }
+      ]
+    });
+  }
+
+  function loadLevel(idx, showIntro) {
     currentLevel = idx;
     const lvl = LEVELS[idx];
     x = lvl.startX;
+    renderX = x;
+    renderY = lvl.fn(x);
     steps = 0;
     overshotCount = 0;
     trail = [{ x: x, y: lvl.fn(x) }];
     fogRevealed = false;
     gameOver = false;
     isAnimating = false;
+    inDemoPhase = Boolean(lvl.hasGuidedDemo);
 
-    document.getElementById("levelTitle").textContent = lvl.title;
-    document.getElementById("levelDesc").textContent = lvl.desc;
-    lrSlider.value = lvl.defaultLr;
-    lrValue.textContent = lvl.defaultLr.toFixed(2);
+    document.getElementById("brandPill").textContent = lvl.aiMode ? "MATH OF AI • MISSION LAB" : "INTERACTIVE MISSION";
+    document.getElementById("levelTitle").textContent = inDemoPhase ? lvl.demoTitle : lvl.title;
+    document.getElementById("levelDesc").textContent = inDemoPhase ? lvl.demoDesc : lvl.desc;
+
+    lrSlider.value = inDemoPhase ? lvl.demoLr : lvl.defaultLr;
+    lrSlider.disabled = inDemoPhase;
+    lrValue.textContent = Number(lrSlider.value).toFixed(2);
     stepBtn.disabled = false;
-    fogToggleBtn.textContent = "Clear Mist: OFF";
-    outcomeOverlay.classList.add("hidden");
+    fogToggleBtn.textContent = "Clear Fog: OFF";
 
+    updateVocabulary(lvl.aiMode);
     updateTabs();
     updateTelemetry();
-    setLog("Rover deployed. Adjust the Learning Rate and fire thrusters to reach the green beacon.", "");
-    drawScene(x, lvl.fn(x));
+    updateFormulaBar();
+
+    if (inDemoPhase) {
+      setLog("Guided Test: Click Fire Thrusters once at 0.90 to see how this steeper slope reacts.", "warn");
+    } else {
+      setLog("Rover deployed. Adjust the dial and fire thrusters to reach the blinking green zone.", "");
+    }
+
+    if (showIntro) {
+      showIntroDrawer();
+    } else {
+      sideDrawer.classList.remove("open");
+    }
+  }
+
+  function updateVocabulary(aiMode) {
+    const lossLabel = document.getElementById("lossLabel");
+    const gradLabel = document.getElementById("gradLabel");
+    const sliderLabel = document.getElementById("sliderLabel");
+
+    if (aiMode) {
+      lossLabel.innerHTML = `LOSS <span class="help-tip" data-tip="In Mission 01, we called this Altitude. In AI, Loss measures how big the model's error is.">?</span>`;
+      gradLabel.innerHTML = `GRADIENT <span class="help-tip" data-tip="In Mission 01, we called this Slope. In AI, the Gradient tells the model how steep the error curve is.">?</span>`;
+      sliderLabel.innerHTML = `LEARNING RATE <span class="help-tip" data-tip="In Mission 01, we called this Thruster Power. In AI, the Learning Rate controls how aggressively a model updates after an error.">?</span>`;
+    } else {
+      lossLabel.textContent = "ALTITUDE";
+      gradLabel.textContent = "SLOPE";
+      sliderLabel.textContent = "THRUSTER POWER";
+    }
   }
 
   function updateTabs() {
     document.querySelectorAll(".lvl-pill").forEach((btn, i) => {
       btn.classList.toggle("active", i === currentLevel);
-      btn.classList.toggle("solved", solved[i]);
+      btn.classList.toggle("solved", missionHistory[i].status === "Completed");
     });
   }
 
@@ -109,6 +212,19 @@
     document.getElementById("stepsDisplay").textContent = `${steps} / ${lvl.maxSteps}`;
     document.getElementById("lossDisplay").textContent = lvl.fn(x).toFixed(2);
     document.getElementById("gradDisplay").textContent = lvl.df(x).toFixed(2);
+  }
+
+  function updateFormulaBar() {
+    const lvl = LEVELS[currentLevel];
+    const lr = Number(lrSlider.value);
+    const grad = lvl.df(Math.max(-lvl.maxSafeX, Math.min(lvl.maxSafeX, x)));
+    const delta = -lr * grad;
+    const dirWord = delta >= 0 ? "right" : "left";
+    const dialName = lvl.aiMode ? "Learning Rate" : "Thruster Power";
+    const slopeName = lvl.aiMode ? "Gradient" : "Slope";
+
+    document.getElementById("formulaEq").textContent =
+      `${dialName} (${lr.toFixed(2)}) x ${slopeName} (${grad.toFixed(2)}) = ${delta >= 0 ? "+" : ""}${delta.toFixed(2)} ${dirWord}`;
   }
 
   function setLog(msg, tone) {
@@ -138,49 +254,111 @@
     const duration = 340;
     const t0 = performance.now();
 
-    function animateHop(now) {
+    function animateStep(now) {
       const p = Math.min(1, (now - t0) / duration);
       const ease = 1 - Math.pow(1 - p, 3);
-      const curX = startX + (targetX - startX) * ease;
-      const baseLineY = startY + (targetY - startY) * ease;
-      const arcLift = Math.sin(p * Math.PI) * 0.75;
-      drawScene(curX, baseLineY + arcLift);
+      renderX = startX + (targetX - startX) * ease;
+      renderY = startY + (targetY - startY) * ease + Math.sin(p * Math.PI) * 0.45;
 
       if (p < 1) {
-        animFrameId = requestAnimationFrame(animateHop);
+        requestAnimationFrame(animateStep);
       } else {
-        animFrameId = null;
         isAnimating = false;
         x = targetX;
+        renderX = x;
+        renderY = targetY;
         trail.push({ x: x, y: targetY });
-        evaluateStep(startX, startY, prevGrad, targetY, diverged);
+
+        if (inDemoPhase) {
+          handleDemoComplete(prevGrad);
+        } else {
+          evaluateStep(startX, startY, prevGrad, targetY, diverged);
+        }
       }
     }
 
-    animFrameId = requestAnimationFrame(animateHop);
+    requestAnimationFrame(animateStep);
+  }
+
+  function handleDemoComplete(prevGrad) {
+    const lvl = LEVELS[currentLevel];
+    const newGrad = lvl.df(x);
+    fogRevealed = true;
+    updateTelemetry();
+    updateFormulaBar();
+    setLog("Overshot! Notice how the Gradient flipped from negative to positive on the opposite wall.", "warn");
+
+    openDrawer({
+      tone: "warn",
+      tag: "LEARNING MOMENT • OVERSHOOTING",
+      title: "Whoa! That Is Overshooting.",
+      paragraphs: [
+        `Even though 0.90 felt manageable in Mission 01, multiplying it by this steeper Gradient (${prevGrad.toFixed(2)}) launched you straight across the canyon onto the opposite wall.`,
+        `Notice how your Gradient flipped from ${prevGrad.toFixed(2)} to +${newGrad.toFixed(2)}? That sign flip is why a high Learning Rate makes a rover (or an AI model) bounce back and forth across the bottom, or fly off the canyon completely.`
+      ],
+      mathText: "Your battery will now reset to 0 / 4. Lower your Learning Rate so you can step smoothly into the Global Minimum.",
+      buttons: [
+        {
+          label: "Reset & Calibrate Learning Rate",
+          primary: true,
+          onClick: () => startMissionTwoRealAttempt()
+        }
+      ]
+    });
+  }
+
+  function startMissionTwoRealAttempt() {
+    const lvl = LEVELS[1];
+    inDemoPhase = false;
+    x = lvl.startX;
+    renderX = x;
+    renderY = lvl.fn(x);
+    steps = 0;
+    overshotCount = 0;
+    trail = [{ x: x, y: lvl.fn(x) }];
+    fogRevealed = false;
+    gameOver = false;
+
+    document.getElementById("levelTitle").textContent = lvl.title;
+    document.getElementById("levelDesc").textContent = lvl.desc;
+    lrSlider.disabled = false;
+    lrSlider.value = 0.40;
+    lrValue.textContent = "0.40";
+    stepBtn.disabled = false;
+    fogToggleBtn.textContent = "Clear Fog: OFF";
+
+    updateTelemetry();
+    updateFormulaBar();
+    setLog("Battery reset to 0 / 4. Lower your Learning Rate and land smoothly.", "");
+    sideDrawer.classList.remove("open");
   }
 
   function evaluateStep(prevX, prevY, prevGrad, newY, diverged) {
     const lvl = LEVELS[currentLevel];
+    const lr = Number(lrSlider.value);
     const newGrad = lvl.df(Math.max(-lvl.maxSafeX, Math.min(lvl.maxSafeX, x)));
     const crossedValley = (prevGrad < 0 && newGrad > 0) || (prevGrad > 0 && newGrad < 0);
     if (crossedValley) overshotCount++;
 
     updateTelemetry();
+    updateFormulaBar();
 
-    // 1. Check Divergence Crash
+    // 1. Check Divergence
     if (diverged) {
       gameOver = true;
       fogRevealed = true;
-      drawScene(x, newY);
-      setLog("SIGNAL LOST: Your learning rate was too large and launched the rover off the canyon!", "danger");
-      showOutcome(
-        false,
-        "MISSION FAILED • DIVERGED",
-        "Overshot the Canyon!",
-        `Your Learning Rate of ${Number(lrSlider.value).toFixed(2)} multiplied by the slope (${prevGrad.toFixed(2)}) threw the rover completely off the terrain.`,
-        lvl.failDivergeMath
-      );
+      recordHistory("Failed (Diverged)", steps, lr, lvl.failDivergeMath);
+      setLog("SIGNAL LOST: Your dial was too high and launched the rover off the terrain.", "danger");
+      openDrawer({
+        tone: "fail",
+        tag: "SIGNAL LOST • DIVERGED",
+        title: lvl.failDivergeTitle,
+        paragraphs: [lvl.failDivergeReason],
+        mathText: lvl.failDivergeMath,
+        buttons: [
+          { label: "Try Again", primary: true, onClick: () => loadLevel(currentLevel, false) }
+        ]
+      });
       return;
     }
 
@@ -188,91 +366,118 @@
     if (Math.abs(x - lvl.goalX) <= lvl.goalTolerance) {
       gameOver = true;
       fogRevealed = true;
-      solved[currentLevel] = true;
+      recordHistory("Completed", steps, lr, lvl.conceptSummary);
       updateTabs();
-      drawScene(x, newY);
+      setLog(`LANDING CONFIRMED: Reached the lowest point in ${steps} step${steps === 1 ? "" : "s"}!`, "success");
 
-      const oscillationNote = overshotCount > 0
-        ? "Notice how you overshot the bottom at first, then the reversed slope pulled you back in (damped oscillation)."
-        : "You tuned the learning rate cleanly and guided the rover smoothly into the lowest valley without overshooting.";
+      let winReason = `You landed in ${steps} step${steps === 1 ? "" : "s"}.`;
+      if (currentLevel === 0) {
+        winReason += " Notice how your steps got smaller as you neared the bottom, even if you never moved the dial? That happens because the hill gets less steep near the bottom, so the slope number gets closer to zero.";
+      } else if (currentLevel === 1) {
+        winReason += " You adapted cleanly to the steeper Gradient without overshooting off the canyon.";
+      } else {
+        winReason += " You cleared the middle ridge and reached the deepest valley. A cautious Learning Rate from Mission 02 would have trapped you in that shallow dip on the left.";
+      }
 
-      setLog(`LANDING CONFIRMED: Reached minimum loss in ${steps} step${steps === 1 ? "" : "s"}!`, "success");
-      showOutcome(
-        true,
-        "MISSION COMPLETE",
-        `Beacon Reached in ${steps} Step${steps === 1 ? "" : "s"}!`,
-        oscillationNote,
-        lvl.winMath
-      );
+      const nextIdx = (currentLevel + 1) % LEVELS.length;
+      openDrawer({
+        tone: "win",
+        tag: currentLevel === LEVELS.length - 1 ? "ALL MISSIONS COMPLETE" : `MISSION 0${currentLevel + 1} COMPLETE`,
+        title: lvl.winTitle,
+        paragraphs: [winReason],
+        mathText: lvl.winMath,
+        buttons: [
+          { label: "View All Notes", primary: false, onClick: () => switchDrawerTab("log") },
+          {
+            label: currentLevel < LEVELS.length - 1 ? `Continue to Mission 0${currentLevel + 2} →` : "Replay Mission 01 ↺",
+            primary: true,
+            onClick: () => loadLevel(nextIdx, false)
+          }
+        ]
+      });
       return;
     }
 
-    // 3. Check Battery Depleted
+    // 3. Check Out of Battery
     if (steps >= lvl.maxSteps) {
       gameOver = true;
       fogRevealed = true;
-      drawScene(x, newY);
       const isLocalTrap = currentLevel === 2 && x < 0;
+      recordHistory(isLocalTrap ? "Trapped (Local Min)" : "Out of Battery", steps, lr, lvl.failBatteryMath);
       setLog(
         isLocalTrap
           ? "BATTERY DEPLETED: Trapped in the shallow Local Minimum on the left."
-          : "BATTERY DEPLETED: Ran out of steps before reaching the green beacon.",
+          : "BATTERY DEPLETED: Ran out of your 4 steps before reaching the target.",
         "warn"
       );
-      showOutcome(
-        false,
-        isLocalTrap ? "MISSION FAILED • LOCAL MINIMUM" : "MISSION FAILED • OUT OF BATTERY",
-        isLocalTrap ? "Trapped in the False Bottom!" : "Out of Battery!",
-        isLocalTrap
-          ? "The rover settled into the shallow dip on the left and never crossed the ridge to the deeper Global Minimum."
-          : "You ran out of your 5 steps before reaching the green landing zone. Adjust your Learning Rate and try again.",
-        lvl.failBatteryMath
-      );
+      openDrawer({
+        tone: "fail",
+        tag: isLocalTrap ? "TRAPPED • LOCAL MINIMUM" : "OUT OF BATTERY",
+        title: lvl.failBatteryTitle,
+        paragraphs: [lvl.failBatteryReason],
+        mathText: lvl.failBatteryMath,
+        buttons: [
+          { label: "Try Again", primary: true, onClick: () => loadLevel(currentLevel, false) }
+        ]
+      });
       return;
     }
 
     // 4. Mid-run Live Coaching
     stepBtn.disabled = false;
-    drawScene(x, newY);
-
     if (newY > prevY + 0.1) {
-      setLog("Diverging! You jumped higher up the opposite wall. Lower your Learning Rate immediately.", "danger");
+      setLog("Diverging! You stepped higher up the opposite wall. Lower your dial immediately.", "danger");
     } else if (crossedValley) {
-      setLog("Overshot the bottom! You jumped past the valley onto the opposite wall, so the slope reversed direction. Lower your Learning Rate to settle in.", "warn");
+      setLog("Overshot the bottom! You crossed onto the opposite wall, so the slope reversed direction. Lower your dial to settle in.", "warn");
     } else if (Math.abs(x - prevX) < 0.25) {
       if (currentLevel === 2 && x < 0) {
-        setLog("Barely moving inside a shallow dip! Try a larger Learning Rate to clear the ridge ahead.", "warn");
+        setLog("Your Gradient is nearly zero inside this shallow dip, so you barely move. You hit a Local Minimum. Reset and try a bolder Learning Rate to clear the ridge.", "warn");
       } else {
-        setLog("Tiny step! You risk running out of battery. Try increasing your Learning Rate.", "warn");
+        setLog("Small step. At this pace you risk running out of battery in 4 steps.", "warn");
       }
     } else {
-      setLog("Smooth descent! Altitude (Loss) dropped without overshooting.", "");
+      setLog(lvl.aiMode ? "Smooth descent. Loss dropped and the Gradient flattened out." : "Good descent. Altitude dropped and the slope flattened out.", "");
     }
   }
 
-  function showOutcome(isWin, tag, title, reason, mathText) {
-    outcomeCard.classList.toggle("fail", !isWin);
-    document.getElementById("outcomeTag").textContent = tag;
-    document.getElementById("outcomeTitle").textContent = title;
-    document.getElementById("outcomeReason").textContent = reason;
-    document.getElementById("outcomeMath").textContent = mathText;
-
-    const nextBtn = document.getElementById("overlayNextBtn");
-    if (isWin) {
-      nextBtn.style.display = "inline-block";
-      nextBtn.textContent = currentLevel < LEVELS.length - 1 ? "Next Mission →" : "Replay Mission 01 ↺";
-    } else {
-      nextBtn.style.display = "none";
-    }
-
-    outcomeOverlay.classList.remove("hidden");
+  function recordHistory(status, stepsUsed, lastLr, note) {
+    const rec = missionHistory[currentLevel];
+    // Never overwrite a Completed status with a later failed replay
+    if (rec.status === "Completed" && status !== "Completed") return;
+    rec.status = status;
+    rec.stepsUsed = stepsUsed;
+    rec.lastLr = lastLr;
+    rec.note = note;
+    renderMissionLog();
   }
 
-  function drawScene(roverX, roverY) {
+  function renderMissionLog() {
+    const list = document.getElementById("missionLogList");
+    list.innerHTML = missionHistory.map(m => {
+      const isDone = m.status === "Completed";
+      const isFail = m.status !== "Not Started" && !isDone;
+      const badgeClass = isDone ? "done" : (isFail ? "failed" : "");
+      const metaLine = m.stepsUsed !== null
+        ? `Steps: ${m.stepsUsed} / 4 • Last Dial: ${m.lastLr.toFixed(2)}`
+        : "Not attempted yet";
+      return `
+        <div class="log-card ${isDone ? "solved" : ""}">
+          <div class="log-card-head">
+            <span class="log-card-title">${m.shortName}</span>
+            <span class="log-status ${badgeClass}">${m.status}</span>
+          </div>
+          <div class="log-card-meta">${metaLine}</div>
+          <p class="log-card-note">${m.note}</p>
+        </div>
+      `;
+    }).join("");
+  }
+
+  function drawScene(roverX, roverY, timestamp) {
     const dpr = window.devicePixelRatio || 1;
     const rect = canvas.getBoundingClientRect();
     const W = rect.width || 760;
-    const H = rect.height || 340;
+    const H = rect.height || 300;
     canvas.width = W * dpr;
     canvas.height = H * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -282,7 +487,7 @@
     const maxY = currentLevel === 1 ? 10.5 : 8.5;
 
     const mapX = v => ((v + xRange) / (xRange * 2)) * (W - 60) + 30;
-    const mapY = v => H - 34 - (v / maxY) * (H - 68);
+    const mapY = v => H - 30 - (v / maxY) * (H - 60);
 
     // 1. Night Sky Background
     const skyGrad = ctx.createLinearGradient(0, 0, 0, H);
@@ -326,22 +531,7 @@
     ctx.lineWidth = 3;
     ctx.stroke();
 
-    // 3. Green Landing Beacon (Goal Zone)
-    const gx = mapX(lvl.goalX);
-    const gy = mapY(lvl.fn(lvl.goalX));
-    const gLeft = mapX(lvl.goalX - lvl.goalTolerance);
-    const gRight = mapX(lvl.goalX + lvl.goalTolerance);
-
-    ctx.fillStyle = "rgba(52, 211, 153, 0.22)";
-    ctx.fillRect(gLeft, gy - 45, gRight - gLeft, 55);
-    ctx.strokeStyle = "#34D399";
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(gLeft, gy + 8);
-    ctx.lineTo(gRight, gy + 8);
-    ctx.stroke();
-
-    // 4. Hop Trail
+    // 3. Step Trail
     if (trail.length > 1) {
       ctx.beginPath();
       trail.forEach((pt, idx) => {
@@ -350,7 +540,7 @@
         if (idx === 0) ctx.moveTo(px, py);
         else ctx.lineTo(px, py);
       });
-      ctx.strokeStyle = "rgba(251, 191, 36, 0.7)";
+      ctx.strokeStyle = "rgba(251, 191, 36, 0.72)";
       ctx.lineWidth = 2;
       ctx.setLineDash([5, 5]);
       ctx.stroke();
@@ -364,20 +554,48 @@
       });
     }
 
-    // 5. Light Translucent Mist (Terrain stays visible on frame 1)
+    // 4. Dark Fog of War Mask (Spotlight around Rover)
     const rx = mapX(roverX);
     const ry = mapY(roverY);
 
     if (!fogRevealed) {
-      const mist = ctx.createRadialGradient(rx, ry, 55, rx, ry, 210);
-      mist.addColorStop(0, "rgba(7, 11, 20, 0)");
-      mist.addColorStop(0.65, "rgba(7, 11, 20, 0.35)");
-      mist.addColorStop(1, "rgba(7, 11, 20, 0.55)");
-      ctx.fillStyle = mist;
+      const fog = ctx.createRadialGradient(rx, ry, 36, rx, ry, 130);
+      fog.addColorStop(0, "rgba(7, 11, 20, 0)");
+      fog.addColorStop(0.65, "rgba(7, 11, 20, 0.84)");
+      fog.addColorStop(1, "rgba(7, 11, 20, 0.96)");
+      ctx.fillStyle = fog;
       ctx.fillRect(0, 0, W, H);
     }
 
-    // 6. Rover Avatar + Headlamp Cone
+    // 5. Blinking Green Landing Zone (Drawn ABOVE fog so it pulses through the dark!)
+    const pulse = 0.55 + 0.45 * Math.sin((timestamp || 0) / 380);
+    const gx = mapX(lvl.goalX);
+    const gy = mapY(lvl.fn(lvl.goalX));
+    const gLeft = mapX(lvl.goalX - lvl.goalTolerance);
+    const gRight = mapX(lvl.goalX + lvl.goalTolerance);
+
+    ctx.fillStyle = `rgba(52, 211, 153, ${0.14 + pulse * 0.22})`;
+    ctx.fillRect(gLeft, gy - 42, gRight - gLeft, 50);
+
+    ctx.strokeStyle = `rgba(52, 211, 153, ${0.5 + pulse * 0.5})`;
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(gLeft, gy + 8);
+    ctx.lineTo(gRight, gy + 8);
+    ctx.stroke();
+
+    // Pulsing Beacon Dot
+    ctx.beginPath();
+    ctx.arc(gx, gy - 6, 4.5 + pulse * 2.5, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(52, 211, 153, ${0.45 + pulse * 0.55})`;
+    ctx.fill();
+
+    ctx.fillStyle = `rgba(52, 211, 153, ${0.7 + pulse * 0.3})`;
+    ctx.font = "700 10.5px 'JetBrains Mono', monospace";
+    ctx.textAlign = "center";
+    ctx.fillText(lvl.aiMode ? "GLOBAL MIN" : "LANDING ZONE", gx, gy + 23);
+
+    // 6. Rover Avatar + Headlight Cone
     const slope = lvl.df(Math.max(-lvl.maxSafeX, Math.min(lvl.maxSafeX, roverX)));
     const dir = slope > 0 ? -1 : 1;
 
@@ -385,11 +603,11 @@
       ctx.save();
       ctx.beginPath();
       ctx.moveTo(rx + dir * 10, ry - 8);
-      ctx.lineTo(rx + dir * 68, ry - 26);
-      ctx.lineTo(rx + dir * 68, ry + 14);
+      ctx.lineTo(rx + dir * 72, ry - 26);
+      ctx.lineTo(rx + dir * 72, ry + 14);
       ctx.closePath();
-      const beamGrad = ctx.createLinearGradient(rx, ry, rx + dir * 68, ry);
-      beamGrad.addColorStop(0, "rgba(251, 191, 36, 0.35)");
+      const beamGrad = ctx.createLinearGradient(rx, ry, rx + dir * 72, ry);
+      beamGrad.addColorStop(0, "rgba(251, 191, 36, 0.38)");
       beamGrad.addColorStop(1, "rgba(251, 191, 36, 0)");
       ctx.fillStyle = beamGrad;
       ctx.fill();
@@ -405,7 +623,7 @@
     ctx.arc(7, 7, 3.8, 0, Math.PI * 2);
     ctx.fill();
 
-    ctx.fillStyle = gameOver && !solved[currentLevel] ? "#FB7185" : "#FBBF24";
+    ctx.fillStyle = gameOver && missionHistory[currentLevel].status !== "Completed" ? "#FB7185" : "#FBBF24";
     ctx.beginPath();
     ctx.roundRect(-11, -4, 22, 10, 4);
     ctx.fill();
@@ -428,12 +646,6 @@
     ctx.fill();
 
     ctx.restore();
-
-    // Always label the Goal Zone clearly
-    ctx.fillStyle = "#34D399";
-    ctx.font = "700 11px 'JetBrains Mono', monospace";
-    ctx.textAlign = "center";
-    ctx.fillText("GLOBAL MIN", gx, gy + 24);
   }
 
   init();

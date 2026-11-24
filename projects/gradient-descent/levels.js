@@ -2,57 +2,82 @@
 window.DESCENT_LEVELS = [
   {
     id: 0,
-    title: "Mission 01: The Foggy Valley",
-    desc: "Guide the rover to the green landing beacon (minimum loss) in 5 steps or fewer. Too small drains your battery; too large launches you out of the canyon.",
+    shortName: "01. Foggy Valley",
+    aiMode: false,
+    title: "Mission 01: Find the Lowest Point",
+    desc: "Reach the blinking green landing zone in 4 steps or fewer. Watch how your Thruster Power and the hill's slope work together on every step.",
     startX: -3.6,
-    maxSteps: 5,
+    maxSteps: 4,
     goalX: 0,
     goalTolerance: 0.35,
     defaultLr: 0.50,
     maxSafeX: 4.6,
     // f(x) = 0.5x^2 + 0.5 -> f'(x) = 1.0x
-    // Sweet spot: 0.45 - 0.85 (wins in 2-4 steps). Diverges at 2.0+. Stalls <= 0.20.
     fn: x => 0.5 * x * x + 0.5,
     df: x => 1.0 * x,
-    winMath: "You just ran Gradient Descent! In AI training, altitude is 'Loss' (model error), slope is the 'Gradient', and thruster power is the 'Learning Rate'. A balanced learning rate lands smoothly at the minimum.",
-    failDivergeMath: "Your Learning Rate was too high (2.0 or above on this curve), causing 'Divergence'. Instead of descending, each step multiplied your error and launched the rover off the canyon.",
-    failBatteryMath: "Your Learning Rate was too small (or bounced back and forth too much), draining your 5-step battery before reaching the bottom. In AI training, a tiny learning rate makes models train too slowly."
+    conceptSummary: "Gradient Descent: stepping downhill proportional to the slope until Loss reaches its minimum.",
+    winTitle: "You Just Ran Gradient Descent!",
+    winMath: "You just practiced how AI models learn! Think of Altitude as Loss (model error), Slope as the Gradient, and Thruster Power as the Learning Rate. Gradient Descent repeats one rule: step downhill based on the slope until error hits its lowest point.",
+    failBatteryTitle: "Out of Battery in 4 Steps",
+    failBatteryReason: "Your Thruster Power was too low (or bounced back and forth too much) to reach the landing zone in 4 steps.",
+    failBatteryMath: "In AI, your dial is called the Learning Rate. When a Learning Rate is too small, a model learns painfully slowly and runs out of time before finding the best answer.",
+    failDivergeTitle: "You Overshot the Valley!",
+    failDivergeReason: "Your Thruster Power multiplied by the slope was too strong and launched the rover right out of the valley.",
+    failDivergeMath: "In AI, your dial is called the Learning Rate. When it is too high, every step makes the error (Loss) worse instead of better. Engineers call this Divergence."
   },
   {
     id: 1,
-    title: "Mission 02: The Steep Canyon",
-    desc: "This canyon is 2.5x steeper! A learning rate that worked in Mission 01 can now launch you straight off the wall. Recalibrate and land in 5 steps or fewer.",
+    shortName: "02. Steep Canyon",
+    aiMode: true,
+    hasGuidedDemo: true,
+    demoLr: 0.90,
+    demoTitle: "Mission 02: Test a Steeper Canyon",
+    demoDesc: "This canyon is 2.5 times steeper than Mission 01. First, click Fire Thrusters at 0.90 to see what happens when you use a high Learning Rate on a steep Gradient.",
+    title: "Mission 02: Calibrate for Steep Terrain",
+    desc: "Your battery is reset to 0 / 4. Now lower your Learning Rate to match this steeper Gradient and land in the Global Minimum in 4 steps or fewer.",
     startX: -2.4,
-    maxSteps: 5,
+    maxSteps: 4,
     goalX: 0,
     goalTolerance: 0.30,
-    defaultLr: 0.85,
+    defaultLr: 0.90,
     maxSafeX: 3.4,
     // f(x) = 1.25x^2 + 0.5 -> f'(x) = 2.5x
-    // Sweet spot: 0.25 - 0.55 (wins in 2-3 steps). Diverges at 0.80+. Stalls <= 0.15.
     fn: x => 1.25 * x * x + 0.5,
     df: x => 2.5 * x,
-    winMath: "Because the slope (gradient) is much steeper here, multiplying it by a big learning rate creates massive jumps. AI engineers scale down the learning rate on steep loss landscapes to keep training stable.",
-    failDivergeMath: "Divergence! On a steep curve, even a moderate Learning Rate (0.80+) multiplies by a huge gradient and flings the rover out of the canyon. Lower the slider to around 0.25 to 0.50.",
-    failBatteryMath: "Out of battery! Either your step size was too tiny to reach the center in 5 steps, or it bounced back and forth across the canyon walls. Aim for a smooth, steady descent."
+    conceptSummary: "Overshooting & Steep Gradients: steeper loss curves require smaller Learning Rates to stay stable.",
+    winTitle: "Steep Terrain Mastered!",
+    winMath: "There is no single magic Learning Rate. Steeper Loss landscapes create larger Gradients, so AI engineers lower the Learning Rate to prevent overshooting and keep training stable.",
+    failBatteryTitle: "Out of Battery on Steep Terrain",
+    failBatteryReason: "You ran out of your 4 steps before reaching the Global Minimum.",
+    failBatteryMath: "If you overcorrect by setting the Learning Rate too tiny (or keep bouncing back and forth across the valley), the model stalls out before reaching minimum Loss.",
+    failDivergeTitle: "Diverged Off the Canyon!",
+    failDivergeReason: "Your Learning Rate was still too high for this steep canyon and launched the rover off the terrain.",
+    failDivergeMath: "On steep curves, even a moderate Learning Rate multiplies into a huge step that causes Divergence. Lower the dial until your steps move steadily downhill without crossing over the bottom."
   },
   {
     id: 2,
-    title: "Mission 03: The False Bottom",
-    desc: "Real AI loss landscapes have traps! There is a shallow dip nearby (Local Minimum) and a deeper canyon to the right (Global Minimum). Escape the shallow dip and land in the deep beacon in 5 steps or fewer.",
+    shortName: "03. False Bottom",
+    aiMode: true,
+    title: "Mission 03: Escape the False Bottom",
+    desc: "Real AI landscapes are bumpy. There is a shallow dip nearby and a deeper canyon to the right. Reach the true lowest point (Global Minimum) in 4 steps or fewer.",
     startX: -3.2,
-    maxSteps: 5,
+    maxSteps: 4,
     goalX: 2.0,
     goalTolerance: 0.45,
     defaultLr: 0.25,
     maxSafeX: 4.5,
-    // Local min at -1.8, ridge at -0.3, global min at +2.0.
-    // Small lr (~0.25) traps in local min. Bold lr (~0.65 - 0.75) jumps the ridge and wins in 3-4 steps.
+    // Local min at -1.8, ridge at -0.3, global min at +2.0
     fn: x => 0.0625 * Math.pow(x, 4) + 0.00833 * Math.pow(x, 3) - 0.4575 * Math.pow(x, 2) - 0.27 * x + 3.5,
     df: x => 0.25 * Math.pow(x, 3) + 0.025 * Math.pow(x, 2) - 0.915 * x - 0.27,
-    winMath: "You escaped the Local Minimum! By using a bolder learning rate at the start, you carried enough momentum to clear the middle ridge and discover the true Global Minimum.",
-    failDivergeMath: "Too much thrust! Your learning rate launched the rover past the deep canyon and off the far edge of the map. Try a controlled step size around 0.65 to 0.75.",
-    failBatteryMath: "Trapped in the False Bottom! A cautious learning rate settles into the first shallow dip it finds (a Local Minimum) and never discovers the deeper valley. Try a bolder initial step (around 0.65 to 0.75) to jump the ridge."
+    conceptSummary: "Local vs. Global Minimum: cautious Learning Rates can trap models in shallow dips instead of the true best solution.",
+    winTitle: "You Found the Global Minimum!",
+    winMath: "A Local Minimum is a shallow dip that looks like the bottom nearby, while the Global Minimum is the true lowest error overall. Real AI optimizers use techniques like momentum to carry past false bottoms.",
+    failBatteryTitle: "Trapped in a Local Minimum!",
+    failBatteryReason: "Your cautious Learning Rate settled into the shallow dip on the left, where the Gradient flattened to zero.",
+    failBatteryMath: "A Local Minimum traps an AI model in a 'good enough' answer even though a much better solution exists nearby. Reset and try a bolder Learning Rate to clear the ridge, while still watching out for overshooting.",
+    failDivergeTitle: "Overshot the Global Minimum!",
+    failDivergeReason: "Your Learning Rate was strong enough to clear the ridge, but too high to stay inside the canyon.",
+    failDivergeMath: "Finding the Global Minimum is a balancing act: too cautious traps you in a Local Minimum, while too aggressive causes Divergence. Dial it back slightly and try again."
   }
 ];
 // END OF FILE
