@@ -20,6 +20,7 @@
   let fogRevealed = false;
   let gameOver = false;
   let isAnimating = false;
+  let animFrameId = null;
   let overshotCount = 0;
 
   const stars = Array.from({ length: 45 }, () => ({
@@ -38,12 +39,14 @@
     resetBtn.addEventListener("click", () => loadLevel(currentLevel));
     fogToggleBtn.addEventListener("click", () => {
       fogRevealed = !fogRevealed;
-      fogToggleBtn.textContent = fogRevealed ? "Radar Peek: ON" : "Radar Peek: OFF";
+      fogToggleBtn.textContent = fogRevealed ? "Clear Mist: ON" : "Clear Mist: OFF";
       drawScene(x, LEVELS[currentLevel].fn(x));
     });
 
     document.querySelectorAll(".lvl-pill").forEach(btn => {
-      btn.addEventListener("click", () => loadLevel(Number(btn.dataset.lvl)));
+      btn.addEventListener("click", () => {
+        loadLevel(Number(btn.dataset.lvl));
+      });
     });
 
     document.getElementById("overlayRetryBtn").addEventListener("click", () => {
@@ -60,9 +63,16 @@
     });
 
     loadLevel(0);
+    // Ensure a clean redraw once browser layout finishes
+    requestAnimationFrame(() => drawScene(x, LEVELS[currentLevel].fn(x)));
   }
 
   function loadLevel(idx) {
+    if (animFrameId) {
+      cancelAnimationFrame(animFrameId);
+      animFrameId = null;
+    }
+
     currentLevel = idx;
     const lvl = LEVELS[idx];
     x = lvl.startX;
@@ -78,12 +88,12 @@
     lrSlider.value = lvl.defaultLr;
     lrValue.textContent = lvl.defaultLr.toFixed(2);
     stepBtn.disabled = false;
-    fogToggleBtn.textContent = "Radar Peek: OFF";
+    fogToggleBtn.textContent = "Clear Mist: OFF";
     outcomeOverlay.classList.add("hidden");
 
     updateTabs();
     updateTelemetry();
-    setLog("Rover deployed. Use the headlamp and slope readout to tune your Learning Rate.", "");
+    setLog("Rover deployed. Adjust the Learning Rate and fire thrusters to reach the green beacon.", "");
     drawScene(x, lvl.fn(x));
   }
 
@@ -137,8 +147,9 @@
       drawScene(curX, baseLineY + arcLift);
 
       if (p < 1) {
-        requestAnimationFrame(animateHop);
+        animFrameId = requestAnimationFrame(animateHop);
       } else {
+        animFrameId = null;
         isAnimating = false;
         x = targetX;
         trail.push({ x: x, y: targetY });
@@ -146,7 +157,7 @@
       }
     }
 
-    requestAnimationFrame(animateHop);
+    animFrameId = requestAnimationFrame(animateHop);
   }
 
   function evaluateStep(prevX, prevY, prevGrad, newY, diverged) {
@@ -182,7 +193,7 @@
       drawScene(x, newY);
 
       const oscillationNote = overshotCount > 0
-        ? "Notice how you overshot the bottom at first, then the reversed slope pulled you back in (called damped oscillation)."
+        ? "Notice how you overshot the bottom at first, then the reversed slope pulled you back in (damped oscillation)."
         : "You tuned the learning rate cleanly and guided the rover smoothly into the lowest valley without overshooting.";
 
       setLog(`LANDING CONFIRMED: Reached minimum loss in ${steps} step${steps === 1 ? "" : "s"}!`, "success");
@@ -214,7 +225,7 @@
         isLocalTrap ? "Trapped in the False Bottom!" : "Out of Battery!",
         isLocalTrap
           ? "The rover settled into the shallow dip on the left and never crossed the ridge to the deeper Global Minimum."
-          : "You ran out of steps before reaching the green landing zone. Adjust your Learning Rate and try again.",
+          : "You ran out of your 5 steps before reaching the green landing zone. Adjust your Learning Rate and try again.",
         lvl.failBatteryMath
       );
       return;
@@ -228,7 +239,7 @@
       setLog("Diverging! You jumped higher up the opposite wall. Lower your Learning Rate immediately.", "danger");
     } else if (crossedValley) {
       setLog("Overshot the bottom! You jumped past the valley onto the opposite wall, so the slope reversed direction. Lower your Learning Rate to settle in.", "warn");
-    } else if (Math.abs(x - prevX) < 0.22) {
+    } else if (Math.abs(x - prevX) < 0.25) {
       if (currentLevel === 2 && x < 0) {
         setLog("Barely moving inside a shallow dip! Try a larger Learning Rate to clear the ridge ahead.", "warn");
       } else {
@@ -260,14 +271,13 @@
   function drawScene(roverX, roverY) {
     const dpr = window.devicePixelRatio || 1;
     const rect = canvas.getBoundingClientRect();
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
-    ctx.scale(dpr, dpr);
+    const W = rect.width || 760;
+    const H = rect.height || 340;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    const W = rect.width;
-    const H = rect.height;
     const lvl = LEVELS[currentLevel];
-
     const xRange = lvl.maxSafeX + 0.4;
     const maxY = currentLevel === 1 ? 10.5 : 8.5;
 
@@ -300,7 +310,7 @@
     ctx.closePath();
 
     const terrainGrad = ctx.createLinearGradient(0, H * 0.25, 0, H);
-    terrainGrad.addColorStop(0, "rgba(56, 189, 248, 0.22)");
+    terrainGrad.addColorStop(0, "rgba(56, 189, 248, 0.24)");
     terrainGrad.addColorStop(1, "rgba(15, 23, 42, 0.95)");
     ctx.fillStyle = terrainGrad;
     ctx.fill();
@@ -322,7 +332,7 @@
     const gLeft = mapX(lvl.goalX - lvl.goalTolerance);
     const gRight = mapX(lvl.goalX + lvl.goalTolerance);
 
-    ctx.fillStyle = "rgba(52, 211, 153, 0.18)";
+    ctx.fillStyle = "rgba(52, 211, 153, 0.22)";
     ctx.fillRect(gLeft, gy - 45, gRight - gLeft, 55);
     ctx.strokeStyle = "#34D399";
     ctx.lineWidth = 2;
@@ -340,7 +350,7 @@
         if (idx === 0) ctx.moveTo(px, py);
         else ctx.lineTo(px, py);
       });
-      ctx.strokeStyle = "rgba(251, 191, 36, 0.65)";
+      ctx.strokeStyle = "rgba(251, 191, 36, 0.7)";
       ctx.lineWidth = 2;
       ctx.setLineDash([5, 5]);
       ctx.stroke();
@@ -354,16 +364,16 @@
       });
     }
 
-    // 5. Fog of War Mask
+    // 5. Light Translucent Mist (Terrain stays visible on frame 1)
     const rx = mapX(roverX);
     const ry = mapY(roverY);
 
     if (!fogRevealed) {
-      const fog = ctx.createRadialGradient(rx, ry, 34, rx, ry, 118);
-      fog.addColorStop(0, "rgba(7, 11, 20, 0)");
-      fog.addColorStop(0.65, "rgba(7, 11, 20, 0.86)");
-      fog.addColorStop(1, "rgba(7, 11, 20, 0.98)");
-      ctx.fillStyle = fog;
+      const mist = ctx.createRadialGradient(rx, ry, 55, rx, ry, 210);
+      mist.addColorStop(0, "rgba(7, 11, 20, 0)");
+      mist.addColorStop(0.65, "rgba(7, 11, 20, 0.35)");
+      mist.addColorStop(1, "rgba(7, 11, 20, 0.55)");
+      ctx.fillStyle = mist;
       ctx.fillRect(0, 0, W, H);
     }
 
@@ -419,12 +429,11 @@
 
     ctx.restore();
 
-    if (fogRevealed) {
-      ctx.fillStyle = "#34D399";
-      ctx.font = "700 11px 'JetBrains Mono', monospace";
-      ctx.textAlign = "center";
-      ctx.fillText("GLOBAL MIN", gx, gy + 24);
-    }
+    // Always label the Goal Zone clearly
+    ctx.fillStyle = "#34D399";
+    ctx.font = "700 11px 'JetBrains Mono', monospace";
+    ctx.textAlign = "center";
+    ctx.fillText("GLOBAL MIN", gx, gy + 24);
   }
 
   init();
