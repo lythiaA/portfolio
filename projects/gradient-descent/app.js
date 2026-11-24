@@ -378,10 +378,10 @@
           `<p>You landed in ${steps} step${steps === 1 ? "" : "s"}. Notice how your steps got smaller as you neared the bottom, even if you never moved the dial? That happens because the hill flattens out near the bottom, so the slope gets closer to zero.</p>`,
           `<p><strong>HUD Upgrade for Mission 02:</strong> Now that you know how the rover moves, we are switching your dashboard to the real AI terms (hover over any <strong>?</strong> icon anytime for a reminder):</p>`,
           `<ul class="vocab-list">
-            <li><strong>Thruster Power</strong> → Learning Rate</li>
-            <li><strong>Altitude</strong> → Loss (model error)</li>
-            <li><strong>Slope</strong> → Gradient</li>
-            <li><strong>Landing Zone</strong> → Global Minimum</li>
+            <li><strong>Thruster Power → Learning Rate:</strong> Adjusting this dial bigger or smaller controls how aggressively an AI model updates its settings after a mistake, just like it controlled how hard your rover stepped.</li>
+            <li><strong>Altitude → Loss (Model Error):</strong> Measures how far off an AI model is from the right answer. Just like lowering your rover's altitude, the goal is to drive Loss as low as possible.</li>
+            <li><strong>Slope → Gradient:</strong> Tells the model how steep the error curve is and which direction is downhill. A steeper Gradient creates a larger adjustment.</li>
+            <li><strong>Landing Zone → Global Minimum:</strong> The lowest possible point on the error curve, where the AI model achieves its best accuracy.</li>
           </ul>`
         );
       } else if (currentLevel === 1) {
