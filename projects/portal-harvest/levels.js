@@ -42,7 +42,7 @@ window.CLT_LEVELS = [
     startN: 2,
     minNToWin: 25,
     minBatchesToWin: 200,
-    title: "Mission 03: Tame an Extreme Skew",
+    title: "Mission 03: Tame an ExtrAeme Skew",
     desc: "Real-world data (like income or viral views) is often heavily skewed. Test a small Sample Size (n = 2) to see the skew survive, then raise n high enough (25+) and fire 200 batches to force a symmetric Bell Curve.",
     weights: [100, 75, 45, 24, 14, 8, 5, 3, 2, 2, 1, 1, 1, 1, 1, 1],
     winTitle: "You Mastered the Central Limit Theorem!",

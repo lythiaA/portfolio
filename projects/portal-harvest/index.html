@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Signal Forge | Interactive Central Limit Theorem Lab</title>
+  <title>Portal Harvest | Interactive Multi-Armed Bandit Lab</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
@@ -15,13 +15,13 @@
     <header class="hud-header">
       <div class="hud-brand">
         <span class="mission-pill" id="brandPill">INTERACTIVE MISSION</span>
-        <h1>Signal Forge</h1>
+        <h1>Portal Harvest</h1>
       </div>
 
       <nav class="level-selector" id="levelTabs" aria-label="Mission Levels">
-        <button class="lvl-pill active" data-lvl="0" type="button">01. Break the Bell</button>
-        <button class="lvl-pill" data-lvl="1" type="button">02. Narrow the Target</button>
-        <button class="lvl-pill" data-lvl="2" type="button">03. Extreme Skew</button>
+        <button class="lvl-pill active" data-lvl="0" type="button">01. Hidden Odds</button>
+        <button class="lvl-pill" data-lvl="1" type="button">02. Jackpot Trap</button>
+        <button class="lvl-pill" data-lvl="2" type="button">03. Shifting Signals</button>
       </nav>
 
       <div class="hud-actions">
@@ -36,16 +36,16 @@
       <div class="briefing-bar">
         <div class="telemetry-grid">
           <div class="tele-box">
-            <span class="tele-label" id="batchesLabel">BATCHES RUN</span>
-            <span class="tele-value" id="batchesDisplay">0</span>
+            <span class="tele-label">TURNS LEFT</span>
+            <span class="tele-value" id="turnsDisplay">15</span>
           </div>
           <div class="tele-box">
-            <span class="tele-label" id="spreadLabel">SPREAD</span>
-            <span class="tele-value" id="spreadDisplay">--</span>
+            <span class="tele-label">ENERGY</span>
+            <span class="tele-value" id="energyDisplay">0 / 90</span>
           </div>
           <div class="tele-box">
-            <span class="tele-label">STATUS</span>
-            <span class="tele-value" id="statusDisplay">READY</span>
+            <span class="tele-label" id="rateLabel">AVG / TURN</span>
+            <span class="tele-value" id="avgDisplay">0.0</span>
           </div>
         </div>
 
@@ -55,36 +55,26 @@
         </div>
       </div>
 
-      <!-- Dual-Chamber Interactive Canvas -->
-      <div class="canvas-stage">
-        <canvas id="gameCanvas"></canvas>
+      <!-- Energy Target Progress Bar -->
+      <div class="energy-meter-bar">
+        <div class="meter-meta">
+          <span class="meter-label">HARVEST PROGRESS</span>
+          <span class="meter-pct" id="meterPct">0% of Target</span>
+        </div>
+        <div class="meter-track">
+          <div class="meter-fill" id="meterFill"></div>
+        </div>
       </div>
 
-      <!-- Bottom Command Console -->
-      <section class="command-console">
-        <div class="slider-zone">
-          <div class="slider-meta">
-            <label for="nSlider" id="nSliderLabel">BATCH SIZE</label>
-            <span class="val-readout" id="nValue">1</span>
-          </div>
-          <input type="range" id="nSlider" min="1" max="35" step="1" value="1" />
-          <div class="slider-scale">
-            <span>1</span>
-            <span>15</span>
-            <span>35</span>
-          </div>
-        </div>
-
-        <div class="action-zone">
-          <button class="btn-secondary" id="dropOneBtn" type="button">DROP 1 BATCH</button>
-          <button class="btn-launch" id="fireManyBtn" type="button">FIRE 200 BATCHES</button>
-        </div>
+      <!-- Interactive 3-Portal Arena -->
+      <section class="portal-arena" id="portalArena" aria-label="Energy Portals">
+        <!-- Portals rendered dynamically by app.js -->
       </section>
 
       <!-- Live Telemetry Log -->
       <div class="live-log" id="feedbackLog">
         <span class="log-dot"></span>
-        <span id="feedbackText">Click and drag across the top bars to sculpt any weird shape, then fire batches below.</span>
+        <span id="feedbackText">Click Test (1 Turn) on a portal to probe its payout rate, or Commit All once you are confident.</span>
       </div>
     </main>
 
@@ -101,7 +91,7 @@
       <!-- Tab 1: Current Intro / Debrief -->
       <div class="drawer-body" id="drawerBriefView">
         <span class="drawer-tag" id="drawerTag">INTERACTIVE MISSION</span>
-        <h3 class="drawer-title" id="drawerTitle">Welcome to Signal Forge</h3>
+        <h3 class="drawer-title" id="drawerTitle">Welcome to Portal Harvest</h3>
         <div class="drawer-text" id="drawerText"></div>
 
         <div class="drawer-math-box hidden" id="drawerMathBox">
@@ -114,9 +104,9 @@
 
       <!-- Tab 2: Persistent Study Notes Across All 3 Missions -->
       <div class="drawer-body hidden" id="drawerLogView">
-        <span class="drawer-tag">PROBABILITY & STATS STUDY NOTES</span>
+        <span class="drawer-tag">PROBABILITY & RL STUDY NOTES</span>
         <h3 class="drawer-title">What You Learned Across All 3 Missions</h3>
-        <p class="log-intro">Every concept you uncover across the missions is saved here as your Central Limit Theorem summary.</p>
+        <p class="log-intro">Every concept you uncover (from wins and failed runs) is saved here as your Probability and Exploration summary.</p>
         <div class="mission-log-list" id="missionLogList"></div>
       </div>
     </aside>
