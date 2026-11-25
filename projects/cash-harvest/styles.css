@@ -166,7 +166,7 @@ html, body {
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 6px 12px;
-  min-width: 112px;
+  min-width: 116px;
   text-align: center;
 }
 
@@ -255,8 +255,8 @@ html, body {
 
 .help-tip:hover::after { opacity: 1; }
 
-/* Energy Progress Meter */
-.energy-meter-bar {
+/* Cash Progress Meter */
+.cash-meter-bar {
   background: var(--bg-panel);
   border: 1px solid var(--border);
   border-radius: 10px;
@@ -292,8 +292,8 @@ html, body {
   transition: width 0.2s ease;
 }
 
-/* 3-Portal Arena */
-.portal-arena {
+/* 3-Vault Arena */
+.vault-arena {
   flex: 1;
   min-height: 0;
   display: grid;
@@ -301,7 +301,7 @@ html, body {
   gap: 14px;
 }
 
-.portal-card {
+.vault-card {
   position: relative;
   background: var(--bg-panel);
   border: 1px solid var(--border);
@@ -315,24 +315,24 @@ html, body {
   overflow: hidden;
 }
 
-.portal-card.flash-hit {
+.vault-card.flash-hit {
   border-color: var(--emerald);
   box-shadow: 0 0 24px rgba(52, 211, 153, 0.28);
 }
 
-.portal-card.flash-miss {
+.vault-card.flash-miss {
   border-color: var(--rose);
   box-shadow: 0 0 20px rgba(251, 113, 133, 0.22);
 }
 
-.portal-top {
+.vault-top {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.portal-name {
+.vault-name {
   font-family: var(--font-mono);
   font-size: 13px;
   font-weight: 700;
@@ -345,23 +345,23 @@ html, body {
   font-weight: 700;
   padding: 3px 8px;
   border-radius: 6px;
-  background: rgba(251, 191, 36, 0.14);
-  border: 1px solid rgba(251, 191, 36, 0.4);
-  color: var(--amber);
+  background: rgba(52, 211, 153, 0.14);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  color: var(--emerald);
 }
 
-/* Glowing Animated Portal Ring */
-.portal-visual {
+/* Glowing Animated Cash Vault Ring */
+.vault-visual {
   position: relative;
-  width: 112px;
-  height: 112px;
+  width: 108px;
+  height: 108px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 6px 0;
 }
 
-.portal-ring {
+.vault-ring {
   position: absolute;
   inset: 0;
   border-radius: 50%;
@@ -370,19 +370,19 @@ html, body {
   animation: pulseRing 2.6s ease-in-out infinite;
 }
 
-.portal-card[data-idx="1"] .portal-ring {
+.vault-card[data-idx="1"] .vault-ring {
   border-color: var(--violet);
   box-shadow: 0 0 22px rgba(192, 132, 252, 0.35), inset 0 0 22px rgba(192, 132, 252, 0.25);
   animation-delay: 0.6s;
 }
 
-.portal-card[data-idx="2"] .portal-ring {
+.vault-card[data-idx="2"] .vault-ring {
   border-color: var(--amber);
   box-shadow: 0 0 22px rgba(251, 191, 36, 0.35), inset 0 0 22px rgba(251, 191, 36, 0.25);
   animation-delay: 1.2s;
 }
 
-.portal-core {
+.vault-core {
   font-family: var(--font-mono);
   font-size: 18px;
   font-weight: 700;
@@ -391,16 +391,16 @@ html, body {
   text-align: center;
 }
 
-.portal-core.hit-text { color: var(--emerald); }
-.portal-core.miss-text { color: var(--rose); }
+.vault-core.hit-text { color: var(--emerald); }
+.vault-core.miss-text { color: var(--rose); }
 
 @keyframes pulseRing {
   0%, 100% { transform: scale(0.96); opacity: 0.85; }
   50% { transform: scale(1.04); opacity: 1; }
 }
 
-/* Portal Stats & History Dots */
-.portal-stats {
+/* Vault Stats & History Dots */
+.vault-stats {
   width: 100%;
   background: var(--bg-deep);
   border: 1px solid var(--border);
@@ -463,8 +463,8 @@ html, body {
 
 .true-odds-reveal.hidden { display: none; }
 
-/* Portal Action Buttons */
-.portal-btns {
+/* Vault Action Buttons */
+.vault-btns {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -543,9 +543,9 @@ html, body {
   top: 10px;
   right: 16px;
   bottom: 10px;
-  width: 385px;
+  width: 400px;
   max-width: calc(100% - 32px);
-  background: rgba(15, 23, 42, 0.97);
+  background: rgba(15, 23, 42, 0.98);
   border: 1px solid var(--cyan);
   border-radius: 12px;
   box-shadow: -12px 0 36px rgba(0, 0, 0, 0.65);
@@ -604,12 +604,12 @@ html, body {
 .drawer-close:hover { color: var(--text-main); }
 
 .drawer-body {
-  padding: 18px;
+  padding: 16px 18px;
   overflow-y: auto;
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 11px;
 }
 
 .drawer-body.hidden { display: none; }
@@ -627,19 +627,64 @@ html, body {
 .side-drawer.tone-warn .drawer-tag { color: var(--amber); }
 
 .drawer-title {
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 700;
   line-height: 1.25;
 }
 
+/* Run Replay Curve Box */
+.replay-chart-box {
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.replay-chart-box.hidden { display: none; }
+
+.chart-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--text-muted);
+}
+
+.chart-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.lg-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.lg-dot.c-alpha { background: var(--cyan); }
+.lg-dot.c-beta { background: var(--violet); }
+.lg-dot.c-gamma { background: var(--amber); }
+
+#replayCanvas {
+  width: 100%;
+  height: 120px;
+  display: block;
+}
+
 .drawer-text {
-  font-size: 13px;
+  font-size: 12.8px;
   color: var(--text-muted);
   line-height: 1.55;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 9px;
 }
+
+.drawer-text strong { color: var(--text-main); }
 
 .vocab-list {
   list-style: none;
@@ -660,7 +705,7 @@ html, body {
   background: var(--bg-deep);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 12px 14px;
+  padding: 11px 13px;
 }
 
 .drawer-math-box.hidden { display: none; }
@@ -675,7 +720,7 @@ html, body {
 }
 
 .drawer-math-box p {
-  font-size: 12.5px;
+  font-size: 12.2px;
   color: var(--text-main);
   line-height: 1.5;
 }
@@ -685,7 +730,7 @@ html, body {
   flex-wrap: wrap;
   gap: 8px;
   margin-top: auto;
-  padding-top: 8px;
+  padding-top: 6px;
 }
 
 .btn-drawer-primary {
@@ -784,8 +829,8 @@ html, body {
   }
   .telemetry-grid { width: 100%; }
   .tele-box { flex: 1; min-width: 0; }
-  .portal-arena { grid-template-columns: 1fr; }
-  .portal-visual { width: 84px; height: 84px; }
+  .vault-arena { grid-template-columns: 1fr; }
+  .vault-visual { width: 84px; height: 84px; }
   .side-drawer {
     position: fixed;
     top: auto;
@@ -794,7 +839,7 @@ html, body {
     bottom: 10px;
     width: auto;
     max-width: none;
-    max-height: 75vh;
+    max-height: 78vh;
     transform: translateY(calc(100% + 24px));
   }
   .side-drawer.open { transform: translateY(0); }
