@@ -670,13 +670,19 @@
           </ul>`
         );
       } else if (currentLevel === 1) {
-        htmlBlocks.push(
-          `<p>You banked <strong>$${totalCash}</strong> and maximized <strong>Expected Utility</strong>! You spent <strong>${bestVault.pulls} turns</strong> on ${bestVault.name} ($25 at 45% = $11.25/turn), beating both the $5 safe vault and the rare $65 jackpot.</p>`
-        );
-      } else {
-        htmlBlocks.push(
-          `<p>You banked <strong>$${totalCash}</strong> and survived the Turn 15 shift! Look at your curve after the red SHIFT line: you adapted instead of staying stuck on the vault that dropped from 85% to 15%.</p>`
-        );
+        const jackpotVault = vaults.find(v => v.role === "jackpot");
+        const wonByLuck = jackpotVault.earned >= bestVault.earned || bestVault.pulls < 10;
+
+        if (wonByLuck) {
+          htmlBlocks.push(
+            `<p>You banked <strong>$${totalCash}</strong>, though you actually beat the odds with a lucky streak! You earned <strong>$${jackpotVault.earned}</strong> from ${jackpotVault.name} ($65 at 7% odds) and only spent <strong>${bestVault.pulls} turns</strong> on ${bestVault.name}.</p>`,
+            `<div class="bonus-callout"><strong>Variance vs. Expected Value:</strong> In probability, short-term luck (called Variance) can occasionally let a low-value option win a single run. Over hundreds of trials, however, ${bestVault.name} ($25 at 45% = $11.25/turn) will crush the 7% jackpot ($4.55/turn) every time.</div>`
+          );
+        } else {
+          htmlBlocks.push(
+            `<p>You banked <strong>$${totalCash}</strong> and maximized <strong>Expected Utility</strong>! You spent <strong>${bestVault.pulls} turns</strong> on ${bestVault.name} ($25 at 45% = $11.25/turn), beating both the $5 safe vault and the rare $65 jackpot.</p>`
+          );
+        }
       }
 
       const nextIdx = (currentLevel + 1) % LEVELS.length;
