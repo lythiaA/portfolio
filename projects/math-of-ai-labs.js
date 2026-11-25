@@ -6,17 +6,17 @@ window.PORTFOLIO_PROJECTS["math-of-ai-labs"] = {
     badge: "Gamified Learning • Math of AI Series",
     status: "3 Playable Web Labs",
     title: "Math of AI: Interactive Intuition Labs",
-    subtitle: "A three-part, puzzle-based learning suite I designed, directed, and built through AI-assisted rapid prototyping to develop applied mathematical intuition across Calculus, Linear Algebra, and Probability.",
+    subtitle: "A three-part, puzzle-based learning suite I designed and coded to build applied mathematical intuition across Calculus, Linear Algebra, and Probability before learners dive into machine learning diagnostics.",
     roles: ["gamified-learning", "lxd-data"],
-    metrics: ["3 Playable Web Labs", "Progressive Vocabulary HUD", "AI-Assisted Prototyping"],
+    metrics: ["3 Playable Web Labs", "Progressive Vocabulary HUD", "Real-Time Run Diagnostics"],
     meta: {
-        role: "Learning Experience Designer & Creative Director",
+        role: "Learning Experience Designer & Developer",
         audience: "Aspiring AI Engineers & Data Practitioners",
-        stack: "HTML5 Canvas, CSS3, Vanilla JS, Web Audio API, AI-Assisted Coding",
+        stack: "HTML5 Canvas, CSS3, Vanilla JS, Web Audio API",
         impact: "Active Intuition Across 3 Core AI Math Pillars"
     },
     challenge: "Applied AI curricula often treat Linear Algebra, Multivariable Calculus, and Probability as isolated, plug-and-chug theory or passive textbook simulations. Beginners struggle to connect abstract equations to real machine learning failure modes like overshooting gradients, rank collapse, or data drift. I saw a need for active, game-like puzzles with real win and fail stakes that let learners feel the math first.",
-    persona: "Adult learners, aspiring AI engineers, and data practitioners who want to look under the hood of machine learning models and build genuine mathematical intuition without getting buried in dry notation on day one.",
+    persona: "Adult learners, aspiring AI engineers, and data practitioners who want to look under the hood of machine learning models and build genuine mathematical intuition without getting buried in notation on day one.",
 
     features: [
         {
@@ -29,7 +29,7 @@ window.PORTFOLIO_PROJECTS["math-of-ai-labs"] = {
         },
         {
             title: "Cash Harvest (Probability & Expected Utility)",
-            desc: "A 30-turn Multi-Armed Bandit game with a live turn-by-turn replay curve that teaches empirical probability, expected value optimization, variance, data drift, and Epsilon-Greedy exploration."
+            desc: "A guessing game with a live turn-by-turn replay curve that teaches empirical probability, expected value optimization, variance, data drift, and Epsilon-Greedy exploration."
         },
         {
             title: "Progressive Vocabulary Scaffolding",
@@ -46,10 +46,10 @@ window.PORTFOLIO_PROJECTS["math-of-ai-labs"] = {
     ],
 
     evaluation: {
-        metric1Title: "Diagnostic Concept Transfer",
-        metric1Desc: "I evaluate effectiveness by tracking whether learners can bridge their visual intuition from the labs directly into applied ML troubleshooting, such as diagnosing learning rate instability, feature redundancy, and generalization gaps.",
+        metric1Title: "Foundational Readiness & Confidence",
+        metric1Desc: "Because these labs serve as introductory perspective-builders rather than formal assessments, I evaluate effectiveness by how well they demystify core terms (like gradients, determinants, and expected value) and build learner confidence before students dive into formal equations and Python implementations.",
         metric2Title: "Active Engagement & Retry Behavior",
-        metric2Desc: "Because each mission features clear win/fail stakes and tailored failure feedback, learners naturally iterate on their strategies until they master the underlying mathematical principle rather than passively clicking through."
+        metric2Desc: "Because each mission features clear win and fail stakes with tailored feedback, learners naturally iterate on their strategies until the underlying intuition clicks rather than passively clicking through a demo."
     },
 
     skills: [
@@ -62,8 +62,8 @@ window.PORTFOLIO_PROJECTS["math-of-ai-labs"] = {
             desc: "I translate advanced machine learning mathematics (optimization dynamics, matrix geometry, and probabilistic reasoning) into intuitive visual models for beginners."
         },
         {
-            skill: "AI-Assisted Rapid Prototyping",
-            desc: "I pair human-centered learning architecture with AI-assisted coding, directing code generation while owning the pedagogical blueprint, mathematical balancing, UX refinement, and edge-case QA."
+            skill: "Decentralized Front-End Prototyping",
+            desc: "I architect lightweight, zero-dependency HTML5 Canvas and JavaScript web apps with modular data banks so interactive labs are fast, responsive, and easy to scale."
         }
     ],
 
