@@ -5,9 +5,9 @@ window.VAULT_LEVELS = [
     shortName: "01. Hidden Odds",
     aiMode: false,
     turns: 30,
-    targetCash: 180,
+    targetCash: 200,
     title: "Mission 01: Find the Best Cash Vault",
-    desc: "Clicking a vault gives you a chance to win $10, or $0 if it comes up empty. You do not know the hidden odds. Bank $180 in 30 turns using Test x1 or Test x5 to gather clues, then Commit All when you spot the strongest vault.",
+    desc: "Clicking a vault gives you a chance to win $10, or $0 if it comes up empty. You do not know the hidden odds. Bank $200 in 30 turns using Test x1 or Test x5 to gather clues, then Commit All when you spot the strongest vault.",
     vaultConfigs: [
       { role: "weak", prob: 0.20, payout: 10 },
       { role: "medium", prob: 0.45, payout: 10 },
@@ -24,9 +24,9 @@ window.VAULT_LEVELS = [
     shortName: "02. High Stakes",
     aiMode: true,
     turns: 30,
-    targetCash: 275,
+    targetCash: 290,
     title: "Mission 02: High Stakes & Mixed Payouts",
-    desc: "Each Cash Vault now pays a different dollar amount ($5, $25, or $65) when it hits, and their hidden odds are unknown. Bank $275 in 30 turns by comparing each vault's average return per turn.",
+    desc: "Each Cash Vault now pays a different dollar amount ($5, $25, or $65) when it hits, and their hidden odds are unknown. Bank $290 in 30 turns by comparing each vault's average return per turn.",
     vaultConfigs: [
       { role: "safe", prob: 0.90, payout: 5 },      // EV = $4.50 / turn
       { role: "best", prob: 0.55, payout: 25 },     // EV = $13.75 / turn
@@ -43,10 +43,10 @@ window.VAULT_LEVELS = [
     shortName: "03. Shifting Signals",
     aiMode: true,
     turns: 30,
-    targetCash: 150,
+    targetCash: 185,
     shiftAfterTurn: 15,
     title: "Mission 03: Adapt to Shifting Odds",
-    desc: "Warning: vault odds are unstable and will shift halfway through the run at Turn 15. Bank $150 in 30 turns. Watch your recent hits closely, and be careful about clicking Commit All too early.",
+    desc: "Warning: vault odds are unstable and will shift halfway through the run at Turn 15. Bank $185 in 30 turns. Watch your recent hits closely, and be careful about clicking Commit All too early.",
     vaultConfigs: [
       { role: "fades", prob: 0.85, shiftedProb: 0.15, payout: 10 },
       { role: "steady", prob: 0.45, shiftedProb: 0.45, payout: 10 },
@@ -54,9 +54,9 @@ window.VAULT_LEVELS = [
     ],
     winTitle: "You Adapted to Data Drift!",
     winFormula: "",
-    winMath: "In the real world, user habits and markets change over time. In AI, this is called Data Drift. Because yesterday's best option can suddenly drop in performance, smart AI models keep monitoring recent results and resume exploring whenever performance falls.",
-    winNoteLabel: "Data Drift & Adaptive Exploration",
-    winNoteBody: "Data Drift happens when real-world probabilities change over time. Locking into an early winner forever fails when conditions shift, so AI models must detect cold streaks and re-explore."
+    winMath: "In the real world, user habits and markets change over time. In AI, this is called Data Drift. To handle it, many AI systems use an Epsilon-Greedy strategy: they spend most of their turns exploiting the current best option, while always reserving a small percentage of turns (called epsilon) to keep exploring in case a different option becomes better.",
+    winNoteLabel: "Data Drift & Epsilon-Greedy",
+    winNoteBody: "Data Drift happens when real-world probabilities change over time. An Epsilon-Greedy strategy handles this by mostly exploiting the current winner while always keeping a small budget to keep exploring."
   }
 ];
 // END OF FILE
