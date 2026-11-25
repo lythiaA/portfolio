@@ -31,7 +31,7 @@
             <div id="hero-highlights" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-8 border-t border-[#E5E7EB]"></div>
         </section>
 
-        <!-- 2. WORK (9 INTERACTIVE PROJECTS WITH SESSION-MEMORY FILTER) -->
+        <!-- 2. WORK (10 INTERACTIVE PROJECTS WITH SESSION-MEMORY FILTER) -->
         <section id="work" class="max-w-6xl mx-auto px-6 py-20 border-b border-[#E5E7EB]">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
                 <div>
@@ -46,6 +46,7 @@
                         <button data-filter="customer-ed" class="filter-pill px-3.5 py-1.5 rounded text-xs font-semibold">Customer Education & CS</button>
                         <button data-filter="solutions" class="filter-pill px-3.5 py-1.5 rounded text-xs font-semibold">Solutions & Onboarding</button>
                         <button data-filter="lxd-data" class="filter-pill px-3.5 py-1.5 rounded text-xs font-semibold">LXD & Analytics</button>
+                        <button data-filter="gamified-learning" class="filter-pill px-3.5 py-1.5 rounded text-xs font-semibold">Gamified Learning</button>
                     </div>
                 </div>
             </div>
@@ -127,6 +128,7 @@
     <script src="projects/power-automate-ops.js"></script>
     <script src="projects/mysql-joins-cohort.js"></script>
     <script src="projects/sql-gamified-labs.js"></script>
+    <script src="projects/math-of-ai-labs.js"></script>
 
     <script>
         const projectOrder = [
@@ -138,7 +140,8 @@
             "leading-with-impact",
             "power-automate-ops",
             "mysql-joins-cohort",
-            "sql-gamified-labs"
+            "sql-gamified-labs",
+            "math-of-ai-labs"
         ];
 
         function renderProjects(filter = "all") {
