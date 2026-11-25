@@ -84,7 +84,7 @@ window.PORTFOLIO_PROJECTS["digital-accessibility-module"] = {
             </div>
 
             <div class="w-full h-[720px] rounded overflow-hidden border border-[#E5E7EB] bg-[#F7F5F0] shadow-sm">
-                <iframe src="projects/accessibility-module/index.html" title="Inclusive by Default Digital Accessibility Mini-Module" class="w-full h-full border-0"></iframe>
+                <iframe src="projects/digital-accessibility-module/index.html" title="Inclusive by Default Digital Accessibility Mini-Module" class="w-full h-full border-0"></iframe>
             </div>
         </div>`;
     },
