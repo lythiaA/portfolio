@@ -22,12 +22,12 @@
   let turnsUsed = 0;
   let totalCash = 0;
   let turnLog = []; // Tracks every click: { turn, vaultIdx, hit, gain, cumCash }
-  let isCommitting = false;
+  let isBursting = false;
   let gameOver = false;
   let committedAtTurn = null;
   let committedVaultIdx = null;
   let shiftAnnounced = false;
-  let commitTimer = null;
+  let burstTimer = null;
   let soundEnabled = true;
 
   const missionHistory = LEVELS.map(l => ({
@@ -65,7 +65,7 @@
         osc.stop(ctx.currentTime + times[i] + durs[i] + 0.02);
       });
     } catch (e) {
-      // Ignore audio block if browser restricts autoplay
+      // Ignore if browser restricts autoplay
     }
   }
 
@@ -111,7 +111,7 @@
     if (!isBrief) renderMissionLog();
   }
 
-  function openDrawer({ tone = "", tag, title, showChart = false, htmlBlocks, mathText = "", buttons = [] }) {
+  function openDrawer({ tone = "", tag, title, showChart = false, htmlBlocks, formulaText = "", mathText = "", buttons = [] }) {
     sideDrawer.className = "side-drawer open" + (tone ? " tone-" + tone : "");
     switchDrawerTab("brief");
 
@@ -127,9 +127,11 @@
     }
 
     const mathBox = document.getElementById("drawerMathBox");
+    const mathContent = document.getElementById("drawerMathText");
     if (mathText) {
       mathBox.classList.remove("hidden");
-      document.getElementById("drawerMathText").textContent = mathText;
+      const formulaHtml = formulaText ? `<div class="formula-pill">${formulaText}</div>` : "";
+      mathContent.innerHTML = `${formulaHtml}<p>${mathText}</p>`;
     } else {
       mathBox.classList.add("hidden");
     }
@@ -152,8 +154,8 @@
       title: "Welcome to Cash Harvest",
       showChart: false,
       htmlBlocks: [
-        "<p>Three mystery <strong>Cash Vaults</strong> sit in front of you. When you tap a vault, you <strong>may or may not</strong> win cash: each vault has a hidden chance of paying out or coming up empty ($0).</p>",
-        "<p>You have <strong>15 turns</strong> to hit the cash target. Click <strong>Test (1 Turn)</strong> to gather clues about which vault pays out most often, then click <strong>Commit All</strong> once you are confident to cash in your remaining turns fast.</p>"
+        "<p>Three mystery <strong>Cash Vaults</strong> sit in front of you. When you click a vault, you <strong>may or may not</strong> win cash: each vault has a hidden chance of paying out or coming up empty ($0).</p>",
+        "<p>You have <strong>30 turns</strong> to hit the cash target. Use <strong>Test x1</strong> or <strong>Test x5</strong> to gather clues about which vault pays out most often, then click <strong>Commit All</strong> once you are confident to cash in your remaining turns fast.</p>"
       ],
       buttons: [
         {
@@ -166,9 +168,9 @@
   }
 
   function loadLevel(idx, showIntro) {
-    if (commitTimer) {
-      clearInterval(commitTimer);
-      commitTimer = null;
+    if (burstTimer) {
+      clearInterval(burstTimer);
+      burstTimer = null;
     }
 
     currentLevel = idx;
@@ -176,7 +178,7 @@
     turnsUsed = 0;
     totalCash = 0;
     turnLog = [];
-    isCommitting = false;
+    isBursting = false;
     gameOver = false;
     committedAtTurn = null;
     committedVaultIdx = null;
@@ -205,7 +207,7 @@
     updateTelemetry();
     updateTabs();
 
-    setLog("Click Test (1 Turn) on a Cash Vault to see if it pays out, or Commit All once you spot the winner.", "");
+    setLog("Click Test x1 or Test x5 on a Cash Vault to probe its odds, or Commit All once you spot the winner.", "");
 
     if (showIntro) {
       showIntroDrawer();
@@ -229,7 +231,7 @@
       ? `EMP. PROB <span class="help-tip" data-tip="In Mission 01, we called this Hit Rate. Empirical Probability is your estimated chance of winning based on observed trials.">?</span>`
       : "HIT RATE";
     const evLabel = lvl.aiMode
-      ? `EST. EV <span class="help-tip" data-tip="Estimated Expected Value (average dollars earned per turn from this vault so far).">?</span>`
+      ? `EST. EV <span class="help-tip" data-tip="Estimated Expected Value, which is the average dollars earned per turn from this vault so far.">?</span>`
       : "AVG / TURN";
 
     vaultArena.innerHTML = vaults.map(v => `
@@ -263,7 +265,10 @@
         <div class="true-odds-reveal hidden" id="reveal-${v.idx}"></div>
 
         <div class="vault-btns">
-          <button class="btn-test" data-action="test" data-idx="${v.idx}" type="button">TEST (1 TURN)</button>
+          <div class="test-row">
+            <button class="btn-test" data-action="test1" data-idx="${v.idx}" type="button">TEST x1</button>
+            <button class="btn-test x5" data-action="test5" data-idx="${v.idx}" type="button">TEST x5</button>
+          </div>
           <button class="btn-commit" data-action="commit" data-idx="${v.idx}" type="button">COMMIT ALL REMAINING</button>
         </div>
       </div>
@@ -272,10 +277,13 @@
     vaultArena.querySelectorAll("button").forEach(btn => {
       btn.addEventListener("click", () => {
         const idx = Number(btn.dataset.idx);
-        if (btn.dataset.action === "test") {
+        const act = btn.dataset.action;
+        if (act === "test1") {
           executeSingleTurn(idx);
+        } else if (act === "test5") {
+          startBurst(idx, 5, false);
         } else {
-          startCommitBurst(idx);
+          startBurst(idx, LEVELS[currentLevel].turns - turnsUsed, true);
         }
       });
     });
@@ -327,8 +335,8 @@
 
     if (lvl.shiftAfterTurn && turnsUsed === lvl.shiftAfterTurn && !shiftAnnounced) {
       shiftAnnounced = true;
-      setLog("Sensor flicker detected! Vault odds may be shifting. Watch your recent dots closely.", "warn");
-    } else if (!isCommitting) {
+      setLog("Sensor flicker detected at Turn 15! Vault odds may be shifting. Watch your recent dots closely.", "warn");
+    } else if (!isBursting) {
       setLog(
         isHit
           ? `${v.name} paid +$${gain}! (${lvl.turns - turnsUsed} turns left)`
@@ -342,25 +350,41 @@
     }
   }
 
-  function startCommitBurst(idx) {
+  function startBurst(idx, count, isCommitAll) {
     const lvl = LEVELS[currentLevel];
-    if (gameOver || isCommitting || turnsUsed >= lvl.turns) return;
+    const remaining = lvl.turns - turnsUsed;
+    const toRun = Math.min(count, remaining);
+    if (gameOver || isBursting || toRun <= 0) return;
 
-    committedAtTurn = turnsUsed;
-    committedVaultIdx = idx;
-    isCommitting = true;
+    if (isCommitAll) {
+      committedAtTurn = turnsUsed;
+      committedVaultIdx = idx;
+      setLog(`Committed all ${toRun} remaining turns to ${vaults[idx].name}! Cashing in...`, "warn");
+    } else {
+      setLog(`Testing ${vaults[idx].name} ${toRun} times...`, "");
+    }
+
+    isBursting = true;
     setButtonsDisabled(true);
-    setLog(`Committed all remaining turns to ${vaults[idx].name}! Cashing in...`, "warn");
 
-    commitTimer = setInterval(() => {
-      if (gameOver || turnsUsed >= lvl.turns) {
-        clearInterval(commitTimer);
-        commitTimer = null;
-        isCommitting = false;
+    let fired = 0;
+    const intervalMs = isCommitAll ? 75 : 95;
+
+    burstTimer = setInterval(() => {
+      if (gameOver || fired >= toRun || turnsUsed >= lvl.turns) {
+        clearInterval(burstTimer);
+        burstTimer = null;
+        isBursting = false;
+        if (!gameOver) {
+          setButtonsDisabled(false);
+          const v = vaults[idx];
+          setLog(`Finished testing ${v.name}. Current Avg / Turn: $${(v.earned / v.pulls).toFixed(2)} (${lvl.turns - turnsUsed} turns left).`, "");
+        }
         return;
       }
+      fired++;
       executeSingleTurn(idx);
-    }, 110);
+    }, intervalMs);
   }
 
   function setButtonsDisabled(disabled) {
@@ -389,7 +413,7 @@
 
     const turnsEl = document.getElementById("turnsDisplay");
     turnsEl.textContent = left;
-    turnsEl.className = "tele-value " + (left <= 4 && left > 0 ? "low-turns" : "");
+    turnsEl.className = "tele-value " + (left <= 6 && left > 0 ? "low-turns" : "");
 
     const cashEl = document.getElementById("cashDisplay");
     cashEl.textContent = `$${totalCash} / $${lvl.targetCash}`;
@@ -414,7 +438,7 @@
     });
   }
 
-  // Draws the student's actual turn-by-turn cash curve inside the debrief drawer
+  // Draws the student's actual 30-turn cash curve inside the debrief drawer
   function drawReplayChart() {
     const lvl = LEVELS[currentLevel];
     const ctx = replayCanvas.getContext("2d");
@@ -422,7 +446,7 @@
     const H = replayCanvas.height;
     ctx.clearRect(0, 0, W, H);
 
-    const padL = 34;
+    const padL = 36;
     const padR = 12;
     const padT = 14;
     const padB = 20;
@@ -455,7 +479,7 @@
     ctx.font = "700 9px 'JetBrains Mono', monospace";
     ctx.fillText(`$${lvl.targetCash}`, 2, ty + 3);
 
-    // Mission 03 Shift Marker at Turn 7
+    // Mission 03 Shift Marker at Turn 15
     if (lvl.shiftAfterTurn) {
       const sx = mapX(lvl.shiftAfterTurn);
       ctx.save();
@@ -486,17 +510,18 @@
       const px = mapX(entry.turn);
       const py = mapY(entry.cumCash);
       ctx.beginPath();
-      ctx.arc(px, py, entry.hit ? 3.5 : 2.3, 0, Math.PI * 2);
+      ctx.arc(px, py, entry.hit ? 3.0 : 1.9, 0, Math.PI * 2);
       ctx.fillStyle = VAULT_COLORS[entry.vaultIdx];
       ctx.fill();
     });
 
-    // X-axis labels
+    // Clean X-axis labels for 30 turns
     ctx.fillStyle = "#94A3B8";
     ctx.font = "600 9px 'JetBrains Mono', monospace";
     ctx.fillText("T1", mapX(1) - 4, H - 5);
-    ctx.fillText("T7", mapX(7) - 4, H - 5);
-    ctx.fillText("T15", mapX(15) - 10, H - 5);
+    ctx.fillText("T10", mapX(10) - 8, H - 5);
+    ctx.fillText("T20", mapX(20) - 8, H - 5);
+    ctx.fillText("T30", mapX(30) - 10, H - 5);
   }
 
   // Builds tailored, data-driven diagnosis based on what the student actually clicked
@@ -512,43 +537,48 @@
         return {
           title: "Locked In Before the Shift!",
           noteLabel: "Data Drift & Early Commitment",
-          diagnosis: `Look at your curve above after the red SHIFT line at Turn 7. You clicked Commit All on Turn ${committedAtTurn}, locking yourself onto ${vaults[committedVaultIdx].name} right before the odds shifted.`,
-          mathText: "In AI and statistics, when real-world odds change over time, it is called Data Drift. Committing 100% to an early winner leaves you blind when performance drops."
+          formula: "",
+          diagnosis: `Look at your curve above after the red SHIFT line at Turn 15. You clicked Commit All on Turn ${committedAtTurn}, locking yourself onto ${vaults[committedVaultIdx].name} right before the odds shifted.`,
+          mathText: "In the real world, probabilities change over time. In AI, this is called Data Drift. Committing 100% to an early winner leaves a model blind when performance suddenly drops."
         };
       }
       return {
         title: "Stuck on an Outdated Winner",
         noteLabel: "Detecting Data Drift",
-        diagnosis: `You spent ${fadedVault.pulls} turns on ${fadedVault.name}, which started strong (85%) but dropped to 15% after Turn 7, while ${bestVault.name} surged to 85%. Notice how your curve flattened out in the second half.`,
-        mathText: "When a reliable option suddenly goes cold, a smart AI resumes exploring instead of hoping the old odds come back. That is why reinforcement learning models keep a small exploration budget."
+        formula: "",
+        diagnosis: `You spent ${fadedVault.pulls} turns on ${fadedVault.name}, which started strong at 85% but dropped to 15% after Turn 15, while ${bestVault.name} surged to 85%. Notice how your curve flattened out in the second half.`,
+        mathText: "When a reliable option suddenly goes cold, a smart AI resumes exploring instead of hoping the old odds come back. Adapting to Data Drift is essential in changing environments."
       };
     }
 
-    // Mission 02: High Stakes / Jackpot Trap Diagnosis
+    // Mission 02: High Stakes / Expected Utility Diagnosis
     if (currentLevel === 1) {
       const safeVault = vaults.find(v => v.role === "safe");
       const jackpotVault = vaults.find(v => v.role === "jackpot");
       if (jackpotVault.pulls >= safeVault.pulls && jackpotVault.pulls >= bestVault.pulls) {
         return {
-          title: "Caught in the Jackpot Trap!",
-          noteLabel: "The Jackpot Trap (Low Expected Value)",
-          diagnosis: `You spent ${jackpotVault.pulls} of your 15 turns chasing ${jackpotVault.name} (+$65). Because it only hits 7% of the time, its true Expected Value is just $4.55 per turn, causing long flat stretches on your curve.`,
-          mathText: "Expected Value = Probability x Payout. Flashy jackpots feel exciting, but ${bestVault.name} ($25 at 55%) averages $13.75 per turn, nearly triple the jackpot's long-run return."
+          title: "Chased a Low-Value Jackpot!",
+          noteLabel: "Expected Utility vs. Rare Jackpots",
+          formula: "Expected Value = Probability x Payout",
+          diagnosis: `You spent ${jackpotVault.pulls} of your 30 turns chasing ${jackpotVault.name} (+$65). Because it only hits 7% of the time, its true Expected Value is just $4.55 per turn, causing long flat stretches on your curve.`,
+          mathText: `In AI decision theory, models maximize Expected Utility instead of chasing rare outliers. ${bestVault.name} ($25 at 55%) averages $13.75 per turn, which is triple the jackpot's long-run return.`
         };
       }
       if (safeVault.pulls >= bestVault.pulls) {
         return {
-          title: "Too Safe to Reach $140",
-          noteLabel: "Safe Payout Trap (Expected Value)",
-          diagnosis: `You spent ${safeVault.pulls} turns on ${safeVault.name} (+$5). Even though it hits 90% of the time, $5 x 0.90 is only $4.50 per turn, so your curve climbed steadily but far too slowly to hit $140.`,
-          mathText: "High hit frequency does not mean high value. Expected Value multiplies hit chance by dollar payout. Always compare Avg / Turn rather than just how often a vault pays out."
+          title: "Too Safe to Reach $275",
+          noteLabel: "Expected Utility vs. High Hit Rate",
+          formula: "Expected Value = Probability x Payout",
+          diagnosis: `You spent ${safeVault.pulls} turns on ${safeVault.name} (+$5). Even though it hits 90% of the time, $5 multiplied by 0.90 is only $4.50 per turn, so your curve climbed steadily but far too slowly to hit $275.`,
+          mathText: "High hit frequency does not mean high value. Expected Utility multiplies hit chance by dollar payout. Always compare Avg / Turn rather than just how often a vault pays out."
         };
       }
       return {
-        title: "Not Enough Turns on the Best Vault",
+        title: "Not Enough Turns on the Highest-Value Vault",
         noteLabel: "Expected Value & Sample Size",
-        diagnosis: `You spent ${bestVault.pulls} turns on ${bestVault.name} (+$25, true EV $13.75/turn) and ${nonBestPulls} turns on the lower-value vaults. With a few more turns on ${bestVault.name}, your curve crosses $140.`,
-        mathText: "Because you never know the true odds up front, you need just enough trials to compare each vault's Avg / Turn, then commit your remaining turns to the leader."
+        formula: "Expected Value = Probability x Payout",
+        diagnosis: `You spent ${bestVault.pulls} turns on ${bestVault.name} (+$25, true EV $13.75/turn) and ${nonBestPulls} turns on the lower-value vaults. With a few more turns on ${bestVault.name}, your curve crosses $275.`,
+        mathText: "Because you never know the true odds up front, use Test x5 to compare each vault's Avg / Turn, then commit your remaining turns to the leader."
       };
     }
 
@@ -557,34 +587,37 @@
       return {
         title: "Committed Too Early on a Small Sample",
         noteLabel: "Small Sample Size Bias",
+        formula: "",
         diagnosis: `You locked onto ${vaults[committedVaultIdx].name} after only ${committedAtTurn} turns. With such a small sample, a couple of lucky hits can make a ${Math.round(vaults[committedVaultIdx].prob * 100)}% vault look better than ${bestVault.name} (85%).`,
-        mathText: "In statistics, Small Sample Size Bias happens when you draw conclusions from too few trials. Testing each option 2 to 3 times before committing cuts down the chance of being fooled by luck."
+        mathText: "In statistics, Small Sample Size Bias happens when you draw conclusions from too few trials. Testing each vault 5 times before committing cuts down the chance of being fooled by luck."
       };
     }
 
-    if (nonBestPulls >= 8) {
+    if (nonBestPulls >= 16) {
       return {
         title: "Spent Too Many Turns Testing",
         noteLabel: "Over-Exploration",
-        diagnosis: `You spent ${nonBestPulls} of your 15 turns on weaker vaults and only ${bestVault.pulls} turns on ${bestVault.name} (85%). Look at how your curve jumps steepest whenever you hit ${bestVault.name}.`,
-        mathText: "Testing too long is called Over-Exploration. Even if an AI eventually finds the best option, it loses money if it wastes too many turns gathering data instead of cashing in."
+        formula: "",
+        diagnosis: `You spent ${nonBestPulls} of your 30 turns on weaker vaults and only ${bestVault.pulls} turns on ${bestVault.name} (85%). Look at how your curve jumps steepest whenever you hit ${bestVault.name}.`,
+        mathText: "Testing too long is called Over-Exploration. Even if an AI eventually finds the best option, it loses reward if it wastes too many turns gathering data instead of cashing in."
       };
     }
 
     return {
       title: "Close Run! Watch Your Sample Clues",
       noteLabel: "Balancing Exploration & Exploitation",
+      formula: "",
       diagnosis: `You found ${bestVault.name} (85%) for ${bestVault.pulls} turns and banked $${totalCash} (just $${lvl.targetCash - totalCash} short of $${lvl.targetCash}).`,
-      mathText: "Randomness means even a strong strategy can miss by a hair on a cold streak. Probe each vault 2 to 3 times, then commit to the clear leader to give yourself the highest odds of winning."
+      mathText: "Randomness means even a strong strategy can miss by a hair on a cold streak. Use Test x5 on each vault to gather a solid sample, then commit to the clear leader."
     };
   }
 
   function finishMission() {
     gameOver = true;
-    isCommitting = false;
-    if (commitTimer) {
-      clearInterval(commitTimer);
-      commitTimer = null;
+    isBursting = false;
+    if (burstTimer) {
+      clearInterval(burstTimer);
+      burstTimer = null;
     }
     setButtonsDisabled(true);
     revealTrueOdds();
@@ -600,25 +633,35 @@
       setLog(`TARGET HIT! You banked $${totalCash} (Target: $${lvl.targetCash}). True odds revealed above.`, "success");
 
       const bestVault = vaults.find(v => v.role === "best" || v.role === "surges");
+      const untestedCount = vaults.filter(v => v.pulls === 0).length;
       const htmlBlocks = [];
 
       if (currentLevel === 0) {
         htmlBlocks.push(
-          `<p>You banked <strong>$${totalCash}</strong>! Look at your curve above: you spent <strong>${bestVault.pulls} turns</strong> on ${bestVault.name} (85% odds), which drove your cash past the green target line.</p>`,
+          `<p>You banked <strong>$${totalCash}</strong>! Look at your curve above: you spent <strong>${bestVault.pulls} turns</strong> on ${bestVault.name} (85% odds), which drove your cash past the green target line.</p>`
+        );
+
+        if (untestedCount > 0) {
+          htmlBlocks.push(
+            `<div class="bonus-callout"><strong>Lucky First Guess:</strong> You hit the target without ever testing ${untestedCount === 2 ? "the other two vaults" : "one of the vaults"}! That worked this time, though relying on a first guess without exploring is risky because what looks good right now could easily be a weaker option.</div>`
+          );
+        }
+
+        htmlBlocks.push(
           `<p><strong>HUD Upgrade for Mission 02:</strong> Now that you have practiced balancing testing against cashing in, we are switching your dashboard to the real Probability and AI terms:</p>`,
           `<ul class="vocab-list">
             <li><strong>Hit Rate → Empirical Probability:</strong> Estimating hidden odds by counting real outcomes from your trials.</li>
             <li><strong>Test vs. Commit → Exploration vs. Exploitation:</strong> The core AI trade-off between gathering new data and cashing in on your current leader.</li>
-            <li><strong>Avg / Turn → Expected Value (E[X]):</strong> The long-run average dollars earned per turn (Probability multiplied by Payout).</li>
+            <li><strong>Avg / Turn → Expected Value:</strong> The long-run average dollars earned per turn, found by multiplying Probability by Payout.</li>
           </ul>`
         );
       } else if (currentLevel === 1) {
         htmlBlocks.push(
-          `<p>You banked <strong>$${totalCash}</strong> and avoided the <strong>Jackpot Trap</strong>! You spent <strong>${bestVault.pulls} turns</strong> on ${bestVault.name} ($25 at 55% = $13.75/turn), beating both the $5 safe vault and the rare $65 jackpot.</p>`
+          `<p>You banked <strong>$${totalCash}</strong> and maximized <strong>Expected Utility</strong>! You spent <strong>${bestVault.pulls} turns</strong> on ${bestVault.name} ($25 at 55% = $13.75/turn), beating both the $5 safe vault and the rare $65 jackpot.</p>`
         );
       } else {
         htmlBlocks.push(
-          `<p>You banked <strong>$${totalCash}</strong> and survived the Turn 7 shift! Notice how your curve stayed climbing after the red SHIFT line because you adapted instead of staying stuck on the fading vault.</p>`
+          `<p>You banked <strong>$${totalCash}</strong> and survived the Turn 15 shift! Look at your curve after the red SHIFT line: you adapted instead of staying stuck on the vault that dropped from 85% to 15%.</p>`
         );
       }
 
@@ -629,6 +672,7 @@
         title: lvl.winTitle,
         showChart: true,
         htmlBlocks: htmlBlocks,
+        formulaText: lvl.winFormula,
         mathText: lvl.winMath,
         buttons: [
           { label: "View All Notes", primary: false, onClick: () => switchDrawerTab("log") },
@@ -651,6 +695,7 @@
         title: diag.title,
         showChart: true,
         htmlBlocks: [`<p>${diag.diagnosis}</p>`],
+        formulaText: diag.formula,
         mathText: diag.mathText,
         buttons: [
           { label: "View All Notes", primary: false, onClick: () => switchDrawerTab("log") },

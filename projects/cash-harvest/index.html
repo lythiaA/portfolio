@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=1" />
+  <link rel="stylesheet" href="styles.css?v=2" />
 </head>
 <body>
   <div class="game-viewport">
@@ -38,11 +38,11 @@
         <div class="telemetry-grid">
           <div class="tele-box">
             <span class="tele-label">TURNS LEFT</span>
-            <span class="tele-value" id="turnsDisplay">15</span>
+            <span class="tele-value" id="turnsDisplay">30</span>
           </div>
           <div class="tele-box">
             <span class="tele-label">CASH BANKED</span>
-            <span class="tele-value" id="cashDisplay">$0 / $90</span>
+            <span class="tele-value" id="cashDisplay">$0 / $180</span>
           </div>
           <div class="tele-box">
             <span class="tele-label" id="rateLabel">AVG / TURN</span>
@@ -60,7 +60,7 @@
       <div class="cash-meter-bar">
         <div class="meter-meta">
           <span class="meter-label">CASH HARVEST PROGRESS</span>
-          <span class="meter-pct" id="meterPct">0% of Target ($0 / $90)</span>
+          <span class="meter-pct" id="meterPct">0% of Target ($0 / $180)</span>
         </div>
         <div class="meter-track">
           <div class="meter-fill" id="meterFill"></div>
@@ -75,7 +75,7 @@
       <!-- Live Telemetry Log -->
       <div class="live-log" id="feedbackLog">
         <span class="log-dot"></span>
-        <span id="feedbackText">Click Test (1 Turn) on any Cash Vault to see if it pays out, or Commit All once you are confident.</span>
+        <span id="feedbackText">Click Test x1 or Test x5 on any Cash Vault to see if it pays out, or Commit All once you are confident.</span>
       </div>
     </main>
 
@@ -97,7 +97,7 @@
         <!-- Dynamic Run Replay Curve (Shown on Win or Fail) -->
         <div class="replay-chart-box hidden" id="replayChartBox">
           <div class="chart-head">
-            <span class="chart-label">YOUR RUN CURVE (TURN BY TURN)</span>
+            <span class="chart-label">YOUR RUN CURVE (30 TURNS)</span>
             <span class="chart-legend">
               <span class="lg-dot c-alpha"></span>A
               <span class="lg-dot c-beta"></span>B
@@ -111,7 +111,7 @@
 
         <div class="drawer-math-box hidden" id="drawerMathBox">
           <span class="math-label">THE MATH OF AI TAKEAWAY</span>
-          <p id="drawerMathText"></p>
+          <div id="drawerMathText"></div>
         </div>
 
         <div class="drawer-actions" id="drawerActions"></div>
@@ -121,14 +121,14 @@
       <div class="drawer-body hidden" id="drawerLogView">
         <span class="drawer-tag">PROBABILITY & AI STUDY NOTES</span>
         <h3 class="drawer-title">What You Learned Across All 3 Missions</h3>
-        <p class="log-intro">Every concept you uncover (from wins and failed runs) is saved here as your Probability and Expected Value summary.</p>
+        <p class="log-intro">Every concept you uncover from both wins and failed runs is saved here as your Probability and Expected Value summary.</p>
         <div class="mission-log-list" id="missionLogList"></div>
       </div>
     </aside>
   </div>
 
-  <script src="levels.js?v=1"></script>
-  <script src="app.js?v=1"></script>
+  <script src="levels.js?v=2"></script>
+  <script src="app.js?v=2"></script>
 </body>
 </html>
 <!-- END OF FILE -->
