@@ -78,7 +78,7 @@ window.PORTFOLIO_PROJECTS["digital-accessibility-module"] = {
                     <span class="font-mono-tag text-xs text-slate-500 block">Self-Paced Web Module • 8 Interactive Panes</span>
                     <h3 class="font-display text-xl font-bold text-[#111827]">Inclusive by Default: Interactive Experience</h3>
                 </div>
-                <a href="projects/accessibility-module/index.html" target="_blank" rel="noopener" class="btn-primary px-4 py-2 rounded text-xs font-semibold">
+                <a href="projects/digital-accessibility-module/index.html" target="_blank" rel="noopener" class="btn-primary px-4 py-2 rounded text-xs font-semibold">
                     Open Module Full-Screen in New Tab ↗
                 </a>
             </div>
