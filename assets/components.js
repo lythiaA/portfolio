@@ -1,5 +1,17 @@
 // assets/components.js
 document.addEventListener('DOMContentLoaded', () => {
+    // 0. Ensure <main> has an ID and inject Skip to Main Content link
+    const mainEl = document.querySelector('main');
+    if (mainEl && !mainEl.id) {
+        mainEl.id = 'main-content';
+        mainEl.setAttribute('tabindex', '-1');
+    }
+    const skipLink = document.createElement('a');
+    skipLink.href = '#main-content';
+    skipLink.className = 'site-skip-link';
+    skipLink.textContent = 'Skip to main content';
+    document.body.insertBefore(skipLink, document.body.firstChild);
+
     // 1. Inject Shared Top Navigation
     const navPlaceholder = document.getElementById('site-nav');
     if (navPlaceholder) {
@@ -102,7 +114,195 @@ document.addEventListener('DOMContentLoaded', () => {
             </aside>
         </div>`;
     }
+
+    // 3. Inject Shared Floating Accessibility Widget
+    const a11yWrapper = document.createElement('div');
+    a11yWrapper.className = 'site-a11y-widget';
+    a11yWrapper.innerHTML = `
+        <button
+            type="button"
+            class="site-a11y-fab"
+            id="siteA11yToggle"
+            aria-expanded="false"
+            aria-controls="siteA11yPanel"
+            aria-label="Open Accessibility Tools"
+            title="Accessibility Tools"
+        >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="4.5" r="2" fill="currentColor" />
+                <path d="M4.5 8.5H19.5M12 8.5V14.5M12 14.5L8.5 20.5M12 14.5L15.5 20.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+
+        <aside class="site-a11y-panel hidden" id="siteA11yPanel" aria-label="Portfolio Accessibility Tools">
+            <div class="site-a11y-head">
+                <h2>Accessibility Tools</h2>
+                <button type="button" class="site-a11y-close" id="siteA11yClose" aria-label="Close accessibility tools">✕</button>
+            </div>
+
+            <div class="site-a11y-group">
+                <span class="site-a11y-label">Audio Reader</span>
+                <div class="site-reader-btns">
+                    <button type="button" class="site-a11y-btn" id="siteReadPlay">▶ Read Page</button>
+                    <button type="button" class="site-a11y-btn secondary" id="siteReadPause" disabled>⏸ Pause</button>
+                    <button type="button" class="site-a11y-btn secondary" id="siteReadStop" disabled>■ Stop</button>
+                </div>
+                <select id="siteVoiceSelect" class="site-voice-select" aria-label="Select reading voice">
+                    <option value="">Default System Voice</option>
+                </select>
+                <p class="site-a11y-hint" id="siteReaderStatus">Reads the main content of this page aloud.</p>
+            </div>
+
+            <div class="site-a11y-group">
+                <span class="site-a11y-label">Display & Reading</span>
+                <label class="site-a11y-row">
+                    <span>High-Contrast Dark Mode</span>
+                    <input type="checkbox" id="siteDarkToggle" />
+                </label>
+                <label class="site-a11y-row">
+                    <span>Large Text Size</span>
+                    <input type="checkbox" id="siteLargeToggle" />
+                </label>
+                <label class="site-a11y-row">
+                    <span>Readable Spacing</span>
+                    <input type="checkbox" id="siteSpacingToggle" />
+                </label>
+            </div>
+
+            <div class="site-a11y-group site-kbd-box">
+                <span class="site-a11y-label">Keyboard Navigation</span>
+                <ul class="site-kbd-list">
+                    <li><kbd>Tab</kbd> Move to next item</li>
+                    <li><kbd>Shift</kbd> + <kbd>Tab</kbd> Move backward</li>
+                    <li><kbd>Enter</kbd> / <kbd>Space</kbd> Activate or toggle</li>
+                </ul>
+            </div>
+        </aside>
+    `;
+    document.body.appendChild(a11yWrapper);
+
+    initSiteA11yWidget();
 });
+
+function initSiteA11yWidget() {
+    const toggleBtn = document.getElementById('siteA11yToggle');
+    const closeBtn = document.getElementById('siteA11yClose');
+    const panel = document.getElementById('siteA11yPanel');
+    const darkToggle = document.getElementById('siteDarkToggle');
+    const largeToggle = document.getElementById('siteLargeToggle');
+    const spacingToggle = document.getElementById('siteSpacingToggle');
+    const playBtn = document.getElementById('siteReadPlay');
+    const pauseBtn = document.getElementById('siteReadPause');
+    const stopBtn = document.getElementById('siteReadStop');
+    const voiceSelect = document.getElementById('siteVoiceSelect');
+    const statusEl = document.getElementById('siteReaderStatus');
+
+    // Restore saved preferences across pages
+    const savedDark = localStorage.getItem('portfolioA11yDark') === 'true';
+    const savedLarge = localStorage.getItem('portfolioA11yLarge') === 'true';
+    const savedSpacing = localStorage.getItem('portfolioA11ySpacing') === 'true';
+
+    darkToggle.checked = savedDark;
+    largeToggle.checked = savedLarge;
+    spacingToggle.checked = savedSpacing;
+
+    document.body.classList.toggle('a11y-dark-mode', savedDark);
+    document.documentElement.classList.toggle('a11y-large-text', savedLarge);
+    document.body.classList.toggle('a11y-readable-spacing', savedSpacing);
+
+    function setPanelOpen(open) {
+        panel.classList.toggle('hidden', !open);
+        toggleBtn.setAttribute('aria-expanded', String(open));
+    }
+
+    toggleBtn.addEventListener('click', () => setPanelOpen(panel.classList.contains('hidden')));
+    closeBtn.addEventListener('click', () => setPanelOpen(false));
+
+    darkToggle.addEventListener('change', () => {
+        document.body.classList.toggle('a11y-dark-mode', darkToggle.checked);
+        localStorage.setItem('portfolioA11yDark', String(darkToggle.checked));
+    });
+
+    largeToggle.addEventListener('change', () => {
+        document.documentElement.classList.toggle('a11y-large-text', largeToggle.checked);
+        localStorage.setItem('portfolioA11yLarge', String(largeToggle.checked));
+    });
+
+    spacingToggle.addEventListener('change', () => {
+        document.body.classList.toggle('a11y-readable-spacing', spacingToggle.checked);
+        localStorage.setItem('portfolioA11ySpacing', String(spacingToggle.checked));
+    });
+
+    // Built-in Web Speech API Reader
+    let voices = [];
+    function loadVoices() {
+        if (!('speechSynthesis' in window)) return;
+        voices = window.speechSynthesis.getVoices().filter(v => v.lang.startsWith('en'));
+        if (voices.length === 0) voices = window.speechSynthesis.getVoices();
+        voiceSelect.innerHTML = `<option value="">Default System Voice</option>` +
+            voices.map((v, i) => `<option value="${i}">${v.name} (${v.lang})</option>`).join('');
+    }
+
+    if ('speechSynthesis' in window) {
+        loadVoices();
+        window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
+
+    playBtn.addEventListener('click', () => {
+        if (!('speechSynthesis' in window)) {
+            statusEl.textContent = 'Your browser does not support built-in speech reading.';
+            return;
+        }
+        window.speechSynthesis.cancel();
+        const target = document.querySelector('main') || document.body;
+        const text = target.innerText.replace(/\s+/g, ' ').trim();
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.rate = 0.98;
+
+        if (voiceSelect.value !== '' && voices[Number(voiceSelect.value)]) {
+            utter.voice = voices[Number(voiceSelect.value)];
+        }
+
+        utter.onstart = () => {
+            pauseBtn.disabled = false;
+            pauseBtn.textContent = '⏸ Pause';
+            stopBtn.disabled = false;
+            statusEl.textContent = 'Reading page aloud...';
+        };
+        utter.onend = () => {
+            pauseBtn.disabled = true;
+            pauseBtn.textContent = '⏸ Pause';
+            stopBtn.disabled = true;
+            statusEl.textContent = 'Finished reading page.';
+        };
+        window.speechSynthesis.speak(utter);
+    });
+
+    pauseBtn.addEventListener('click', () => {
+        if (!('speechSynthesis' in window)) return;
+        if (window.speechSynthesis.paused) {
+            window.speechSynthesis.resume();
+            pauseBtn.textContent = '⏸ Pause';
+            statusEl.textContent = 'Resumed reading...';
+        } else if (window.speechSynthesis.speaking) {
+            window.speechSynthesis.pause();
+            pauseBtn.textContent = '▶ Resume';
+            statusEl.textContent = 'Paused.';
+        }
+    });
+
+    stopBtn.addEventListener('click', () => {
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        pauseBtn.disabled = true;
+        pauseBtn.textContent = '⏸ Pause';
+        stopBtn.disabled = true;
+        statusEl.textContent = 'Reads the main content of this page aloud.';
+    });
+
+    window.addEventListener('beforeunload', () => {
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    });
+}
 
 window.toggleContactDrawer = function(open) {
     const wrapper = document.getElementById('contact-drawer-Wrapper');
