@@ -24,9 +24,9 @@ window.VAULT_LEVELS = [
     shortName: "02. High Stakes",
     aiMode: true,
     turns: 30,
-    targetCash: 290,
+    targetCash: 250,
     title: "Mission 02: High Stakes & Mixed Payouts",
-    desc: "Each Cash Vault now pays a different dollar amount ($5, $25, or $65) when it hits, and their hidden odds are unknown. Bank $290 in 30 turns by comparing each vault's average return per turn.",
+    desc: "Each Cash Vault now pays a different dollar amount ($5, $25, or $65) when it hits, and their hidden odds are unknown. Bank $250 in 30 turns by comparing each vault's average return per turn.",
     vaultConfigs: [
       { role: "safe", prob: 0.90, payout: 5 },      // EV = $4.50 / turn
       { role: "best", prob: 0.45, payout: 25 },     // EV = $11.25 / turn

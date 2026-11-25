@@ -580,10 +580,10 @@
       }
       if (safeVault.pulls >= bestVault.pulls) {
         return {
-          title: "Too Safe to Reach $290",
+          title: "Too Safe to Reach $250",
           noteLabel: "Expected Utility vs. High Hit Rate",
           formula: "Expected Value = Probability x Payout",
-          diagnosis: `You spent ${safeVault.pulls} turns on ${safeVault.name} (+$5). Even though it hits 90% of the time, $5 multiplied by 0.90 is only $4.50 per turn, so your curve climbed steadily but far too slowly to hit $290.`,
+          diagnosis: `You spent ${safeVault.pulls} turns on ${safeVault.name} (+$5). Even though it hits 90% of the time, $5 multiplied by 0.90 is only $4.50 per turn, so your curve climbed steadily but far too slowly to hit $250.`,
           mathText: "High hit frequency does not mean high value. Expected Utility multiplies hit chance by dollar payout. Always compare Avg / Turn rather than just how often a vault pays out."
         };
       }
@@ -591,7 +591,7 @@
         title: "Not Enough Turns on the Highest-Value Vault",
         noteLabel: "Expected Value & Sample Size",
         formula: "Expected Value = Probability x Payout",
-        diagnosis: `You spent ${bestVault.pulls} turns on ${bestVault.name} (+$25, true EV $11.25/turn) and ${nonBestPulls} turns on the lower-value vaults. With a few more turns on ${bestVault.name}, your curve crosses $290.`,
+        diagnosis: `You spent ${bestVault.pulls} turns on ${bestVault.name} (+$25, true EV $11.25/turn) and ${nonBestPulls} turns on the lower-value vaults. With a few more turns on ${bestVault.name}, your curve crosses $250.`,
         mathText: "Because you never know the true odds up front, use Test x5 to compare each vault's Avg / Turn, then commit your remaining turns to the leader."
       };
     }
