@@ -6,13 +6,13 @@ window.PORTFOLIO_PROJECTS["math-of-ai-labs"] = {
     badge: "Gamified Learning • Math of AI Series",
     status: "3 Playable Web Labs",
     title: "Math of AI: Interactive Intuition Labs",
-    subtitle: "A three-part, puzzle-based learning suite I designed and coded to build applied mathematical intuition across Calculus, Linear Algebra, and Probability before learners dive into machine learning diagnostics.",
+    subtitle: "A three-part, puzzle-based learning suite I designed, directed, and built through AI-assisted rapid prototyping to develop applied mathematical intuition across Calculus, Linear Algebra, and Probability.",
     roles: ["gamified-learning", "lxd-data"],
-    metrics: ["3 Playable Web Labs", "Progressive Vocabulary HUD", "Real-Time Run Diagnostics"],
+    metrics: ["3 Playable Web Labs", "Progressive Vocabulary HUD", "AI-Assisted Prototyping"],
     meta: {
-        role: "Learning Experience Designer & Developer",
+        role: "Learning Experience Designer & Creative Director",
         audience: "Aspiring AI Engineers & Data Practitioners",
-        stack: "HTML5 Canvas, CSS3, Vanilla JS, Web Audio API",
+        stack: "HTML5 Canvas, CSS3, Vanilla JS, Web Audio API, AI-Assisted Coding",
         impact: "Active Intuition Across 3 Core AI Math Pillars"
     },
     challenge: "Applied AI curricula often treat Linear Algebra, Multivariable Calculus, and Probability as isolated, plug-and-chug theory or passive textbook simulations. Beginners struggle to connect abstract equations to real machine learning failure modes like overshooting gradients, rank collapse, or data drift. I saw a need for active, game-like puzzles with real win and fail stakes that let learners feel the math first.",
@@ -62,8 +62,8 @@ window.PORTFOLIO_PROJECTS["math-of-ai-labs"] = {
             desc: "I translate advanced machine learning mathematics (optimization dynamics, matrix geometry, and probabilistic reasoning) into intuitive visual models for beginners."
         },
         {
-            skill: "Decentralized Front-End Prototyping",
-            desc: "I architect lightweight, zero-dependency HTML5 Canvas and JavaScript web apps with modular data banks so interactive labs are fast, responsive, and easy to scale."
+            skill: "AI-Assisted Rapid Prototyping",
+            desc: "I pair human-centered learning architecture with AI-assisted coding, directing code generation while owning the pedagogical blueprint, mathematical balancing, UX refinement, and edge-case QA."
         }
     ],
 

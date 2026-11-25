@@ -7,7 +7,7 @@ window.PORTFOLIO_PROJECTS["millionaire-data-quiz"] = {
     status: "Live Embedded Application",
     title: "Interactive Certification Prep and Socratic Quiz App",
     subtitle: "A low-stakes, decentralized quiz application I built for CompTIA Data+ certification prep by bridging a familiar game-show format with instructional design principles like Socratic questioning and domain-level diagnostic reporting.",
-    roles: ["lxd-data", "customer-ed", "solutions"],
+    roles: ["lxd-data", "customer-ed", "solutions","gamified-learning"],
     metrics: ["Game-Show to EdTech Bridge", "Socratic Coach Lifeline", "Domain Mastery Report"],
     meta: {
         role: "Lead Learning Architect & App Builder",

@@ -7,7 +7,7 @@ window.PORTFOLIO_PROJECTS["sql-gamified-labs"] = {
     status: "4 Live Demos & Video",
     title: "Multimodal Database and SQL Training Suite",
     subtitle: "A four-part showcase I built demonstrating how complex database concepts (Normalization, Joins, and Aggregate Queries) can be taught across four distinct modalities: animated explainer video, Articulate Rise/Storyline courses, Socratic AI labs, and interactive web quests.",
-    roles: ["lxd-data", "customer-ed", "facilitation"],
+    roles: ["lxd-data", "customer-ed", "facilitation", "gamified-learning"],
     metrics: ["Animaker Explainer Video", "Articulate Rise & Storyline", "Socratic AI Prototyping"],
     meta: {
         role: "Instructional Designer & Technical Facilitator",
