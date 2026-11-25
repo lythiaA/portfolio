@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=1" />
+  <link rel="stylesheet" href="styles.css?v=2" />
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -53,8 +53,8 @@
         ← Previous
       </button>
 
-      <div class="step-dots" id="stepDots" role="tablist" aria-label="Jump to pane">
-        <!-- Rendered dynamically -->
+      <div class="step-numbers" id="stepNumbers" role="tablist" aria-label="Jump to pane">
+        <!-- Numbered buttons 1-8 rendered dynamically -->
       </div>
 
       <button type="button" class="nav-btn primary" id="nextBtn">
@@ -89,9 +89,14 @@
       <div class="a11y-group">
         <span class="a11y-group-label">AUDIO READER</span>
         <div class="reader-controls">
-          <button type="button" class="a11y-action-btn" id="readPlayBtn">▶ Read This Pane</button>
+          <button type="button" class="a11y-action-btn" id="readPlayBtn">▶ Read</button>
+          <button type="button" class="a11y-action-btn small" id="readPauseBtn" disabled>⏸ Pause</button>
           <button type="button" class="a11y-action-btn small" id="readStopBtn" disabled>■ Stop</button>
         </div>
+        <label class="voice-picker-label" for="voiceSelect">Voice:</label>
+        <select id="voiceSelect" class="voice-select" aria-label="Select reading voice">
+          <option value="">Default System Voice</option>
+        </select>
         <p class="a11y-hint" id="readerStatus">Uses your browser's built-in voice reader.</p>
       </div>
 
@@ -110,11 +115,20 @@
           <input type="checkbox" id="spacingToggle" />
         </label>
       </div>
+
+      <div class="a11y-group kbd-guide">
+        <span class="a11y-group-label">KEYBOARD NAVIGATION</span>
+        <ul class="kbd-list">
+          <li><kbd>Tab</kbd> Move to next item</li>
+          <li><kbd>Shift</kbd> + <kbd>Tab</kbd> Move backward</li>
+          <li><kbd>Enter</kbd> / <kbd>Space</kbd> Activate or toggle</li>
+        </ul>
+      </div>
     </aside>
   </div>
 
-  <script src="content.js?v=1"></script>
-  <script src="app.js?v=1"></script>
+  <script src="content.js?v=2"></script>
+  <script src="app.js?v=2"></script>
 </body>
 </html>
 <!-- END OF FILE -->
