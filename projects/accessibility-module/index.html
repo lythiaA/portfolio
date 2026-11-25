@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inclusive by Default | Remote Accessibility & UDL Mini-Module</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=1" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="module-shell">
+    <!-- Top Header Bar -->
+    <header class="top-bar">
+      <div class="brand-block">
+        <span class="eyebrow">SELF-PACED MINI-MODULE</span>
+        <h1>Inclusive by Default</h1>
+      </div>
+
+      <!-- Persistent Context Toggle -->
+      <div class="context-toggle" role="group" aria-label="Switch workplace context">
+        <button type="button" class="ctx-btn active" id="ctxUniBtn" data-ctx="university" aria-pressed="true">
+          Online University
+        </button>
+        <button type="button" class="ctx-btn" id="ctxCorpBtn" data-ctx="corporate" aria-pressed="false">
+          Corporate Remote
+        </button>
+      </div>
+    </header>
+
+    <!-- Progress Bar & Pane Counter -->
+    <div class="progress-wrap" aria-label="Module progress">
+      <div class="progress-meta">
+        <span id="paneCounter">Pane 1 of 8</span>
+        <span id="paneLabel">ADA: The Legal Baseline</span>
+      </div>
+      <div class="progress-track" role="progressbar" aria-valuemin="1" aria-valuemax="8" aria-valuenow="1" id="progressBar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <!-- Main Active Pane Stage -->
+    <main id="main-content" class="pane-stage" tabindex="-1" aria-live="polite">
+      <!-- Dynamic pane content rendered by app.js -->
+    </main>
+
+    <!-- Bottom Stepper Navigation -->
+    <footer class="stepper-footer">
+      <button type="button" class="nav-btn secondary" id="prevBtn" disabled>
+        ← Previous
+      </button>
+
+      <div class="step-dots" id="stepDots" role="tablist" aria-label="Jump to pane">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <button type="button" class="nav-btn primary" id="nextBtn">
+        Next →
+      </button>
+    </footer>
+  </div>
+
+  <!-- Floating Side Accessibility Widget -->
+  <div class="a11y-widget" id="a11yWidget">
+    <button
+      type="button"
+      class="a11y-fab"
+      id="a11yToggleBtn"
+      aria-expanded="false"
+      aria-controls="a11yPanel"
+      aria-label="Open Accessibility Tools"
+      title="Accessibility Tools"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <circle cx="12" cy="4.5" r="2" fill="currentColor" />
+        <path d="M4.5 8.5H19.5M12 8.5V14.5M12 14.5L8.5 20.5M12 14.5L15.5 20.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+
+    <aside class="a11y-panel hidden" id="a11yPanel" aria-label="Accessibility Tools">
+      <div class="a11y-panel-head">
+        <h2>Accessibility Tools</h2>
+        <button type="button" class="a11y-close" id="a11yCloseBtn" aria-label="Close accessibility tools">✕</button>
+      </div>
+
+      <div class="a11y-group">
+        <span class="a11y-group-label">AUDIO READER</span>
+        <div class="reader-controls">
+          <button type="button" class="a11y-action-btn" id="readPlayBtn">▶ Read This Pane</button>
+          <button type="button" class="a11y-action-btn small" id="readStopBtn" disabled>■ Stop</button>
+        </div>
+        <p class="a11y-hint" id="readerStatus">Uses your browser's built-in voice reader.</p>
+      </div>
+
+      <div class="a11y-group">
+        <span class="a11y-group-label">DISPLAY & READING</span>
+        <label class="a11y-toggle-row">
+          <span>High-Contrast Dark Mode</span>
+          <input type="checkbox" id="darkToggle" />
+        </label>
+        <label class="a11y-toggle-row">
+          <span>Large Text Size</span>
+          <input type="checkbox" id="largeTextToggle" />
+        </label>
+        <label class="a11y-toggle-row">
+          <span>Readable Spacing</span>
+          <input type="checkbox" id="spacingToggle" />
+        </label>
+      </div>
+    </aside>
+  </div>
+
+  <script src="content.js?v=1"></script>
+  <script src="app.js?v=1"></script>
+</body>
+</html>
+<!-- END OF FILE -->
