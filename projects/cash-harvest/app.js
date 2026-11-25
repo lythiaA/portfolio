@@ -542,6 +542,20 @@
           mathText: "In the real world, probabilities change over time. In AI, this is called Data Drift. Committing 100% to an early winner leaves a model blind when performance suddenly drops."
         };
       }
+
+      const pulls = vaults.map(v => v.pulls);
+      const isSpreadOut = (Math.max(...pulls) - Math.min(...pulls)) <= 4;
+
+      if (isSpreadOut) {
+        return {
+          title: "Spread Too Thin to Hit $185",
+          noteLabel: "Over-Exploration Under Data Drift",
+          formula: "",
+          diagnosis: `You split your 30 turns almost evenly across all three vaults (${pulls.join(", ")}). Because the three vaults average out to 50% ($150 expected), spreading out evenly protects you from a total crash but leaves you short of $185.`,
+          mathText: "In an Epsilon-Greedy strategy, you still need to exploit the current winner for most of your turns. Save only a small budget for exploring, then switch once you spot a cold streak after Turn 15."
+        };
+      }
+
       return {
         title: "Stuck on an Outdated Winner",
         noteLabel: "Detecting Data Drift",
@@ -561,15 +575,15 @@
           noteLabel: "Expected Utility vs. Rare Jackpots",
           formula: "Expected Value = Probability x Payout",
           diagnosis: `You spent ${jackpotVault.pulls} of your 30 turns chasing ${jackpotVault.name} (+$65). Because it only hits 7% of the time, its true Expected Value is just $4.55 per turn, causing long flat stretches on your curve.`,
-          mathText: `In AI decision theory, models maximize Expected Utility instead of chasing rare outliers. ${bestVault.name} ($25 at 55%) averages $13.75 per turn, which is triple the jackpot's long-run return.`
+          mathText: `In AI decision theory, models maximize Expected Utility instead of chasing rare outliers. ${bestVault.name} ($25 at 45%) averages $11.25 per turn, more than double the jackpot's long-run return.`
         };
       }
       if (safeVault.pulls >= bestVault.pulls) {
         return {
-          title: "Too Safe to Reach $275",
+          title: "Too Safe to Reach $290",
           noteLabel: "Expected Utility vs. High Hit Rate",
           formula: "Expected Value = Probability x Payout",
-          diagnosis: `You spent ${safeVault.pulls} turns on ${safeVault.name} (+$5). Even though it hits 90% of the time, $5 multiplied by 0.90 is only $4.50 per turn, so your curve climbed steadily but far too slowly to hit $275.`,
+          diagnosis: `You spent ${safeVault.pulls} turns on ${safeVault.name} (+$5). Even though it hits 90% of the time, $5 multiplied by 0.90 is only $4.50 per turn, so your curve climbed steadily but far too slowly to hit $290.`,
           mathText: "High hit frequency does not mean high value. Expected Utility multiplies hit chance by dollar payout. Always compare Avg / Turn rather than just how often a vault pays out."
         };
       }
@@ -577,7 +591,7 @@
         title: "Not Enough Turns on the Highest-Value Vault",
         noteLabel: "Expected Value & Sample Size",
         formula: "Expected Value = Probability x Payout",
-        diagnosis: `You spent ${bestVault.pulls} turns on ${bestVault.name} (+$25, true EV $13.75/turn) and ${nonBestPulls} turns on the lower-value vaults. With a few more turns on ${bestVault.name}, your curve crosses $275.`,
+        diagnosis: `You spent ${bestVault.pulls} turns on ${bestVault.name} (+$25, true EV $11.25/turn) and ${nonBestPulls} turns on the lower-value vaults. With a few more turns on ${bestVault.name}, your curve crosses $290.`,
         mathText: "Because you never know the true odds up front, use Test x5 to compare each vault's Avg / Turn, then commit your remaining turns to the leader."
       };
     }
@@ -657,7 +671,7 @@
         );
       } else if (currentLevel === 1) {
         htmlBlocks.push(
-          `<p>You banked <strong>$${totalCash}</strong> and maximized <strong>Expected Utility</strong>! You spent <strong>${bestVault.pulls} turns</strong> on ${bestVault.name} ($25 at 55% = $13.75/turn), beating both the $5 safe vault and the rare $65 jackpot.</p>`
+          `<p>You banked <strong>$${totalCash}</strong> and maximized <strong>Expected Utility</strong>! You spent <strong>${bestVault.pulls} turns</strong> on ${bestVault.name} ($25 at 45% = $11.25/turn), beating both the $5 safe vault and the rare $65 jackpot.</p>`
         );
       } else {
         htmlBlocks.push(

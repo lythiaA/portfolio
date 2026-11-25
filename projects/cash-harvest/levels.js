@@ -29,12 +29,12 @@ window.VAULT_LEVELS = [
     desc: "Each Cash Vault now pays a different dollar amount ($5, $25, or $65) when it hits, and their hidden odds are unknown. Bank $290 in 30 turns by comparing each vault's average return per turn.",
     vaultConfigs: [
       { role: "safe", prob: 0.90, payout: 5 },      // EV = $4.50 / turn
-      { role: "best", prob: 0.55, payout: 25 },     // EV = $13.75 / turn
+      { role: "best", prob: 0.45, payout: 25 },     // EV = $11.25 / turn
       { role: "jackpot", prob: 0.07, payout: 65 }   // EV = $4.55 / turn
     ],
     winTitle: "Expected Utility Mastered!",
     winFormula: "Expected Value = Probability x Payout",
-    winMath: "In AI decision theory, models maximize Expected Utility rather than chasing the highest hit rate or the biggest rare payout. Here, the $5 vault averages $4.50 per turn and the $65 jackpot averages $4.55 per turn, while the $25 vault at 55% wins with $13.75 per turn.",
+    winMath: "In AI decision theory, models maximize Expected Utility rather than chasing the highest hit rate or the biggest rare payout. Here, the $5 vault averages $4.50 per turn and the $65 jackpot averages $4.55 per turn, while the $25 vault at 45% wins with $11.25 per turn.",
     winNoteLabel: "Expected Utility & Expected Value",
     winNoteBody: "Expected Value equals Probability multiplied by Payout. AI models use Expected Utility to pick the option with the highest long-run average return instead of being fooled by frequent tiny wins or rare jackpots."
   },
