@@ -18,8 +18,14 @@
   let activeConnectPillar = "ada";
   let openPour = { P: true, O: false, U: false, R: false };
   let audit1Fixes = { contrast: false, link: false, alt: false, headings: false };
-  let audit2Fixes = { captions: false, verbalize: false, agenda: false, camera: false };
-  let lastHotspotNote = "Click any pulsing button in the simulated live session above to enable an inclusive practice.";
+
+  // Pane 6: 2-Step Live Slide Audit state
+  let audit2Selected = { color: false, contrast: false, structure: false, font: false, spoken: false };
+  let audit2Unlocked = false;
+  let audit2VerifyMsg = "";
+  let audit2ActiveTab = 0; // 0, 1, 2
+  let audit2Guesses = { color: null, structure: null, spoken: null };
+  let audit2Fixes = { color: false, structure: false, spoken: false };
 
   // Separate Pane 7 state per context (University vs. Corporate)
   const scenarioState = {
@@ -47,8 +53,12 @@
     activeConnectPillar = "ada";
     openPour = { P: true, O: false, U: false, R: false };
     audit1Fixes = { contrast: false, link: false, alt: false, headings: false };
-    audit2Fixes = { captions: false, verbalize: false, agenda: false, camera: false };
-    lastHotspotNote = "Click any pulsing button in the simulated live session above to enable an inclusive practice.";
+    audit2Selected = { color: false, contrast: false, structure: false, font: false, spoken: false };
+    audit2Unlocked = false;
+    audit2VerifyMsg = "";
+    audit2ActiveTab = 0;
+    audit2Guesses = { color: null, structure: null, spoken: null };
+    audit2Fixes = { color: false, structure: false, spoken: false };
     initRankings();
     renderPane();
   }
@@ -150,7 +160,6 @@
     closeBtn.addEventListener("click", () => setPanelOpen(false));
 
     darkToggle.addEventListener("change", () => document.body.classList.toggle("dark-mode", darkToggle.checked));
-    // Apply large-text to root <html> so all rem units scale
     largeTextToggle.addEventListener("change", () => document.documentElement.classList.toggle("large-text", largeTextToggle.checked));
     spacingToggle.addEventListener("change", () => document.body.classList.toggle("readable-spacing", spacingToggle.checked));
 
@@ -444,69 +453,180 @@
   }
 
   function renderPane6(ctx) {
+    const shared = DATA.audit2Shared;
     const fixedCount = Object.values(audit2Fixes).filter(Boolean).length;
-    const score = fixedCount * 25;
+    const pct = Math.round((fixedCount / 3) * 100);
 
-    mainStage.innerHTML = `
-      <span class="pane-tag">SPOT & FIX AUDIT 2 • LIVE VIRTUAL SESSION</span>
-      <h2 class="pane-title">Audit Your ${ctx.audit2Title}</h2>
-      <p class="pane-lead">Click each pulsing hotspot on the simulated session bar below to activate inclusive facilitation habits.</p>
-
-      <div class="mock-meeting" aria-label="Simulated live virtual session">
-        <div class="meeting-topbar">
-          <span>● LIVE SESSION: ${ctx.audit2Title}</span>
-          <span class="score-pill ${score === 100 ? "perfect" : ""}">Inclusion Score: ${score}%</span>
+    const slideHtml = `
+      <div class="slide-card" aria-label="Sample presentation slide for ${ctx.contextName}">
+        <div class="artifact-header">
+          <span>SLIDE: ${ctx.audit2SlideHeader}</span>
+          <span class="score-pill ${fixedCount === 3 ? "perfect" : ""}">${fixedCount} of 3 Included (${pct}%)</span>
         </div>
 
-        <div class="meeting-body">
-          <div class="mock-slide">
-            <div>
-              <div class="mock-slide-title">${ctx.audit2SlideTitle}</div>
-              <div class="mock-bars" aria-hidden="true">
-                <div class="mock-bar" style="height: 85%;"></div>
-                <div class="mock-bar" style="height: 55%;"></div>
-                <div class="mock-bar" style="height: 95%;"></div>
-                <div class="mock-bar" style="height: 70%;"></div>
-              </div>
-            </div>
-            <div class="live-caption-bar ${audit2Fixes.captions ? "" : "hidden"}">
-              <strong>[CC]:</strong> "As shown on the third bar of the chart, completion reached 95 percent..."
-            </div>
-          </div>
-
-          <div class="mock-chat">
-            <strong style="color:#93C5FD;">SESSION CHAT</strong>
-            <div class="agenda-pill ${audit2Fixes.agenda ? "" : "hidden"}">✓ Agenda & Slides Shared 24h Early</div>
-            <div class="chat-bubble">${ctx.audit2Chat1}</div>
-            <div class="chat-bubble">${ctx.audit2Chat2}</div>
-            <div class="agenda-pill ${audit2Fixes.verbalize ? "" : "hidden"}">✓ Host reading chat questions aloud</div>
-            <div class="agenda-pill ${audit2Fixes.camera ? "" : "hidden"}">✓ Cameras optional (chat & mic welcome)</div>
-          </div>
+        <div class="slide-top-metric">
+          <span class="big-stat">78%</span>
+          <p class="stat-context ${audit2Fixes.spoken ? "" : "missing"}">
+            ${audit2Fixes.spoken ? ctx.audit2TakeawayFixed : "(Presenter is explaining this number out loud...)"}
+          </p>
         </div>
 
-        <div class="meeting-controls">
-          ${ctx.audit2Items.map(item => `
-            <button type="button" class="hotspot-btn ${audit2Fixes[item.id] ? "fixed" : ""}" data-fix2="${item.id}" aria-pressed="${audit2Fixes[item.id]}">
-              ${audit2Fixes[item.id] ? "✓ " : ""}${item.btnLabel}
-            </button>
+        <ul class="slide-status-list">
+          ${ctx.audit2Rows.map(row => `
+            <li class="slide-status-item">
+              <span>${row.name}</span>
+              <span class="status-indicator">
+                <span class="status-dot ${row.status}" aria-hidden="true"></span>
+                ${audit2Fixes.color ? `<span>${row.fixedLabel}</span>` : ""}
+              </span>
+            </li>
           `).join("")}
-        </div>
-      </div>
+        </ul>
 
-      <div class="hotspot-feedback" aria-live="polite">
-        ${lastHotspotNote}
+        <div class="sr-readout ${audit2Fixes.structure ? "fixed" : ""}">
+          <strong>SCREEN READER READOUT</strong>
+          <span>${audit2Fixes.structure ? ctx.audit2SrFixed : '"Graphic. Graphic. Untitled text box. 78%."'}</span>
+        </div>
+
+        <div class="slide-caption-bar ${audit2Fixes.spoken ? "" : "hidden"}">
+          ${ctx.audit2CaptionText}
+        </div>
       </div>
     `;
 
-    mainStage.querySelectorAll("[data-fix2]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const k = btn.dataset.fix2;
-        audit2Fixes[k] = !audit2Fixes[k];
-        const item = ctx.audit2Items.find(i => i.id === k);
-        lastHotspotNote = `<strong>${item.title}:</strong> ${item.note}`;
-        renderPane6(ctx);
+    let rightPanelHtml = "";
+
+    if (!audit2Unlocked) {
+      rightPanelHtml = `
+        <div class="fix-controls">
+          <strong style="font-size:0.9rem;">Step 1: Select the 3 real barriers on this slide</strong>
+          <div class="audit-check-list">
+            ${shared.checkboxes.map(cb => `
+              <label class="audit-check-row">
+                <input type="checkbox" data-cb="${cb.id}" ${audit2Selected[cb.id] ? "checked" : ""} />
+                <span>${cb.text}</span>
+              </label>
+            `).join("")}
+          </div>
+          ${audit2VerifyMsg ? `<div class="audit-msg">${audit2VerifyMsg}</div>` : ""}
+          <button type="button" class="nav-btn primary" id="verifyAudit2Btn">Verify Issues & Unlock Tabs →</button>
+        </div>
+      `;
+    } else {
+      const b = shared.barriers[audit2ActiveTab];
+      const guess = audit2Guesses[b.id];
+      const isFixed = audit2Fixes[b.id];
+      const isCorrect = guess === b.correctAttendee;
+
+      rightPanelHtml = `
+        <div class="fix-controls">
+          <div class="barrier-tabs" role="tablist" aria-label="Slide barriers">
+            ${shared.barriers.map((item, idx) => `
+              <button
+                type="button"
+                class="barrier-tab ${idx === audit2ActiveTab ? "active" : ""} ${audit2Fixes[item.id] ? "done" : ""}"
+                data-btab="${idx}"
+              >${audit2Fixes[item.id] ? "✓ " : ""}${item.tabLabel}</button>
+            `).join("")}
+          </div>
+
+          <div class="barrier-panel">
+            <div><strong>${b.tabLabel}:</strong> ${b.statement}</div>
+
+            <div>
+              <strong style="display:block; font-size:0.8rem; margin-bottom:6px;">Who is most directly impacted by this barrier?</strong>
+              <div class="attendee-choices">
+                ${shared.attendees.map(att => {
+                  let cls = "";
+                  if (guess === att.id) cls = isCorrect ? "correct" : "wrong";
+                  return `<button type="button" class="attendee-btn ${cls}" data-att="${att.id}">${att.label}</button>`;
+                }).join("")}
+              </div>
+            </div>
+
+            ${guess ? `
+              <div class="audit-msg ${isCorrect ? "success" : ""}">
+                ${isCorrect ? b.rightNote : b.wrongNote}
+              </div>
+
+              <div class="standard-box">
+                <div><strong>${b.wcag}</strong></div>
+                <div style="margin-top:4px;">${b.udl}</div>
+              </div>
+
+              <button type="button" class="nav-btn primary" id="applySlideFixBtn" ${isFixed ? "disabled" : ""}>
+                ${isFixed ? "✓ Fix Applied to Slide" : b.fixLabel}
+              </button>
+            ` : ""}
+          </div>
+        </div>
+      `;
+    }
+
+    mainStage.innerHTML = `
+      <span class="pane-tag">SPOT & FIX AUDIT 2 • THROUGH THEIR EYES</span>
+      <h2 class="pane-title">Audit a Live Presentation Slide</h2>
+      <p class="pane-lead">
+        ${audit2Unlocked
+          ? "Inspect each unlocked barrier, match the most impacted attendee, and apply the fix to see the slide transform."
+          : "Inspect the presentation slide on the left and check the 3 real accessibility barriers (watch out for the 2 distractors that already pass)."}
+      </p>
+
+      <div class="audit-layout">
+        ${slideHtml}
+        ${rightPanelHtml}
+      </div>
+    `;
+
+    if (!audit2Unlocked) {
+      mainStage.querySelectorAll("[data-cb]").forEach(input => {
+        input.addEventListener("change", () => {
+          audit2Selected[input.dataset.cb] = input.checked;
+        });
       });
-    });
+
+      document.getElementById("verifyAudit2Btn").addEventListener("click", () => {
+        const picked = Object.keys(audit2Selected).filter(k => audit2Selected[k]);
+        const pickedReal = picked.filter(k => shared.checkboxes.find(c => c.id === k).isReal);
+        const pickedDistractors = picked.filter(k => !shared.checkboxes.find(c => c.id === k).isReal);
+
+        if (pickedReal.length === 3 && pickedDistractors.length === 0) {
+          audit2Unlocked = true;
+          audit2VerifyMsg = "";
+          renderPane6(ctx);
+        } else if (pickedDistractors.length > 0) {
+          audit2VerifyMsg = "Look closely at the slide: the dark text on white has strong contrast, and the sans-serif font is clean and readable. Uncheck any distractors and select the 3 real barriers.";
+          renderPane6(ctx);
+        } else {
+          audit2VerifyMsg = `You have found ${pickedReal.length} of the 3 real barriers so far. Inspect the metric, status dots, and screen-reader readout to find the rest.`;
+          renderPane6(ctx);
+        }
+      });
+    } else {
+      mainStage.querySelectorAll("[data-btab]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          audit2ActiveTab = Number(btn.dataset.btab);
+          renderPane6(ctx);
+        });
+      });
+
+      mainStage.querySelectorAll("[data-att]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const b = shared.barriers[audit2ActiveTab];
+          audit2Guesses[b.id] = btn.dataset.att;
+          renderPane6(ctx);
+        });
+      });
+
+      const applyBtn = document.getElementById("applySlideFixBtn");
+      if (applyBtn) {
+        applyBtn.addEventListener("click", () => {
+          const b = shared.barriers[audit2ActiveTab];
+          audit2Fixes[b.id] = true;
+          renderPane6(ctx);
+        });
+      }
+    }
   }
 
   function renderPane7(ctx) {

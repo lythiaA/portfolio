@@ -560,155 +560,242 @@ body.dark-mode .pour-letter {
   opacity: 0.9;
 }
 
-/* Pane 6: Simulated Live Virtual Session Screen + Pulsing Hotspots */
-.mock-meeting {
-  background: #0F172A;
-  color: #F8FAFC;
-  border-radius: 12px;
+/* Pane 6: Through Their Eyes (Live Slide Audit) */
+.slide-card {
+  background: var(--bg-surface);
   border: 2px solid var(--border);
-  overflow: hidden;
+  border-radius: 12px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
 }
 
-.meeting-topbar {
-  background: #1E293B;
-  padding: 8px 14px;
+.slide-top-metric {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.78rem;
-  font-weight: 700;
+  align-items: baseline;
+  gap: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
 }
 
-.meeting-body {
-  display: grid;
-  grid-template-columns: 1.8fr 1fr;
-  gap: 10px;
-  padding: 12px;
-  min-height: 205px;
-}
-
-.mock-slide {
-  position: relative;
-  background: #1E293B;
-  border: 1px solid #334155;
-  border-radius: 8px;
-  padding: 14px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.mock-slide-title {
+.big-stat {
   font-family: var(--font-display);
-  font-size: 0.95rem;
-  color: #93C5FD;
-  margin-bottom: 6px;
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--ultramarine);
+  line-height: 1;
 }
 
-.mock-bars {
-  display: flex;
-  align-items: flex-end;
-  gap: 8px;
-  height: 55px;
-  margin: 6px 0;
+.stat-context {
+  font-size: 0.86rem;
+  color: var(--text-muted);
 }
 
-.mock-bar {
-  flex: 1;
-  background: #3B82F6;
-  border-radius: 4px 4px 0 0;
+.stat-context.missing {
+  font-style: italic;
+  opacity: 0.75;
 }
 
-.live-caption-bar {
-  background: rgba(2, 6, 23, 0.9);
-  border: 1px solid #60A5FA;
-  border-radius: 6px;
-  padding: 6px 10px;
-  font-size: 0.76rem;
-  color: #F8FAFC;
-  margin-top: 8px;
-}
-
-.live-caption-bar.hidden {
-  display: none;
-}
-
-.mock-chat {
-  background: #1E293B;
-  border: 1px solid #334155;
-  border-radius: 8px;
-  padding: 10px;
+.slide-status-list {
+  list-style: none;
   display: flex;
   flex-direction: column;
+  gap: 8px;
+}
+
+.slide-status-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-page);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
   gap: 7px;
-  font-size: 0.76rem;
-}
-
-.chat-bubble {
-  background: #0F172A;
-  padding: 6px 8px;
-  border-radius: 6px;
-  color: #CBD5E1;
-}
-
-.agenda-pill {
-  background: #064E3B;
-  color: #A7F3D0;
-  padding: 4px 8px;
-  border-radius: 5px;
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   font-weight: 700;
 }
 
-.agenda-pill.hidden {
+.status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-dot.green {
+  background: #16A34A;
+}
+
+.status-dot.red {
+  background: #DC2626;
+}
+
+.sr-readout {
+  background: var(--bg-subtle);
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.78rem;
+}
+
+.sr-readout.fixed {
+  background: var(--success-bg);
+  border-color: var(--success-border);
+  color: var(--success-text);
+}
+
+.sr-readout strong {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 3px;
+}
+
+.slide-caption-bar {
+  background: #0F172A;
+  color: #F8FAFC;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.78rem;
+}
+
+.slide-caption-bar.hidden {
   display: none;
 }
 
-.meeting-controls {
-  background: #1E293B;
-  border-top: 1px solid #334155;
-  padding: 10px 12px;
+/* Step 1 Checkboxes */
+.audit-check-list {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.hotspot-btn {
-  position: relative;
+.audit-check-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--bg-page);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.84rem;
+  cursor: pointer;
+}
+
+.audit-check-row input {
+  margin-top: 3px;
+}
+
+.audit-msg {
+  font-size: 0.82rem;
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: var(--warn-bg);
+  color: var(--warn-text);
+  border: 1px solid var(--warn-border);
+}
+
+.audit-msg.success {
+  background: var(--success-bg);
+  color: var(--success-text);
+  border-color: var(--success-border);
+}
+
+/* Step 2 Perspective Tabs & Attendee Match */
+.barrier-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.barrier-tab {
   font-family: var(--font-body);
   font-size: 0.78rem;
   font-weight: 700;
-  padding: 8px 12px;
+  padding: 8px 6px;
   border-radius: 8px;
-  border: 2px solid #60A5FA;
-  background: #0F172A;
-  color: #F8FAFC;
+  border: 1px solid var(--border);
+  background: var(--bg-page);
+  color: var(--text-muted);
   cursor: pointer;
-  animation: pulseHotspot 1.8s infinite;
 }
 
-.hotspot-btn.fixed {
-  animation: none;
-  background: #065F46;
-  border-color: #34D399;
-  color: #ECFDF5;
+.barrier-tab.active {
+  background: var(--ultramarine);
+  color: #FFFFFF;
+  border-color: var(--ultramarine);
 }
 
-@keyframes pulseHotspot {
-  0% { box-shadow: 0 0 0 0 rgba(96, 165, 250, 0.7); }
-  70% { box-shadow: 0 0 0 9px rgba(96, 165, 250, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(96, 165, 250, 0); }
+body.dark-mode .barrier-tab.active {
+  color: #0B1120;
 }
 
-.hotspot-feedback {
+.barrier-tab.done {
+  border-color: var(--success-border);
+}
+
+.barrier-panel {
+  background: var(--bg-page);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.86rem;
+}
+
+.attendee-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.attendee-btn {
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+.attendee-btn:hover {
+  border-color: var(--ultramarine);
+}
+
+.attendee-btn.correct {
+  background: var(--success-bg);
+  border-color: var(--success-border);
+  color: var(--success-text);
+}
+
+.attendee-btn.wrong {
+  background: var(--warn-bg);
+  border-color: var(--warn-border);
+  color: var(--warn-text);
+}
+
+.standard-box {
   background: var(--bg-accent-soft);
   border-left: 4px solid var(--ultramarine);
-  border-radius: 8px;
-  padding: 10px 14px;
-  font-size: 0.88rem;
+  border-radius: 6px;
+  padding: 9px 12px;
+  font-size: 0.8rem;
 }
 
 /* Pane 7: 4-Phase Ranking Scenario */
@@ -1259,7 +1346,6 @@ kbd {
   .roadmap-strip,
   .connect-grid,
   .audit-layout,
-  .meeting-body,
   .phase-tabs {
     grid-template-columns: 1fr;
   }

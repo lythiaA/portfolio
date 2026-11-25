@@ -6,7 +6,7 @@ window.A11Y_CONTENT = {
     "UDL: Proactive Design",
     "How All 3 Pillars Connect",
     "Spot & Fix Audit 1: Written Content",
-    "Spot & Fix Audit 2: Live Sessions",
+    "Spot & Fix Audit 2: Live Slide Audit",
     "In the Moment: Priority Ranking",
     "Quick-Check & Official Resources"
   ],
@@ -27,6 +27,56 @@ window.A11Y_CONTENT = {
       body: "Universal Design for Learning shifts teams from reactive fixes to proactive flexibility, building multiple ways to absorb content and participate from day one.",
       connects: "How it connects: UDL raises the ceiling above basic compliance. When combined with WCAG technical hygiene, it creates remote experiences that lift everyone without forcing people to disclose a disability."
     }
+  },
+
+  audit2Shared: {
+    checkboxes: [
+      { id: "color", isReal: true, text: "Status indicators rely only on red and green dots with no icons or text labels." },
+      { id: "contrast", isReal: false, text: "Low text-to-background contrast on the slide." },
+      { id: "structure", isReal: true, text: "Missing slide heading structure and alt text for assistive technology." },
+      { id: "font", isReal: false, text: "Decorative or hard-to-read font style." },
+      { id: "spoken", isReal: true, text: "Key metric context is spoken out loud with no captions or written takeaway." }
+    ],
+    attendees: [
+      { id: "colorblind", label: "Color-Blind Attendee" },
+      { id: "screenreader", label: "Screen-Reader User" },
+      { id: "deaf", label: "Deaf / Hard-of-Hearing Attendee" }
+    ],
+    barriers: [
+      {
+        id: "color",
+        tabLabel: "Barrier 1",
+        statement: "Status indicators rely only on red and green dots with no icons or text labels.",
+        correctAttendee: "colorblind",
+        wrongNote: "While clear labels help everyone, a Color-Blind Attendee is most directly impacted because red and green dots can look identical without a shape or text cue.",
+        rightNote: "Correct. A Color-Blind Attendee cannot reliably distinguish red from green when color is the only signal.",
+        wcag: "WCAG 1.4.1 (Use of Color): Color must not be the only visual means of conveying information.",
+        udl: "UDL (Multiple Means of Representation): Pairing icons and text labels makes status scannable for everyone.",
+        fixLabel: "Add Icons & Text Labels to Status Dots"
+      },
+      {
+        id: "structure",
+        tabLabel: "Barrier 2",
+        statement: "Missing slide heading structure and alt text for assistive technology.",
+        correctAttendee: "screenreader",
+        wrongNote: "A Screen-Reader User is most directly impacted here. Without real slide headings and alt text, assistive tech only announces generic placeholders like 'Graphic' or 'Untitled text box.'",
+        rightNote: "Correct. A Screen-Reader User relies on proper heading hierarchy and alt text to understand what is on the slide.",
+        wcag: "WCAG 1.1.1 (Non-Text Content) & 1.3.1 (Info and Relationships): Provide alt text and semantic structure.",
+        udl: "UDL (Clear Structure): Logical headings help all learners navigate and review slides faster.",
+        fixLabel: "Apply Slide Heading & Concise Alt Text"
+      },
+      {
+        id: "spoken",
+        tabLabel: "Barrier 3",
+        statement: "Key metric context is spoken out loud with no captions or written takeaway.",
+        correctAttendee: "deaf",
+        wrongNote: "A Deaf or Hard-of-Hearing Attendee is most directly impacted. Showing only '78%' on screen while explaining what it means verbally leaves them without the actual takeaway.",
+        rightNote: "Correct. A Deaf or Hard-of-Hearing Attendee misses the meaning of '78%' unless spoken context is captioned or written on the slide.",
+        wcag: "WCAG 1.2.2 (Captions): Provide captions for live and prerecorded spoken audio.",
+        udl: "UDL (Multi-Modal Access): Pairing a concise written takeaway with live captions supports different processing paces and noisy environments.",
+        fixLabel: "Add Written Takeaway & Live Captions"
+      }
+    ]
   },
 
   university: {
@@ -54,15 +104,14 @@ window.A11Y_CONTENT = {
     audit1AltFixed: "Alt text added: 'Timeline graphic showing Chapter 4 reading due Wednesday, Live Q&A on Thursday at 7 PM, and Draft submission due Friday.'",
     audit1LinkBroken: "Click here",
     audit1LinkFixed: "Download the Week 3 Grading Rubric (Accessible Doc)",
-    audit2Title: "Live Online Cohort Room",
-    audit2SlideTitle: "Week 3: Model Evaluation Metrics",
-    audit2Chat1: "Student A: Wait, which column is Precision?",
-    audit2Chat2: "Student B: Could you repeat the formula?",
-    audit2Items: [
-      { id: "captions", btnLabel: "CC Live Captions", title: "Live Captions & Transcript Enabled", note: "Supports deaf or hard-of-hearing students, non-native speakers, and learners in noisy homes." },
-      { id: "verbalize", btnLabel: "Verbalize Visuals", title: "Verbalizing Slides & Chat Questions", note: "Describing charts and reading chat questions aloud keeps screen-reader users and audio-only attendees included." },
-      { id: "agenda", btnLabel: "24h Pre-Read", title: "Agenda & Slides Shared 24 Hours Early", note: "Reduces cognitive load and lets students using assistive tech preview materials at their own pace." },
-      { id: "camera", btnLabel: "Camera-Optional", title: "Camera-Optional & Multi-Modal Participation", note: "Allowing chat, reactions, or mic input supports neurodivergent learners and participants with slower internet connections." }
+    audit2SlideHeader: "Week 3 Course Progress",
+    audit2TakeawayFixed: "78% of learners completed the Week 3 SQL lab ahead of Friday's deadline.",
+    audit2CaptionText: "[CC]: '78% of the cohort has already finished the Week 3 SQL lab, and we are reviewing Module 3 today.'",
+    audit2SrFixed: "Heading 1: Week 3 Course Progress. Metric: 78% lab completion. List: Module 1 On Track, Module 2 On Track, Module 3 Needs Review.",
+    audit2Rows: [
+      { name: "Module 1: Database Basics", status: "green", fixedLabel: "✓ On Track" },
+      { name: "Module 2: SQL Queries", status: "green", fixedLabel: "✓ On Track" },
+      { name: "Module 3: Normalization Lab", status: "red", fixedLabel: "! Needs Review" }
     ],
     phases: [
       {
@@ -221,15 +270,14 @@ window.A11Y_CONTENT = {
     audit1AltFixed: "Alt text added: 'Bar chart showing Phase 1 design complete at 100%, Phase 2 QA at 75%, and Launch scheduled for Nov 15.'",
     audit1LinkBroken: "Click here",
     audit1LinkFixed: "Open the Q4 Launch Tracker (Shared Sheet)",
-    audit2Title: "Live Remote Team Sync Room",
-    audit2SlideTitle: "Q4 Rollout: Readiness Dashboard",
-    audit2Chat1: "Alex: Wait, which bar is QA?",
-    audit2Chat2: "Sam: Can you share that link again?",
-    audit2Items: [
-      { id: "captions", btnLabel: "CC Live Captions", title: "Live Captions & Transcript Enabled", note: "Supports deaf or hard-of-hearing teammates, global colleagues, and anyone working in a noisy space." },
-      { id: "verbalize", btnLabel: "Verbalize Visuals", title: "Verbalizing Slides & Chat Questions", note: "Describing visuals and reading chat aloud keeps screen-reader users and dial-in teammates fully included." },
-      { id: "agenda", btnLabel: "24h Pre-Read", title: "Agenda & Pre-Read Shared 24 Hours Early", note: "Reduces cognitive load and gives everyone time to prepare thoughtful input." },
-      { id: "camera", btnLabel: "Camera-Optional", title: "Camera-Optional & Multi-Modal Input", note: "Allowing chat, reactions, or mic participation supports neurodivergent teammates and participants with slower internet connections." }
+    audit2SlideHeader: "Q4 Launch Readiness",
+    audit2TakeawayFixed: "78% of launch tasks are complete; QA sign-off is the final blocker.",
+    audit2CaptionText: "[CC]: 'We are at 78% readiness overall, and our main focus today is unblocking QA Sign-Off.'",
+    audit2SrFixed: "Heading 1: Q4 Launch Readiness. Metric: 78% tasks complete. List: Design On Track, Engineering On Track, QA Sign-Off Needs Review.",
+    audit2Rows: [
+      { name: "Design Handoff", status: "green", fixedLabel: "✓ On Track" },
+      { name: "Engineering Build", status: "green", fixedLabel: "✓ On Track" },
+      { name: "QA Sign-Off", status: "red", fixedLabel: "! Needs Review" }
     ],
     phases: [
       {
